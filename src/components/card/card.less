@@ -1,0 +1,49 @@
+@import "../../variable.less";
+
+.card {
+    margin: 8px;
+    overflow: hidden;
+}
+
+@media (max-width: @screen-sm-min) {
+    .card {
+        width: e("calc(100% - 16px)");
+    }
+}
+
+.CardBottom {
+    height: 74px;
+    display: flex;
+    align-items: center;
+}
+
+.card.card-with-img {
+    >div {
+        display: flex;
+        flex-direction: column;
+        min-height: 400px;
+        >div:first-child {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            >div {
+                height: 100%;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}
+
+.CardImage {
+    min-height: 200px;
+    height: 100%;
+    width: 100%;
+    background-repeat: repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-origin: padding-box;
+    background-attachment: scroll;
+    flex-grow: 1;
+}

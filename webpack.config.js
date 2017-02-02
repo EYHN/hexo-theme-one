@@ -36,7 +36,7 @@ module.exports = {
 
     module: {
         loaders: [
-            { test: /\.tsx?$/, loaders: ["react-hot","awesome-typescript-loader"] },
+            { test: /\.tsx?$/, loaders: ["react-hot", "awesome-typescript-loader"] },
             { test: /\.(css|less)$/, loader: 'style-loader!css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]!less-loader' },
             { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' },
             { test: /\.(ttf|otf)$/, loader: 'file-loader' },
@@ -45,7 +45,7 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react','es2015']
+                    presets: ['react', 'es2015']
                 }
             }
         ],

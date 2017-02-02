@@ -2,7 +2,7 @@ import { AppState } from '../../stateI';
 import * as React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import { Router, Route } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 import Home from '../home/home'
 var style = require('./app.less')
 
@@ -18,8 +18,8 @@ export default class App extends React.Component<AppProps, undefined>{
   render() {
     return (
       <MuiThemeProvider muiTheme={this.props.muiTheme}>
-        <main>
-          <Router>
+        <main id={style.main}>
+          <Router history={hashHistory}>
             <Route path="/" component={Home} />
           </Router>
         </main>
