@@ -6,35 +6,47 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import SocialShare from 'material-ui/svg-icons/social/share';
 import CardHeaderAcatar from '../cardHeaderAvatar/cardHeaderAvatar'
+import muiThemeable from 'material-ui/styles/muiThemeable';
 var style = require('./postCard.less')
 
 interface PostCardProps {
-
+  muiTheme: __MaterialUI.Styles.MuiTheme,
+  title?:React.ReactNode,
+  subtitle?:React.ReactNode,
+  cover?:string,
+  excerpt?:React.ReactNode,
+  authorName?:React.ReactNode,
+  authorAvatar?:React.ReactNode
 }
 
-export default class PostCard extends React.Component<PostCardProps, undefined>{
+export class PostCard extends React.Component<PostCardProps, undefined>{
   render() {
     return (
       <Card className={style.PostCard}>
         <CardMedia
-          overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
+          overlay={<CardTitle title={this.props.title} subtitle={this.props.subtitle} />}
         >
           <div
             className={style.CardImage}
-            style={{ backgroundImage: "url(https://delusion.coding.me/img/daily_pic.min.jpg)" }}
+            style={{ backgroundImage: `url(${this.props.cover})` }}
           >
           </div>
         </CardMedia>
         <CardText>
-          这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！
-          这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！这个主题真吊！
+        {
+          this.props.excerpt
+        }
         </CardText>
         <div className={style.CardBottom}>
           <CardHeaderAcatar
-            title="滑稽"
-            avatar="http://q1.qlogo.cn/headimg_dl?bs=1106996185&dst_uin=1106996185&spec=100&url_enc=0&referer=bu_interface&term_type=PC"/>
+            title={this.props.authorName}
+            avatar={this.props.authorAvatar} />
           <div className="flexFull"></div>
-          <CardText><a href="#">分类</a> | <a href="#">分类</a></CardText>
+          <CardText><a style={{
+            color: this.props.muiTheme.palette.primary1Color
+          }} href="#">分类</a> | <a style={{
+            color: this.props.muiTheme.palette.primary1Color
+          }} href="#">分类</a></CardText>
           <IconMenu
             iconButtonElement={<IconButton><SocialShare /></IconButton>}
             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
@@ -62,3 +74,6 @@ export default class PostCard extends React.Component<PostCardProps, undefined>{
     )
   }
 }
+
+
+export default muiThemeable<any, any, any>()(PostCard);

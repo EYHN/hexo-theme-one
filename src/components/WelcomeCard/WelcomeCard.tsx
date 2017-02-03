@@ -4,26 +4,40 @@ import CardHeaderAcatar from '../cardHeaderAvatar/cardHeaderAvatar'
 var style = require('./WelcomeCard.less')
 
 interface WelcomeCardProps {
-
+  title?:React.ReactNode,
+  subtitle?:React.ReactNode,
+  coverImg?:string,
+  avatarImg?:React.ReactNode,
+  username?:React.ReactNode,
+  avatarSubtitle?:React.ReactNode
 }
 
 export default class WelcomeCard extends React.Component<WelcomeCardProps, undefined>{
   render() {
+    var {
+      title = "标题",
+      subtitle = "副标题",
+      coverImg,
+      avatarImg,
+      username,
+      avatarSubtitle
+    }=this.props
     return (
       <Card className={style.WelcomeCard}>
           <CardMedia
-            overlay={<CardTitle title="幻想帖" subtitle="这个主题真吊！" />}
+            overlay={<CardTitle title={title} subtitle={subtitle} />}
           >
           <div 
             className={style.CardImage}
-            style={{backgroundImage:"url(https://delusion.coding.me/img/daily_pic.min.jpg)"}}
+            style={{backgroundImage:`url(${coverImg})`}}
              >
           </div>
           </CardMedia>
           <div className={style.CardBottom}>
           <CardHeaderAcatar
-            title="滑稽"
-            avatar="http://q1.qlogo.cn/headimg_dl?bs=1106996185&dst_uin=1106996185&spec=100&url_enc=0&referer=bu_interface&term_type=PC"/>
+            title={username}
+            subtitle={avatarSubtitle}
+            avatar={avatarImg}/>
           </div>
         </Card>
     )

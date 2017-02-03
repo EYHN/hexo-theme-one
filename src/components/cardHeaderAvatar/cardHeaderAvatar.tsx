@@ -6,7 +6,8 @@ interface CardHeaderAvatarProps {
   style?:React.CSSProperties,
   className?: string,
   title?:React.ReactNode,
-  avatar?:React.ReactNode
+  avatar?:React.ReactNode,
+  subtitle?:React.ReactNode
 }
 
 export default class CardHeaderAvatar extends React.Component<CardHeaderAvatarProps, undefined>{
@@ -17,6 +18,7 @@ export default class CardHeaderAvatar extends React.Component<CardHeaderAvatarPr
         <CardHeader
           title={this.props.title}
           avatar={this.props.avatar}
+          subtitle={this.props.subtitle}
         />
       </div>
     )

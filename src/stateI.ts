@@ -1,4 +1,11 @@
+import { postsState } from './reducers/posts';
 import { themeState } from './reducers/theme';
-export interface AppState {
-  theme?:themeState
+import { siteState } from './reducers/site';
+
+interface AppState {
+  theme?:themeState,
+  site?:siteState,
+  posts?:postsState
 }
+
+export default AppState;
