@@ -1,3 +1,4 @@
+import AppState from '../../stateI';
 import * as React from 'react';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
@@ -10,7 +11,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 var style = require('./postCard.less')
 
 interface PostCardProps {
-  muiTheme: __MaterialUI.Styles.MuiTheme,
+  muiTheme?: __MaterialUI.Styles.MuiTheme,
   title?:React.ReactNode,
   subtitle?:React.ReactNode,
   cover?:string,
@@ -76,4 +77,4 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
 }
 
 
-export default muiThemeable<any, any, any>()(PostCard);
+export default muiThemeable()(PostCard);

@@ -5,6 +5,7 @@ import AppState from '../../stateI';
 import WelcomeCard from '../WelcomeCard/WelcomeCard'
 import LogoCard from '../logoCard/logoCard'
 import PostCard from '../postCard/postCard'
+import DisplayTrigger from '../displayTrigger/displayTrigger'
 import Grid from '../grid/grid'
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
@@ -15,45 +16,57 @@ var style = require("./home.less");
 interface HomeProps {
   site?: siteState;
   loading?: boolean;
-  pageIndex?: number;
-  pageSize?: number;
-  pageCount?: number;
   posts?: postsState;
+  ajaxLoading?:boolean;
   dispatch?: Dispatch<AppState>;
 }
 
-export class Home extends React.Component<HomeProps, undefined>{
+interface HomeState {
+  pageNumber:number
+}
+
+export class Home extends React.Component<HomeProps, HomeState>{
+  constructor(){
+    super();
+    this.state = {pageNumber:1}
+  }
+
   getPosts(): React.ReactNode {
-    let { pageIndex = 0,pageSize = 0,posts = {} } = this.props;
-    let { apiPageSize = 0, total = 0, postsList = []} = posts;
+    let { posts = {} } = this.props;
+    if (typeof posts.total === 'undefined' && !this.props.loading) {
+      this.props.dispatch(updatePostsP() as any);
+    }
+    let { apiPageSize = 0, total = 0, postsList = [],loading = false} = posts;
     let res: Array<React.ReactNode> = [];
     for (
-      let i = (pageIndex - 1) * pageSize;
-      i < pageIndex * pageSize && i < total;
+      let i = 0;
+      i < this.state.pageNumber * apiPageSize  && i < total;
       i++
     ) {
       let post = postsList[i];
       if (typeof post === 'undefined') {
-        if (!posts.loading) {
-          this.props.dispatch(updatePostsP(parseInt((i / posts.apiPageSize).toString()) + 1) as any);
-          i += posts.apiPageSize - 1;
+        if (!loading) {
+          this.props.dispatch(updatePostsP(parseInt((i / apiPageSize).toString()) + 1) as any);
+          i += apiPageSize - 1;
         }
       } else {
-        res.push(<PostCard key={post.slug} title={post.title} />);
+        res.push(<PostCard key={post.slug} title={post.title} excerpt={post.excerpt} />);
       }
     }
     return res;
   }
-  render() {
-    let { posts = {} } = this.props;
-    let { apiPageSize = 0, total = 0 } = posts;
-    let {
-      pageCount = total / apiPageSize,
-      pageIndex = 1,
-      pageSize = apiPageSize } = this.props;
-    if (typeof posts.total === 'undefined' && !this.props.loading) {
-      this.props.dispatch(updatePostsP() as any);
+
+  loadingMore(event:JQueryEventObject){
+    if(this.props.loading != true){
+      let newState = {
+        ...this.state,
+        pageNumber:this.state.pageNumber+1
+      }
+      this.setState(newState);
     }
+  }
+
+  render() {
     return (
       <Grid>
         <WelcomeCard
@@ -63,6 +76,9 @@ export class Home extends React.Component<HomeProps, undefined>{
         />
         <LogoCard />
         {this.getPosts()}
+        <DisplayTrigger onDisplay={this.loadingMore.bind(this)}>
+          123
+        </DisplayTrigger>
       </Grid>
     )
   }

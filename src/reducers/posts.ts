@@ -12,10 +12,10 @@ export interface postsState{
 function updatePosts(posts:postsState = {},actionPosts:postsI):postsState{
   let { postsList = [] } = posts;
   for(
-    let i = actionPosts.pageSize * (actionPosts.pageIndex - 1);
-    i < actionPosts.total;
-    i++){
-      postsList[i] = actionPosts.data[i];
+    let i = actionPosts.pageSize * (actionPosts.pageIndex - 1),a = 0;
+    i < actionPosts.total && a < actionPosts.pageSize && a < actionPosts.data.length;
+    i++,a++){
+      postsList[i] = actionPosts.data[a];
   }
   let res = {
     ...posts,

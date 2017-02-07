@@ -7,7 +7,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import { Router, Route, hashHistory } from 'react-router';
 import Home from '../home/home'
-import TouchRipple from 'material-ui/internal/TouchRipple';
 import Post from '../post/post';
 import * as zh from 'react-intl/locale-data/zh';
 import * as en from 'react-intl/locale-data/en';
