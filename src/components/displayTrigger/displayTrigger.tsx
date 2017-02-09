@@ -3,6 +3,7 @@ import * as $ from "jquery"
 
 interface DisplayTriggerProps {
   onDisplay: (event: JQueryEventObject) => any;
+  className?:string
 }
 
 export default class DisplayTrigger extends React.Component<DisplayTriggerProps, undefined>{
@@ -29,7 +30,8 @@ export default class DisplayTrigger extends React.Component<DisplayTriggerProps,
     $(window).unbind("scroll", this.scrollListener);
   }
   render() {
-    return <div ref="DisplayTrigger">
+    let {className = ''} = this.props;
+    return <div ref="DisplayTrigger" className={className}>
       {
         this.props.children
       }

@@ -1,3 +1,4 @@
+import { theme } from '../Interfaces/theme';
 import { site } from '../Interfaces/site';
 import { posts } from '../Interfaces/posts';
 import { post } from '../Interfaces/post';
@@ -5,8 +6,9 @@ import { tagsItem } from '../Interfaces/tags';
 import { tag } from '../Interfaces/tag';
 import { categoriesItem } from '../Interfaces/categories';
 import { category } from '../Interfaces/category';
-export var apiHref = "https://delusion.coding.me/api"
 import * as fetch from 'isomorphic-fetch';
+
+export var apiHref = "http://delusion.coding.me/hexo-theme-design-Demo/api"
 
 const fetchConfig = {
 }
@@ -14,6 +16,12 @@ const fetchConfig = {
 export function getSite(href = apiHref) {
   return fetch(href + "/site.json",fetchConfig).then((res) => {
     return res.json() as Promise<site>;
+  })
+}
+
+export function getTheme(href = apiHref) {
+  return fetch(href + "/theme.json",fetchConfig).then((res) => {
+    return res.json() as Promise<theme>;
   })
 }
 

@@ -1,5 +1,7 @@
+import * as Url from 'url';
+import { siteState } from './reducers/site';
 import AppState from './stateI';
-import { apiHref,getSite } from './lib/hexoApi';
+import { apiHref, getSite, getTheme } from './lib/hexoApi';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import { Router, Route } from 'react-router';
 import { Provider } from 'react-redux';
@@ -15,23 +17,22 @@ injectTapEventPlugin();
 
 var style = require('./main.less');
 
-const Main = ({store}:{store:Store<any>}) => (
+const Main = ({store}: { store: Store<any> }) => (
   <Provider store={store}>
     <App />
   </Provider>
 );
 
-let store:Store<AppState>;
+let store: Store<AppState>;
 
-async function main(){
-  var site = await getSite();
-  store = createStore({site})
+Promise.all([getSite() as siteState, getTheme()]).then((res) => {
+  let u = new URL(apiHref);
+  res[0].siteUrl = u.protocol + '//' + u.host;
+  store = createStore({ site: res[0], theme: res[1] })
   ReactDOM.render(
-    <Main store={store}/>,
+    <Main store={store} />,
     document.getElementById('app')
   );
-}
-
-main();
+})
 
 export default store;

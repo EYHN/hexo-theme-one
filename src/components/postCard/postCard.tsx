@@ -1,4 +1,6 @@
+import { array_rand, array_randS } from '../../lib/random';
 import AppState from '../../stateI';
+import * as Url from 'url';
 import * as React from 'react';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
@@ -8,20 +10,40 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import SocialShare from 'material-ui/svg-icons/social/share';
 import CardHeaderAcatar from '../cardHeaderAvatar/cardHeaderAvatar'
 import muiThemeable from 'material-ui/styles/muiThemeable';
+import { connect } from 'react-redux'
 var style = require('./postCard.less')
 
 interface PostCardProps {
   muiTheme?: __MaterialUI.Styles.MuiTheme,
-  title?:React.ReactNode,
-  subtitle?:React.ReactNode,
-  cover?:string,
-  excerpt?:React.ReactNode,
-  authorName?:React.ReactNode,
-  authorAvatar?:React.ReactNode
+  title?: React.ReactNode,
+  subtitle?: React.ReactNode,
+  cover?: string,
+  excerpt?: string,
+  authorName?: React.ReactNode,
+  authorAvatar?: React.ReactNode,
+  default_thumbnail?: string,
+  siteUrl?:string
+}
+
+function removeHTMLTag(str: String) {
+  str = str.replace(/<\/?[^>]*>/g, '');
+  str = str.replace(/[ | ]*\n/g, '\n');
+  str = str.replace(/ /ig, '');
+  return str;
 }
 
 export class PostCard extends React.Component<PostCardProps, undefined>{
+  default_thumbnail = '';
+  excerpt() {
+    let {excerpt: e = ""} = this.props
+    return removeHTMLTag(e.toString());
+  }
+  componentWillMount(){
+    this.default_thumbnail = this.props.default_thumbnail
+  }
   render() {
+    let {cover = this.default_thumbnail,siteUrl = ''} = this.props
+    cover = Url.resolve(siteUrl,cover);
     return (
       <Card className={style.PostCard}>
         <CardMedia
@@ -29,14 +51,14 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
         >
           <div
             className={style.CardImage}
-            style={{ backgroundImage: `url(${this.props.cover})` }}
+            style={{ backgroundImage: `url(${cover})` }}
           >
           </div>
         </CardMedia>
         <CardText>
-        {
-          this.props.excerpt
-        }
+          {
+            this.excerpt()
+          }
         </CardText>
         <div className={style.CardBottom}>
           <CardHeaderAcatar
@@ -76,5 +98,21 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
   }
 }
 
+const mapStateToProps: (state: AppState) => PostCardProps = (state: AppState) => {
+  try {
+    var { theme: {img: {post_thumbnail}},site:{siteUrl} } = state;
+  } catch (e) {
+    console.error(e);
+  }
+  return {
+    siteUrl: siteUrl || '',
+    default_thumbnail: array_rand(post_thumbnail || '')
+  }
+};
 
-export default muiThemeable()(PostCard);
+
+let PostCardS = muiThemeable()(PostCard);
+
+let PostCardX = connect<AppState, PostCardProps, PostCardProps>(mapStateToProps)(PostCardS as any)
+
+export default PostCardX;

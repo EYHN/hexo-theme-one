@@ -1,3 +1,6 @@
+import { array_randS } from '../../lib/random';
+import * as Url from 'url';
+import { apiHref } from '../../lib/hexoApi';
 import { postsState } from '../../reducers/posts';
 import { updatePostsP } from '../../actions/posts';
 import * as React from 'react';
@@ -11,24 +14,32 @@ import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { siteState } from '../../reducers/site'
 import mainState from '../../main'
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import CircularProgress from 'material-ui/CircularProgress';
 var style = require("./home.less");
 
 interface HomeProps {
-  site?: siteState;
+  muiTheme?: __MaterialUI.Styles.MuiTheme,
   loading?: boolean;
   posts?: postsState;
-  ajaxLoading?:boolean;
+  ajaxLoading?: boolean;
   dispatch?: Dispatch<AppState>;
+  avatar?:string
+  left_pic?:string
+  slogan?:string
+  siteUrl?:string
+  author?:string
+  title?:string
 }
 
 interface HomeState {
-  pageNumber:number
+  pageNumber: number
 }
 
 export class Home extends React.Component<HomeProps, HomeState>{
-  constructor(){
+  constructor() {
     super();
-    this.state = {pageNumber:1}
+    this.state = { pageNumber: 1 }
   }
 
   getPosts(): React.ReactNode {
@@ -36,11 +47,11 @@ export class Home extends React.Component<HomeProps, HomeState>{
     if (typeof posts.total === 'undefined' && !this.props.loading) {
       this.props.dispatch(updatePostsP() as any);
     }
-    let { apiPageSize = 0, total = 0, postsList = [],loading = false} = posts;
+    let { apiPageSize = 0, total = 0, postsList = [], loading = false} = posts;
     let res: Array<React.ReactNode> = [];
     for (
       let i = 0;
-      i < this.state.pageNumber * apiPageSize  && i < total;
+      i < this.state.pageNumber * apiPageSize && i < total;
       i++
     ) {
       let post = postsList[i];
@@ -50,34 +61,44 @@ export class Home extends React.Component<HomeProps, HomeState>{
           i += apiPageSize - 1;
         }
       } else {
-        res.push(<PostCard key={post.slug} title={post.title} excerpt={post.excerpt} />);
+        res.push(<PostCard key={post.slug} title={post.title} excerpt={post.excerpt} cover={array_randS(post.thumbnail)} />);
       }
     }
     return res;
   }
 
-  loadingMore(event:JQueryEventObject){
-    if(this.props.loading != true){
+  loadingMore(event: JQueryEventObject) {
+    if (this.props.loading != true) {
       let newState = {
         ...this.state,
-        pageNumber:this.state.pageNumber+1
+        pageNumber: this.state.pageNumber + 1
       }
       this.setState(newState);
     }
   }
 
   render() {
+    let {siteUrl = '',author = '',title = ''} = this.props;
+    let {left_pic = '',slogan = '',avatar = ''} = this.props;
     return (
       <Grid>
         <WelcomeCard
-          title={this.props.site.title}
-          subtitle={this.props.site.subtitle}
-          username={this.props.site.author}
+          title={title}
+          subtitle={slogan}
+          username={author}
+          coverImg={Url.resolve(siteUrl,left_pic)}
+          avatarImg={Url.resolve(siteUrl,avatar)}
         />
         <LogoCard />
         {this.getPosts()}
-        <DisplayTrigger onDisplay={this.loadingMore.bind(this)}>
-          123
+        <DisplayTrigger className={style.Loading} onDisplay={
+          this.loadingMore.bind(this)
+          }>
+          {
+              this.props.loading ? <span style={{
+                color:this.props.muiTheme.cardText.textColor
+              }}><CircularProgress size={25} /><span className={style.loadingMore}> 加载更多...</span></span> : undefined
+          }
         </DisplayTrigger>
       </Grid>
     )
@@ -85,12 +106,23 @@ export class Home extends React.Component<HomeProps, HomeState>{
 }
 
 const mapStateToProps = (state: AppState) => {
-  var { site = {}, posts = {} } = state;
+  let { site = {}, posts = {}, theme = {} } = state;
+  let { siteUrl = '',author = '',title = '' } = site;
+  let { img = {},uiux = {} } = theme;
   return {
-    site, posts, loading: posts.loading
+    siteUrl,
+    author,
+    title,
+    posts,
+    loading: posts.loading, 
+    avatar: array_randS(img.avatar),
+    left_pic: array_randS(img.left_pic),
+    slogan: array_randS(uiux.slogan)
   }
 }
 
-let HomeX = connect<AppState, HomeProps, HomeProps>(mapStateToProps)(Home as any)
+let HomeS =  muiThemeable()(Home);
+
+let HomeX = connect<AppState, HomeProps, HomeProps>(mapStateToProps)(HomeS as any)
 
 export default HomeX

@@ -1,1 +1,17 @@
-lol: 100
+head:
+    favicon: "/img/favicon.png"
+
+img:
+    avatar: "http://q1.qlogo.cn/headimg_dl?bs=1106996185&dst_uin=1106996185&spec=100&url_enc=0&referer=bu_interface&term_type=PC"
+    left_pic: 
+      - "/img/daily_pic.min.jpg"
+      - "/img/random/marerial-1.png"
+    right_pic:
+      - "/img/daily_pic.min.jpg"
+      - "/img/random/marerial-1.png"
+    post_thumbnail: 
+      - "/img/random/marerial-2.png"
+      - "/img/random/marerial-3.png"
+
+uiux:
+    slogan: "1"

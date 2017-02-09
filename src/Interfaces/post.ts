@@ -11,4 +11,5 @@ export interface post {
   content?: string,
   categories?: Array<categoriesItem>,
   tags?: Array<tagsItem>
+  thumbnail?:string | Array<string>
 }
