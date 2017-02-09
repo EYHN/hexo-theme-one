@@ -14,7 +14,6 @@ export default class DisplayTrigger extends React.Component<DisplayTriggerProps,
     let windowDom = $(window);
     let isOnDisplay = false;
     this.scrollListener = (e) => {
-      let sum = document.documentElement.scrollHeight;
       if (listenDom.offset().top <= bodyDom.scrollTop() + windowDom.height()) {
         if (isOnDisplay == false) {
           this.props.onDisplay(e);

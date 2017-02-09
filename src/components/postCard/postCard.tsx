@@ -11,6 +11,7 @@ import SocialShare from 'material-ui/svg-icons/social/share';
 import CardHeaderAcatar from '../cardHeaderAvatar/cardHeaderAvatar'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { connect } from 'react-redux'
+import { Link } from 'react-router';
 var style = require('./postCard.less')
 
 interface PostCardProps {
@@ -22,7 +23,8 @@ interface PostCardProps {
   authorName?: React.ReactNode,
   authorAvatar?: React.ReactNode,
   default_thumbnail?: string,
-  siteUrl?:string
+  siteUrl?:string,
+  content?:string
 }
 
 function removeHTMLTag(str: String) {
@@ -46,18 +48,18 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
     cover = Url.resolve(siteUrl,cover);
     return (
       <Card className={style.PostCard}>
-        <CardMedia
-          overlay={<CardTitle title={this.props.title} subtitle={this.props.subtitle} />}
-        >
-          <div
-            className={style.CardImage}
-            style={{ backgroundImage: `url(${cover})` }}
+          <CardMedia
+            overlay={<CardTitle title={this.props.title} subtitle={this.props.subtitle} />}
           >
-          </div>
-        </CardMedia>
+            <div
+              className={style.CardImage}
+              style={{ backgroundImage: `url(${cover})` }}
+            >
+            </div>
+          </CardMedia>
         <CardText>
           {
-            this.excerpt()
+            this.props.content || this.excerpt()
           }
         </CardText>
         <div className={style.CardBottom}>
