@@ -1,0 +1,23 @@
+@import "../../variable.less";
+
+.WelcomeCard {
+    composes: card from '../card/card.less';
+    composes: card-with-img from '../card/card.less';
+    width: e("calc(66.66% - 16px)");
+}
+
+// @media (max-width: @screen-sm-min) {
+//     .WelcomeCard {
+//         margin: 0px !important;
+//         width: 100% !important;
+//         border-radius: 0px !important;
+//     }
+// }
+
+.CardImage {
+    composes: CardImage from '../card/card.less';
+}
+
+.CardBottom {
+    composes: CardBottom from '../card/card.less';
+}
