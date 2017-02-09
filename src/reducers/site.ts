@@ -4,12 +4,12 @@ export interface siteState extends siteI{
 
 }
 
-const site = (state: siteState = {}, action: any) => {
+const site = (state: siteState = {}, action: {type?:string,date?:siteI}  = {}) => {
   switch (action.type) {
     case 'CHANGE_SITE':
       return {
         ...state,
-        ...action
+        ...action.date
       }
   }
   return state

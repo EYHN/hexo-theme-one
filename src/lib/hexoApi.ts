@@ -6,6 +6,7 @@ import { tag } from '../Interfaces/tag';
 import { categoriesItem } from '../Interfaces/categories';
 import { category } from '../Interfaces/category';
 export var apiHref = "https://delusion.coding.me/api"
+import * as fetch from 'isomorphic-fetch';
 
 const fetchConfig = {
 }
@@ -20,14 +21,14 @@ export function getPosts(index?: number, href = apiHref) {
   if (typeof index === 'undefined') {
     return fetch(href + "/posts.json",fetchConfig).then((res) => {
       return res.json().then((date)=>{
-        date.pageIndex = 1;
+        date.pageIndex =0;
         return date as Promise<posts>
       });
     })
   } else {
     return fetch(href + `/posts/${index}.json`,fetchConfig).then((res) => {
       return res.json().then((date)=>{
-        date.pageIndex = index;
+        date.pageIndex = index - 1;
         return date as Promise<posts>
       });
     })

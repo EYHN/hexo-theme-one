@@ -12,7 +12,7 @@ export interface postsState{
 function updatePosts(posts:postsState = {},actionPosts:postsI):postsState{
   let { postsList = [] } = posts;
   for(
-    let i = actionPosts.pageSize * (actionPosts.pageIndex - 1),a = 0;
+    let i = actionPosts.pageSize * (actionPosts.pageIndex),a = 0;
     i < actionPosts.total && a < actionPosts.pageSize && a < actionPosts.data.length;
     i++,a++){
       postsList[i] = actionPosts.data[a];
@@ -26,7 +26,7 @@ function updatePosts(posts:postsState = {},actionPosts:postsI):postsState{
   return res;
 }
 
-const posts:(state:postsState,action:any)=>postsState = (state: postsState = {}, action: any) => {
+const posts:(state:postsState,action:any)=>postsState = (state: postsState = {}, action: any = {}) => {
   switch (action.type) {
     case 'UPDATE_POSTS':
       let posts = updatePosts(state,action.result);

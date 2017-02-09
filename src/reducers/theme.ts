@@ -2,7 +2,10 @@ export interface themeState {
   muiTheme?: __MaterialUI.Styles.MuiTheme;
 }
 
-const theme = (state: themeState = {}, action: any) => {
+const theme = (
+  state: themeState = {},
+  action: { type?: string, muiTheme?: __MaterialUI.Styles.MuiTheme } = {}
+) => {
   switch (action.type) {
     case 'CHANGE_THEME':
       return {
