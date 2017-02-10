@@ -12,6 +12,7 @@ import * as $ from "jquery"
 
 interface MenuProps {
   muiTheme?: MuiTheme
+  onclickLeft?:(e:any)=>any
 }
 
 interface MenuStates {
@@ -77,6 +78,7 @@ class Menu extends React.Component<MenuProps, MenuStates>{
             0px 1px 6px rgba(0, 0, 0, ${0.117647 * this.state.opacity}) , 0px 1px 4px rgba(0, 0, 0, ${0.117647 * this.state.opacity})
             `
           }}
+          onLeftIconButtonTouchTap={this.props.onclickLeft}
           iconClassNameRight="muidocs-icon-navigation-expand-more"
         />
       </div>

@@ -13,7 +13,7 @@ export default class Post extends React.Component<PostProps, undefined>{
   render() {
     return (
       <Grid>
-        <PostCard/>
+        <PostCard className={style.postCard} cardMedia={false}/>
       </Grid>
     )
   }

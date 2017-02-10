@@ -12,7 +12,7 @@ import Post from '../post/post';
 import * as zh from 'react-intl/locale-data/zh';
 import * as en from 'react-intl/locale-data/en';
 import {IntlProvider,addLocaleData} from 'react-intl'
-import Drawer from 'material-ui/Drawer';
+import Drawer from '../Drawer/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Background from '../background/background'
 import muiThemeable from 'material-ui/styles/muiThemeable';
@@ -35,20 +35,38 @@ function chooseLocale(){
     }
 }
 
-export class App extends React.Component<AppProps, undefined>{
+interface AppComponentState { 
+  sidebar?:boolean
+}
+
+export class App extends React.Component<AppProps, AppComponentState>{
   constructor(props: any) {
     super(props);
+    this.state = {
+      sidebar:false
+    }
+  }
+
+  MenuToggle(){
+    this.setState((state)=>({
+      ...state,
+      sidebar:!this.state.sidebar
+    }))
   }
 
   render() {
     return (
       <IntlProvider
-        locale={navigator.language} 
+        locale={navigator.language}
         messages={chooseLocale()}>
         <MuiThemeProvider muiTheme={this.props.Theme}>
           <div>
-            <Menu/>
+            <Menu onclickLeft={this.MenuToggle.bind(this)}/>
             <Background/>
+            <Drawer
+              open={this.state.sidebar}
+              onRequestChange={this.MenuToggle.bind(this)}
+              />
             <div id={style.container}>
               <main
               id={style.main}>

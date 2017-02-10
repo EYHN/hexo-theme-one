@@ -23,8 +23,11 @@ interface PostCardProps {
   authorName?: React.ReactNode,
   authorAvatar?: React.ReactNode,
   default_thumbnail?: string,
-  siteUrl?:string,
-  content?:string
+  siteUrl?: string,
+  content?: string,
+  link?: boolean,
+  className?: boolean,
+  cardMedia?:boolean
 }
 
 function removeHTMLTag(str: String) {
@@ -40,14 +43,17 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
     let {excerpt: e = ""} = this.props
     return removeHTMLTag(e.toString());
   }
-  componentWillMount(){
+  componentWillMount() {
     this.default_thumbnail = this.props.default_thumbnail
   }
   render() {
-    let {cover = this.default_thumbnail,siteUrl = ''} = this.props
-    cover = Url.resolve(siteUrl,cover);
+    let {cover = this.default_thumbnail, siteUrl = '', className = '',cardMedia = true} = this.props
+    cover = Url.resolve(siteUrl, cover);
     return (
-      <Card className={style.PostCard}>
+      <Card className={style.PostCard + ' ' + className}>
+
+        {
+          cardMedia?
           <CardMedia
             overlay={<CardTitle title={this.props.title} subtitle={this.props.subtitle} />}
           >
@@ -55,8 +61,13 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
               className={style.CardImage}
               style={{ backgroundImage: `url(${cover})` }}
             >
+              <Link to="/post/aa" className={style.Link}>
+
+              </Link>
             </div>
           </CardMedia>
+          :undefined
+          }
         <CardText>
           {
             this.props.content || this.excerpt()
@@ -102,7 +113,7 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
 
 const mapStateToProps: (state: AppState) => PostCardProps = (state: AppState) => {
   try {
-    var { theme: {img: {post_thumbnail}},site:{siteUrl} } = state;
+    var { theme: {img: {post_thumbnail}}, site: {siteUrl} } = state;
   } catch (e) {
     console.error(e);
   }

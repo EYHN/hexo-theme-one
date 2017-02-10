@@ -12,7 +12,7 @@ export class Background extends React.Component<BackgroundProps, undefined>{
     return (
       <div>
         <div className={style.ColorBackground} style={{
-          backgroundColor:this.props.muiTheme.palette.primary1Color
+          backgroundColor:this.props.muiTheme.appBar.color
         }}></div>
       </div>
     )

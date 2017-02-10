@@ -1,3 +1,4 @@
+import { Theme } from './themes';
 import { darkBlack, grey600 } from 'material-ui/styles/colors';
 import { MuiTheme } from 'material-ui/styles';
 import * as Url from 'url';
@@ -16,11 +17,6 @@ import createStore from './create-store';
 import App from './components/app/app'
 import reducer from './reducers/reducer'
 
-const defaultMuiTheme:MuiTheme = {
-  appBar:{
-  }
-}
-
 injectTapEventPlugin();
 
 var style = require('./main.less');
@@ -38,7 +34,7 @@ Promise.all([getSite() as siteState, getTheme()]).then((res) => {
   res[0].siteUrl = u.protocol + '//' + u.host;
   store = createStore({ site: res[0], theme: {
     ...res[1],
-    muiTheme:getMuiTheme(defaultMuiTheme)
+    muiTheme:getMuiTheme(Theme['lightBaseTheme'])
   } })
   ReactDOM.render(
     <Main store={store} />,
