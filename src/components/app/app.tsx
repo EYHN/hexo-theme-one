@@ -1,3 +1,5 @@
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import color2Theme from '../../lib/color2Theme';
 import Menu from '../Menu/Menu';
 import AppState from '../../stateI';
 import * as React from 'react';
@@ -21,7 +23,10 @@ addLocaleData(en);
 var style = require('./app.less')
 
 interface AppProps {
-  Theme?: __MaterialUI.Styles.MuiTheme
+  color?: {
+    primaryColor:string,
+    accentColor:string
+  }
 }
 
 function chooseLocale(){
@@ -55,11 +60,12 @@ export class App extends React.Component<AppProps, AppComponentState>{
   }
 
   render() {
+    let Theme = getMuiTheme(color2Theme(this.props.color.primaryColor,this.props.color.primaryColor));
     return (
       <IntlProvider
         locale={navigator.language}
         messages={chooseLocale()}>
-        <MuiThemeProvider muiTheme={this.props.Theme}>
+        <MuiThemeProvider muiTheme={Theme}>
           <div>
             <Menu onclickLeft={this.MenuToggle.bind(this)}/>
             <Background/>
@@ -85,7 +91,10 @@ export class App extends React.Component<AppProps, AppComponentState>{
 
 const mapStateToProps = (state:AppState) => {
   return {
-    Theme: state.theme.muiTheme
+    color: state.theme.color || {
+      primaryColor:'cyan',
+      accentColor:'pink'
+    }
   }
 }
 

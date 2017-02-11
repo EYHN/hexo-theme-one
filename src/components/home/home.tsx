@@ -1,3 +1,4 @@
+import { changeColor } from '../../actions/theme';
 import { array_randS } from '../../lib/random';
 import * as Url from 'url';
 import { apiHref } from '../../lib/hexoApi';
@@ -37,6 +38,10 @@ interface HomeState {
 }
 
 export class Home extends React.Component<HomeProps, HomeState>{
+  componentDidMount(){
+    this.props.dispatch(changeColor('cyan','pink'));
+  }
+
   constructor() {
     super();
     this.state = { pageNumber: 1 }

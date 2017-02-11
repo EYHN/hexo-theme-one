@@ -1,6 +1,7 @@
 import MenuItem from 'material-ui/MenuItem';
 import MDDrawer from 'material-ui/Drawer';
 import * as React from 'react';
+import ColorChoose from '../colorChoose/colorChoose'
 
 interface DrawerProps {
   open?:boolean,
@@ -21,6 +22,7 @@ export default class Drawer extends React.Component<DrawerProps, DrawerState>{
       >
         <MenuItem>Menu Item</MenuItem>
         <MenuItem>Menu Item 2</MenuItem>
+        <ColorChoose/>
       </MDDrawer>
     )
   }

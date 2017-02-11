@@ -1,25 +1,27 @@
-import {changeMuiThemeAction,changeThemeAction } from '../actions/theme'
+import { changeColorAction, changeThemeAction } from '../actions/theme';
 import { theme as themeI } from '../Interfaces/theme'
 
 export interface themeState extends themeI {
-  muiTheme?: __MaterialUI.Styles.MuiTheme;
 }
 
 const theme = (
   state: themeState = {},
-  action: changeMuiThemeAction | changeThemeAction
+  action: changeThemeAction | changeColorAction
 ) => {
   if(typeof action === 'undefined')return state;
   switch (action.type) {
-    case 'CHANGE_MUI_THEME':
-      return {
-        ...state,
-        muiTheme: action.muiTheme
-      }
     case 'CHANGE_THEME':
       return {
         ...state,
         ...action.theme
+      }
+    case 'CHANGE_COLOR':
+      return {
+        ...state,
+        color:{
+          primaryColor:action.primaryColor,
+          accentColor:action.primaryColor
+        }
       }
   }
   return state

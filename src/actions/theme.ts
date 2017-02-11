@@ -1,21 +1,23 @@
 import {theme} from '../Interfaces/theme'
 
-export interface changeMuiThemeAction {
-  type: 'CHANGE_MUI_THEME',
-  muiTheme:__MaterialUI.Styles.MuiTheme
-}
-
 export interface changeThemeAction {
   type: 'CHANGE_THEME',
   theme:theme
 }
 
-export const changeMuiTheme = (muiTheme:__MaterialUI.Styles.MuiTheme) => ({
-  type: 'CHANGE_MUI_THEME',
-  muiTheme: muiTheme
-})
+export interface changeColorAction {
+  type: 'CHANGE_COLOR',
+  primaryColor:string,
+  accentColor:String
+}
 
 export const changeTheme = (theme:theme) => ({
   type: 'CHANGE_THEME',
   theme: theme
+})
+
+export const changeColor = (primaryColor:string,accentColor:string) => ({
+  type: 'CHANGE_COLOR',
+  primaryColor: primaryColor,
+  accentColor: accentColor
 })

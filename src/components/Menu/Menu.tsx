@@ -5,6 +5,7 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import SearchIcon from 'material-ui/svg-icons/action/search';
 import * as React from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 let style = require('./Menu.less');
@@ -79,7 +80,7 @@ class Menu extends React.Component<MenuProps, MenuStates>{
             `
           }}
           onLeftIconButtonTouchTap={this.props.onclickLeft}
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
+          iconElementRight={<IconButton><SearchIcon/></IconButton>}
         />
       </div>
     )

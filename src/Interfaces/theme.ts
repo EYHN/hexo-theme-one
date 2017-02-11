@@ -1,4 +1,8 @@
 export interface theme {
+  color?:{
+    primaryColor:string,
+    accentColor:string
+  }
   uiux?:{
     slogan?: string | Array<string>
   },
