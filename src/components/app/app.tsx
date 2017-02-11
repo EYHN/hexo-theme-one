@@ -93,7 +93,7 @@ const mapStateToProps = (state:AppState) => {
   return {
     color: state.theme.color || {
       primaryColor:'cyan',
-      accentColor:'pink'
+      pccentColor:'pink'
     }
   }
 }

@@ -32,11 +32,7 @@ Promise.all([getSite() as siteState, getTheme()]).then((res) => {
   let u = new URL(apiHref);
   res[0].siteUrl = u.protocol + '//' + u.host;
   store = createStore({ site: res[0], theme: {
-    ...res[1],
-    color:{
-      primaryColor:'cyan',
-      accentColor:'pink'
-    }
+    ...res[1]
   } })
   ReactDOM.render(
     <Main store={store} />,

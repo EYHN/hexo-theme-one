@@ -1,10 +1,9 @@
 import Checkbox from 'material-ui/Checkbox';
 import * as React from 'react';
+var style = require('./colorChooseButton.less')
 
-interface ColorChooseButtonProps {
+interface ColorChooseButtonProps extends __MaterialUI.Switches.CheckboxProps {
   color?:string
-  label?:string
-  onCheck?:()=>any
 }
 
 interface ColorChooseButtonState {
@@ -15,11 +14,13 @@ export default class ColorChooseButton extends React.Component<ColorChooseButton
   render(){
     return (
       <Checkbox
-        label={this.props.label || ''}
         iconStyle={{
-          fill: this.props.color || ''
+          fill: this.props.color
         }}
-        onCheck={this.props.onCheck}
+        className={style.CheckBox}
+        {
+          ...this.props
+        }
       />
     )
   }
