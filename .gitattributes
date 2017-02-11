@@ -1,3 +1,3 @@
-dist/*.js -crlf -diff
-dist/*.js.map -crlf -diff
-mochawesome-reports/* -crlf -diff
+dist/*.js binary
+dist/*.js.map binary
+mochawesome-reports/* binary
