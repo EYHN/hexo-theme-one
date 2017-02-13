@@ -1,3 +1,4 @@
+import { array_randS } from './lib/random';
 import { darkBlack, grey600 } from 'material-ui/styles/colors';
 import { MuiTheme } from 'material-ui/styles';
 import * as Url from 'url';
@@ -31,9 +32,12 @@ let store: Store<AppState>;
 Promise.all([getSite() as siteState, getTheme()]).then((res) => {
   let u = new URL(apiHref);
   res[0].siteUrl = u.protocol + '//' + u.host;
-  store = createStore({ site: res[0], theme: {
+  let state:AppState = { site: res[0], theme: {
     ...res[1]
-  } })
+  } };
+  state.theme.color.accentColor = array_randS(state.theme.uiux.defaultAccentColor);
+  state.theme.color.primaryColor = array_randS(state.theme.uiux.defaultPrimaryColor);
+  store = createStore(state)
   ReactDOM.render(
     <Main store={store} />,
     document.getElementById('app')

@@ -1,4 +1,5 @@
-import {post} from '../Interfaces/post'
+import post from './post';
+import {postState} from './post'
 import {posts as postsI} from "../Interfaces/posts"
 
 export interface postsState{
@@ -6,7 +7,7 @@ export interface postsState{
   loading?:boolean,
   apiPageSize?: number,
   err?:boolean,
-  postsList?:Array<post>
+  postsList?:Array<postState>
 }
 
 function updatePosts(posts:postsState = {},actionPosts:postsI):postsState{
@@ -45,7 +46,10 @@ const posts:(state:postsState,action:any)=>postsState = (state: postsState = {},
         err:true
       }
   }
-  return state
+  return {
+    ...state,
+    postsList:post(state.postsList,action)
+  }
 }
 
 export default posts;

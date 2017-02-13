@@ -1,9 +1,9 @@
-import { changeColor } from '../../actions/theme';
+import { changeColor, changeColorAction } from '../../actions/theme';
 import { array_randS } from '../../lib/random';
 import * as Url from 'url';
 import { apiHref } from '../../lib/hexoApi';
 import { postsState } from '../../reducers/posts';
-import { updatePostsP } from '../../actions/posts';
+import { updatePostsAction, updatePostsP } from '../../actions/posts';
 import * as React from 'react';
 import AppState from '../../stateI';
 import WelcomeCard from '../WelcomeCard/WelcomeCard'
@@ -24,13 +24,16 @@ interface HomeProps {
   loading?: boolean;
   posts?: postsState;
   ajaxLoading?: boolean;
-  dispatch?: Dispatch<AppState>;
   avatar?:string
   left_pic?:string
   slogan?:string
   siteUrl?:string
   author?:string
-  title?:string
+  title?:string,
+  onChooseColor?: (primaryColor:string,accentColor:string) =>void;
+  primaryColor?: string
+  accentColor?: string
+  updatePostsP?:(index?:number) => void
 }
 
 interface HomeState {
@@ -39,7 +42,7 @@ interface HomeState {
 
 export class Home extends React.Component<HomeProps, HomeState>{
   componentDidMount(){
-    this.props.dispatch(changeColor('cyan','pink'));
+    this.props.onChooseColor(this.props.primaryColor,this.props.accentColor);
   }
 
   constructor() {
@@ -50,7 +53,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
   getPosts(): React.ReactNode {
     let { posts = {} } = this.props;
     if (typeof posts.total === 'undefined' && !this.props.loading) {
-      this.props.dispatch(updatePostsP() as any);
+      this.props.updatePostsP();
     }
     let { apiPageSize = 0, total = 0, postsList = [], loading = false} = posts;
     let res: Array<React.ReactNode> = [];
@@ -62,11 +65,11 @@ export class Home extends React.Component<HomeProps, HomeState>{
       let post = postsList[i];
       if (typeof post === 'undefined') {
         if (!loading) {
-          this.props.dispatch(updatePostsP(parseInt((i / apiPageSize).toString()) + 1) as any);
+          this.props.updatePostsP(parseInt((i / apiPageSize).toString()) + 1);
           i += apiPageSize - 1;
         }
       } else {
-        res.push(<PostCard key={post.slug} title={post.title} excerpt={post.excerpt} cover={array_randS(post.thumbnail)} />);
+        res.push(<PostCard key={post.slug} title={post.title} excerpt={post.excerpt} cover={array_randS(post.thumbnail)} link={post.slug} />);
       }
     }
     return res;
@@ -114,6 +117,7 @@ const mapStateToProps = (state: AppState) => {
   let { site = {}, posts = {}, theme = {} } = state;
   let { siteUrl = '',author = '',title = '' } = site;
   let { img = {},uiux = {} } = theme;
+  let { defaultPrimaryColor = 'cyan', defaultAccentColor = 'pink'} = uiux
   return {
     siteUrl,
     author,
@@ -122,12 +126,25 @@ const mapStateToProps = (state: AppState) => {
     loading: posts.loading, 
     avatar: array_randS(img.avatar),
     left_pic: array_randS(img.left_pic),
-    slogan: array_randS(uiux.slogan)
+    slogan: array_randS(uiux.slogan),
+    primaryColor: array_randS(defaultPrimaryColor),
+    accentColor: array_randS(defaultAccentColor)
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
+  return {
+    onChooseColor: (primaryColor:string,accentColor:string) => {
+      dispatch(changeColor(primaryColor,accentColor))
+    },
+    updatePostsP:  (index?:number) => {
+      dispatch(updatePostsP(index) as any );
+    }
   }
 }
 
 let HomeS =  muiThemeable()(Home);
 
-let HomeX = connect<AppState, HomeProps, HomeProps>(mapStateToProps)(HomeS as any)
+let HomeX = connect<AppState, HomeProps, HomeProps>(mapStateToProps,mapDispatchToProps)(HomeS as any)
 
 export default HomeX

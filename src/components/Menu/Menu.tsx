@@ -13,7 +13,7 @@ import * as $ from "jquery"
 
 interface MenuProps {
   muiTheme?: MuiTheme
-  onclickLeft?:(e:any)=>any
+  onclickLeft?: (e: any) => any
 }
 
 interface MenuStates {
@@ -35,10 +35,16 @@ class Menu extends React.Component<MenuProps, MenuStates>{
     let windowDom = $(window);
     let isOnDisplay = false;
     this.scrollListener = () => {
-      let sum = bodyDom.scrollTop() / 200;
-      this.setState({
-        opacity: (sum > 1) ? 1 : sum
-      });
+      let timer:any;
+      if (timer) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(()=> {
+        let sum = bodyDom.scrollTop() / 200;
+        this.setState({
+          opacity: (sum > 1) ? 1 : sum
+        });
+      }, 100);
     }
     this.scrollListener();
     $(window).bind("scroll", this.scrollListener);
@@ -75,12 +81,13 @@ class Menu extends React.Component<MenuProps, MenuStates>{
         <AppBar
           style={{
             backgroundColor: this.doColor(),
-            boxShadow:`
-            0px 1px 6px rgba(0, 0, 0, ${0.117647 * this.state.opacity}) , 0px 1px 4px rgba(0, 0, 0, ${0.117647 * this.state.opacity})
+            boxShadow: `
+            0px 1px 6px rgba(0, 0, 0, ${0.117647 * this.state.opacity}) , 
+            0px 1px 4px rgba(0, 0, 0, ${0.117647 * this.state.opacity})
             `
           }}
           onLeftIconButtonTouchTap={this.props.onclickLeft}
-          iconElementRight={<IconButton><SearchIcon/></IconButton>}
+          iconElementRight={<IconButton><SearchIcon /></IconButton>}
         />
       </div>
     )

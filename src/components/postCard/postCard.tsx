@@ -25,9 +25,8 @@ interface PostCardProps {
   default_thumbnail?: string,
   siteUrl?: string,
   content?: string,
-  link?: boolean,
-  className?: boolean,
-  cardMedia?:boolean
+  link?: string,
+  className?: string,
 }
 
 function removeHTMLTag(str: String) {
@@ -47,27 +46,28 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
     this.default_thumbnail = this.props.default_thumbnail
   }
   render() {
-    let {cover = this.default_thumbnail, siteUrl = '', className = '',cardMedia = true} = this.props
+    let {cover = this.default_thumbnail, siteUrl = '', className = '', link, title, subtitle} = this.props
     cover = Url.resolve(siteUrl, cover);
     return (
       <Card className={style.PostCard + ' ' + className}>
 
-        {
-          cardMedia?
-          <CardMedia
-            overlay={<CardTitle title={this.props.title} subtitle={this.props.subtitle} />}
+      {
+        link || title ||  subtitle ?
+        <CardMedia
+          overlay={<CardTitle title={title} subtitle={subtitle} />}
+        >
+          <div
+            className={style.CardImage}
+            style={{ backgroundImage: `url(${cover})` }}
           >
-            <div
-              className={style.CardImage}
-              style={{ backgroundImage: `url(${cover})` }}
-            >
-              <Link to="/post/aa" className={style.Link}>
-
-              </Link>
-            </div>
-          </CardMedia>
-          :undefined
-          }
+            {
+              link ?
+                <Link to={"/post/" + link} className={style.Link}></Link> : undefined
+            }
+          </div>
+        </CardMedia>
+        :undefined
+      }
         <CardText>
           {
             this.props.content || this.excerpt()

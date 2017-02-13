@@ -19,7 +19,10 @@ module.exports = function (cfg, themecfg, site) {
                 excerpt: true,
                 content: false,
                 categories: true,
-                tags: true
+                tags: true,
+                primarycolor: true,
+                accentcolor: true,
+                thumbnail: true
             },
             categories: true,
             tags: true,
@@ -48,6 +51,9 @@ module.exports = function (cfg, themecfg, site) {
                 path: posts_props('path', 'api/articles/' + post.slug + '.json'),
                 excerpt: posts_props('excerpt', post.excerpt),
                 keywords: posts_props('keywords', cfg.keywords),
+                thumbnail: posts_props('thumbnail', post.thumbnail),
+                primarycolor: posts_props('primarycolor', post.primarycolor),
+                accentcolor: posts_props('accentcolor', post.accentcolor),
                 content: posts_props('content', post.content),
                 raw: posts_props('raw', post.raw),
                 categories: posts_props('categories', function () {
