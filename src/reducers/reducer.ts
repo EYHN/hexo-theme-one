@@ -1,3 +1,4 @@
+import post from './post';
 import theme from './theme';
 import site from './site';
 import posts from './posts';
@@ -8,5 +9,6 @@ var reducer;
 export default reducer = combineReducers({
   theme,
   site,
-  posts
+  posts,
+  postList:post
 });

@@ -1,7 +1,7 @@
-import { getPost } from '../../lib/hexoApi';
+import { getPost } from '../../actions/post';
+import { postState } from '../../reducers/post';
 import { array_randS } from '../../lib/random';
 import { changeColor, changeColorAction } from '../../actions/theme';
-import { post } from '../../Interfaces/post';
 import { Dispatch } from 'redux';
 import AppState from '../../stateI';
 import * as React from 'react';
@@ -13,9 +13,11 @@ import { connect } from 'react-redux'
 var style = require("./post.less");
 
 interface PostProps {
-  dispatch?: Dispatch<AppState>;
+  loadingPost?: (slug:string) => void;
   onChangeColor?: (primaryColor:string,accentColor:string) =>void;
-  postsList?:Array<post>;
+  postsList?:Map<string,postState>;
+  defaultPrimaryColor?: string;
+  defaultAccentColor?: string;
   params?:{
     slug?:string
   }
@@ -23,34 +25,34 @@ interface PostProps {
 
 class Post extends React.Component<PostProps, undefined>{
   componentDidMount(){
-    this.props.onChangeColor('red','red');
+    this.props.onChangeColor(this.props.defaultPrimaryColor,this.props.defaultAccentColor);
   }
   render() {
-    let {postsList = [],params={}} = this.props
+    let {postsList = new Map<string,postState>(),params={}} = this.props
     let {slug} = params;
-    if(postsList.length == 0){
-    }else{
-      postsList.find((value)=>{
-        return value.slug == slug
-      });
+    let post = postsList.get(slug);
+    if (typeof post === "undefined" || typeof post.content === "undefined"){
+      post = post || {};
+      if(!post.loading){
+        this.props.loadingPost(slug);
+      }
     }
     return (
       <Grid>
-        <PostCard className={style.postCard}/>
+        <PostCard className={style.postCard} content={post.content}/>
       </Grid>
     )
   }
 }
 
 const mapStateToProps = (state: AppState) => {
-  let { posts = {},theme={} } = state;
-  let { postsList = [] } = posts;
+  let { theme={},postList = new Map<string,postState>() } = state;
   let { uiux={} } = theme;
   let { defaultPrimaryColor = 'cyan', defaultAccentColor = 'pink'} = uiux
   return {
-    postsList:postsList,
-    primaryColor: array_randS(defaultPrimaryColor),
-    accentColor: array_randS(defaultAccentColor)
+    postsList:postList,
+    defaultPrimaryColor: array_randS(defaultPrimaryColor),
+    defaultAccentColor: array_randS(defaultAccentColor)
   }
 }
 

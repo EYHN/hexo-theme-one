@@ -1,16 +1,15 @@
 import { error } from 'util';
-import { post } from '../Interfaces/post';
+import { post as postI } from '../Interfaces/post';
 import { getPostAction } from '../actions/post'
-export interface postState extends post{
+export interface postState extends postI{
   loading?:boolean,
   error?:boolean
 }
 
-const post:(state:Array<postState>,action:getPostAction)=>Array<postState> = (state: Array<postState> = [], action: getPostAction)=>{
+const post:(state:Map<string,postState>,action:getPostAction)=>Map<string,postState> = (state:Map<string,postState> = new Map, action: getPostAction)=>{
   if(action.type.startsWith('GET_POST') && action.slug){
-    let post = state.find((value)=>{
-        return action.slug == value
-      })
+      state = new Map(state.entries());
+      let post = state.get(action.slug)
       let finded = !(typeof post === 'undefined')
       switch(action.type){
         case "GET_POST_REQUEST":
@@ -31,14 +30,14 @@ const post:(state:Array<postState>,action:getPostAction)=>Array<postState> = (st
         case "GET_POST":
           post = {
             ...post,
-            loading: true,
+            ...action.result,
+            loading: false,
+            error: false,
             slug: action.slug
           }
           break;
       }
-      if(!finded){
-        state.push(post);
-      }
+      state.set(action.slug,post);
       return state;
   }
   return state

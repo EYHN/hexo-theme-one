@@ -12,6 +12,7 @@ import CardHeaderAcatar from '../cardHeaderAvatar/cardHeaderAvatar'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
+import * as $ from 'jquery';
 var style = require('./postCard.less')
 
 interface PostCardProps {
@@ -42,8 +43,23 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
     let {excerpt: e = ""} = this.props
     return removeHTMLTag(e.toString());
   }
+  renderContent(){
+    if (this.props.content){
+      $("#postContext").html(this.props.content)
+    }
+  }
   componentWillMount() {
     this.default_thumbnail = this.props.default_thumbnail
+  }
+  componentDidMount() {
+    if (this.props.content){
+      $("#postContext").html(this.props.content)
+    }
+  }
+  componentDidUpdate(){
+    if (this.props.content){
+      $("#postContext").html(this.props.content)
+    }
   }
   render() {
     let {cover = this.default_thumbnail, siteUrl = '', className = '', link, title, subtitle} = this.props
@@ -69,9 +85,11 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
         :undefined
       }
         <CardText>
-          {
-            this.props.content || this.excerpt()
-          }
+          <div id="postContext">
+            {
+              this.excerpt()
+            }
+          </div>
         </CardText>
         <div className={style.CardBottom}>
           <CardHeaderAcatar

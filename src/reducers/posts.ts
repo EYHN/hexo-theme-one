@@ -12,6 +12,7 @@ export interface postsState{
 
 function updatePosts(posts:postsState = {},actionPosts:postsI):postsState{
   let { postsList = [] } = posts;
+  postsList = postsList.concat();
   for(
     let i = actionPosts.pageSize * (actionPosts.pageIndex),a = 0;
     i < actionPosts.total && a < actionPosts.pageSize && a < actionPosts.data.length;
@@ -46,10 +47,7 @@ const posts:(state:postsState,action:any)=>postsState = (state: postsState = {},
         err:true
       }
   }
-  return {
-    ...state,
-    postsList:post(state.postsList,action)
-  }
+  return state
 }
 
 export default posts;

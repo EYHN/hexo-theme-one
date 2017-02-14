@@ -35,6 +35,7 @@ Promise.all([getSite() as siteState, getTheme()]).then((res) => {
   let state:AppState = { site: res[0], theme: {
     ...res[1]
   } };
+  if(typeof state.theme.color === 'undefined')state.theme.color = {};
   state.theme.color.accentColor = array_randS(state.theme.uiux.defaultAccentColor);
   state.theme.color.primaryColor = array_randS(state.theme.uiux.defaultPrimaryColor);
   store = createStore(state)
