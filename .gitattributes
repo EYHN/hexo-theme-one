@@ -1,3 +1,2 @@
-dist/*.js binary
-dist/*.js.map binary
-mochawesome-reports/* binary
+dist/*.js diff=Typescript
+mochawesome-reports/* diff=Typescript

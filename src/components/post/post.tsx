@@ -1,6 +1,6 @@
 import { getPost } from '../../actions/post';
 import { postState } from '../../reducers/post';
-import { array_randS } from '../../lib/random';
+import { array_randS, array_rand } from '../../lib/random';
 import { changeColor, changeColorAction } from '../../actions/theme';
 import { Dispatch } from 'redux';
 import AppState from '../../stateI';
@@ -10,6 +10,7 @@ import LogoCard from '../logoCard/logoCard'
 import PostCard from '../postCard/postCard'
 import Grid from '../grid/grid'
 import { connect } from 'react-redux'
+import post from '../../reducers/post';
 var style = require("./post.less");
 
 interface PostProps {
@@ -20,7 +21,8 @@ interface PostProps {
   defaultAccentColor?: string;
   params?:{
     slug?:string
-  }
+  },
+  phone?:boolean
 }
 
 class Post extends React.Component<PostProps, undefined>{
@@ -28,7 +30,7 @@ class Post extends React.Component<PostProps, undefined>{
     this.props.onChangeColor(this.props.defaultPrimaryColor,this.props.defaultAccentColor);
   }
   render() {
-    let {postsList = new Map<string,postState>(),params={}} = this.props
+    let {postsList = new Map<string,postState>(),params={},phone = false} = this.props
     let {slug} = params;
     let post = postsList.get(slug);
     if (typeof post === "undefined" || typeof post.content === "undefined"){
@@ -39,7 +41,15 @@ class Post extends React.Component<PostProps, undefined>{
     }
     return (
       <Grid>
-        <PostCard className={style.postCard} content={post.content}/>
+        <PostCard 
+        className={style.postCard} 
+        content={post.content} 
+        cover={phone?undefined:array_randS(post.thumbnail)} 
+        cardMedia={!phone} 
+        title={post.title}
+        cardMediaStyle={{
+          height:"275px"
+        }}/>
       </Grid>
     )
   }
@@ -52,7 +62,8 @@ const mapStateToProps = (state: AppState) => {
   return {
     postsList:postList,
     defaultPrimaryColor: array_randS(defaultPrimaryColor),
-    defaultAccentColor: array_randS(defaultAccentColor)
+    defaultAccentColor: array_randS(defaultAccentColor),
+    phone:state.windowSize.smaller.than.phone
   }
 }
 

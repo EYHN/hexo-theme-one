@@ -1,0 +1,29 @@
+@import "../../variable.less";
+
+.context {
+  > * {
+    padding: 0px @context-padding;
+    @media (max-width: @screen-sm-min) {
+      padding: 0px @context-padding-mobile;
+    }
+  }
+  .borderLeft(@color) {
+    border-left: 3px solid @color; 
+  }
+  h1,h2,h3,h4,h5,h6 {
+    &:hover{
+      .borderLeft(#888);
+    }
+    .borderLeft(transparent);
+    padding-left: @context-padding - 3px;
+    @media (max-width: @screen-sm-min) {
+      padding-left: @context-padding-mobile - 3px;
+    }
+  }
+  h1 {
+    .borderLeft(#888);
+    &:hover{
+      .borderLeft(#666);
+    }
+  }
+}

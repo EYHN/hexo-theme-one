@@ -13,6 +13,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 import * as $ from 'jquery';
+import Context from '../context/context';
 var style = require('./postCard.less')
 
 interface PostCardProps {
@@ -23,73 +24,58 @@ interface PostCardProps {
   excerpt?: string,
   authorName?: React.ReactNode,
   authorAvatar?: React.ReactNode,
-  default_thumbnail?: string,
   siteUrl?: string,
   content?: string,
   link?: string,
   className?: string,
+  cardMedia?: boolean,
+  cardMediaStyle?: React.CSSProperties
 }
 
-function removeHTMLTag(str: String) {
-  str = str.replace(/<\/?[^>]*>/g, '');
-  str = str.replace(/[ | ]*\n/g, '\n');
-  str = str.replace(/ /ig, '');
-  return str;
-}
+let Cstate:AppState;
 
 export class PostCard extends React.Component<PostCardProps, undefined>{
   default_thumbnail = '';
-  excerpt() {
-    let {excerpt: e = ""} = this.props
-    return removeHTMLTag(e.toString());
-  }
-  renderContent(){
-    if (this.props.content){
+
+  renderContent() {
+    if (this.props.content) {
       $("#postContext").html(this.props.content)
     }
   }
   componentWillMount() {
-    this.default_thumbnail = this.props.default_thumbnail
-  }
-  componentDidMount() {
-    if (this.props.content){
-      $("#postContext").html(this.props.content)
-    }
-  }
-  componentDidUpdate(){
-    if (this.props.content){
-      $("#postContext").html(this.props.content)
-    }
+    this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
   }
   render() {
-    let {cover = this.default_thumbnail, siteUrl = '', className = '', link, title, subtitle} = this.props
+    let {cover: setCover, siteUrl = '', className = '', link, title, excerpt, subtitle, cardMedia, cardMediaStyle, content} = this.props;
+    let { setCover: cover = this.default_thumbnail} = { setCover }
     cover = Url.resolve(siteUrl, cover);
     return (
       <Card className={style.PostCard + ' ' + className}>
 
-      {
-        link || title ||  subtitle ?
-        <CardMedia
-          overlay={<CardTitle title={title} subtitle={subtitle} />}
-        >
-          <div
-            className={style.CardImage}
-            style={{ backgroundImage: `url(${cover})` }}
-          >
-            {
-              link ?
-                <Link to={"/post/" + link} className={style.Link}></Link> : undefined
-            }
-          </div>
-        </CardMedia>
-        :undefined
-      }
+        {
+          (typeof cardMedia === 'undefined' || cardMedia) && (link || title || subtitle || setCover) ?
+            <CardMedia
+              overlay={title || subtitle ? <CardTitle title={title} subtitle={subtitle} /> : undefined}
+              style={{
+                ...cardMediaStyle
+              }}
+            >
+              <div
+                className={style.CardImage}
+                style={{ backgroundImage: `url(${cover})` }}
+              >
+                {
+                  link ?
+                    <Link to={"/post/" + link} className={style.Link}></Link> : undefined
+                }
+              </div>
+            </CardMedia>
+            : undefined
+        }
         <CardText>
-          <div id="postContext">
-            {
-              this.excerpt()
-            }
-          </div>
+          <Context html={content} excerpt={excerpt} >
+
+          </Context>
         </CardText>
         <div className={style.CardBottom}>
           <CardHeaderAcatar
@@ -135,9 +121,9 @@ const mapStateToProps: (state: AppState) => PostCardProps = (state: AppState) =>
   } catch (e) {
     console.error(e);
   }
+  Cstate = state
   return {
-    siteUrl: siteUrl || '',
-    default_thumbnail: array_rand(post_thumbnail || '')
+    siteUrl: siteUrl || ''
   }
 };
 

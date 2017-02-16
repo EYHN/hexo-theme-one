@@ -16,6 +16,7 @@ import { Store } from 'redux';
 import createStore from './create-store';
 import App from './components/app/app'
 import reducer from './reducers/reducer'
+import { registerListener } from './windowSize';
 
 injectTapEventPlugin();
 
@@ -34,11 +35,12 @@ Promise.all([getSite() as siteState, getTheme()]).then((res) => {
   res[0].siteUrl = u.protocol + '//' + u.host;
   let state:AppState = { site: res[0], theme: {
     ...res[1]
-  } };
+  }};
   if(typeof state.theme.color === 'undefined')state.theme.color = {};
   state.theme.color.accentColor = array_randS(state.theme.uiux.defaultAccentColor);
   state.theme.color.primaryColor = array_randS(state.theme.uiux.defaultPrimaryColor);
   store = createStore(state)
+  registerListener(store);
   ReactDOM.render(
     <Main store={store} />,
     document.getElementById('app')
