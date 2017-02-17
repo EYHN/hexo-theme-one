@@ -1,4 +1,4 @@
-import { getPost as getPostX } from '../lib/hexoApi';
+import { getPost as getPostX } from '../lib/api';
 import { post } from '../Interfaces/post';
 export interface getPostAction {
   type: 'GET_POST'|'GET_POST_REQUEST'|'GET_POST_FAILURE',

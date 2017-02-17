@@ -26,14 +26,14 @@ export class Background extends React.Component<BackgroundProps, BackgroundState
     let bodyDom = $("body");
     let windowDom = $(window);
     let isOnDisplay = false;
-    this.scrollListener = () => {
+    this.scrollListener = _.debounce(() => {
         let sum = bodyDom.scrollTop();
         this.setState({
           top: sum / 2
         });
-    }
+    },10);
     this.scrollListener();
-    $(window).bind("scroll", _.debounce(this.scrollListener,10));
+    $(window).bind("scroll", this.scrollListener);
   }
   componentWillUnmount() {
     $(window).unbind("scroll", this.scrollListener);

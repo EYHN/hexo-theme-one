@@ -1,12 +1,23 @@
 import * as React from 'react';
 import * as $ from 'jquery'
+import * as MarkdownIt from 'markdown-it'
 let style = require("./context.less");
+let markdownTest = require("./test.md");
+let markdownItTocAndAnchor = require('markdown-it-toc-and-anchor').default;
 
-interface contextProps {
-  id?:string,
-  className?:string,
-  html?:string,
-  excerpt?:string
+let md = new MarkdownIt({
+  html: true,
+  linkify: true,
+}).use(markdownItTocAndAnchor, {
+  anchorLink: false
+});
+
+interface contentProps {
+  id?: string,
+  className?: string,
+  markdown?: boolean,
+  content?:string,
+  excerpt?: string
 }
 
 function removeHTMLTag(str: String) {
@@ -16,30 +27,35 @@ function removeHTMLTag(str: String) {
   return str;
 }
 
-export default class Context extends React.Component<contextProps, undefined>{
+export default class Content extends React.Component<contentProps, undefined>{
   excerpt() {
     let {excerpt: e = ""} = this.props
     return removeHTMLTag(e.toString());
   }
-  putHTMLin()
-  {
-    if(this.props.html){
-      $(this.refs['body']).html(this.props.html)
+  putHTMLin() {
+    if (this.props.content) {
+      let html = this.props.content;
+      if (this.props.markdown){
+        html = md.render(this.props.content)
+      }
+      $(this.refs['body']).html(html);
     }
   }
   componentDidMount() {
     this.putHTMLin();
   }
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.putHTMLin();
   }
   render() {
-    let {id,className = ''} = this.props
+    let {id, className = ''} = this.props
     return (
       <div id={id} ref="body" className={className + " " + style.context}>
         {
           this.excerpt()
         }
+        <style>
+        </style>
       </div>
     )
   }

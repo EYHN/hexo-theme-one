@@ -4,7 +4,7 @@ import { MuiTheme } from 'material-ui/styles';
 import * as Url from 'url';
 import { siteState } from './reducers/site';
 import AppState from './stateI';
-import { apiHref, getSite, getTheme } from './lib/hexoApi';
+import { apiHref, getSite, getTheme } from './lib/api';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import { Router, Route } from 'react-router';
 import { Provider } from 'react-redux';

@@ -13,7 +13,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 import * as $ from 'jquery';
-import Context from '../context/context';
+import Content from '../context/context';
 var style = require('./postCard.less')
 
 interface PostCardProps {
@@ -73,9 +73,9 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
             : undefined
         }
         <CardText>
-          <Context html={content} excerpt={excerpt} >
+          <Content content={content} markdown={false} excerpt={excerpt} >
 
-          </Context>
+          </Content>
         </CardText>
         <div className={style.CardBottom}>
           <CardHeaderAcatar

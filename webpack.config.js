@@ -47,7 +47,9 @@ module.exports = {
                 query: {
                     presets: ['react', 'es2015']
                 }
-            }
+            },
+            {test: /\.json$/,loader: 'json-loader'},
+            {test: /\.md$/,loader: 'raw-loader'}
         ],
 
         preLoaders: [

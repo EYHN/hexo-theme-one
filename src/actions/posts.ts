@@ -1,5 +1,5 @@
 import {posts} from "../Interfaces/posts"
-import {getPosts as getPostsA} from "../lib/hexoApi"
+import {getPosts as getPostsA} from "../lib/api"
 
 export interface updatePostsAction {
   type: 'UPDATE_POSTS',
