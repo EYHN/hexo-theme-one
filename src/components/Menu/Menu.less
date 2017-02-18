@@ -9,8 +9,8 @@
         width: e("calc(100% + 100px)");
         margin: 0px -50px;
         height: 100%;
-        position: absolute;
         top: 0px;
+        position: fixed;
     }
     will-change: transform;
     transition: top 0.5s;
@@ -29,8 +29,9 @@
 
 .stopAt200 {
     position: absolute;
-    top: 0px;
-    transform: translateY(228px - 64px);
+    top: -64px;
+    transform: translateY(228px);
+    transition: top 0s;
 }
 
 .hidden {
