@@ -1,2 +1,2 @@
-dist/*.js diff=Typescript
-mochawesome-reports/* diff=Typescript
+dist/*.js linguist-language=Typescript
+mochawesome-reports/* linguist-language=Typescript
