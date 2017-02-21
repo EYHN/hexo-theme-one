@@ -17,7 +17,8 @@ interface contentProps {
   className?: string,
   markdown?: boolean,
   content?:string,
-  excerpt?: string
+  excerpt?: string,
+  toc?:(tocArray:toc[])=>void
 }
 
 function removeHTMLTag(str: String) {
@@ -25,6 +26,12 @@ function removeHTMLTag(str: String) {
   str = str.replace(/[ | ]*\n/g, '\n');
   str = str.replace(/ /ig, '');
   return str;
+}
+
+export interface toc {
+  anchor: string,
+  content: string,
+  level: number
 }
 
 export default class Content extends React.Component<contentProps, undefined>{
@@ -36,7 +43,13 @@ export default class Content extends React.Component<contentProps, undefined>{
     if (this.props.content) {
       let html = this.props.content;
       if (this.props.markdown){
-        html = md.render(this.props.content)
+        html = md.render(this.props.content,{
+          tocCallback: (tocMarkdown:any, tocArray:toc[], tocHtml:any)=> {
+            if(this.props.toc){
+              this.props.toc(tocArray);
+            }
+          }
+        })
       }
       $(this.refs['body']).html(html);
     }

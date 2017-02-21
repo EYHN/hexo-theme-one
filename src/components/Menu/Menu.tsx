@@ -33,7 +33,6 @@ class Menu extends React.Component<MenuProps, MenuStates>{
   }
   scrollListener: (e:any) => void;
   componentDidMount() {
-    let listenDom = $(this.refs['DisplayTrigger'])
     let bodyDom = $("body");
     let windowDom = $(window);
     let top = true;

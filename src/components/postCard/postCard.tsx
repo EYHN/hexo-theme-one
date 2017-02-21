@@ -14,6 +14,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router';
 import * as $ from 'jquery';
 import Content from '../context/context';
+import {toc} from '../context/context';
 var style = require('./postCard.less')
 
 interface PostCardProps {
@@ -29,7 +30,8 @@ interface PostCardProps {
   link?: string,
   className?: string,
   cardMedia?: boolean,
-  cardMediaStyle?: React.CSSProperties
+  cardMediaStyle?: React.CSSProperties,
+  toc?:(tocArray:toc[])=>void
 }
 
 let Cstate:AppState;
@@ -73,7 +75,7 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
             : undefined
         }
         <CardText>
-          <Content content={content} markdown={false} excerpt={excerpt} >
+          <Content content={content} markdown={true} excerpt={excerpt} toc={this.props.toc} >
 
           </Content>
         </CardText>
