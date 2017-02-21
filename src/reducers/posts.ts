@@ -1,4 +1,5 @@
-import {post} from '../Interfaces/post'
+import post from './post';
+import {postState} from './post'
 import {posts as postsI} from "../Interfaces/posts"
 
 export interface postsState{
@@ -6,11 +7,12 @@ export interface postsState{
   loading?:boolean,
   apiPageSize?: number,
   err?:boolean,
-  postsList?:Array<post>
+  postsList?:Array<postState>
 }
 
 function updatePosts(posts:postsState = {},actionPosts:postsI):postsState{
   let { postsList = [] } = posts;
+  postsList = postsList.concat();
   for(
     let i = actionPosts.pageSize * (actionPosts.pageIndex),a = 0;
     i < actionPosts.total && a < actionPosts.pageSize && a < actionPosts.data.length;

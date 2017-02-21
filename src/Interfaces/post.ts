@@ -11,4 +11,7 @@ export interface post {
   content?: string,
   categories?: Array<categoriesItem>,
   tags?: Array<tagsItem>
+  thumbnail?:string | Array<string>
+  primarycolor?: string | Array<string>
+  accentcolor?: string | Array<string>
 }

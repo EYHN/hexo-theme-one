@@ -1,3 +1,6 @@
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import color2Theme from '../../lib/color2Theme';
+import Menu from '../Menu/Menu';
 import AppState from '../../stateI';
 import * as React from 'react';
 import { connect } from 'react-redux'
@@ -11,12 +14,19 @@ import Post from '../post/post';
 import * as zh from 'react-intl/locale-data/zh';
 import * as en from 'react-intl/locale-data/en';
 import {IntlProvider,addLocaleData} from 'react-intl'
+import Drawer from '../Drawer/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import Background from '../background/background'
+import muiThemeable from 'material-ui/styles/muiThemeable';
 addLocaleData(zh);
 addLocaleData(en);
 var style = require('./app.less')
 
 interface AppProps {
-  muiTheme?: __MaterialUI.Styles.MuiTheme
+  color?: {
+    primaryColor:string,
+    accentColor:string
+  }
 }
 
 function chooseLocale(){
@@ -30,24 +40,48 @@ function chooseLocale(){
     }
 }
 
-export class App extends React.Component<AppProps, undefined>{
+interface AppComponentState { 
+  sidebar?:boolean
+}
+
+export class App extends React.Component<AppProps, AppComponentState>{
   constructor(props: any) {
     super(props);
+    this.state = {
+      sidebar:false
+    }
+  }
+
+  MenuToggle(){
+    this.setState((state)=>({
+      ...state,
+      sidebar:!this.state.sidebar
+    }))
   }
 
   render() {
+    let Theme = getMuiTheme(color2Theme(this.props.color.primaryColor,this.props.color.primaryColor));
     return (
       <IntlProvider
-        locale={navigator.language} 
+        locale={navigator.language}
         messages={chooseLocale()}>
-        <MuiThemeProvider muiTheme={this.props.muiTheme}>
+        <MuiThemeProvider muiTheme={Theme}>
           <div>
-            <main id={style.main}>
-              <Router history={hashHistory}>
-                <Route path="/" component={Home} />
-                <Route path="/post" component={Post} />
-              </Router>
-            </main>
+            <Menu onclickLeft={this.MenuToggle.bind(this)}/>
+            <Background/>
+            <Drawer
+              open={this.state.sidebar}
+              onRequestChange={this.MenuToggle.bind(this)}
+              />
+            <div id={style.container}>
+              <main
+              id={style.main}>
+                <Router history={hashHistory}>
+                  <Route path="/" component={Home} />
+                  <Route path="/post/:slug" component={Post} />
+                </Router>
+              </main>
+            </div>
           </div>
         </MuiThemeProvider>
       </IntlProvider>
@@ -57,7 +91,10 @@ export class App extends React.Component<AppProps, undefined>{
 
 const mapStateToProps = (state:AppState) => {
   return {
-    muiTheme: state.theme.muiTheme
+    color: state.theme.color || {
+      primaryColor:'cyan',
+      pccentColor:'pink'
+    }
   }
 }
 

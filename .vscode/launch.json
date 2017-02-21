@@ -7,6 +7,9 @@
       "name": "Launch Chrome against localhost",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceRoot}",
+      "windows": {
+        "runtimeExecutable": "C:\\Users\\AREA\\AppData\\Local\\Google\\Chrome SxS\\Application\\chrome.exe"
+      },
       "runtimeArgs": [
         "--remote-debugging-port=9222"
       ]

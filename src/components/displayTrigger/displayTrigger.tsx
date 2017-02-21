@@ -3,6 +3,7 @@ import * as $ from "jquery"
 
 interface DisplayTriggerProps {
   onDisplay: (event: JQueryEventObject) => any;
+  className?:string
 }
 
 export default class DisplayTrigger extends React.Component<DisplayTriggerProps, undefined>{
@@ -13,7 +14,11 @@ export default class DisplayTrigger extends React.Component<DisplayTriggerProps,
     let windowDom = $(window);
     let isOnDisplay = false;
     this.scrollListener = (e) => {
-      let sum = document.documentElement.scrollHeight;
+      let timer:any;
+      if (timer) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(()=> {
       if (listenDom.offset().top <= bodyDom.scrollTop() + windowDom.height()) {
         if (isOnDisplay == false) {
           this.props.onDisplay(e);
@@ -21,7 +26,7 @@ export default class DisplayTrigger extends React.Component<DisplayTriggerProps,
         isOnDisplay = true
       } else {
         isOnDisplay = false
-      }
+      }}, 100)
     }
     $(window).bind("scroll", this.scrollListener);
   }
@@ -29,7 +34,8 @@ export default class DisplayTrigger extends React.Component<DisplayTriggerProps,
     $(window).unbind("scroll", this.scrollListener);
   }
   render() {
-    return <div ref="DisplayTrigger">
+    let {className = ''} = this.props;
+    return <div ref="DisplayTrigger" className={className}>
       {
         this.props.children
       }

@@ -1,0 +1,39 @@
+.Menu {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1100;
+    &:after {
+        content: '';
+        box-shadow: 0px 30px 50px rgba(0, 0, 0, 0.117647) inset;
+        width: e("calc(100% + 100px)");
+        margin: 0px -50px;
+        height: 100%;
+        top: 0px;
+        position: fixed;
+    }
+    will-change: transform;
+    transition: top 0.5s;
+}
+
+.MenuBox {
+  width: 100%;
+  height: 64px;
+}
+
+.transparent {
+    background-color: rgba(0, 0, 0, 0) !important;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0),
+     0px 1px 4px rgba(0, 0, 0, 0)  !important
+}
+
+.stopAt200 {
+    position: absolute;
+    top: -64px;
+    transform: translateY(228px);
+    transition: top 0s;
+}
+
+.hidden {
+    top: -64px;
+}
