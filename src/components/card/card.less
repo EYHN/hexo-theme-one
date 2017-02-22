@@ -5,6 +5,16 @@
     overflow: hidden;
 }
 
+@keyframes fadeIn
+{
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
+.card *{
+    animation: fadeIn 0.5s;
+}
+
 @media (max-width: @screen-sm-min) {
     .card {
         margin: 8px 0px;

@@ -1,22 +1,51 @@
 @import "../../variable.less";
-
 .ColorBackground {
-  position: absolute;
-  z-index: -1;
-  top: 0px;
-  width: 100%;
-  height: 350px;
-  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-  background-repeat: repeat;
-  background-position: 50% 50%;
-  background-size: cover;
-  background-origin: padding-box;
-  background-attachment: scroll;
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    width: 100%;
+    height: 270px;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
 
 @media (min-width: @screen-sm-min) {
-  .ColorBackground {
-    transform: none !important;
-    height: 350px;
-  }
+    .ColorBackground {
+        transform: none !important;
+        height: 350px;
+    }
+}
+
+:global(.bg-img-enter) {
+    opacity: 0.01;
+}
+
+:global(.bg-img) {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-origin: padding-box;
+    background-attachment: scroll;
+    transition: all 450ms;
+}
+
+:global(.bg-img-leave) {
+    opacity: 0.01;
+    transform: translateY(-200px);
+}
+
+@media (min-width: @screen-sm-min) {
+     :global(.bg-img) {
+        opacity: 0;
+    }
+}
+
+.CSSTransitionGroup {
+    height: 100%;
+    width: 100%;
+    display: block;
 }

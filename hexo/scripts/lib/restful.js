@@ -207,6 +207,9 @@ module.exports = function (cfg, themecfg, site) {
                     excerpt: post.excerpt,
                     keywords: cfg.keyword,
                     content: post._content,
+                    thumbnail: post.thumbnail,
+                    primarycolor: post.primarycolor,
+                    accentcolor: post.accentcolor,
                     categories: post.categories.map(function (cat) {
                         return {
                             name: cat.name,

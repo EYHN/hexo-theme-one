@@ -3,14 +3,19 @@ import * as React from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as $ from "jquery"
 import * as _ from "underscore"
+import { connect } from 'react-redux';
+import AppState from '../../stateI';
+import { Dispatch } from 'redux';
+import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 let style = require('./background.less');
 
 interface BackgroundProps {
   muiTheme?: MuiTheme
+  images?: string[]
 }
 
 interface BackgroundState {
-  top:number
+  top: number
 }
 
 export class Background extends React.Component<BackgroundProps, BackgroundState>{
@@ -18,7 +23,7 @@ export class Background extends React.Component<BackgroundProps, BackgroundState
   constructor() {
     super();
     this.state = {
-      top:0
+      top: 0
     }
   }
   componentDidMount() {
@@ -27,24 +32,41 @@ export class Background extends React.Component<BackgroundProps, BackgroundState
     let windowDom = $(window);
     let isOnDisplay = false;
     this.scrollListener = _.debounce(() => {
-        let sum = bodyDom.scrollTop();
-        this.setState({
-          top: sum / 2
-        });
-    },10);
+      let sum = bodyDom.scrollTop();
+      this.setState({
+        top: sum / 2
+      });
+    }, 10);
     this.scrollListener();
     $(window).bind("scroll", this.scrollListener);
   }
   componentWillUnmount() {
     $(window).unbind("scroll", this.scrollListener);
   }
+  getBGNode() {
+    let {images = []} = this.props
+    let nodes: React.ReactNode[] = [];
+    images.forEach((value) => {
+      nodes.push(
+        <div className={"bg-img"} style={{ backgroundImage: "url(" + value + ")" }} key={value}></div>
+      )
+    })
+    return nodes
+  }
   render() {
+    
     return (
       <div>
         <div className={style.ColorBackground} style={{
-          backgroundColor:this.props.muiTheme.appBar.color,
+          backgroundColor: this.props.muiTheme.appBar.color,
           transform: `translateY(${this.state.top}px)`
-        }}></div>
+        }}>
+          <ReactCSSTransitionGroup transitionName="bg-img"  transitionEnterTimeout={1} transitionLeaveTimeout={450} className={style.CSSTransitionGroup}>
+          {
+            this.getBGNode()
+          }
+          </ReactCSSTransitionGroup>
+        </div>
       </div>
     )
   }
@@ -52,4 +74,12 @@ export class Background extends React.Component<BackgroundProps, BackgroundState
 
 let BackgroundS = muiThemeable()(Background);
 
-export default BackgroundS;
+const mapStateToProps = (state: AppState) => {
+  return {
+    images: state.background.backgroundImg
+  }
+}
+
+const BackgroundX = connect<AppState, BackgroundProps, BackgroundProps>(mapStateToProps)(BackgroundS as any)
+
+export default BackgroundX;

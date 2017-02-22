@@ -7,17 +7,18 @@ let markdownItTocAndAnchor = require('markdown-it-toc-and-anchor').default;
 let md = new MarkdownIt({
   html: true,
   linkify: true
-}).use(markdownItTocAndAnchor, {
-  anchorLink: false
-});
+})
+  .use(markdownItTocAndAnchor, {
+    anchorLink: false
+  });
 
 interface contentProps {
   id?: string,
   className?: string,
   markdown?: boolean,
-  content?:string,
+  content?: string,
   excerpt?: string,
-  toc?:(tocArray:toc[])=>void
+  toc?: (tocArray: toc[]) => void
 }
 
 function removeHTMLTag(str: String) {
@@ -40,21 +41,21 @@ export default class Content extends React.Component<contentProps, undefined>{
   }
   putHTMLin() {
     if (this.props.content) {
-      let html = this.props.content;
-      if (this.props.markdown){
-        html = md.render(this.props.content,{
-          tocCallback: (tocMarkdown:any, tocArray:toc[], tocHtml:any)=> {
-            if(this.props.toc){
-              this.props.toc(tocArray);
+      let hasHTML = $(this.refs['body']).html();
+      if ($.trim(hasHTML) == "" || $.trim(hasHTML) == $.trim(this.props.excerpt)) {
+        let html = this.props.content;
+        if (this.props.markdown) {
+          html = md.render(this.props.content, {
+            tocCallback: (tocMarkdown: any, tocArray: toc[], tocHtml: any) => {
+              if (this.props.toc) {
+                this.props.toc(tocArray);
+              }
             }
-          }
-        })
+          })
+        }
+        $(this.refs['body']).html(html);
       }
-      $(this.refs['body']).html(html);
     }
-  }
-  componentDidMount() {
-    this.putHTMLin();
   }
   componentDidUpdate() {
     this.putHTMLin();
@@ -66,8 +67,6 @@ export default class Content extends React.Component<contentProps, undefined>{
         {
           this.excerpt()
         }
-        <style>
-        </style>
       </div>
     )
   }

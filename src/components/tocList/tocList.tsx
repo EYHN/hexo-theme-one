@@ -9,13 +9,42 @@ interface TocListProps {
   className?:string
 }
 
-export default class TocList extends React.Component<TocListProps, undefined>{
+interface TocListState {
+  tocIndex: number
+}
+
+export default class TocList extends React.Component<TocListProps, TocListState>{
+  readA:Set<number> = new Set();
+  updateIndex(){
+    let index:number = 0;
+    this.readA.forEach((value)=>{
+      index = Math.max(value,index);
+    })
+    this.setState({
+      tocIndex: index
+    });
+  }
   getTocNodes(tocArray: toc[]) {
     let node: React.ReactNode[] = [];
-    tocArray.forEach((value) => {
-      node.push(<Toc key={value.anchor} toc={value}></Toc>);
+    tocArray.forEach((value,index) => {
+      node.push(<Toc key={value.anchor} toc={value} active={index == this.state.tocIndex} read={()=>{
+        this.readA.add(index);
+        this.updateIndex();
+      }} unread={
+        ()=>{
+          this.readA.delete(index);
+          this.updateIndex();
+        }
+      }
+      ></Toc>);
     })
     return node;
+  }
+  constructor(){
+    super();
+    this.state = {
+      tocIndex:0
+    }
   }
   render() {
     return (

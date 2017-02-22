@@ -15,8 +15,10 @@ import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { siteState } from '../../reducers/site'
 import mainState from '../../main'
+import * as $ from 'jquery'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import CircularProgress from 'material-ui/CircularProgress';
+import { addBackGroundImg, setBackGroundImg } from '../../actions/background';
 var style = require("./home.less");
 
 interface HomeProps {
@@ -34,6 +36,7 @@ interface HomeProps {
   primaryColor?: string
   accentColor?: string
   updatePostsP?:(index?:number) => void
+  setBackGroundImg?:(backgroundImg: string) => void
 }
 
 interface HomeState {
@@ -42,6 +45,8 @@ interface HomeState {
 
 export class Home extends React.Component<HomeProps, HomeState>{
   componentDidMount(){
+    let {left_pic = '',siteUrl = ''} = this.props;
+    this.props.setBackGroundImg(Url.resolve(siteUrl,left_pic))
     this.props.onChooseColor(this.props.primaryColor,this.props.accentColor);
   }
 
@@ -89,7 +94,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
     let {siteUrl = '',author = '',title = ''} = this.props;
     let {left_pic = '',slogan = '',avatar = ''} = this.props;
     return (
-      <Grid>
+      <Grid className="Home">
         <WelcomeCard
           title={title}
           subtitle={slogan}
@@ -139,6 +144,9 @@ const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
     },
     updatePostsP:  (index?:number) => {
       dispatch(updatePostsP(index) as any );
+    },
+    setBackGroundImg: (backgroundImg: string) => {
+      dispatch(setBackGroundImg([backgroundImg]))
     }
   }
 }

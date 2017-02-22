@@ -5,6 +5,7 @@ let style = require("./fixedAt.less")
 
 interface FixedAtProps extends React.HTMLProps<HTMLDivElement> {
   fixedHeight:number
+  fixedClassName?:string
 }
 
 interface FixedAtState {
@@ -33,10 +34,10 @@ export default class FixedAt extends React.Component<FixedAtProps, FixedAtState>
             className: ""
           });
         }
-      } else if (this.state.className != style.fixed) {
+      } else if (this.state.className != style.fixed + " " + this.props.fixedClassName) {
         this.setState({
           ...this.state,
-          className: style.fixed
+          className: style.fixed + " " + this.props.fixedClassName
         });
       }
       oldScrollTop = scrollTop;
@@ -52,12 +53,13 @@ export default class FixedAt extends React.Component<FixedAtProps, FixedAtState>
       ...this.props
     }
     delete divProps.fixedHeight;
+    delete divProps.fixedClassName;
     return (
       <div {
         ...divProps
       } ref="listenObj" className={
         (this.props.className || "") + " " + this.state.className
-      }>
+      } >
         {
           this.props.children
         }

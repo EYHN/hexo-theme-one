@@ -10,3 +10,50 @@
     width: 100%;
     padding-top: 220px;
 }
+
+// :global(.route-page-enter) {
+//     opacity: 0.01;
+//     transition: opacity 200ms ease-in;
+// }
+
+// :global(.route-page-enter):global(.route-page-enter-active) {
+//     opacity: 1;
+// }
+
+// :global(.route-page-leave) {
+//     opacity: 1;
+//     transition: opacity 200ms ease-in;
+// }
+
+// :global(.route-page-leave):global(.route-page-leave-active) {
+//     opacity: 0;
+// }
+
+:global(.route-page-enter) {
+    opacity: 0;
+    transition: all 450ms;
+}
+
+:global(.route-page-enter):global(.route-page-enter-active) {
+    opacity: 1;
+}
+
+:global(.route-page-leave) {
+    opacity: 1;
+    transition: all 450ms;
+}
+
+:global(.route-page-leave):global(.route-page-leave-active) {
+    opacity: 0;
+}
+
+.TransitionGroup {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    >* {
+        position: absolute;
+        top: 0px;
+        will-change: transform
+    }
+}
