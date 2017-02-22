@@ -71,7 +71,7 @@ class Post extends React.Component<PostProps, PostState>{
             height: "275px"
           }}
           toc={this.toc.bind(this)} />
-        <div className={style.toc} ref="toc"><FixedAt fixedHeight={268}><TocList tocArray={this.state.tocArray} className={style.TocList}></TocList></FixedAt></div>
+        <div className={style.toc} ref="toc"><FixedAt fixedHeight={300}><TocList tocArray={this.state.tocArray} className={style.TocList}></TocList></FixedAt></div>
       </Grid>
     )
   }

@@ -48,9 +48,13 @@ export default class FixedAt extends React.Component<FixedAtProps, FixedAtState>
     $(window).unbind("scroll", this.scrollListener);
   }
   render(){
+    let divProps = {
+      ...this.props
+    }
+    delete divProps.fixedHeight;
     return (
       <div {
-        ...this.props
+        ...divProps
       } ref="listenObj" className={
         (this.props.className || "") + " " + this.state.className
       }>

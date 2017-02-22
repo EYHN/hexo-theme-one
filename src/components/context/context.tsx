@@ -2,12 +2,11 @@ import * as React from 'react';
 import * as $ from 'jquery'
 import * as MarkdownIt from 'markdown-it'
 let style = require("./context.less");
-let markdownTest = require("./test.md");
 let markdownItTocAndAnchor = require('markdown-it-toc-and-anchor').default;
 
 let md = new MarkdownIt({
   html: true,
-  linkify: true,
+  linkify: true
 }).use(markdownItTocAndAnchor, {
   anchorLink: false
 });

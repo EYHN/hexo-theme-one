@@ -102,7 +102,6 @@ class Menu extends React.Component<MenuProps, MenuStates>{
   // }
 
   render() {
-    console.log("render!");
     return (
       <div className={style.Menu + " " + this.state.outClassName}>
         <AppBar
