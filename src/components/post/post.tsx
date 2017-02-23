@@ -28,6 +28,7 @@ interface PostProps {
   defaultAccentColor?: string;
   params?: {
     slug?: string
+    toc?: string
   }
   phone?: boolean
   siteUrl?: string
@@ -95,7 +96,7 @@ class Post extends React.Component<PostProps, PostState>{
             height: "275px"
           }}
           toc={this.toc.bind(this)} />
-        <div className={style.toc} ref="toc"><FixedAt fixedHeight={300} fixedClassName={style.tocFixed}><TocList tocArray={this.state.tocArray} className={style.TocList}></TocList></FixedAt></div>
+        <div className={style.toc} ref="toc"><FixedAt fixedHeight={300} className={style.tocFixed}><TocList tocArray={this.state.tocArray} className={style.TocList}></TocList></FixedAt></div>
       </Grid>
     )
   }

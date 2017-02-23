@@ -2,6 +2,7 @@ import { toc } from '../context/context';
 import * as React from 'react';
 import * as $ from 'jquery';
 import * as _ from 'underscore';
+import { Link } from 'react-router';
 let style = require("./toc.less")
 
 interface TocProps {
@@ -20,7 +21,7 @@ export default class Toc extends React.Component<TocProps, undefined>{
     let windowDom = $(window);
     let listenDom = $("#" + this.props.toc.anchor);
     this.scrollListener = _.throttle((e:JQueryEventObject)=>{
-      if (listenDom.offset().top <= bodyDom.scrollTop() + listenDom.height() + 20) {
+      if (listenDom.offset().top <= bodyDom.scrollTop() + listenDom.height() + 64) {
         if(this.readed == false){
           this.props.read();
         }
@@ -38,10 +39,13 @@ export default class Toc extends React.Component<TocProps, undefined>{
   {
     $(window).unbind("scroll", this.scrollListener);
   }
+  onClickLink(){
+    $("html,body").animate({scrollTop:$("#" + this.props.toc.anchor).offset().top - 64})
+  }
   render(){
     return (
       <li className={style.Toc + " " + (this.props.active?style.active:"")}>
-        <a className={style.tocLink} href="#">{this.props.toc.content}</a>
+        <a className={style.tocLink} onClick={this.onClickLink.bind(this)}>{this.props.toc.content}</a>
       </li>
     )
   }
