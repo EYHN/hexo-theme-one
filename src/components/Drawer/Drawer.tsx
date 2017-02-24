@@ -2,6 +2,8 @@ import MenuItem from 'material-ui/MenuItem';
 import MDDrawer from 'material-ui/Drawer';
 import * as React from 'react';
 import ColorChoose from '../colorChoose/colorChoose'
+import HomeIcon from  'material-ui/svg-icons/action/home'
+import SideHander from '../sideHander/sideHander'
 
 interface DrawerProps {
   open?:boolean,
@@ -20,7 +22,8 @@ export default class Drawer extends React.Component<DrawerProps, DrawerState>{
         docked={false}
         onRequestChange={this.props.onRequestChange.bind(this)}
       >
-        <MenuItem>Menu Item</MenuItem>
+        <SideHander></SideHander>
+        <MenuItem  leftIcon={<HomeIcon/>}>Home</MenuItem>
         <MenuItem>Menu Item 2</MenuItem>
         <ColorChoose/>
       </MDDrawer>

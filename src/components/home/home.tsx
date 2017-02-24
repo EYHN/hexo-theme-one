@@ -36,7 +36,7 @@ interface HomeProps {
   primaryColor?: string
   accentColor?: string
   updatePostsP?:(index?:number) => void
-  setBackGroundImg?:(backgroundImg: string) => void
+  setBackGroundImg?:(backgroundImg: string,key:string) => void
 }
 
 interface HomeState {
@@ -46,7 +46,7 @@ interface HomeState {
 export class Home extends React.Component<HomeProps, HomeState>{
   componentDidMount(){
     let {left_pic = '',siteUrl = ''} = this.props;
-    this.props.setBackGroundImg(Url.resolve(siteUrl,left_pic))
+    this.props.setBackGroundImg(Url.resolve(siteUrl,left_pic),"home")
     this.props.onChooseColor(this.props.primaryColor,this.props.accentColor);
   }
 
@@ -145,8 +145,8 @@ const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
     updatePostsP:  (index?:number) => {
       dispatch(updatePostsP(index) as any );
     },
-    setBackGroundImg: (backgroundImg: string) => {
-      dispatch(setBackGroundImg([backgroundImg]))
+    setBackGroundImg: (backgroundImg: string,key:string) => {
+      dispatch(setBackGroundImg([{url:backgroundImg,key}]))
     }
   }
 }

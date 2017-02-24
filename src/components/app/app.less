@@ -31,6 +31,8 @@
 
 :global(.route-page-enter) {
     opacity: 0;
+    position: absolute;
+    top: 0;
     transition: all 450ms;
 }
 
@@ -40,6 +42,8 @@
 
 :global(.route-page-leave) {
     opacity: 1;
+    position: absolute;
+    top: 0;
     transition: all 450ms;
 }
 
@@ -51,9 +55,4 @@
     width: 100%;
     height: 100%;
     position: relative;
-    >* {
-        position: absolute;
-        top: 0px;
-   //     will-change: transform
-    }
 }

@@ -12,9 +12,11 @@ import CardHeaderAcatar from '../cardHeaderAvatar/cardHeaderAvatar'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
-import * as $ from 'jquery';
 import Content from '../context/context';
 import {toc} from '../context/context';
+import Comment from '../comment/comment';
+import post from '../../reducers/post';
+import * as $ from "jquery"
 var style = require('./postCard.less')
 
 interface PostCardProps {
@@ -30,6 +32,8 @@ interface PostCardProps {
   link?: string,
   className?: string,
   cardMedia?: boolean,
+  comment?:boolean,
+  slug?:string
   cardMediaStyle?: React.CSSProperties,
   toc?:(tocArray:toc[])=>void
 }
@@ -48,7 +52,7 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
   }
   render() {
-    let {cover: setCover, siteUrl = '', className = '', link, title, excerpt, subtitle, cardMedia, cardMediaStyle, content} = this.props;
+    let {cover: setCover,slug = '', siteUrl = '',comment, className = '', link, title, excerpt, subtitle, cardMedia, cardMediaStyle, content} = this.props;
     let { setCover: cover = this.default_thumbnail} = { setCover }
     cover = Url.resolve(siteUrl, cover);
     return (
@@ -57,7 +61,7 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
         {
           (typeof cardMedia === 'undefined' || cardMedia) && (link || title || subtitle || setCover) ?
             <CardMedia
-              overlay={title || subtitle ? <CardTitle title={title} subtitle={subtitle} /> : undefined}
+              overlay={(title || subtitle) ? <CardTitle title={title} subtitle={subtitle} /> : undefined}
               style={{
                 ...cardMediaStyle
               }}
@@ -112,6 +116,9 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
             <MenuItem primaryText="Sign out" />
           </IconMenu>
         </div>
+        {
+          (comment && slug != '' && title) ? <Comment postID={slug} className={style.Comment} postTitle={title.toString()}></Comment> : undefined
+        }
       </Card>
     )
   }

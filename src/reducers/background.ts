@@ -1,6 +1,9 @@
 import { setBackGroundImgAction, addBackGroundImgAction } from '../actions/background';
 export interface backgroundState {
-  backgroundImg?:string[]
+  backgroundImg?:{
+    url:string
+    key:string
+  }[]
 }
 
 const background:(state:backgroundState,action:addBackGroundImgAction | setBackGroundImgAction)=>backgroundState = (state:backgroundState = {}, action: addBackGroundImgAction | setBackGroundImgAction)=>{

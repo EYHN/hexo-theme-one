@@ -43,9 +43,9 @@ class Menu extends React.Component<MenuProps, MenuStates>{
         top = true
         let sum = scrollTop - 228 + 64;
         if (sum < 0) {
-          if(this.state.className != style.transparent || this.state.outClassName != ""){
+          if(this.state.className != style.transparent || this.state.outClassName != style.fixedTop){
             this.setState({
-              outClassName: "",
+              outClassName: style.fixedTop,
               className: style.transparent
             });
           }
@@ -78,29 +78,6 @@ class Menu extends React.Component<MenuProps, MenuStates>{
   componentWillUnmount() {
     $(window).unbind("scroll", this.scrollListener);
   }
-  // doColor() {
-  //   let reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
-  //   var sColor = this.props.muiTheme.appBar.color.toLowerCase();
-  //   if (sColor && reg.test(sColor)) {
-  //     if (sColor.length === 4) {
-  //       var sColorNew = "#";
-  //       for (var i = 1; i < 4; i += 1) {
-  //         sColorNew += sColor.slice(i, i + 1).concat(sColor.slice(i, i + 1));
-  //       }
-  //       sColor = sColorNew;
-  //     }
-  //     //处理六位的颜色值
-  //     var sColorChange = [];
-  //     for (var i = 1; i < 7; i += 2) {
-  //       sColorChange.push(parseInt("0x" + sColor.slice(i, i + 2)));
-  //     }
-  //     sColorChange.push(this.state.opacity);
-  //     return "rgba(" + sColorChange.join(",") + ")";
-  //   } else {
-  //     return sColor;
-  //   }
-  // }
-
   render() {
     return (
       <div className={style.Menu + " " + this.state.outClassName}>

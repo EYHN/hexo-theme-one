@@ -1,0 +1,307 @@
+/**
+*
+* Dialog
+*
+**/
+
+#ds-wrapper {
+  left: 0;
+  right: 0;
+  top: 20%;
+  bottom: 0;
+  width:100%;
+  margin: auto;
+  z-index: 9999;
+  position: fixed;
+  _position: absolute;  // ie6 position fixed bug
+  text-align: center;
+  color: @gray-light;
+
+  .ds-dialog, #ds-reset.ds-dialog { // 因为IE6不识别 ID + class的选择符，因此这里再写一遍。
+    margin: 0 auto;
+    text-align: left;
+    _zoom: 1;
+    //padding: 8px; 由于有max-width:100%, 如果再设置padding就会溢出，似乎这个padding也没有特别用处，就去掉吧
+    width : 480px;  // 默认宽度
+    max-width:100%; // 适应手机屏幕
+  }
+}
+
+#ds-wrapper #ds-reset{
+  &.ds-dialog-bind-more {
+    .ds-service-list {
+      width: 50%;
+    }
+  }
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    color: @gray-light;
+  }
+  /* 已经没有地方用到了
+  .ds-dialog-header {
+    position: relative;
+    padding: 12px 25px;
+    border-bottom: 1px solid #ddd;
+    h2 {
+      font-size: 15px;
+      margin: 0;
+    }
+  }
+  */
+  .ds-dialog-inner {
+    width: 100%;
+    position: relative;
+    border: @border-dark;
+    background: #ffffff url("@{images-url}bg_sprites.png") 0 -90px repeat-x;
+    text-shadow: @text-shadow;
+    box-shadow: inset 0 1px 1px #fff, 0 2px 6px rgba(0,0,0,0.4);
+    .ds-unread-list{
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  }
+  .ds-control-group {
+    margin: 18px 0;
+    position: relative;
+    padding-right : 80px;
+    max-width: 166px; //为了能够自适应宽度，不直接设置width
+    
+    input {
+      color: @gray-light;
+      width: 100%;
+      font-size: @font-size-base;
+      border: @border-gray;
+      padding: 4px 80px 6px 6px;  //  如果想要输入不覆盖"名字(必填)"，则需要增加padding，在个别网页下面仍然有问题：http://alexyang.me/2013/07/01/%E5%88%A9%E7%94%A8%E7%99%BE%E5%BA%A6%E4%BA%91%E7%BC%93%E5%AD%98%E5%8A%A0%E9%80%9Fbae-wordpress.html
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+      &:focus {
+        border-color: #08b5fb;
+      }
+    }
+    label {
+      font-size: @font-size-base;
+      color: @gray-lightest;
+      letter-spacing: 1px;
+      position: absolute;
+      right: 0;
+      top: 8px;
+    }
+  }
+  tr {
+    height: 45px;
+  }  
+  button {
+    cursor: pointer;
+    color: @gray;
+    .gradient(#e6e6e6, #ffffff);
+    .transition(all);
+    border: @border-dark;
+    display: inline-block;
+    font-size: 15px;
+    height: 30px;
+    width: 100px;
+    padding : 0;
+    &:hover {
+      background-position: 0 -15px;
+      color: @gray-dark;
+    }
+    &:active {
+      top: 0;
+      -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+  }
+  h2 {
+    display: block;
+    font-weight: normal;
+    font-size: 16px;
+    margin: 0 0 15px 0;
+    color: @gray;
+  }
+  .ds-dialog-body {
+    padding: 30px 30px 25px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* 放弃左右栏的设计
+  .ds-dialog-left {
+    width: 190px;
+  }
+  .ds-dialog-right {
+    border-left: 1px dotted @gray-lightest;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    width: 305px;
+    padding-left: 50px;
+  }
+  */
+  // 发评论的之前用社交帐号登陆
+  .ds-icons-32 {
+    height: 32px;
+    margin-bottom: 20px;
+    overflow:hidden;
+    a {
+      float: left;
+      margin: 0 5px 0 0;
+    }
+  }
+  ul li {
+    margin: 10px 0;
+  }
+  .ds-service-list {
+    width: 45%;
+    float: left;
+    .ds-more-services {
+      display: none;
+    }
+  }  
+  .ds-icon-ok {
+    background-position: 0 -203px;
+    width: 12px;
+    height: 12px;
+  }
+  .ds-quote {
+    margin: 10px 0px;
+    padding: 6px 10px;
+    background: @gray-background;
+    line-height : 1.5em;
+    font-size: 12px;
+    overflow-y: auto;
+    max-height: 180px;
+  }
+  .ds-textarea-wrapper {
+    border:@border-gray;
+    padding: 0 20px 0 0;
+    position:relative;
+    margin: 12px 0;
+    
+    textarea{
+      width: 100%;
+      height: 54px;
+      margin: 0;
+      resize: none;
+      padding: 6px 10px;
+      overflow: auto;
+      //box-shadow:none;  浏览器原生的box-shadown也挺好看的，暂时留着吧
+    }
+    .ds-hidden-text{
+      top:0;
+      left:10px;
+      right:10px;
+      position:absolute;
+      visibility:hidden;
+      word-wrap: break-word;
+    }
+    textarea, .ds-hidden-text{
+      font-size:13px;
+      line-height: 1.5em;
+    }
+  }
+  .ds-actions {
+    position:relative;
+    height:30px;
+    
+    button {
+      display:block;
+      position:absolute;
+      top:0;
+      right:0;
+    }
+  }
+  .ds-dialog-close {
+    position: absolute;
+    bottom: 13px;
+    right: 11px;
+    display: block;
+    width: 13px;
+    height: 13px;
+    overflow: hidden;
+    .spritesheet(0, -163px);
+
+    &:hover {
+      background-position: 0 -176px;
+    }
+  }
+  .ds-logo {
+    display: inline-block;
+    width: 64px;
+    height: 21px;
+    margin-right: 10px;
+    background: url("@{images-url}logo.png") 0 0 no-repeat;
+  }
+  .ds-dialog-footer {
+    clear: both;
+    border-top: 1px dotted @gray-lightest;
+    padding: 10px 15px 6px;
+
+    span {
+      color: @gray-lighter;
+      position: relative;
+      top: -6px;
+    }
+  }
+  .ds-connect {
+    display: none; //hide for now
+  }
+  .ds-unread-list {
+    li {
+      position:relative;
+      margin: 0;
+      padding: 8px 0;
+      border-top: 1px solid #eee;
+      line-height: 1.5em;
+      color: @gray-light;
+      a {
+        color: @highlight;
+        &:hover {
+          color: lighten(@highlight, 10%);
+        }
+      }
+      a[rel~="author"] {
+        color: @link-color;
+      }
+      
+      .ds-delete{
+        display:none;
+        position:absolute;
+        right:0;
+        bottom:10px;
+        text-indent: -9999px;
+        width: 14px;
+        height: 14px;
+        overflow: hidden;
+        background: transparent url("@{images-url}delete.gif") no-repeat scroll 0 -14px;
+      }
+      
+      &:hover{
+        .ds-delete{
+          display:block;
+        }
+      }
+    }
+  }
+  &.ds-touch .ds-unread-list li .ds-delete {
+    display:block;
+  }
+}
+
+#ds-wrapper.ds-no-transition #ds-reset {
+  button {
+    background: url("@{images-url}bg_sprites.png") repeat-x !important;
+    &:hover {
+      background-position: 0 -30px !important;
+    }
+  }
+  &.ds-dialog {
+    background-image: url("@{images-url}black.png");
+  }
+}
+
+#ds-wrapper.ds-ie6 #ds-reset {
+  margin-top: 0;
+  
+  .ds-dialog-footer span {
+    top: -3px;
+  }
+}

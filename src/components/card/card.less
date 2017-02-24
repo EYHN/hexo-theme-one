@@ -7,7 +7,7 @@
 
 @keyframes fadeIn
 {
-    from {opacity: 0}
+    from {opacity: 0.01}
     to {opacity: 1}
 }
 
@@ -15,7 +15,7 @@
     animation: fadeIn 0.5s;
 }
 
-@media (max-width: @screen-sm-min + 1) {
+@media (max-width:((@screen-sm-min + 1))) {
     .card {
         margin: 8px 0px;
         width: 100%;

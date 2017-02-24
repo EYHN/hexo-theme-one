@@ -11,7 +11,10 @@ let style = require('./background.less');
 
 interface BackgroundProps {
   muiTheme?: MuiTheme
-  images?: string[]
+  images?:{
+    url:string
+    key:string
+  }[]
 }
 
 interface BackgroundState {
@@ -48,23 +51,22 @@ export class Background extends React.Component<BackgroundProps, BackgroundState
     let nodes: React.ReactNode[] = [];
     images.forEach((value) => {
       nodes.push(
-        <div className={"bg-img"} style={{ backgroundImage: "url(" + value + ")" }} key={value}></div>
+        <div className={"bg-img"} style={{ backgroundImage: "url(" + value.url + ")" }} key={value.key}></div>
       )
     })
     return nodes
   }
   render() {
-    
     return (
       <div>
         <div className={style.ColorBackground} style={{
           backgroundColor: this.props.muiTheme.appBar.color,
           transform: `translateY(${this.state.top}px)`
         }}>
-          <ReactCSSTransitionGroup transitionName="bg-img"  transitionEnterTimeout={1} transitionLeaveTimeout={450} className={style.CSSTransitionGroup}>
-          {
-            this.getBGNode()
-          }
+          <ReactCSSTransitionGroup transitionName="bg-img" transitionEnterTimeout={1} transitionLeaveTimeout={450} className={style.CSSTransitionGroup}>
+            {
+              this.getBGNode()
+            }
           </ReactCSSTransitionGroup>
         </div>
       </div>
@@ -72,14 +74,14 @@ export class Background extends React.Component<BackgroundProps, BackgroundState
   }
 }
 
-let BackgroundS = muiThemeable()(Background);
-
 const mapStateToProps = (state: AppState) => {
   return {
     images: state.background.backgroundImg
   }
 }
 
-const BackgroundX = connect<AppState, BackgroundProps, BackgroundProps>(mapStateToProps)(BackgroundS as any)
+const BackgroundX = connect<AppState, BackgroundProps, BackgroundProps>(mapStateToProps)(Background as any)
 
-export default BackgroundX;
+const BackgroundS = muiThemeable()(BackgroundX);
+
+export default BackgroundS;

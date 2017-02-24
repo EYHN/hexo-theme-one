@@ -17,7 +17,6 @@ import createStore from './create-store';
 import App from './components/app/app'
 import reducer from './reducers/reducer'
 import { registerListener } from './windowSize';
-
 injectTapEventPlugin();
 
 var style = require('./main.less');

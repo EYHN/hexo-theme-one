@@ -18,6 +18,7 @@ import { toc } from '../context/context';
 import FixedAt from '../fixedAt/fixedAt';
 import { addBackGroundImg } from '../../actions/background';
 import * as Url from 'url';
+import FontIcon from 'material-ui/FontIcon';
 var style = require("./post.less");
 
 interface PostProps {
@@ -32,7 +33,7 @@ interface PostProps {
   }
   phone?: boolean
   siteUrl?: string
-  addBackGroundImg?: (backgroundImg: string) => void
+  addBackGroundImg?: (backgroundImg: string,key:string) => void
 }
 
 interface PostState {
@@ -81,7 +82,7 @@ class Post extends React.Component<PostProps, PostState>{
         if (post.primarycolor || post.accentcolor)
           this.props.onChangeColor(array_randS(post.primarycolor), array_randS(post.accentcolor));
         if (thumbnail)
-          this.props.addBackGroundImg(thumbnail)
+          this.props.addBackGroundImg(thumbnail,"post-" + slug)
       }
     }
     return (
@@ -95,8 +96,11 @@ class Post extends React.Component<PostProps, PostState>{
           cardMediaStyle={{
             height: "275px"
           }}
-          toc={this.toc.bind(this)} />
-        <div className={style.toc} ref="toc"><FixedAt fixedHeight={300} className={style.tocFixed}><TocList tocArray={this.state.tocArray} className={style.TocList}></TocList></FixedAt></div>
+          toc={this.toc.bind(this)}
+          slug={post.slug}
+          comment={true} />
+        <div className={style.toc} ref="toc">
+          <FixedAt fixedHeight={300} className={style.tocFixed}><TocList tocArray={this.state.tocArray} className={style.TocList}></TocList></FixedAt></div>
       </Grid>
     )
   }
@@ -124,8 +128,8 @@ const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
     onChangeColor: (primaryColor: string, accentColor: string) => {
       dispatch(changeColor(primaryColor, accentColor))
     },
-    addBackGroundImg: (backgroundImg: string) => {
-      dispatch(addBackGroundImg(backgroundImg))
+    addBackGroundImg: (backgroundImg: string,key:string) => {
+      dispatch(addBackGroundImg(backgroundImg,key))
     }
   }
 }
