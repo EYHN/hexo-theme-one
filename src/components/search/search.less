@@ -1,0 +1,43 @@
+@keyframes fadeIn
+{
+    0% {
+      opacity: 0.01;
+      transform: translateY(300px)
+      }
+    30% {
+      opacity: 1
+      }
+    100% {
+      transform: translateY(0px)
+    }
+}
+
+.inputCanve {
+    width: 100%;
+    border-radius: 0px;
+    .grid {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        flex-direction: column;
+        height: 300px;
+        justify-content: center;
+        .input {
+            line-height: 90px !important;
+            height: 90px !important;
+            width: e("calc(100% - 40px)") !important;
+            margin: 0px 20px !important;
+        }
+    }
+}
+
+:global(.search) {
+    width: 100%;
+    position: fixed  !important;
+    left: 0px;
+    animation: fadeIn 1s cubic-bezier(.64,.13,.08,1.01);
+    -webkit-animation: fadeIn 1s cubic-bezier(.64,.13,.08,1.01);
+    &:global(.route-page-leave) {
+      opacity: 0 !important;
+    }
+}

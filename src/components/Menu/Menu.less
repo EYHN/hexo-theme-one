@@ -16,6 +16,13 @@
     transition: top 0.5s;
 }
 
+.title {
+    will-change: opacity;
+    transition: opacity 0.5s;
+    text-overflow: ellipsis;
+    overflow: hidden
+}
+
 .MenuBox {
   width: 100%;
   height: 64px;
@@ -26,6 +33,9 @@
     box-shadow: 0px 1px 6px rgba(0, 0, 0, 0),
      0px 1px 4px rgba(0, 0, 0, 0)  !important;
     will-change: box-shadow,background-color;
+    .title {
+        opacity: 0;
+    }
 }
 
 .stopAt200 {

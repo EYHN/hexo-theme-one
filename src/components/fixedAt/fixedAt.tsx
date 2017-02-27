@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as _ from "underscore"
-import * as $ from "jquery"
 let style = require("./fixedAt.less")
 
 interface FixedAtProps extends React.HTMLProps<HTMLDivElement> {

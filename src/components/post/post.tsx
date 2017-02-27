@@ -12,13 +12,13 @@ import Grid from '../grid/grid'
 import TocList from '../tocList/tocList'
 import { connect } from 'react-redux'
 import post from '../../reducers/post';
-import * as $ from 'jquery'
 import * as _ from 'underscore'
 import { toc } from '../context/context';
 import FixedAt from '../fixedAt/fixedAt';
 import { addBackGroundImg } from '../../actions/background';
-import * as Url from 'url';
+const url = require('url');
 import FontIcon from 'material-ui/FontIcon';
+import { setNavTitle } from '../../actions/nav';
 var style = require("./post.less");
 
 interface PostProps {
@@ -31,6 +31,7 @@ interface PostProps {
     slug?: string
     toc?: string
   }
+  setNavTitle?: (title: string)=>void
   phone?: boolean
   siteUrl?: string
   addBackGroundImg?: (backgroundImg: string,key:string) => void
@@ -51,9 +52,6 @@ class Post extends React.Component<PostProps, PostState>{
     };
   }
   default_thumbnail: string
-  componentDidMount() {
-    this.props.onChangeColor(this.props.defaultPrimaryColor, this.props.defaultAccentColor);
-  }
   toc(tocArray: toc[]) {
     if (!_.isEqual(tocArray, this.state.tocArray)) {
       this.setState({
@@ -64,6 +62,7 @@ class Post extends React.Component<PostProps, PostState>{
   }
   componentWillMount() {
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
+    this.props.onChangeColor(this.props.defaultPrimaryColor, this.props.defaultAccentColor);
   }
   render() {
     let {postsList = new Map<string, postState>(), params = {}, phone = false, siteUrl = ""} = this.props
@@ -76,13 +75,15 @@ class Post extends React.Component<PostProps, PostState>{
         this.props.loadingPost(slug);
       }
     } else {
-      thumbnail = Url.resolve(siteUrl,array_randS(post.thumbnail) || this.default_thumbnail);
+      thumbnail = url.resolve(siteUrl,array_randS(post.thumbnail) || this.default_thumbnail);
       if (this.loaded == false) {
         this.loaded = true
         if (post.primarycolor || post.accentcolor)
           this.props.onChangeColor(array_randS(post.primarycolor), array_randS(post.accentcolor));
         if (thumbnail)
           this.props.addBackGroundImg(thumbnail,"post-" + slug)
+        if (post.title)
+          this.props.setNavTitle(post.title)
       }
     }
     return (
@@ -120,7 +121,7 @@ const mapStateToProps = (state: AppState) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
     loadingPost: (slug: string) => {
       dispatch(getPost(slug) as any)
@@ -130,6 +131,9 @@ const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
     },
     addBackGroundImg: (backgroundImg: string,key:string) => {
       dispatch(addBackGroundImg(backgroundImg,key))
+    },
+    setNavTitle: (title: string)=>{
+      dispatch(setNavTitle(title));
     }
   }
 }

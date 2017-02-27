@@ -1,6 +1,6 @@
 import { array_rand, array_randS } from '../../lib/random';
 import AppState from '../../stateI';
-import * as Url from 'url';
+const url = require('url');
 import * as React from 'react';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
@@ -16,7 +16,6 @@ import Content from '../context/context';
 import {toc} from '../context/context';
 import Comment from '../comment/comment';
 import post from '../../reducers/post';
-import * as $ from "jquery"
 var style = require('./postCard.less')
 
 interface PostCardProps {
@@ -54,7 +53,7 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
   render() {
     let {cover: setCover,slug = '', siteUrl = '',comment, className = '', link, title, excerpt, subtitle, cardMedia, cardMediaStyle, content} = this.props;
     let { setCover: cover = this.default_thumbnail} = { setCover }
-    cover = Url.resolve(siteUrl, cover);
+    cover = url.resolve(siteUrl, cover);
     return (
       <Card className={style.PostCard + ' ' + className}>
 
@@ -89,9 +88,9 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
             avatar={this.props.authorAvatar} />
           <div className="flexFull"></div>
           <CardText><a style={{
-            color: this.props.muiTheme.palette.primary1Color
+            color: this.props.muiTheme.palette.primary2Color
           }} href="#">分类</a> | <a style={{
-            color: this.props.muiTheme.palette.primary1Color
+            color: this.props.muiTheme.palette.primary2Color
           }} href="#">分类</a></CardText>
           <IconMenu
             iconButtonElement={<IconButton><SocialShare /></IconButton>}

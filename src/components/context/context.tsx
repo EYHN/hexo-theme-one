@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as $ from 'jquery'
 import * as MarkdownIt from 'markdown-it'
 let style = require("./context.less");
 let markdownItTocAndAnchor = require('markdown-it-toc-and-anchor').default;

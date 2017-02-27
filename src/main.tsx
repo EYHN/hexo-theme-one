@@ -1,12 +1,12 @@
 import { array_randS } from './lib/random';
 import { darkBlack, grey600 } from 'material-ui/styles/colors';
 import { MuiTheme } from 'material-ui/styles';
-import * as Url from 'url';
+const url = require('url');
 import { siteState } from './reducers/site';
 import AppState from './stateI';
 import { apiHref, getSite, getTheme } from './lib/api';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
-import { Router, Route } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -19,6 +19,12 @@ import reducer from './reducers/reducer'
 import { registerListener } from './windowSize';
 injectTapEventPlugin();
 
+if(/webkit/.test(navigator.userAgent.toLowerCase())){
+  require('!style!css!less!./lib/webkit-scrollrail/style.less');
+  require('./lib/webkit-scrollrail/webkit-scrollrail.js');
+  new window.webkitScrollbar({autohide:true});
+}
+
 var style = require('./main.less');
 
 const Main = ({store}: { store: Store<any> }) => (
@@ -30,7 +36,7 @@ const Main = ({store}: { store: Store<any> }) => (
 let store: Store<AppState>;
 
 Promise.all([getSite() as siteState, getTheme()]).then((res) => {
-  let u = new URL(apiHref);
+  let u = url.parse(apiHref);
   res[0].siteUrl = u.protocol + '//' + u.host;
   let state:AppState = { site: res[0], theme: {
     ...res[1]

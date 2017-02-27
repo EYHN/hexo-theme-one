@@ -1,6 +1,6 @@
 import { changeColor, changeColorAction } from '../../actions/theme';
 import { array_randS } from '../../lib/random';
-import * as Url from 'url';
+const url = require('url');
 import { apiHref } from '../../lib/hexoApi';
 import { postsState } from '../../reducers/posts';
 import { updatePostsAction, updatePostsP } from '../../actions/posts';
@@ -15,10 +15,10 @@ import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { siteState } from '../../reducers/site'
 import mainState from '../../main'
-import * as $ from 'jquery'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import CircularProgress from 'material-ui/CircularProgress';
 import { addBackGroundImg, setBackGroundImg } from '../../actions/background';
+import { setNavTitle } from '../../actions/nav';
 var style = require("./home.less");
 
 interface HomeProps {
@@ -32,6 +32,7 @@ interface HomeProps {
   siteUrl?:string
   author?:string
   title?:string,
+  setNavTitle?: (title: string)=>void
   onChooseColor?: (primaryColor:string,accentColor:string) =>void;
   primaryColor?: string
   accentColor?: string
@@ -46,8 +47,9 @@ interface HomeState {
 export class Home extends React.Component<HomeProps, HomeState>{
   componentDidMount(){
     let {left_pic = '',siteUrl = ''} = this.props;
-    this.props.setBackGroundImg(Url.resolve(siteUrl,left_pic),"home")
+    this.props.setBackGroundImg(url.resolve(siteUrl,left_pic),"home")
     this.props.onChooseColor(this.props.primaryColor,this.props.accentColor);
+    this.props.setNavTitle('');
   }
 
   constructor() {
@@ -99,8 +101,8 @@ export class Home extends React.Component<HomeProps, HomeState>{
           title={title}
           subtitle={slogan}
           username={author}
-          coverImg={Url.resolve(siteUrl,left_pic)}
-          avatarImg={Url.resolve(siteUrl,avatar)}
+          coverImg={url.resolve(siteUrl,left_pic)}
+          avatarImg={url.resolve(siteUrl,avatar)}
         />
         <LogoCard />
         {this.getPosts()}
@@ -147,6 +149,9 @@ const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
     },
     setBackGroundImg: (backgroundImg: string,key:string) => {
       dispatch(setBackGroundImg([{url:backgroundImg,key}]))
+    },
+    setNavTitle: (title: string)=>{
+      dispatch(setNavTitle(title));
     }
   }
 }

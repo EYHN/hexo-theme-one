@@ -1,17 +1,19 @@
 @import "../../variable.less";
-
 .card {
     margin: 8px;
     overflow: hidden;
 }
 
-@keyframes fadeIn
-{
-    from {opacity: 0.01}
-    to {opacity: 1}
+@keyframes fadeIn {
+    from {
+        opacity: 0.01
+    }
+    to {
+        opacity: 1
+    }
 }
 
-.card *{
+.card * {
     animation: fadeIn 0.5s;
 }
 
@@ -24,24 +26,24 @@
 }
 
 .CardBottom {
+    display:flex;
     height: 74px;
-    display: flex;
     align-items: center;
 }
 
 .card.card-with-img {
     >div {
-        display: flex;
+        display:flex;
         flex-direction: column;
         min-height: 400px;
         >div:first-child {
             flex-grow: 1;
-            display: flex;
+            display:flex;
             flex-direction: column;
             >div {
                 height: 100%;
                 flex-grow: 1;
-                display: flex;
+                display:flex;
                 flex-direction: column;
             }
         }

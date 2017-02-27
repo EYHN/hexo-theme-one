@@ -1,7 +1,6 @@
 import { MuiTheme } from 'material-ui/styles';
 import * as React from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import * as $ from "jquery"
 import * as _ from "underscore"
 import { connect } from 'react-redux';
 import AppState from '../../stateI';
@@ -15,6 +14,7 @@ interface BackgroundProps {
     url:string
     key:string
   }[]
+  fullModel?:boolean
 }
 
 interface BackgroundState {
@@ -51,15 +51,16 @@ export class Background extends React.Component<BackgroundProps, BackgroundState
     let nodes: React.ReactNode[] = [];
     images.forEach((value) => {
       nodes.push(
-        <div className={"bg-img"} style={{ backgroundImage: "url(" + value.url + ")" }} key={value.key}></div>
+        <div className={style.bgImg} style={{ backgroundImage: "url(" + value.url + ")" }} key={value.key}></div>
       )
     })
     return nodes
   }
   render() {
+    let {fullModel = false} = this.props;
     return (
       <div>
-        <div className={style.ColorBackground} style={{
+        <div className={style.ColorBackground + " " + (fullModel?style.fullModel:"")} style={{
           backgroundColor: this.props.muiTheme.appBar.color,
           transform: `translateY(${this.state.top}px)`
         }}>
@@ -76,7 +77,8 @@ export class Background extends React.Component<BackgroundProps, BackgroundState
 
 const mapStateToProps = (state: AppState) => {
   return {
-    images: state.background.backgroundImg
+    images: state.background.backgroundImg,
+    fullModel: state.nav.fullModel
   }
 }
 

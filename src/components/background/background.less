@@ -15,11 +15,22 @@
     }
 }
 
+.fullModel {
+    position: absolute;
+    top: 0px;
+    transform: translateY(0px);
+    height: 64px;
+    .bgImg{
+        display: none
+    }
+    transition: all 1000ms cubic-bezier(.64,.13,.08,1.01) 0ms;
+}
+
 :global(.bg-img-enter) {
     opacity: 0.01;
 }
 
-:global(.bg-img) {
+.bgImg {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -39,7 +50,7 @@
 }
 
 @media (min-width: @screen-sm-min) {
-     :global(.bg-img) {
+     .bgImg {
         opacity: 0;
     }
 }

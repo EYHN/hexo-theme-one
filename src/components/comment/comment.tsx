@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as $ from 'jquery';
 import Duoshuo from './duoshuo/duoshuo'
 import { connect } from 'react-redux';
 import AppState from '../../stateI';

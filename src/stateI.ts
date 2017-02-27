@@ -4,6 +4,7 @@ import { themeState } from './reducers/theme';
 import { siteState } from './reducers/site';
 import { windowState } from './reducers/windowSize'
 import { backgroundState } from './reducers/background';
+import { navState } from './reducers/nav';
 
 interface AppState {
   theme?:themeState,
@@ -11,7 +12,8 @@ interface AppState {
   posts?:postsState,
   postList?:Map<string,postState>,
   windowSize?:windowState,
-  background?:backgroundState
+  background?:backgroundState,
+  nav?:navState
 }
 
 export default AppState;

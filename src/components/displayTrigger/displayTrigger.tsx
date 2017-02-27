@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as $ from "jquery"
 
 interface DisplayTriggerProps {
   onDisplay: (event: JQueryEventObject) => any;

@@ -1,0 +1,12 @@
+compiler.plugin is not a function
+TypeError: compiler.plugin is not a function
+    at setupWatchRun (C:\Users\AREA\Documents\Project\hexo-theme-design\node_modules\.3.0.3@awesome-typescript-loader\src\instance.ts:325:14)
+    at Object.ensureInstance (C:\Users\AREA\Documents\Project\hexo-theme-design\node_modules\.3.0.3@awesome-typescript-loader\src\instance.ts:123:5)
+    at compiler (C:\Users\AREA\Documents\Project\hexo-theme-design\node_modules\.3.0.3@awesome-typescript-loader\src\index.ts:43:22)
+    at Object.loader (C:\Users\AREA\Documents\Project\hexo-theme-design\node_modules\.3.0.3@awesome-typescript-loader\src\index.ts:14:18)
+    at applySyncOrAsync (C:\Users\AREA\Documents\Project\hexo-theme-design\node_modules\.3.0.3@happypack\lib\applyLoaders.js:341:21)
+    at apply (C:\Users\AREA\Documents\Project\hexo-theme-design\node_modules\.3.0.3@happypack\lib\applyLoaders.js:268:5)
+    at C:\Users\AREA\Documents\Project\hexo-theme-design\node_modules\.3.0.3@happypack\lib\applyLoaders.js:131:7
+    at applyPitchLoader (C:\Users\AREA\Documents\Project\hexo-theme-design\node_modules\.3.0.3@happypack\lib\applyLoaders.js:184:14)
+    at applyPitchLoader (C:\Users\AREA\Documents\Project\hexo-theme-design\node_modules\.3.0.3@happypack\lib\applyLoaders.js:192:14)
+    at applyPitchLoader (C:\Users\AREA\Documents\Project\hexo-theme-design\node_modules\.3.0.3@happypack\lib\applyLoaders.js:192:14)

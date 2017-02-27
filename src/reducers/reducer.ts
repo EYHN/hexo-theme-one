@@ -5,6 +5,7 @@ import posts from './posts';
 import windowSize from './windowSize';
 import { combineReducers } from 'redux'
 import background from './background';
+import nav from './nav';
 
 var reducer;
 
@@ -14,5 +15,6 @@ export default reducer = combineReducers({
   posts,
   postList:post,
   windowSize,
-  background
+  background,
+  nav
 });
