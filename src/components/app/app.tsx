@@ -25,20 +25,6 @@ addLocaleData(zh);
 addLocaleData(en);
 var style = require('./app.less')
 
-const TransitionGroup = ({ children, location }: any) => (
-  <ReactCSSTransitionGroup
-    component="div"
-    transitionName="route-page"
-    transitionEnterTimeout={450}
-    transitionLeaveTimeout={450}
-    className={style.TransitionGroup}
-  >
-    {React.cloneElement(children, {
-      key: location.pathname
-    })}
-  </ReactCSSTransitionGroup>
-)
-
 interface AppProps {
   color?: {
     primaryColor?: string,
@@ -46,6 +32,7 @@ interface AppProps {
   }
   children?: React.ReactElement<any>
   fullModel?: boolean
+  location?: any
 }
 
 function chooseLocale() {
@@ -100,13 +87,17 @@ export class App extends React.Component<AppProps, AppComponentState>{
             />
             <div id={style.container} className={fullModel ? style.fullModel : undefined}>
               <main id={style.main}>
-                <Router history={hashHistory} render={applyRouterMiddleware(useScroll())}>
-                  <Route path="/" component={TransitionGroup}>
-                    <IndexRoute component={Home} />
-                    <Route path="/post/:slug" component={Post} />
-                    <Route path="/search" component={SearchX} />
-                  </Route>
-                </Router>
+                <ReactCSSTransitionGroup
+                  component="div"
+                  transitionName="route-page"
+                  transitionEnterTimeout={450}
+                  transitionLeaveTimeout={450}
+                  className={style.TransitionGroup}
+                >
+                  {React.cloneElement(this.props.children, {
+                    key: this.props.location.pathname
+                  })}
+                </ReactCSSTransitionGroup>
               </main>
             </div>
           </div>
@@ -128,4 +119,14 @@ const mapStateToProps = (state: AppState) => {
 
 let AppX = connect(mapStateToProps)(App as any)
 
-export default AppX
+const Group = () => (
+  <Router history={hashHistory} render={applyRouterMiddleware(useScroll())}>
+    <Route path="/" component={AppX}>
+      <IndexRoute component={Home} />
+      <Route path="/post/:slug" component={Post} />
+      <Route path="/search" component={SearchX} />
+    </Route>
+  </Router>
+)
+
+export default Group;

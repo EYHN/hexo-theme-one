@@ -20,6 +20,7 @@
   "devDependencies": {
     "@types/isomorphic-fetch": "^0.0.32",
     "@types/jquery": "^2.0.40",
+    "@types/lunr": "^0.5.28",
     "@types/markdown-it": "^0.0.2",
     "@types/material-ui": "^0.16.48",
     "@types/mocha": "^2.2.39",
@@ -59,6 +60,7 @@
     "json-loader": "^0.5.4",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
+    "lunr": "^1.0.0",
     "markdown-it": "^8.3.0",
     "material-design-icons": "^3.0.1",
     "material-ui": "^0.16.7",

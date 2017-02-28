@@ -20,7 +20,7 @@ interface contentProps {
   toc?: (tocArray: toc[]) => void
 }
 
-function removeHTMLTag(str: String) {
+export function removeHTMLTag(str: String) {
   str = str.replace(/<\/?[^>]*>/g, '');
   str = str.replace(/[ | ]*\n/g, '\n');
   str = str.replace(/ /ig, '');
@@ -57,6 +57,9 @@ export default class Content extends React.Component<contentProps, undefined>{
     }
   }
   componentDidUpdate() {
+    this.putHTMLin();
+  }
+  componentDidMount() {
     this.putHTMLin();
   }
   render() {

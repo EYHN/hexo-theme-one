@@ -18,7 +18,7 @@ import FixedAt from '../fixedAt/fixedAt';
 import { addBackGroundImg } from '../../actions/background';
 const url = require('url');
 import FontIcon from 'material-ui/FontIcon';
-import { setNavTitle } from '../../actions/nav';
+import { setNavTitle, fullModel } from '../../actions/nav';
 var style = require("./post.less");
 
 interface PostProps {
@@ -35,6 +35,7 @@ interface PostProps {
   phone?: boolean
   siteUrl?: string
   addBackGroundImg?: (backgroundImg: string,key:string) => void
+  fullModel?:(fullModelB: boolean)=>void
 }
 
 interface PostState {
@@ -63,6 +64,7 @@ class Post extends React.Component<PostProps, PostState>{
   componentWillMount() {
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
     this.props.onChangeColor(this.props.defaultPrimaryColor, this.props.defaultAccentColor);
+    this.props.fullModel(false)
   }
   render() {
     let {postsList = new Map<string, postState>(), params = {}, phone = false, siteUrl = ""} = this.props
@@ -87,22 +89,24 @@ class Post extends React.Component<PostProps, PostState>{
       }
     }
     return (
-      <Grid className="Post">
-        <PostCard
-          className={style.postCard}
-          content={post.content}
-          cover={phone ? undefined : thumbnail}
-          cardMedia={!phone}
-          title={post.title}
-          cardMediaStyle={{
-            height: "275px"
-          }}
-          toc={this.toc.bind(this)}
-          slug={post.slug}
-          comment={true} />
-        <div className={style.toc} ref="toc">
-          <FixedAt fixedHeight={300} className={style.tocFixed}><TocList tocArray={this.state.tocArray} className={style.TocList}></TocList></FixedAt></div>
-      </Grid>
+      <div className="Post">
+        <Grid>
+          <PostCard
+            className={style.postCard}
+            content={post.content}
+            cover={phone ? undefined : thumbnail}
+            cardMedia={!phone}
+            title={post.title}
+            cardMediaStyle={{
+              height: "275px"
+            }}
+            toc={this.toc.bind(this)}
+            slug={post.slug}
+            comment={true} />
+          <div className={style.toc} ref="toc">
+            <FixedAt fixedHeight={300} className={style.tocFixed}><TocList tocArray={this.state.tocArray} className={style.TocList}></TocList></FixedAt></div>
+        </Grid>
+      </div>
     )
   }
 }
@@ -134,6 +138,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     },
     setNavTitle: (title: string)=>{
       dispatch(setNavTitle(title));
+    },
+    fullModel:(fullModelB: boolean)=>{
+      dispatch(fullModel(fullModelB));
     }
   }
 }

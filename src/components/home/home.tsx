@@ -18,7 +18,7 @@ import mainState from '../../main'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import CircularProgress from 'material-ui/CircularProgress';
 import { addBackGroundImg, setBackGroundImg } from '../../actions/background';
-import { setNavTitle } from '../../actions/nav';
+import { setNavTitle, fullModel } from '../../actions/nav';
 var style = require("./home.less");
 
 interface HomeProps {
@@ -38,6 +38,7 @@ interface HomeProps {
   accentColor?: string
   updatePostsP?:(index?:number) => void
   setBackGroundImg?:(backgroundImg: string,key:string) => void
+  fullModel?:(fullModelB: boolean)=>void
 }
 
 interface HomeState {
@@ -49,6 +50,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
     let {left_pic = '',siteUrl = ''} = this.props;
     this.props.setBackGroundImg(url.resolve(siteUrl,left_pic),"home")
     this.props.onChooseColor(this.props.primaryColor,this.props.accentColor);
+    this.props.fullModel(false)
     this.props.setNavTitle('');
   }
 
@@ -96,7 +98,8 @@ export class Home extends React.Component<HomeProps, HomeState>{
     let {siteUrl = '',author = '',title = ''} = this.props;
     let {left_pic = '',slogan = '',avatar = ''} = this.props;
     return (
-      <Grid className="Home">
+      <div className="Home">
+      <Grid>
         <WelcomeCard
           title={title}
           subtitle={slogan}
@@ -116,6 +119,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
           }
         </DisplayTrigger>
       </Grid>
+      </div>
     )
   }
 }
@@ -152,6 +156,9 @@ const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
     },
     setNavTitle: (title: string)=>{
       dispatch(setNavTitle(title));
+    },
+    fullModel:(fullModelB: boolean)=>{
+      dispatch(fullModel(fullModelB));
     }
   }
 }

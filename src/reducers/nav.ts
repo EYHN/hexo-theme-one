@@ -5,7 +5,7 @@ export interface navState {
   fullModel:boolean
 }
 
-const nav = (state:navState = {title:"",fullModel:false},action:setNavTitleAction | fullModelAction)=>{
+const nav = (state:navState = {title:"",fullModel:true},action:setNavTitleAction | fullModelAction)=>{
   switch(action.type){
     case "SET-NAV-TITLE":
       return {

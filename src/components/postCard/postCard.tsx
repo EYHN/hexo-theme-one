@@ -92,28 +92,6 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
           }} href="#">分类</a> | <a style={{
             color: this.props.muiTheme.palette.primary2Color
           }} href="#">分类</a></CardText>
-          <IconMenu
-            iconButtonElement={<IconButton><SocialShare /></IconButton>}
-            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-            targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-          >
-            <MenuItem primaryText="Refresh" />
-            <MenuItem primaryText="Send feedback" />
-            <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Help" />
-            <MenuItem primaryText="Sign out" />
-          </IconMenu>
-          <IconMenu
-            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-            targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-          >
-            <MenuItem primaryText="Refresh" />
-            <MenuItem primaryText="Send feedback" />
-            <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Help" />
-            <MenuItem primaryText="Sign out" />
-          </IconMenu>
         </div>
         {
           (comment && slug != '' && title) ? <Comment postID={slug} className={style.Comment} postTitle={title.toString()}></Comment> : undefined
