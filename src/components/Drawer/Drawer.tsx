@@ -12,12 +12,15 @@ import ActionGrade from 'material-ui/svg-icons/action/grade';
 import ContentInbox from 'material-ui/svg-icons/content/inbox';
 import {List, ListItem} from 'material-ui/List';
 import { connect } from 'react-redux';
+import {History} from "history"
 import AppState from '../../stateI';
 
 interface DrawerProps {
-  open?:boolean,
+  open?:boolean
   onRequestChange?: (opening: boolean, reason: string) => void
   phone?: boolean
+  RouterHistory:History
+  onTouchTap:()=>void
 }
 
 interface DrawerState {
@@ -26,7 +29,7 @@ interface DrawerState {
 
 class Drawer extends React.Component<DrawerProps, DrawerState>{
   render() {
-    let {phone = false} = this.props
+    let {phone = false,RouterHistory} = this.props
     return (
       <MDDrawer
         open={this.props.open}
@@ -36,16 +39,17 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
         className={style.Drawer}
       >
         <SideHander className={style.sideHander}></SideHander>
-        <ListItem className={style.ListItem} leftIcon={<HomeIcon color=""/>}>首页</ListItem>
+        <ListItem onTouchTap={this.props.onTouchTap} href={RouterHistory.createHref("/")} className={style.ListItem} leftIcon={<HomeIcon color=""/>}>首页</ListItem>
         <Divider className={style.divider} />
-        <ListItem className={style.ListItem} leftIcon={<AccountCircleIcon color=""/>}>关于我</ListItem>
-        <ListItem className={style.ListItem}
+        <ListItem onTouchTap={this.props.onTouchTap} className={style.ListItem} leftIcon={<AccountCircleIcon color=""/>}>关于我</ListItem>
+        <ListItem onTouchTap={this.props.onTouchTap} className={style.ListItem}
               primaryText="Inbox"
               leftIcon={<ContentInbox />}
               initiallyOpen={true}
               primaryTogglesNestedList={true}
               nestedItems={[
-                <ListItem 
+                <ListItem
+                  onTouchTap={this.props.onTouchTap}
                   className={style.ListItem}
                   key={1}
                   primaryText="Starred"

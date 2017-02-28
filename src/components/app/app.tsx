@@ -79,11 +79,16 @@ export class App extends React.Component<AppProps, AppComponentState>{
           <div style={{
             fontFamily: Theme.fontFamily
           }} className={style.body}>
-            <Menu onclickLeft={this.MenuToggle.bind(this)} />
+            <Menu onclickLeft={this.MenuToggle.bind(this)} RouterHistory={hashHistory}/>
             <Background />
             <Drawer
               open={this.state.sidebar}
               onRequestChange={this.MenuToggle.bind(this)}
+              RouterHistory={hashHistory}
+              onTouchTap={()=>{this.setState({
+                ...this.state,
+                sidebar: false
+              })}}
             />
             <div id={style.container} className={fullModel ? style.fullModel : undefined}>
               <main id={style.main}>

@@ -14,7 +14,9 @@ import { postsState } from '../../reducers/posts';
 import { updatePostsP } from '../../actions/posts';
 import post from '../../reducers/post';
 import * as _ from "underscore";
+import { Link } from "react-router"
 import { removeHTMLTag } from '../context/context';
+import { FormattedDate } from 'react-intl'
 const lunr = require("lunr")
 
 const maxPostLength = 20;
@@ -73,7 +75,6 @@ const postSearch = (posts: postState[] = [], key: string) => {
       return false
     }))
   });
-  console.log(index)
   return res.slice(0, maxPostLength);
 }
 
@@ -142,8 +143,17 @@ class search extends React.Component<searchProps, searchState>{
     let nodes = [];
     for (let post of this.state.resPost) {
       nodes.push(
-        <div>
-          <h3>{post.title}</h3>
+        <div className={style.post} key={post.slug}>
+          <h3>
+            <Link to={"/post/" + post.slug}>{post.title}</Link>
+            <footer>
+            <small>
+            <FormattedDate
+              value={new Date(post.date)}
+            />
+            </small>
+          </footer>
+            </h3>
           <p>{removeHTMLTag(post.excerpt)}</p>
         </div>
       )

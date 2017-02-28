@@ -62,6 +62,7 @@
     "less-loader": "^2.2.3",
     "lunr": "^1.0.0",
     "markdown-it": "^8.3.0",
+    "markdown-it-toc-and-anchor": "^4.1.1",
     "material-design-icons": "^3.0.1",
     "material-ui": "^0.16.7",
     "mocha": "^3.2.0",

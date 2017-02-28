@@ -10,6 +10,8 @@ import * as React from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 let style = require('./Menu.less');
 import * as _ from "underscore"
+import {History} from "history"
+import * as router from 'react-router';
 import { connect } from 'react-redux';
 import AppState from '../../stateI';
 import { Link } from 'react-router';
@@ -18,7 +20,8 @@ interface MenuProps {
   muiTheme?: MuiTheme
   onclickLeft?: (e: any) => void
   title?: string,
-  fullModel?:boolean
+  fullModel?:boolean,
+  RouterHistory:History
 }
 
 interface MenuStates {
@@ -83,13 +86,13 @@ class Menu extends React.Component<MenuProps, MenuStates>{
     $(window).unbind("scroll", this.scrollListener);
   }
   render() {
-    let {fullModel = false} = this.props
+    let {fullModel = false,RouterHistory} = this.props
     return (
       <div className={style.Menu + " " + (fullModel?"":this.state.outClassName)}>
         <AppBar
           className={(fullModel?"":this.state.className)}
           onLeftIconButtonTouchTap={this.props.onclickLeft}
-          iconElementRight={<IconButton href={"#/search"}><SearchIcon></SearchIcon></IconButton>}
+          iconElementRight={<IconButton href={RouterHistory.createHref("/search")}><SearchIcon></SearchIcon></IconButton>}
           title={<span className={style.title}>{this.props.title || ""}</span>}
           titleStyle={{ fontSize: '22px' }}
         />
