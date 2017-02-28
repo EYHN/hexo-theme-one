@@ -1,30 +1,36 @@
 import * as React from 'react';
-import * as $ from 'jquery'
 import * as MarkdownIt from 'markdown-it'
 let style = require("./context.less");
-let markdownTest = require("./test.md");
 let markdownItTocAndAnchor = require('markdown-it-toc-and-anchor').default;
 
 let md = new MarkdownIt({
   html: true,
-  linkify: true,
-}).use(markdownItTocAndAnchor, {
-  anchorLink: false
-});
+  linkify: true
+})
+  .use(markdownItTocAndAnchor, {
+    anchorLink: false
+  });
 
 interface contentProps {
   id?: string,
   className?: string,
   markdown?: boolean,
-  content?:string,
-  excerpt?: string
+  content?: string,
+  excerpt?: string,
+  toc?: (tocArray: toc[]) => void
 }
 
-function removeHTMLTag(str: String) {
+export function removeHTMLTag(str: String) {
   str = str.replace(/<\/?[^>]*>/g, '');
   str = str.replace(/[ | ]*\n/g, '\n');
   str = str.replace(/ /ig, '');
   return str;
+}
+
+export interface toc {
+  anchor: string,
+  content: string,
+  level: number
 }
 
 export default class Content extends React.Component<contentProps, undefined>{
@@ -34,17 +40,26 @@ export default class Content extends React.Component<contentProps, undefined>{
   }
   putHTMLin() {
     if (this.props.content) {
-      let html = this.props.content;
-      if (this.props.markdown){
-        html = md.render(this.props.content)
+      let hasHTML = $(this.refs['body']).html();
+      if ($.trim(hasHTML) == "" || $.trim(hasHTML) == $.trim(this.props.excerpt)) {
+        let html = this.props.content;
+        if (this.props.markdown) {
+          html = md.render(this.props.content, {
+            tocCallback: (tocMarkdown: any, tocArray: toc[], tocHtml: any) => {
+              if (this.props.toc) {
+                this.props.toc(tocArray);
+              }
+            }
+          })
+        }
+        $(this.refs['body']).html(html);
       }
-      $(this.refs['body']).html(html);
     }
   }
-  componentDidMount() {
+  componentDidUpdate() {
     this.putHTMLin();
   }
-  componentDidUpdate() {
+  componentDidMount() {
     this.putHTMLin();
   }
   render() {
@@ -54,8 +69,6 @@ export default class Content extends React.Component<contentProps, undefined>{
         {
           this.excerpt()
         }
-        <style>
-        </style>
       </div>
     )
   }

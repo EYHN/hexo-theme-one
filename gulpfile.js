@@ -57,7 +57,7 @@ gulp.task('buildHexo', function () {
 
 gulp.task('copyHexo', function () {
   gulp.src('./hexo/**/*')
-    .pipe(gulp.dest('/home/huaji/Project/HexoBlogKit/themes/design'));
+    .pipe(gulp.dest('C:/Users/AREA/Documents/Project/HexoBlogKit/themes/design'));
 })
 
 gulp.task('hexo', ['buildHexo', 'copyHexo'], function () {

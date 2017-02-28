@@ -12,8 +12,15 @@
         top: 0px;
         position: fixed;
     }
-    will-change: transform;
+    will-change: transform,top;
     transition: top 0.5s;
+}
+
+.title {
+    will-change: opacity;
+    transition: opacity 0.5s;
+    text-overflow: ellipsis;
+    overflow: hidden
 }
 
 .MenuBox {
@@ -24,13 +31,21 @@
 .transparent {
     background-color: rgba(0, 0, 0, 0) !important;
     box-shadow: 0px 1px 6px rgba(0, 0, 0, 0),
-     0px 1px 4px rgba(0, 0, 0, 0)  !important
+     0px 1px 4px rgba(0, 0, 0, 0)  !important;
+    will-change: box-shadow,background-color;
+    .title {
+        opacity: 0;
+    }
 }
 
 .stopAt200 {
     position: absolute;
     top: -64px;
     transform: translateY(228px);
+    transition: top 0s;
+}
+
+.fixedTop {
     transition: top 0s;
 }
 

@@ -9,12 +9,19 @@ import SearchIcon from 'material-ui/svg-icons/action/search';
 import * as React from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 let style = require('./Menu.less');
-import * as $ from "jquery"
 import * as _ from "underscore"
+import {History} from "history"
+import * as router from 'react-router';
+import { connect } from 'react-redux';
+import AppState from '../../stateI';
+import { Link } from 'react-router';
 
 interface MenuProps {
   muiTheme?: MuiTheme
-  onclickLeft?: (e: any) => any
+  onclickLeft?: (e: any) => void
+  title?: string,
+  fullModel?:boolean,
+  RouterHistory:History
 }
 
 interface MenuStates {
@@ -31,40 +38,39 @@ class Menu extends React.Component<MenuProps, MenuStates>{
       outClassName: ""
     }
   }
-  scrollListener: (e:any) => void;
+  scrollListener: (e: any) => void;
   componentDidMount() {
-    let listenDom = $(this.refs['DisplayTrigger'])
     let bodyDom = $("body");
     let windowDom = $(window);
     let top = true;
     let oldScrollTop = bodyDom.scrollTop();
-    this.scrollListener = _.throttle((e:any) => {
+    this.scrollListener = _.throttle((e: any) => {
       let scrollTop = bodyDom.scrollTop()
       if (scrollTop < 228 - 64 || (scrollTop < 228 && top)) {
         top = true
         let sum = scrollTop - 228 + 64;
         if (sum < 0) {
-          if(this.state.className != style.transparent || this.state.outClassName != ""){
+          if (this.state.className != style.transparent || this.state.outClassName != style.fixedTop) {
             this.setState({
-              outClassName: "",
+              outClassName: style.fixedTop,
               className: style.transparent
             });
           }
-        } else if(this.state.className != style.transparent || this.state.outClassName != style.stopAt200){
+        } else if (this.state.className != style.transparent || this.state.outClassName != style.stopAt200) {
           this.setState({
             outClassName: style.stopAt200,
             className: style.transparent
           });
         }
-      } else if(scrollTop > 228 || (scrollTop > 228 - 64 && !top)){
+      } else if (scrollTop > 228 || (scrollTop > 228 - 64 && !top)) {
         top = false
-        if(oldScrollTop < scrollTop && (this.state.className != "" || this.state.outClassName != style.hidden)){
+        if (oldScrollTop < scrollTop && (this.state.className != "" || this.state.outClassName != style.hidden)) {
           this.setState({
             outClassName: style.hidden,
             className: ""
           });
         }
-        if (oldScrollTop > scrollTop && (this.state.className != "" || this.state.outClassName != "")){
+        if (oldScrollTop > scrollTop && (this.state.className != "" || this.state.outClassName != "")) {
           this.setState({
             outClassName: "",
             className: ""
@@ -72,50 +78,38 @@ class Menu extends React.Component<MenuProps, MenuStates>{
         }
       }
       oldScrollTop = scrollTop;
-    },40);
+    }, 40);
     this.scrollListener({});
     $(window).scroll(this.scrollListener);
   }
   componentWillUnmount() {
     $(window).unbind("scroll", this.scrollListener);
   }
-  // doColor() {
-  //   let reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
-  //   var sColor = this.props.muiTheme.appBar.color.toLowerCase();
-  //   if (sColor && reg.test(sColor)) {
-  //     if (sColor.length === 4) {
-  //       var sColorNew = "#";
-  //       for (var i = 1; i < 4; i += 1) {
-  //         sColorNew += sColor.slice(i, i + 1).concat(sColor.slice(i, i + 1));
-  //       }
-  //       sColor = sColorNew;
-  //     }
-  //     //处理六位的颜色值
-  //     var sColorChange = [];
-  //     for (var i = 1; i < 7; i += 2) {
-  //       sColorChange.push(parseInt("0x" + sColor.slice(i, i + 2)));
-  //     }
-  //     sColorChange.push(this.state.opacity);
-  //     return "rgba(" + sColorChange.join(",") + ")";
-  //   } else {
-  //     return sColor;
-  //   }
-  // }
-
   render() {
-    console.log("render!");
+    let {fullModel = false,RouterHistory} = this.props
     return (
-      <div className={style.Menu + " " + this.state.outClassName}>
+      <div className={style.Menu + " " + (fullModel?"":this.state.outClassName)}>
         <AppBar
-          className={this.state.className}
+          className={(fullModel?"":this.state.className)}
           onLeftIconButtonTouchTap={this.props.onclickLeft}
-          iconElementRight={<IconButton><SearchIcon /></IconButton>}
+          iconElementRight={<IconButton href={RouterHistory.createHref("/search")}><SearchIcon></SearchIcon></IconButton>}
+          title={<span className={style.title}>{this.props.title || ""}</span>}
+          titleStyle={{ fontSize: '22px' }}
         />
       </div>
     )
   }
 }
 
-let MenuS = muiThemeable()(Menu);
+const mapStateToProps = (state: AppState) => {
+  return {
+    title: state.nav.title,
+    fullModel:state.nav.fullModel
+  }
+}
+
+let MenuX = connect<AppState, MenuProps, MenuProps>(mapStateToProps)(Menu as any)
+
+let MenuS = muiThemeable()(MenuX);
 
 export default MenuS;

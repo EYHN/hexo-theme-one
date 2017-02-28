@@ -9,7 +9,7 @@ export default {
     bigger:{
         than:{
             phone: ()=>window.innerWidth > 0,
-            pad: ()=>window.innerWidth > 768,
+            pad: ()=>window.innerWidth >= 768,
             desktop: ()=>window.innerWidth >= 992
         }
     }

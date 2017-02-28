@@ -1,6 +1,6 @@
 import { changeColor, changeColorAction } from '../../actions/theme';
 import { array_randS } from '../../lib/random';
-import * as Url from 'url';
+const url = require('url');
 import { apiHref } from '../../lib/hexoApi';
 import { postsState } from '../../reducers/posts';
 import { updatePostsAction, updatePostsP } from '../../actions/posts';
@@ -17,6 +17,8 @@ import { siteState } from '../../reducers/site'
 import mainState from '../../main'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import CircularProgress from 'material-ui/CircularProgress';
+import { addBackGroundImg, setBackGroundImg } from '../../actions/background';
+import { setNavTitle, fullModel } from '../../actions/nav';
 var style = require("./home.less");
 
 interface HomeProps {
@@ -30,10 +32,13 @@ interface HomeProps {
   siteUrl?:string
   author?:string
   title?:string,
+  setNavTitle?: (title: string)=>void
   onChooseColor?: (primaryColor:string,accentColor:string) =>void;
   primaryColor?: string
   accentColor?: string
   updatePostsP?:(index?:number) => void
+  setBackGroundImg?:(backgroundImg: string,key:string) => void
+  fullModel?:(fullModelB: boolean)=>void
 }
 
 interface HomeState {
@@ -42,7 +47,11 @@ interface HomeState {
 
 export class Home extends React.Component<HomeProps, HomeState>{
   componentDidMount(){
+    let {left_pic = '',siteUrl = ''} = this.props;
+    this.props.setBackGroundImg(url.resolve(siteUrl,left_pic),"home")
     this.props.onChooseColor(this.props.primaryColor,this.props.accentColor);
+    this.props.fullModel(false)
+    this.props.setNavTitle('');
   }
 
   constructor() {
@@ -89,13 +98,14 @@ export class Home extends React.Component<HomeProps, HomeState>{
     let {siteUrl = '',author = '',title = ''} = this.props;
     let {left_pic = '',slogan = '',avatar = ''} = this.props;
     return (
+      <div className="Home">
       <Grid>
         <WelcomeCard
           title={title}
           subtitle={slogan}
           username={author}
-          coverImg={Url.resolve(siteUrl,left_pic)}
-          avatarImg={Url.resolve(siteUrl,avatar)}
+          coverImg={url.resolve(siteUrl,left_pic)}
+          avatarImg={url.resolve(siteUrl,avatar)}
         />
         <LogoCard />
         {this.getPosts()}
@@ -109,6 +119,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
           }
         </DisplayTrigger>
       </Grid>
+      </div>
     )
   }
 }
@@ -139,6 +150,15 @@ const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
     },
     updatePostsP:  (index?:number) => {
       dispatch(updatePostsP(index) as any );
+    },
+    setBackGroundImg: (backgroundImg: string,key:string) => {
+      dispatch(setBackGroundImg([{url:backgroundImg,key}]))
+    },
+    setNavTitle: (title: string)=>{
+      dispatch(setNavTitle(title));
+    },
+    fullModel:(fullModelB: boolean)=>{
+      dispatch(fullModel(fullModelB));
     }
   }
 }

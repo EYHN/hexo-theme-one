@@ -7,8 +7,7 @@ const color2Theme:(primaryColor:string,accentColor:string,Theme?:MuiTheme)=>MuiT
     ...Theme,
     palette:{
       ...color[primaryColor],
-      accent1Color:color[accentColor].accent1Color,
-      alternateTextColor:color[accentColor].alternateTextColor
+      accent1Color:color[accentColor].accent1Color
     }
   }
   return resTheme

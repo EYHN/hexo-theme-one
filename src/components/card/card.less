@@ -1,11 +1,23 @@
 @import "../../variable.less";
-
 .card {
     margin: 8px;
     overflow: hidden;
 }
 
-@media (max-width: @screen-sm-min) {
+@keyframes fadeIn {
+    from {
+        opacity: 0.01
+    }
+    to {
+        opacity: 1
+    }
+}
+
+.card * {
+    animation: fadeIn 0.5s;
+}
+
+@media (max-width:((@screen-sm-min + 1))) {
     .card {
         margin: 8px 0px;
         width: 100%;
@@ -14,24 +26,24 @@
 }
 
 .CardBottom {
+    display:flex;
     height: 74px;
-    display: flex;
     align-items: center;
 }
 
 .card.card-with-img {
     >div {
-        display: flex;
+        display:flex;
         flex-direction: column;
         min-height: 400px;
         >div:first-child {
             flex-grow: 1;
-            display: flex;
+            display:flex;
             flex-direction: column;
             >div {
                 height: 100%;
                 flex-grow: 1;
-                display: flex;
+                display:flex;
                 flex-direction: column;
             }
         }

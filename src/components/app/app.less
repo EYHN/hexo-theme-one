@@ -1,12 +1,60 @@
 @import "../../variable.less";
-
 #main {
-    margin: 0 auto;
     width: 100%;
-    max-width: 900px;
 }
 
 #container {
     width: 100%;
     padding-top: 220px;
+}
+
+#container {
+    width: 100%;
+    padding-top: 220px;
+    transition: padding-top 1200ms cubic-bezier(.45,0,0,1) 0ms;
+}
+
+.fullModel#container {
+    padding-top: 64px;
+}
+
+// :global(.route-page-enter) {
+//     opacity: 0.01;
+//     transition: opacity 200ms ease-in;
+// }
+// :global(.route-page-enter):global(.route-page-enter-active) {
+//     opacity: 1;
+// }
+// :global(.route-page-leave) {
+//     opacity: 1;
+//     transition: opacity 200ms ease-in;
+// }
+// :global(.route-page-leave):global(.route-page-leave-active) {
+//     opacity: 0;
+// }
+:global {
+    .route-page-enter:not(.search) {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        transition: all 450ms;
+    }
+    .route-page-enter.route-page-enter-active:not(.search) {
+        opacity: 1;
+    }
+    .route-page-leave:not(.search) {
+        opacity: 1;
+        position: absolute;
+        top: 0;
+        transition: all 450ms;
+    }
+    .route-page-leave.route-page-leave-active:not(.search) {
+        opacity: 0;
+    }
+}
+
+.TransitionGroup {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }

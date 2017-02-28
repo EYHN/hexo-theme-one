@@ -1,6 +1,5 @@
 import AppState from './stateI';
 import { setWindowSize } from './actions/windowSize';
-import * as $ from 'jquery'
 import * as _ from 'underscore'
 import { Store } from 'redux';
 import sreenSize from './lib/sreenSize'

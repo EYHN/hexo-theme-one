@@ -1,0 +1,58 @@
+@keyframes fadeIn
+{
+    0% {
+      opacity: 0.01;
+      transform: translateY(300px)
+      }
+    30% {
+      opacity: 1
+      }
+    100% {
+      transform: translateY(0px)
+    }
+}
+
+.inputCanve {
+    width: 100%;
+    border-radius: 0px;
+    .grid {
+        flex-direction: column;
+        height: 300px;
+        justify-content: center;
+        .input {
+            line-height: 110px !important;
+            height: 110px !important;
+            width: e("calc(100% - 40px)") !important;
+            margin: 0px 20px !important;
+        }
+    }
+}
+
+:global(.search) {
+    width: 100%;
+    animation: fadeIn 1s cubic-bezier(.64,.13,.08,1.01);
+    -webkit-animation: fadeIn 1s cubic-bezier(.64,.13,.08,1.01);
+    &:global(.route-page-leave) {
+      opacity: 0 !important;
+    }
+}
+
+.post {
+    width: 100%;
+    color: #666;
+    a {
+        color: #666;
+        &:hover,&:focus{
+            color: rgb(68, 138, 255);
+        }
+    }
+    footer {
+        font-weight: 300;
+        small {
+            font-size: 14px;
+        }
+    }
+    p {
+        margin: 8px 0 16px 0
+    }
+}

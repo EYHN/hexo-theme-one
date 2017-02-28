@@ -1,6 +1,6 @@
 import { array_rand, array_randS } from '../../lib/random';
 import AppState from '../../stateI';
-import * as Url from 'url';
+const url = require('url');
 import * as React from 'react';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
@@ -12,8 +12,10 @@ import CardHeaderAcatar from '../cardHeaderAvatar/cardHeaderAvatar'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
-import * as $ from 'jquery';
 import Content from '../context/context';
+import {toc} from '../context/context';
+import Comment from '../comment/comment';
+import post from '../../reducers/post';
 var style = require('./postCard.less')
 
 interface PostCardProps {
@@ -29,7 +31,10 @@ interface PostCardProps {
   link?: string,
   className?: string,
   cardMedia?: boolean,
-  cardMediaStyle?: React.CSSProperties
+  comment?:boolean,
+  slug?:string
+  cardMediaStyle?: React.CSSProperties,
+  toc?:(tocArray:toc[])=>void
 }
 
 let Cstate:AppState;
@@ -46,16 +51,16 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
   }
   render() {
-    let {cover: setCover, siteUrl = '', className = '', link, title, excerpt, subtitle, cardMedia, cardMediaStyle, content} = this.props;
+    let {cover: setCover,slug = '', siteUrl = '',comment, className = '', link, title, excerpt, subtitle, cardMedia, cardMediaStyle, content} = this.props;
     let { setCover: cover = this.default_thumbnail} = { setCover }
-    cover = Url.resolve(siteUrl, cover);
+    cover = url.resolve(siteUrl, cover);
     return (
       <Card className={style.PostCard + ' ' + className}>
 
         {
           (typeof cardMedia === 'undefined' || cardMedia) && (link || title || subtitle || setCover) ?
             <CardMedia
-              overlay={title || subtitle ? <CardTitle title={title} subtitle={subtitle} /> : undefined}
+              overlay={(title || subtitle) ? <CardTitle title={title} subtitle={subtitle} /> : undefined}
               style={{
                 ...cardMediaStyle
               }}
@@ -73,7 +78,7 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
             : undefined
         }
         <CardText>
-          <Content content={content} markdown={false} excerpt={excerpt} >
+          <Content content={content} markdown={true} excerpt={excerpt} toc={this.props.toc} >
 
           </Content>
         </CardText>
@@ -83,33 +88,14 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
             avatar={this.props.authorAvatar} />
           <div className="flexFull"></div>
           <CardText><a style={{
-            color: this.props.muiTheme.palette.primary1Color
+            color: this.props.muiTheme.palette.primary2Color
           }} href="#">分类</a> | <a style={{
-            color: this.props.muiTheme.palette.primary1Color
+            color: this.props.muiTheme.palette.primary2Color
           }} href="#">分类</a></CardText>
-          <IconMenu
-            iconButtonElement={<IconButton><SocialShare /></IconButton>}
-            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-            targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-          >
-            <MenuItem primaryText="Refresh" />
-            <MenuItem primaryText="Send feedback" />
-            <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Help" />
-            <MenuItem primaryText="Sign out" />
-          </IconMenu>
-          <IconMenu
-            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-            targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-          >
-            <MenuItem primaryText="Refresh" />
-            <MenuItem primaryText="Send feedback" />
-            <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Help" />
-            <MenuItem primaryText="Sign out" />
-          </IconMenu>
         </div>
+        {
+          (comment && slug != '' && title) ? <Comment postID={slug} className={style.Comment} postTitle={title.toString()}></Comment> : undefined
+        }
       </Card>
     )
   }

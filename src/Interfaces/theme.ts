@@ -12,5 +12,10 @@ export interface theme {
     left_pic?: string | Array<string>,
     right_pic?:string | Array<string>,
     post_thumbnail?:string | Array<string>
+  },
+  comment?:{
+    duoshuo?:{
+      shortName?: string
+    }
   }
 }

@@ -1,0 +1,152 @@
+@import "../../variable.less";
+
+
+@media (max-width:((@screen-sm-min + 1))) {
+  #scrollrail-vertical,
+  #scrollrail-horizontal{
+    display: none !important;
+  }
+}
+/////////////////////////////////////// MINIMALSCROLLBAR //
+
+#scrollrail-vertical,
+#scrollrail-horizontal{
+  position: fixed;
+  margin:0; padding: 0;
+  background: transparent;
+  z-index: 2147483647; // 0x7fffffff
+
+  -webkit-transform-origin: 100% 100%;
+  -webkit-transition: background .3s ease;
+  transform-origin: 100% 100%;
+  transition: background .3s ease;
+}
+
+#scrollbar-vertical,
+#scrollbar-horizontal{
+  position: absolute;
+  background: #222;
+  opacity: .6;
+  margin: 0; /* set rail_margin in script.js*/
+  padding: 0;
+  z-index: 2147483647; // 0x7fffffff
+
+  -webkit-border-radius: 5px / 7px; /* set webkitBorderRadius in script.js */
+  -webkit-box-shadow: 0 0 1px 1px rgba(244,244,244,.85);
+  border-radius: 5px / 7px; /* set webkitBorderRadius in script.js */
+  box-shadow: 0 0 1px 1px rgba(244,244,244,.85);
+}
+
+#scrollrail-vertical{
+  top: 0; right: 0;
+  width: 12px; /* set rail_size in script.js*/
+  height: 100%;
+
+  &.disabled{
+    display:none;
+  }
+
+  &:hover,&.hovered{
+    background: rgba(128,128,128,.2);
+    border-left: 1px solid rgba(192,192,192,.3);
+  }
+
+  #scrollbar-vertical{
+    top: 0; right: 10%;
+    width: 40%; height: 0;
+
+    -webkit-transition: width .3s ease, opacity .2s ease, visibility .2s 0s;
+    transition: width .3s ease, opacity .2s ease, visibility .2s 0s;
+  }
+  #scrollbar-vertical:hover,
+  #scrollbar-vertical.hovered,
+  &.hovered #scrollbar-vertical{
+    width: 80%;
+    opacity: .9;
+  }
+}
+
+#scrollrail-horizontal{
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 12px; /* set rail_size in script.js*/
+
+  &.disabled{
+    display: none;
+  }
+
+  &:hover,&.hovered{
+    background: rgba(128,128,128,.2);
+    border-top: 1px solid rgba(192,192,192,.3);
+  }
+
+  #scrollbar-horizontal{
+    bottom: 10%; left: 0;
+    width: 0; height: 40%;
+
+    -webkit-transition: height .3s ease, opacity .2s ease, visibility .2s 0s;
+    transition: height .3s ease, opacity .2s ease, visibility .2s 0s;
+  }
+
+  #scrollbar-horizontal:hover,
+  #scrollbar-horizontal.hovered,
+  &.hovered #scrollbar-horizontal{
+    height: 80%;
+    opacity: .8;
+  }
+}
+
+/////////////////////////////////// WEBKIT-SCROLLBAR //
+::-webkit-scrollbar {
+  width: 0px !important;
+  height: 0px !important;
+}
+
+html[data-minimalscrollbar="yes"]{
+
+::-webkit-scrollbar {
+  width: 9px !important;
+  height: 9px !important;
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+    height: 0; width: 0;
+    display:none;
+}
+
+::-webkit-scrollbar-track-piece{
+  margin:1px; padding: 0;
+  width: 6px !important;
+  height: 5px !important;
+  background: rgba(255,255,255,.3);
+}
+
+::-webkit-scrollbar:hover{
+  background: rgba(128,128,128,.2);
+}
+
+::-webkit-scrollbar-thumb{
+  margin: 1px !important;
+  border: 2px solid transparent !important;
+  width: 1px !important;
+  background-color: rgba(0,0,0,.4) !important;
+  z-index: 2147483647; // 0x7fffffff
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(255,255,255,.3);
+  border: 1px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: rgba(0,0,0,.8) !important;
+}
+::-webkit-scrollbar-thumb:active {
+  background-color: rgba(0,0,0,.6) !important;
+}
+
+}
