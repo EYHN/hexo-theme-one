@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "47295abbfe2a3405e65f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ab127d31d74ae9bd64d0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31565,7 +31565,7 @@
 	"use strict";
 	
 	var hexo = __webpack_require__(492);
-	exports.apiHref = "//delusion.coding.me/hexo-theme-design-Demo/api";
+	exports.apiHref = "https://delusion.coding.me/hexo-theme-design-Demo/api";
 	function getSite() {
 	    var href = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : exports.apiHref;
 	

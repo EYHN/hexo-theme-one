@@ -10,7 +10,7 @@ import { categoriesItem } from '../Interfaces/categories';
 import { category } from '../Interfaces/category';
 import * as fetch from 'isomorphic-fetch';
 
-export var apiHref = "//delusion.coding.me/hexo-theme-design-Demo/api"
+export var apiHref = "https://delusion.coding.me/hexo-theme-design-Demo/api"
 
 export function getSite(href = apiHref) {
   return hexo.getSite(href);
