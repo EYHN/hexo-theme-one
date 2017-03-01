@@ -183,7 +183,7 @@ class search extends React.Component<searchProps, searchState>{
             />
           </Grid>
         </Paper>
-        <Grid className={style.grid}>
+        <Grid className={style.grid + " " + style.postsList}>
           {
             this.getPostsNode()
           }

@@ -163,8 +163,8 @@ const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
   }
 }
 
-let HomeS =  muiThemeable()(Home);
+let HomeX = connect<AppState, HomeProps, HomeProps>(mapStateToProps,mapDispatchToProps)(Home as any)
 
-let HomeX = connect<AppState, HomeProps, HomeProps>(mapStateToProps,mapDispatchToProps)(HomeS as any)
+let HomeS =  muiThemeable()(HomeX);
 
-export default HomeX
+export default HomeS

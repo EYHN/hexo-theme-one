@@ -14,7 +14,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router';
 import Content from '../context/context';
 import {toc} from '../context/context';
-import Comment from '../comment/comment';
 import post from '../../reducers/post';
 var style = require('./postCard.less')
 
@@ -30,8 +29,7 @@ interface PostCardProps {
   content?: string,
   link?: string,
   className?: string,
-  cardMedia?: boolean,
-  comment?:boolean,
+  cardMedia?: boolean
   slug?:string
   cardMediaStyle?: React.CSSProperties,
   toc?:(tocArray:toc[])=>void
@@ -51,7 +49,7 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
   }
   render() {
-    let {cover: setCover,slug = '', siteUrl = '',comment, className = '', link, title, excerpt, subtitle, cardMedia, cardMediaStyle, content} = this.props;
+    let {cover: setCover,slug = '', siteUrl = '', className = '', link, title, excerpt, subtitle, cardMedia, cardMediaStyle, content} = this.props;
     let { setCover: cover = this.default_thumbnail} = { setCover }
     cover = url.resolve(siteUrl, cover);
     return (
@@ -93,9 +91,6 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
             color: this.props.muiTheme.palette.primary2Color
           }} href="#">分类</a></CardText>
         </div>
-        {
-          (comment && slug != '' && title) ? <Comment postID={slug} className={style.Comment} postTitle={title.toString()}></Comment> : undefined
-        }
       </Card>
     )
   }
@@ -113,9 +108,8 @@ const mapStateToProps: (state: AppState) => PostCardProps = (state: AppState) =>
   }
 };
 
+let PostCardX = connect<AppState, PostCardProps, PostCardProps>(mapStateToProps)(PostCard as any)
 
-let PostCardS = muiThemeable()(PostCard);
+let PostCardS = muiThemeable()(PostCardX);
 
-let PostCardX = connect<AppState, PostCardProps, PostCardProps>(mapStateToProps)(PostCardS as any)
-
-export default PostCardX;
+export default PostCardS;

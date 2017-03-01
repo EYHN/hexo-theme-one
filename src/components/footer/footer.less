@@ -1,0 +1,65 @@
+@import "../../variable.less";
+
+.footer {
+    margin-top: 100px;
+    .footerCanve {
+        font-weight: 300;
+        .grid {
+            justify-content: space-around;
+            height: 144px;
+            align-items: center;
+            padding: 0px 20px;
+            max-width: 1500px;
+            font-size: 14px;
+            >*{
+                width: 33%;
+            }
+            span {
+                opacity: 0.85;
+            }
+            .s1 {
+                text-align: left
+            }
+            .s2 {
+                text-align: center
+            }
+            .s3 {
+                text-align: right
+            }
+        }
+    }
+}
+
+@media (max-width: (@screen-sm-min + 1)) {
+    .footer {
+        margin-top: 50px;
+        .footerCanve {
+            font-weight: 300;
+            .grid {
+                justify-content: space-around;
+                align-items: initial;
+                padding: 20px 10px;
+                max-width: 1500px;
+                font-size: 14px;
+                span {
+                    opacity: 0.85;
+                }
+                .s1 {
+                    order: 1;
+                    text-align: left;
+                    width: 50%;
+                }
+                .s2 {
+                    order: 3;
+                    text-align: left;
+                    width: 100%;
+                }
+                .s3 {
+                    order: 2;
+                    text-align: right;
+                    width: 50%;
+                }
+            }
+        }
+    }
+}

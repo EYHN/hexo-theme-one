@@ -7,6 +7,17 @@
     .postCard {
         width: 100%;
     }
+    .commentCard {
+        composes: card from '../card/card.less';
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+.commentCard {
+    composes: card from '../card/card.less';
+    width: e("calc(100% - 16px)");
+    margin-top: 20px;
 }
 
 .toc {
@@ -24,4 +35,9 @@
 
 :global(.Post) {
     width: 100%;
+}
+
+.Comment {
+    padding: 20px 30px;
+    overflow: hidden
 }
