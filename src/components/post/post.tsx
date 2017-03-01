@@ -19,6 +19,8 @@ import { addBackGroundImg } from '../../actions/background';
 const url = require('url');
 import FontIcon from 'material-ui/FontIcon';
 import { setNavTitle, fullModel } from '../../actions/nav';
+import Comment from '../comment/comment';
+import { Card } from 'material-ui/Card';
 var style = require("./post.less");
 
 interface PostProps {
@@ -31,11 +33,11 @@ interface PostProps {
     slug?: string
     toc?: string
   }
-  setNavTitle?: (title: string)=>void
+  setNavTitle?: (title: string) => void
   phone?: boolean
   siteUrl?: string
-  addBackGroundImg?: (backgroundImg: string,key:string) => void
-  fullModel?:(fullModelB: boolean)=>void
+  addBackGroundImg?: (backgroundImg: string, key: string) => void
+  fullModel?: (fullModelB: boolean) => void
 }
 
 interface PostState {
@@ -77,13 +79,13 @@ class Post extends React.Component<PostProps, PostState>{
         this.props.loadingPost(slug);
       }
     } else {
-      thumbnail = url.resolve(siteUrl,array_randS(post.thumbnail) || this.default_thumbnail);
+      thumbnail = url.resolve(siteUrl, array_randS(post.thumbnail) || this.default_thumbnail);
       if (this.loaded == false) {
         this.loaded = true
         if (post.primarycolor || post.accentcolor)
           this.props.onChangeColor(array_randS(post.primarycolor), array_randS(post.accentcolor));
         if (thumbnail)
-          this.props.addBackGroundImg(thumbnail,"post-" + slug)
+          this.props.addBackGroundImg(thumbnail, "post-" + slug)
         if (post.title)
           this.props.setNavTitle(post.title)
       }
@@ -91,8 +93,8 @@ class Post extends React.Component<PostProps, PostState>{
     return (
       <div className="Post">
         <Grid>
+          <div className={style.postCard}>
           <PostCard
-            className={style.postCard}
             content={post.content}
             cover={phone ? undefined : thumbnail}
             cardMedia={!phone}
@@ -101,10 +103,19 @@ class Post extends React.Component<PostProps, PostState>{
               height: "275px"
             }}
             toc={this.toc.bind(this)}
-            slug={post.slug}
-            comment={true} />
-          <div className={style.toc} ref="toc">
-            <FixedAt fixedHeight={300} className={style.tocFixed}><TocList tocArray={this.state.tocArray} className={style.TocList}></TocList></FixedAt></div>
+            slug={post.slug} />
+          <Card className={style.commentCard}>
+            {
+              (slug != '' && post.title) ? <Comment postID={slug} className={style.Comment} postTitle={post.title.toString()}></Comment> : undefined
+            }
+          </Card>
+          </div>
+          {
+            phone ? undefined :
+              <div className={style.toc} ref="toc">
+                <FixedAt fixedHeight={300} className={style.tocFixed}><TocList tocArray={this.state.tocArray} className={style.TocList}></TocList></FixedAt>
+              </div>
+          }
         </Grid>
       </div>
     )
@@ -133,13 +144,13 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     onChangeColor: (primaryColor: string, accentColor: string) => {
       dispatch(changeColor(primaryColor, accentColor))
     },
-    addBackGroundImg: (backgroundImg: string,key:string) => {
-      dispatch(addBackGroundImg(backgroundImg,key))
+    addBackGroundImg: (backgroundImg: string, key: string) => {
+      dispatch(addBackGroundImg(backgroundImg, key))
     },
-    setNavTitle: (title: string)=>{
+    setNavTitle: (title: string) => {
       dispatch(setNavTitle(title));
     },
-    fullModel:(fullModelB: boolean)=>{
+    fullModel: (fullModelB: boolean) => {
       dispatch(fullModel(fullModelB));
     }
   }

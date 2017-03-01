@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as MarkdownIt from 'markdown-it'
 let style = require("./context.less");
-let markdownItTocAndAnchor = require('markdown-it-toc-and-anchor').default;
+let markdownItTocAndAnchor = require('../../lib/markdown-it-toc-and-anchor/index.js').default;
 
 let md = new MarkdownIt({
   html: true,

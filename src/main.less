@@ -1,22 +1,28 @@
 html {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
-body{
-  margin: 0px;
-  -webkit-font-smoothing: antialiased;
+body {
+    margin: 0px;
+    -webkit-font-smoothing: antialiased;
+    background: #fafafa;
 }
 
-*, :after, :before {
+*,
+ :after,
+ :before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
 :global(.flexFull) {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
-a{
-  text-decoration: none;
+a {
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
 }

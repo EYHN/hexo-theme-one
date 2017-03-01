@@ -20,6 +20,7 @@ import Background from '../background/background'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import SearchX from '../search/search'
+import Footer from '../footer/footer'
 let useScroll = require('react-router-scroll/lib/useScroll');
 addLocaleData(zh);
 addLocaleData(en);
@@ -105,6 +106,7 @@ export class App extends React.Component<AppProps, AppComponentState>{
                 </ReactCSSTransitionGroup>
               </main>
             </div>
+            <Footer />
           </div>
         </MuiThemeProvider>
       </IntlProvider>
