@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "31ccda6c628579137356"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "47295abbfe2a3405e65f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31565,7 +31565,7 @@
 	"use strict";
 	
 	var hexo = __webpack_require__(492);
-	exports.apiHref = "http://delusion.coding.me/hexo-theme-design-Demo/api";
+	exports.apiHref = "//delusion.coding.me/hexo-theme-design-Demo/api";
 	function getSite() {
 	    var href = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : exports.apiHref;
 	
@@ -62804,9 +62804,9 @@
 		switch (opts.arrayFormat) {
 			case 'index':
 				return function (key, value, accumulator) {
-					result = /\[(\d*)\]$/.exec(key);
+					result = /\[(\d*)]$/.exec(key);
 	
-					key = key.replace(/\[\d*\]$/, '');
+					key = key.replace(/\[\d*]$/, '');
 	
 					if (!result) {
 						accumulator[key] = value;
@@ -62822,9 +62822,9 @@
 	
 			case 'bracket':
 				return function (key, value, accumulator) {
-					result = /(\[\])$/.exec(key);
+					result = /(\[])$/.exec(key);
 	
-					key = key.replace(/\[\]$/, '');
+					key = key.replace(/\[]$/, '');
 	
 					if (!result || accumulator[key] === undefined) {
 						accumulator[key] = value;
@@ -86024,6 +86024,8 @@
 	src$core$$["default"].defaultLocale = 'en';
 	
 	exports["default"] = src$core$$["default"];
+	
+	//# sourceMappingURL=main.js.map
 
 /***/ },
 /* 1074 */
@@ -86291,6 +86293,8 @@
 	        locales.join(', ') + ', or the default locale: ' + defaultLocale
 	    );
 	};
+	
+	//# sourceMappingURL=core.js.map
 
 /***/ },
 /* 1075 */
@@ -86326,6 +86330,8 @@
 	    return obj;
 	}
 	exports.hop = hop;
+	
+	//# sourceMappingURL=utils.js.map
 
 /***/ },
 /* 1076 */
@@ -86378,7 +86384,8 @@
 	    return obj;
 	};
 	exports.defineProperty = defineProperty, exports.objCreate = objCreate;
-
+	
+	//# sourceMappingURL=es5.js.map
 
 /***/ },
 /* 1077 */
@@ -86591,6 +86598,8 @@
 	    var options = this.options;
 	    return options[value] || options.other;
 	};
+	
+	//# sourceMappingURL=compiler.js.map
 
 /***/ },
 /* 1078 */
@@ -87963,6 +87972,8 @@
 	    parse:       parse
 	  };
 	})();
+	
+	//# sourceMappingURL=parser.js.map
 
 /***/ },
 /* 1080 */
@@ -87971,7 +87982,8 @@
 	// GENERATED FILE
 	"use strict";
 	exports["default"] = {"locale":"en","pluralRuleFunction":function (n,ord){var s=String(n).split("."),v0=!s[1],t0=Number(s[0])==n,n10=t0&&s[0].slice(-1),n100=t0&&s[0].slice(-2);if(ord)return n10==1&&n100!=11?"one":n10==2&&n100!=12?"two":n10==3&&n100!=13?"few":"other";return n==1&&v0?"one":"other"}};
-
+	
+	//# sourceMappingURL=en.js.map
 
 /***/ },
 /* 1081 */
@@ -88013,6 +88025,8 @@
 	src$core$$["default"].defaultLocale = 'en';
 	
 	exports["default"] = src$core$$["default"];
+	
+	//# sourceMappingURL=main.js.map
 
 /***/ },
 /* 1084 */
@@ -88313,6 +88327,8 @@
 	
 	    return units;
 	};
+	
+	//# sourceMappingURL=core.js.map
 
 /***/ },
 /* 1085 */
@@ -88362,6 +88378,8 @@
 	        year       : year
 	    };
 	};
+	
+	//# sourceMappingURL=diff.js.map
 
 /***/ },
 /* 1086 */
@@ -88440,6 +88458,8 @@
 	    return new Date().getTime();
 	};
 	exports.defineProperty = defineProperty, exports.objCreate = objCreate, exports.arrIndexOf = arrIndexOf, exports.isArray = isArray, exports.dateNow = dateNow;
+	
+	//# sourceMappingURL=es5.js.map
 
 /***/ },
 /* 1087 */
@@ -88448,6 +88468,8 @@
 	// GENERATED FILE
 	"use strict";
 	exports["default"] = {"locale":"en","pluralRuleFunction":function (n,ord){var s=String(n).split("."),v0=!s[1],t0=Number(s[0])==n,n10=t0&&s[0].slice(-1),n100=t0&&s[0].slice(-2);if(ord)return n10==1&&n100!=11?"one":n10==2&&n100!=12?"two":n10==3&&n100!=13?"few":"other";return n==1&&v0?"one":"other"},"fields":{"year":{"displayName":"year","relative":{"0":"this year","1":"next year","-1":"last year"},"relativeTime":{"future":{"one":"in {0} year","other":"in {0} years"},"past":{"one":"{0} year ago","other":"{0} years ago"}}},"month":{"displayName":"month","relative":{"0":"this month","1":"next month","-1":"last month"},"relativeTime":{"future":{"one":"in {0} month","other":"in {0} months"},"past":{"one":"{0} month ago","other":"{0} months ago"}}},"day":{"displayName":"day","relative":{"0":"today","1":"tomorrow","-1":"yesterday"},"relativeTime":{"future":{"one":"in {0} day","other":"in {0} days"},"past":{"one":"{0} day ago","other":"{0} days ago"}}},"hour":{"displayName":"hour","relativeTime":{"future":{"one":"in {0} hour","other":"in {0} hours"},"past":{"one":"{0} hour ago","other":"{0} hours ago"}}},"minute":{"displayName":"minute","relativeTime":{"future":{"one":"in {0} minute","other":"in {0} minutes"},"past":{"one":"{0} minute ago","other":"{0} minutes ago"}}},"second":{"displayName":"second","relative":{"0":"now"},"relativeTime":{"future":{"one":"in {0} second","other":"in {0} seconds"},"past":{"one":"{0} second ago","other":"{0} seconds ago"}}}}};
+	
+	//# sourceMappingURL=en.js.map
 
 /***/ },
 /* 1088 */
@@ -88542,6 +88564,8 @@
 	
 	    return props;
 	}
+	
+	//# sourceMappingURL=memoizer.js.map
 
 /***/ },
 /* 1091 */
@@ -88625,7 +88649,7 @@
 	
 	exports.bind = bind, exports.defineProperty = defineProperty, exports.objCreate = objCreate;
 	
-
+	//# sourceMappingURL=es5.js.map
 
 /***/ },
 /* 1092 */
