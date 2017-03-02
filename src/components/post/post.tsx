@@ -93,9 +93,10 @@ class Post extends React.Component<PostProps, PostState>{
     return (
       <div className="Post">
         <Grid>
-          <div className={style.postCard}>
+          <div className={style.post}>
           <PostCard
             content={post.content}
+            className={style.PostCard}
             cover={phone ? undefined : thumbnail}
             cardMedia={!phone}
             title={post.title}

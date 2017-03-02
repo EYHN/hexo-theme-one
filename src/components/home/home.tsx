@@ -106,6 +106,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
           username={author}
           coverImg={url.resolve(siteUrl,left_pic)}
           avatarImg={url.resolve(siteUrl,avatar)}
+          
         />
         <LogoCard />
         {this.getPosts()}

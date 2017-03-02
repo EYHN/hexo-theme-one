@@ -90,9 +90,7 @@ class Menu extends React.Component<MenuProps, MenuStates>{
     let {fullModel = false,RouterHistory,phone} = this.props
     return (
       <div className={style.Menu + " " + (fullModel?"":this.state.outClassName)}
-        style={{
-          boxShadow: phone?"0px 30px 50px rgba(0, 0, 0, 0.117647) inset":"none"
-          }}>
+        style={{}}>
         <AppBar
           className={(fullModel?"":this.state.className)}
           onLeftIconButtonTouchTap={this.props.onclickLeft}

@@ -6,6 +6,7 @@ import * as React from 'react';
 import ColorChooseButton from '../colorChooseButton/colorChooseButton'
 import { color as colorList } from '../../lib/themes'
 import { connect } from 'react-redux'
+import { ListItem } from 'material-ui/List';
 let style = require('./colorChoose.less');
 
 interface ColorChooseProps {
@@ -51,13 +52,13 @@ class ColorChoose extends React.Component<ColorChooseProps, ColorChooseState>{
 
   render() {
     return (
-      <MenuItem className={style.MenuItem} disableTouchRipple={true} disableFocusRipple={true} disableKeyboardFocus={true}>
+      <ListItem className={style.MenuItem} disableTouchRipple={true} disableFocusRipple={true} disableKeyboardFocus={true}>
         <div>
           {
             this.getColorChooseButtons()
           }
         </div>
-      </MenuItem>
+      </ListItem>
     )
   }
 }

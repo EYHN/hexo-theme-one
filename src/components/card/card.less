@@ -2,6 +2,9 @@
 .card {
     margin: 8px;
     overflow: hidden;
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px !important;
+    }
 }
 
 @keyframes fadeIn {
@@ -20,8 +23,8 @@
 @media (max-width:((@screen-sm-min + 1))) {
     .card {
         margin: 8px 0px;
-        width: 100%;
-        border-radius: 0px !important;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 

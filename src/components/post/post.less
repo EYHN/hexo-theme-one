@@ -1,10 +1,10 @@
 @import "../../variable.less";
-.postCard {
+.post {
     width: e("calc(75% - 16px)");
 }
 
 @media (max-width: (@screen-sm-min + 1)) {
-    .postCard {
+    .post {
         width: 100%;
     }
     .commentCard {
@@ -12,12 +12,19 @@
         width: 100%;
         margin-top: 20px;
     }
+    .PostCard {
+        width: 100%;
+        border-radius: 0px !important;
+    }
 }
+
 
 .commentCard {
     composes: card from '../card/card.less';
     width: e("calc(100% - 16px)");
     margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .toc {

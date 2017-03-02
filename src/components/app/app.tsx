@@ -69,7 +69,7 @@ export class App extends React.Component<AppProps, AppComponentState>{
   render() {
     let {color = {}, fullModel = false} = this.props;
     let {primaryColor, accentColor} = color;
-    let t = color2Theme(primaryColor, accentColor);
+    let t = color2Theme(primaryColor, accentColor,"light");
     t.fontFamily = '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
     let Theme = getMuiTheme(t);
     return (

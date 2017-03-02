@@ -76,7 +76,7 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
             : undefined
         }
         <CardText>
-          <Content content={content} markdown={true} excerpt={excerpt} toc={this.props.toc} >
+          <Content content={content} className={style.content} markdown={true} excerpt={excerpt} toc={this.props.toc} >
 
           </Content>
         </CardText>
