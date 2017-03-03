@@ -21,6 +21,7 @@ import FontIcon from 'material-ui/FontIcon';
 import { setNavTitle, fullModel } from '../../actions/nav';
 import Comment from '../comment/comment';
 import { Card } from 'material-ui/Card';
+import { FormattedDate } from 'react-intl';
 var style = require("./post.less");
 
 interface PostProps {
@@ -103,6 +104,7 @@ class Post extends React.Component<PostProps, PostState>{
             cardMediaStyle={{
               height: "275px"
             }}
+            date={<FormattedDate value={new Date(post.date)}/>}
             toc={this.toc.bind(this)}
             slug={post.slug} />
           <Card className={style.commentCard}>

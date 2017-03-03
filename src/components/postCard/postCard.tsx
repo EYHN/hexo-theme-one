@@ -12,15 +12,15 @@ import CardHeaderAcatar from '../cardHeaderAvatar/cardHeaderAvatar'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
+import FlatButton from 'material-ui/FlatButton';
 import Content from '../context/context';
-import {toc} from '../context/context';
+import { toc } from '../context/context';
 import post from '../../reducers/post';
 var style = require('./postCard.less')
 
 interface PostCardProps {
   muiTheme?: __MaterialUI.Styles.MuiTheme,
-  title?: React.ReactNode,
-  subtitle?: React.ReactNode,
+  title?: React.ReactNode
   cover?: string,
   excerpt?: string,
   authorName?: React.ReactNode,
@@ -30,12 +30,13 @@ interface PostCardProps {
   link?: string,
   className?: string,
   cardMedia?: boolean
-  slug?:string
+  slug?: string
   cardMediaStyle?: React.CSSProperties,
-  toc?:(tocArray:toc[])=>void
+  toc?: (tocArray: toc[]) => void
+  date?:React.ReactNode
 }
 
-let Cstate:AppState;
+let Cstate: AppState;
 
 export class PostCard extends React.Component<PostCardProps, undefined>{
   default_thumbnail = '';
@@ -49,16 +50,16 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
   }
   render() {
-    let {cover: setCover,slug = '', siteUrl = '', className = '', link, title, excerpt, subtitle, cardMedia, cardMediaStyle, content} = this.props;
+    let {cover: setCover, slug = '', siteUrl = '',date, className = '', link, title, excerpt, cardMedia, cardMediaStyle, content} = this.props;
     let { setCover: cover = this.default_thumbnail} = { setCover }
     cover = url.resolve(siteUrl, cover);
     return (
       <Card className={style.PostCard + ' ' + className}>
 
         {
-          (typeof cardMedia === 'undefined' || cardMedia) && (link || title || subtitle || setCover) ?
+          (typeof cardMedia === 'undefined' || cardMedia) && (link || title || setCover) ?
             <CardMedia
-              overlay={(title || subtitle) ? <CardTitle title={title} subtitle={subtitle} /> : undefined}
+              overlay={(title) ? <CardTitle title={title} subtitle={date} /> : undefined}
               style={{
                 ...cardMediaStyle
               }}
@@ -81,9 +82,11 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
           </Content>
         </CardText>
         <div className={style.CardBottom}>
-          <CardHeaderAcatar
-            title={this.props.authorName}
-            avatar={this.props.authorAvatar} />
+          {
+            this.props.authorName && this.props.authorAvatar ? <CardHeaderAcatar
+              title={this.props.authorName}
+              avatar={this.props.authorAvatar} /> : undefined
+          }
           <div className="flexFull"></div>
           <CardText><a style={{
             color: this.props.muiTheme.palette.primary2Color
