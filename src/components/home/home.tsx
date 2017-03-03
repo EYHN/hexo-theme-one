@@ -49,11 +49,11 @@ interface HomeState {
 
 export class Home extends React.Component<HomeProps, HomeState>{
   componentDidMount(){
-    let {left_pic = '',siteUrl = ''} = this.props;
+    let {left_pic = '',siteUrl = '',title = ''} = this.props;
     this.props.setBackGroundImg(url.resolve(siteUrl,left_pic),"home")
     this.props.onChooseColor(this.props.primaryColor,this.props.accentColor);
     this.props.fullModel(false)
-    this.props.setNavTitle('');
+    this.props.setNavTitle(title);
   }
 
   constructor() {
@@ -97,7 +97,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
   }
 
   render() {
-    let {siteUrl = '',author = '',title = ''} = this.props;
+    let {siteUrl = '',author = '',title = '',phone=false} = this.props;
     let {left_pic = '',slogan = '',avatar = ''} = this.props;
     return (
       <div className="Home">
@@ -108,9 +108,11 @@ export class Home extends React.Component<HomeProps, HomeState>{
           username={author}
           coverImg={url.resolve(siteUrl,left_pic)}
           avatarImg={url.resolve(siteUrl,avatar)}
-          phone={this.props.phone}
+          phone={phone}
         />
-        <LogoCard />
+        {
+          phone?undefined:<LogoCard />
+        }
         {this.getPosts()}
         <DisplayTrigger className={style.Loading} onDisplay={
           this.loadingMore.bind(this)
