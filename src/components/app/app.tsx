@@ -11,6 +11,7 @@ import AppBar from 'material-ui/AppBar';
 import { Router, Route, hashHistory, IndexRoute, applyRouterMiddleware } from 'react-router';
 import Home from '../home/home'
 import Post from '../post/post';
+import Page from '../page/page';
 import * as zh from 'react-intl/locale-data/zh';
 import * as en from 'react-intl/locale-data/en';
 import { IntlProvider, addLocaleData } from 'react-intl'
@@ -21,6 +22,8 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import SearchX from '../search/search'
 import Footer from '../footer/footer'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 let useScroll = require('react-router-scroll/lib/useScroll');
 addLocaleData(zh);
 addLocaleData(en);
@@ -107,6 +110,9 @@ export class App extends React.Component<AppProps, AppComponentState>{
               </main>
             </div>
             <Footer />
+            <FloatingActionButton className={style.fixedFloatingButton}>
+              <MoreVertIcon />
+            </FloatingActionButton>
           </div>
         </MuiThemeProvider>
       </IntlProvider>
@@ -131,6 +137,7 @@ const Group = () => (
     <Route path="/" component={AppX}>
       <IndexRoute component={Home} />
       <Route path="/post/:slug" component={Post} />
+      <Route path="/page/:title" component={Page} />
       <Route path="/search" component={SearchX} />
     </Route>
   </Router>

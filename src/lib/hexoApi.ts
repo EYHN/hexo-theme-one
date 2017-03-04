@@ -7,8 +7,9 @@ import { tag } from '../Interfaces/tag';
 import { categoriesItem } from '../Interfaces/categories';
 import { category } from '../Interfaces/category';
 import * as fetch from 'isomorphic-fetch';
+import { page } from '../Interfaces/page';
 
-export var apiHref = "http://delusion.coding.me/hexo-theme-design-Demo/api"
+export var apiHref = "https://delusion.coding.me/hexo-theme-design-Demo/api"
 
 const fetchConfig = {
 }
@@ -70,5 +71,11 @@ export function getCategories(name?: string, href = apiHref) {
 export function getPost(name: string, href = apiHref) {
   return fetch(href + `/articles/${name}.json`,fetchConfig).then((res) => {
     return res.json() as Promise<post>;
+  })
+}
+
+export function getPage(name: string, href = apiHref) {
+  return fetch(href + `/page/${name}.json`,fetchConfig).then((res) => {
+    return res.json() as Promise<page>;
   })
 }

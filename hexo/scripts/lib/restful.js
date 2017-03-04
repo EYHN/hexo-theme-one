@@ -26,7 +26,8 @@ module.exports = function (cfg, themecfg, site) {
             },
             categories: true,
             tags: true,
-            post: true
+            post: true,
+            page: true
         },
 
         posts = site.posts.sort('-date').filter(function (post) {
@@ -86,7 +87,6 @@ module.exports = function (cfg, themecfg, site) {
                         path: 'api/' + name + '/' + item.name + '.json',
                         postlist: item.posts.map(postMap)
                     }
-
                 }));
             }, []);
         },
@@ -203,7 +203,6 @@ module.exports = function (cfg, themecfg, site) {
                     date: post.date,
                     updated: post.updated,
                     comments: post.comments,
-                    path: path,
                     excerpt: post.excerpt,
                     keywords: cfg.keyword,
                     content: post._content,
@@ -222,6 +221,31 @@ module.exports = function (cfg, themecfg, site) {
                             path: 'api/tags/' + tag.name + '.json'
                         };
                     })
+                })
+            };
+        }));
+    }
+
+    let pages = site.pages
+
+    if (restful.page) {
+        apiData = apiData.concat(pages.map(function (page) {
+            var path = 'api/page/' + page.title + '.json';
+            return {
+                path: path,
+                data: JSON.stringify({
+                    title: page.title,
+                    date: page.date,
+                    updated: page.updated,
+                    comments: page.comments,
+                    path: path,
+                    content: page._content,
+                    thumbnail: page.thumbnail,
+                    primarycolor: page.primarycolor,
+                    accentcolor: page.accentcolor,
+                    background: page.background,
+                    toc: page.toc,
+                    html: page.html
                 })
             };
         }));

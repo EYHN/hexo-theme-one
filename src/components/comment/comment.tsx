@@ -14,15 +14,16 @@ interface commentProps {
 }
 
 export class Comment extends React.Component<commentProps, undefined>{
-  handleNewComment(comment:any) {
-    console.log(comment.text);
-  }
+  // handleNewComment(comment:any) {
+  // }
 
   render() {
-    let {url = window.location.href,shortname = "huaji-blog",className = "",author=""} = this.props
+    let {url = window.location.href,shortname,className = "",author=""} = this.props
     return (
       <div className={className}>
-        <Duoshuo thread={this.props.postID} url={url} shortName={"huaji-blog"} author={author}/>
+        {
+          typeof shortname !== "undefined"?<Duoshuo thread={this.props.postID} url={url} shortName={shortname} author={author}/>:undefined
+        }
         {/*<ReactDisqusThread
           shortname="huaji"
           identifier={this.props.postID}

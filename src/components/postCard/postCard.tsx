@@ -38,7 +38,7 @@ interface PostCardProps {
 
 let Cstate: AppState;
 
-export class PostCard extends React.Component<PostCardProps, undefined>{
+class PostCard extends React.Component<PostCardProps, undefined>{
   default_thumbnail = '';
 
   renderContent() {
@@ -89,9 +89,9 @@ export class PostCard extends React.Component<PostCardProps, undefined>{
           }
           <div className="flexFull"></div>
           <CardText><a style={{
-            color: this.props.muiTheme.palette.primary2Color
+            color: this.props.muiTheme.palette.accent1Color
           }} href="#">分类</a> | <a style={{
-            color: this.props.muiTheme.palette.primary2Color
+            color: this.props.muiTheme.palette.accent1Color
           }} href="#">分类</a></CardText>
         </div>
       </Card>

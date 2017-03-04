@@ -40,7 +40,7 @@ gulp.task('webpack-server', function () {
 )
 
 gulp.task('buildHexo', function () {
-  gulp.src('./dist/**/*.js')
+  gulp.src('./dist/**/*')
     .pipe(gulp.dest('./hexo/source'));
   gulp.src('./dist/index.html')
     .pipe(rename(function (path) {
@@ -57,7 +57,7 @@ gulp.task('buildHexo', function () {
 
 gulp.task('copyHexo', function () {
   gulp.src('./hexo/**/*')
-    .pipe(gulp.dest('C:/Users/AREA/Documents/Project/HexoBlogKit/themes/design'));
+    .pipe(gulp.dest('C:/Users/AREA/Documents/Project/HexoBlogKit - 副本/themes/design'));
 })
 
 gulp.task('hexo', ['buildHexo', 'copyHexo'], function () {

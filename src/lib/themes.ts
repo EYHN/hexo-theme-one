@@ -87,7 +87,7 @@ export const color:{[key:string]:__MaterialUI.Styles.ThemePalette} = {
   }
 }
 
-export const theme = {
+export const theme:{[key:string]:__MaterialUI.Styles.ThemePalette} = {
   "dark":{
     textColor: fullWhite,
     secondaryTextColor: fade(fullWhite, 0.7),
