@@ -70,13 +70,14 @@ class Page extends React.Component<PageProps, PageState>{
   }
 
   onloaded(page: pageState) {
+    let {background = true} = page;
     if (page.primarycolor || page.accentcolor)
       this.props.onChangeColor(array_randS(page.primarycolor), array_randS(page.accentcolor));
     this.props.addBackGroundImg(url.resolve(this.props.siteUrl, array_randS(page.thumbnail) || this.default_thumbnail), "page-" + page.title)
     if (page.title)
       this.props.setNavTitle(page.title)
-    if (page.background)
-      this.props.fullModel(true)
+    if (background)
+      this.props.fullModel(false)
   }
 
   render() {

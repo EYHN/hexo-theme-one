@@ -2,11 +2,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom'
 const duoshuocss = require("!style!css!less!../duoshuocss/embed.less")
 
-const MaterialIconseot = require("../../../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.eot");
-const MaterialIconsttf = require("../../../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.ttf");
-const MaterialIconswoff = require("../../../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff");
-const MaterialIconswoff2 = require("../../../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff2");
-
 interface DuoshuoProps {
     thread: string,
     shortName: string,
@@ -47,23 +42,6 @@ export default class Duoshuo extends React.Component<DuoshuoProps, undefined>{
   render() {
     return (
       <div>
-        <style>
-          {
-            `
-            @font-face {
-              font-family: 'Material Icons';
-              font-style: normal;
-              font-weight: 400;
-              src: url(${MaterialIconseot}); /* For IE6-8 */
-              src: local('Material Icons'),
-                  local('MaterialIcons-Regular'),
-                  url(${MaterialIconswoff2}) format('woff2'),
-                  url(${MaterialIconswoff}) format('woff'),
-                  url(${MaterialIconsttf}) format('truetype');
-            }
-            `
-          }
-        </style>
         <div ref="cp-duoshuo"></div>
       </div>
     );

@@ -1,3 +1,14 @@
+export interface DrawerIten {
+  title?: string
+  type?: string
+  name?: string
+  href?: string
+  slug?: string
+  initiallyOpen?: boolean
+  icon?: string
+  nested?: DrawerIten[]
+}
+
 export interface theme {
   uiux?: {
     slogan?: string | Array<string>,
@@ -18,5 +29,5 @@ export interface theme {
       shortName?: string
     }
   },
-  Drawer?: [{ title?: string, type?: string, name?: string, href?: string, slug?: string }]
+  Drawer?: DrawerIten[]
 }

@@ -25,6 +25,10 @@ import Footer from '../footer/footer'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 let useScroll = require('react-router-scroll/lib/useScroll');
+const MaterialIconseot = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.eot");
+const MaterialIconsttf = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.ttf");
+const MaterialIconswoff = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff");
+const MaterialIconswoff2 = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff2");
 addLocaleData(zh);
 addLocaleData(en);
 var style = require('./app.less')
@@ -83,6 +87,23 @@ export class App extends React.Component<AppProps, AppComponentState>{
           <div style={{
             fontFamily: Theme.fontFamily
           }} className={style.body}>
+            <style>
+              {
+                `
+                @font-face {
+                  font-family: 'Material Icons';
+                  font-style: normal;
+                  font-weight: 400;
+                  src: url(${MaterialIconseot}); /* For IE6-8 */
+                  src: local('Material Icons'),
+                      local('MaterialIcons-Regular'),
+                      url(${MaterialIconswoff2}) format('woff2'),
+                      url(${MaterialIconswoff}) format('woff'),
+                      url(${MaterialIconsttf}) format('truetype');
+                }
+                `
+              }
+            </style>
             <Menu onclickLeft={this.MenuToggle.bind(this)} RouterHistory={hashHistory}/>
             <Background />
             <Drawer
@@ -99,8 +120,8 @@ export class App extends React.Component<AppProps, AppComponentState>{
                 <ReactCSSTransitionGroup
                   component="div"
                   transitionName="route-page"
-                  transitionEnterTimeout={450}
-                  transitionLeaveTimeout={450}
+                  transitionEnterTimeout={200}
+                  transitionLeaveTimeout={200}
                   className={style.TransitionGroup}
                 >
                   {React.cloneElement(this.props.children, {
