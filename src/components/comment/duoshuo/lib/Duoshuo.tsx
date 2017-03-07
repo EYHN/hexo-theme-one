@@ -2,6 +2,12 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom'
 const duoshuocss = require("!style!css!less!../duoshuocss/embed.less")
 
+const js = require("!file-loader!./embed.min.js");
+const marked = require("!file-loader!./marked.min.js");
+
+$("body").append(`<script src="${js}" />`);
+$("body").append(`<script src="${marked}" />`);
+
 interface DuoshuoProps {
     thread: string,
     shortName: string,
