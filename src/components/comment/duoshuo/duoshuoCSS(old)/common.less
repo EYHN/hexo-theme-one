@@ -1,35 +1,42 @@
 #ds-reset {
   // 被复用多次，并可以被网站主简单修改的样式
   .ds-highlight {
-    color: @highlight;
+    color: @highlight !important;
   }
   .ds-rounded {
     .rounded(@border-radius);
-  }
+  }  
   .ds-rounded-top {
-      border-top-right-radius: @border-radius;
-      border-top-left-radius: @border-radius;
+    -webkit-border-top-right-radius: @border-radius;
+     -webkit-border-top-left-radius: @border-radius;
+            border-top-right-radius: @border-radius;
+             border-top-left-radius: @border-radius;
   }
   .ds-rounded-bottom {
     border-bottom-left-radius: @border-radius;
     border-bottom-right-radius: @border-radius;
+    -webkit-border-bottom-left-radius: @border-radius;
+    -webkit-border-bottom-right-radius: @border-radius;
   }
-
+  .ds-gradient-bg {
+    background: url("@{images-url}bg_sprites.png") 0 -60px repeat-x;
+  }
   .ds-avatar {
-    position: absolute;
-    top: 4px;
-    left: 0;
-    .rounded(50%);
-    &:hover {
-        box-shadow: 0 3px 12px rgba(0, 0, 0,.3)
-    }
-
+    box-shadow: 0 1px 1px rgba(255, 255, 255, .75);
+    position: relative;
+    .rounded(@border-radius);
+    background-color: #fff;
+    float: left;
+    //width: 50px;  通过里面的图片撑开来
+    //height: 50px; 通过里面的图片撑开来
     img {
       display: block;
-      visibility: visible;
       width: @avatar-size;
       height: @avatar-size;
-      .rounded(50%);
+      max-width: none;    //  如果不设置会导致IE8下width为0
+      //max-height:100%;    //  for-compatible
+      box-shadow: 0 1px 3px rgba(0,0,0,.22);
+      .rounded(@border-radius);
     }
     .ds-service-icon {
       display:block;
@@ -43,15 +50,18 @@
     padding:0;
     display:inline;
     border:none;  // for compatible http://blog.dnspod.cn/2013/01/yangtze-river-delta/dnspod1-2/
+  }  
+  .ds-icon {
+    vertical-align: middle;
+    display: inline-block;
+    overflow: hidden;
+    .spritesheet();
   }
-  .icon {
-    margin: 0 3px;
-  }
-  a .icon {
+  a .ds-icon {
     opacity: 0.6;
     .transition(opacity);
   }
-  a:hover .icon {
+  a:hover .ds-icon {
     opacity: 1;
   }
   /* SNS icons */
@@ -62,26 +72,36 @@
     }
     li:hover a { color: @link-hover-color; }
   }
-
-  .ds-service-icon,
+  /*
+  .ds-connected-sites {
+    display: inline-block;
+    width: 16px !important;
+    height: 16px !important;
+  }*/
+  .ds-service-icon, 
   .ds-service-icon-grey {
     width: 16px !important;
     height: 16px !important;
     line-height: 100px;
     display: inline-block;
     background: url("@{images-url}service-icons-color.png?v=2") no-repeat;
+    _background-image: url("@{images-url}service-icons-color.gif?v=2");
     overflow: hidden;
+    //float: left;
+    //opacity: .8;
   }
   .ds-service-icon-grey {
     //background-position-x: -16px;   // firefox doesn't support this property
     background-image: url("@{images-url}service-icons-grey.png");
+    _background-image: url("@{images-url}service-icons-grey.gif");  // IE6 hack
   }
   .ds-service-link {
     height: 16px !important;
     line-height: 16px;
-    padding-left: 22px;
+    padding-left: 20px;
     display: block;
     background: url("@{images-url}service-icons-color.png?v=2") no-repeat;
+    _background-image: url("@{images-url}service-icons-color.gif?v=2");
     overflow: hidden;
   }
   .ds-weibo {
@@ -169,17 +189,20 @@
   padding: 0;
   margin : 8px 0;
   max-width:640px;
-
+  
   .ds-ctx-entry {
-    position: relative;
-    padding: 10px;
-
+    padding: 6px;
+    margin: 0;
+    border-bottom: 1px solid #e6e6e6;
+    
     .ds-ctx-head a {
-      color: @text-muted;
+      color: lighten(@highlight, 15%);
+      &:hover {
+        color: @highlight;
+      }
     }
     .ds-avatar {
-      top: 10px;
-      left: 10px;
+      margin: 0;
       width: @avatar-small-size;
       height: @avatar-small-size;
       img {
@@ -189,16 +212,11 @@
       }
     }
     .ds-ctx-body{
-      margin-left: 40px;
-      .ds-avatar {
-          left: 0
-      }
-    }
-    .ds-post-button {
-        background: #dcdcdc
-    }
+      margin-left: 38px;
+    }    
     .ds-ctx-head {
       position : relative;
+      _zoom: 1;   // ie6 bug fix
       line-height: 1em;
       padding: 1px 0 0;
       margin : 0 0 .25em;
@@ -212,28 +230,43 @@
     }
     .ds-time {
       font-size: @font-size-small;
+      *font-size: 12px;   // ie6/7会把所有中文修正成12px，因此会出现字体大小不一样的问题。
       margin-left: 8px;
       color: @text-muted;
+      _zoom: 1;     //  ie6 hack 为了触发layout
     }
     .ds-ctx-content {
       position : relative;
+      _zoom: 1;   // ie6 hack
       padding: 0;
       margin: 0;
       overflow:hidden;
       line-height:1.5em;
     }
+    &:hover .ds-comment-actions {
+      display:block;
+    }
   }
-
+  
   .ds-comment-actions {  //  放到.ds-ctx-entry里面去会导致优先级过高reply-active的样式无法生效
-    text-align: right;
+    bottom: 0;
+    right: 0;
     line-height:18px;
-
+    position:absolute;
+    display:none;
+    *display:block;   // ie6/7下不支持a以外的标签的hover事件
+    
     a {
       margin: 0 0 0 6px;
     }
   }
 }
 
+#ds-reset.ds-touch #ds-ctx { // 触屏设备始终显示
+  .ds-ctx-entry .ds-comment-actions{
+    display:block;
+  }
+}
 
 /**
 *
@@ -242,7 +275,8 @@
 **/
 #ds-reset {
   .ds-comment-body #ds-ctx { //  在评论列表中的样式
-    background-color: rgba(0,0,0,.04);
+    border-left: 3px solid @gray-lightest;
+    background-color: rgba(0,0,0,.03);
   }
   &.ds-no-opacity .ds-comment-body #ds-ctx {
     background: @gray-background;

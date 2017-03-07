@@ -7,6 +7,7 @@
       list-style: none;
       margin: 0;
       padding: 0;
+      *zoom:1;
 
       &:after {
         .clearfix();
@@ -135,6 +136,7 @@
       overflow: hidden;
       background-image: url("@{images-url}service-icons-color-32.png");
       background-repeat: no-repeat;
+      _background-image: url("@{images-url}service-icons-color-32.gif");
     }
     .ds-weibo {
       background-position: 0 0;
@@ -237,6 +239,7 @@
 
     .flat {
       background-image: url("@{images-url}service-icons-color-flat-32.png");
+      _background-image: url("@{images-url}service-icons-color-flat-32.gif");
     }
   }
 
@@ -277,6 +280,7 @@
       overflow: hidden;
       background-image: url("@{images-url}service-icons-color.png?v=2");
       background-repeat: no-repeat;
+      _background-image: url("@{images-url}service-icons-color.gif?v=2");
     }
     .ds-weibo {
       background-position: 0 0;
@@ -364,6 +368,7 @@
     }
     .flat {
       background-image: url("@{images-url}service-icons-color-flat.png");
+      _background-image: url("@{images-url}service-icons-color-flat.gif");
     }
   }
 
@@ -428,6 +433,15 @@
   .ds-share-aside-left,
   .ds-share-aside-right {
     width: 230px;
-
+    _position: absolute;
+    _bottom: auto;
+    _top: ~'expression(eval(document.documentElement.scrollTop+200))';
+  }
+  .ds-share-aside-left {
+    _left: ~'expression(eval(document.documentElement.scrollLeft-230))';
+  }
+  .ds-share-aside-right {
+    _right: auto;
+    _left: ~'expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft,10)||0)-(parseInt(this.currentStyle.marginRight,10)||0 - 230))';
   }
 }
