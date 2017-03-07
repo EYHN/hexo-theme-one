@@ -8,6 +8,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import SocialShare from 'material-ui/svg-icons/social/share';
+import TranslateIcon from 'material-ui/svg-icons/action/translate';
 import CardHeaderAcatar from '../cardHeaderAvatar/cardHeaderAvatar'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { connect } from 'react-redux'
@@ -33,29 +34,36 @@ interface PostCardProps {
   slug?: string
   cardMediaStyle?: React.CSSProperties,
   toc?: (tocArray: toc[]) => void
-  date?:React.ReactNode
+  date?: React.ReactNode
+  translate?: boolean
 }
 
 let Cstate: AppState;
 
-class PostCard extends React.Component<PostCardProps, undefined>{
+interface PostCardState {
+  translateContent:string
+}
+
+class PostCard extends React.Component<PostCardProps, PostCardState>{
   default_thumbnail = '';
 
-  renderContent() {
-    if (this.props.content) {
-      $("#postContext").html(this.props.content)
+  constructor(){
+    super();
+    this.state = {
+      translateContent:undefined
     }
   }
+
   componentWillMount() {
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
   }
   render() {
-    let {cover: setCover, slug = '', siteUrl = '',date, className = '', link, title, excerpt, cardMedia, cardMediaStyle, content} = this.props;
+    let {cover: setCover, slug = '', siteUrl = '', translate = false, date, className = '', link, title, excerpt, cardMedia, cardMediaStyle, content} = this.props;
     let { setCover: cover = this.default_thumbnail} = { setCover }
     cover = url.resolve(siteUrl, cover);
+    content = this.state.translateContent || content
     return (
       <Card className={style.PostCard + ' ' + className}>
-
         {
           (typeof cardMedia === 'undefined' || cardMedia) && (link || title || setCover) ?
             <CardMedia
@@ -77,7 +85,7 @@ class PostCard extends React.Component<PostCardProps, undefined>{
             : undefined
         }
         <CardText>
-          <Content content={content} className={style.content} markdown={true} excerpt={excerpt} toc={this.props.toc} >
+          <Content content={content} translate={translate} className={style.content} markdown={true} excerpt={excerpt} toc={this.props.toc} >
 
           </Content>
         </CardText>

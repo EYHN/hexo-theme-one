@@ -106,6 +106,7 @@ class Post extends React.Component<PostProps, PostState>{
               cardMediaStyle={{
                 height: "275px"
               }}
+              translate
               date={<FormattedDate value={new Date(post.date)} />}
               toc={this.toc.bind(this)}
               slug={post.slug} />
