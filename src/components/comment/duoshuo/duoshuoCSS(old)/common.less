@@ -1,0 +1,287 @@
+#ds-reset {
+  // 被复用多次，并可以被网站主简单修改的样式
+  .ds-highlight {
+    color: @highlight !important;
+  }
+  .ds-rounded {
+    .rounded(@border-radius);
+  }  
+  .ds-rounded-top {
+    -webkit-border-top-right-radius: @border-radius;
+     -webkit-border-top-left-radius: @border-radius;
+            border-top-right-radius: @border-radius;
+             border-top-left-radius: @border-radius;
+  }
+  .ds-rounded-bottom {
+    border-bottom-left-radius: @border-radius;
+    border-bottom-right-radius: @border-radius;
+    -webkit-border-bottom-left-radius: @border-radius;
+    -webkit-border-bottom-right-radius: @border-radius;
+  }
+  .ds-gradient-bg {
+    background: url("@{images-url}bg_sprites.png") 0 -60px repeat-x;
+  }
+  .ds-avatar {
+    box-shadow: 0 1px 1px rgba(255, 255, 255, .75);
+    position: relative;
+    .rounded(@border-radius);
+    background-color: #fff;
+    float: left;
+    //width: 50px;  通过里面的图片撑开来
+    //height: 50px; 通过里面的图片撑开来
+    img {
+      display: block;
+      width: @avatar-size;
+      height: @avatar-size;
+      max-width: none;    //  如果不设置会导致IE8下width为0
+      //max-height:100%;    //  for-compatible
+      box-shadow: 0 1px 3px rgba(0,0,0,.22);
+      .rounded(@border-radius);
+    }
+    .ds-service-icon {
+      display:block;
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+    }
+  }
+  img.ds-smiley {
+    margin:0;
+    padding:0;
+    display:inline;
+    border:none;  // for compatible http://blog.dnspod.cn/2013/01/yangtze-river-delta/dnspod1-2/
+  }  
+  .ds-icon {
+    vertical-align: middle;
+    display: inline-block;
+    overflow: hidden;
+    .spritesheet();
+  }
+  a .ds-icon {
+    opacity: 0.6;
+    .transition(opacity);
+  }
+  a:hover .ds-icon {
+    opacity: 1;
+  }
+  /* SNS icons */
+  .ds-service-list {
+    a {
+      vertical-align: middle;
+      padding-right: 3px;
+    }
+    li:hover a { color: @link-hover-color; }
+  }
+  /*
+  .ds-connected-sites {
+    display: inline-block;
+    width: 16px !important;
+    height: 16px !important;
+  }*/
+  .ds-service-icon, 
+  .ds-service-icon-grey {
+    width: 16px !important;
+    height: 16px !important;
+    line-height: 100px;
+    display: inline-block;
+    background: url("@{images-url}service-icons-color.png?v=2") no-repeat;
+    _background-image: url("@{images-url}service-icons-color.gif?v=2");
+    overflow: hidden;
+    //float: left;
+    //opacity: .8;
+  }
+  .ds-service-icon-grey {
+    //background-position-x: -16px;   // firefox doesn't support this property
+    background-image: url("@{images-url}service-icons-grey.png");
+    _background-image: url("@{images-url}service-icons-grey.gif");  // IE6 hack
+  }
+  .ds-service-link {
+    height: 16px !important;
+    line-height: 16px;
+    padding-left: 20px;
+    display: block;
+    background: url("@{images-url}service-icons-color.png?v=2") no-repeat;
+    _background-image: url("@{images-url}service-icons-color.gif?v=2");
+    overflow: hidden;
+  }
+  .ds-weibo {
+    background-position: 0 0;
+  }
+  .ds-renren {
+    background-position: 0 -32px;
+  }
+  .ds-qqt {
+    background-position: 0 -64px;
+  }
+  .ds-kaixin {
+    background-position: 0 -80px;
+  }
+  .ds-douban {
+    background-position: 0 -96px;
+  }
+  .ds-qzone {
+    background-position: 0 -128px;
+  }
+  .ds-duoshuo {
+    background-position: 0 -144px;
+  }
+  .ds-qq {
+    background-position: 0 -192px;
+  }
+  .ds-baidu {
+    background-position: 0 -208px;
+  }
+  .ds-google {
+    background-position: 0 -240px;
+  }
+  .ds-weixin {
+    background-position: 0 -272px;
+  }
+  .ds-wechat {
+    background-position: 0 -272px;
+  }
+}
+
+.ds-icons-32 {
+  a {
+    display: block;
+    cursor:pointer;
+    width: 32px !important;
+    height: 32px !important;
+    background: url("@{images-url}icons_large.png") no-repeat !important;
+    overflow: hidden;
+    text-indent:-9999px;
+
+    &.ds-weibo {
+      background-position: -37px 0 !important;
+    }
+    &.ds-qzone {
+      background-position: 0 0 !important;
+    }
+    &.ds-qqt {
+      background-position: -74px 0 !important;
+    }
+    &.ds-renren {
+      background-position: -148px 0 !important;
+    }
+    &.ds-kaixin {
+      background-position: -111px 0 !important;
+    }
+    &.ds-weixin {
+      background-position: -224px 0 !important;
+    }
+    &.ds-wechat {
+      background-position: -224px 0 !important;
+    }
+    &.ds-qq {
+      background-position: -488px 0 !important;
+    }
+    &.ds-douban {
+      background-position: -186px 0 !important;
+    }
+    &.ds-baidu {
+      background-position: -262px 0 !important;
+    }
+  }
+}
+
+#ds-reset #ds-ctx {  //  通用样式
+  padding: 0;
+  margin : 8px 0;
+  max-width:640px;
+  
+  .ds-ctx-entry {
+    padding: 6px;
+    margin: 0;
+    border-bottom: 1px solid #e6e6e6;
+    
+    .ds-ctx-head a {
+      color: lighten(@highlight, 15%);
+      &:hover {
+        color: @highlight;
+      }
+    }
+    .ds-avatar {
+      margin: 0;
+      width: @avatar-small-size;
+      height: @avatar-small-size;
+      img {
+        width: @avatar-small-size;
+        height: @avatar-small-size;
+        box-shadow: none;
+      }
+    }
+    .ds-ctx-body{
+      margin-left: 38px;
+    }    
+    .ds-ctx-head {
+      position : relative;
+      _zoom: 1;   // ie6 bug fix
+      line-height: 1em;
+      padding: 1px 0 0;
+      margin : 0 0 .25em;
+    }
+    .ds-ctx-nth{
+      color : @gray-lighter;
+      font-size: 12px;
+      position: absolute;
+      top:2px;
+      right:0;
+    }
+    .ds-time {
+      font-size: @font-size-small;
+      *font-size: 12px;   // ie6/7会把所有中文修正成12px，因此会出现字体大小不一样的问题。
+      margin-left: 8px;
+      color: @text-muted;
+      _zoom: 1;     //  ie6 hack 为了触发layout
+    }
+    .ds-ctx-content {
+      position : relative;
+      _zoom: 1;   // ie6 hack
+      padding: 0;
+      margin: 0;
+      overflow:hidden;
+      line-height:1.5em;
+    }
+    &:hover .ds-comment-actions {
+      display:block;
+    }
+  }
+  
+  .ds-comment-actions {  //  放到.ds-ctx-entry里面去会导致优先级过高reply-active的样式无法生效
+    bottom: 0;
+    right: 0;
+    line-height:18px;
+    position:absolute;
+    display:none;
+    *display:block;   // ie6/7下不支持a以外的标签的hover事件
+    
+    a {
+      margin: 0 0 0 6px;
+    }
+  }
+}
+
+#ds-reset.ds-touch #ds-ctx { // 触屏设备始终显示
+  .ds-ctx-entry .ds-comment-actions{
+    display:block;
+  }
+}
+
+/**
+*
+* 上下文样式
+*
+**/
+#ds-reset {
+  .ds-comment-body #ds-ctx { //  在评论列表中的样式
+    border-left: 3px solid @gray-lightest;
+    background-color: rgba(0,0,0,.03);
+  }
+  &.ds-no-opacity .ds-comment-body #ds-ctx {
+    background: @gray-background;
+  }
+  .ds-dialog-body #ds-ctx .ds-ctx-entry:hover .ds-comment-actions {
+    display:none;
+  }
+}

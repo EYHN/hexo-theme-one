@@ -35,3 +35,7 @@ export function getCategories(name?: string, href = apiHref) {
 export function getPost(name: string, href = apiHref) {
   return hexo.getPost(name,href);
 }
+
+export function getPage(name: string, href = apiHref) {
+  return hexo.getPage(name,href);
+}

@@ -11,6 +11,7 @@ import AppBar from 'material-ui/AppBar';
 import { Router, Route, hashHistory, IndexRoute, applyRouterMiddleware } from 'react-router';
 import Home from '../home/home'
 import Post from '../post/post';
+import Page from '../page/page';
 import * as zh from 'react-intl/locale-data/zh';
 import * as en from 'react-intl/locale-data/en';
 import { IntlProvider, addLocaleData } from 'react-intl'
@@ -21,7 +22,13 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import SearchX from '../search/search'
 import Footer from '../footer/footer'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 let useScroll = require('react-router-scroll/lib/useScroll');
+const MaterialIconseot = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.eot");
+const MaterialIconsttf = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.ttf");
+const MaterialIconswoff = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff");
+const MaterialIconswoff2 = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff2");
 addLocaleData(zh);
 addLocaleData(en);
 var style = require('./app.less')
@@ -69,7 +76,7 @@ export class App extends React.Component<AppProps, AppComponentState>{
   render() {
     let {color = {}, fullModel = false} = this.props;
     let {primaryColor, accentColor} = color;
-    let t = color2Theme(primaryColor, accentColor);
+    let t = color2Theme(primaryColor, accentColor,"light");
     t.fontFamily = '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
     let Theme = getMuiTheme(t);
     return (
@@ -80,6 +87,23 @@ export class App extends React.Component<AppProps, AppComponentState>{
           <div style={{
             fontFamily: Theme.fontFamily
           }} className={style.body}>
+            <style>
+              {
+                `
+                @font-face {
+                  font-family: 'Material Icons';
+                  font-style: normal;
+                  font-weight: 400;
+                  src: url(${MaterialIconseot}); /* For IE6-8 */
+                  src: local('Material Icons'),
+                      local('MaterialIcons-Regular'),
+                      url(${MaterialIconswoff2}) format('woff2'),
+                      url(${MaterialIconswoff}) format('woff'),
+                      url(${MaterialIconsttf}) format('truetype');
+                }
+                `
+              }
+            </style>
             <Menu onclickLeft={this.MenuToggle.bind(this)} RouterHistory={hashHistory}/>
             <Background />
             <Drawer
@@ -96,8 +120,8 @@ export class App extends React.Component<AppProps, AppComponentState>{
                 <ReactCSSTransitionGroup
                   component="div"
                   transitionName="route-page"
-                  transitionEnterTimeout={450}
-                  transitionLeaveTimeout={450}
+                  transitionEnterTimeout={200}
+                  transitionLeaveTimeout={200}
                   className={style.TransitionGroup}
                 >
                   {React.cloneElement(this.props.children, {
@@ -107,6 +131,9 @@ export class App extends React.Component<AppProps, AppComponentState>{
               </main>
             </div>
             <Footer />
+            <FloatingActionButton className={style.fixedFloatingButton}>
+              <MoreVertIcon />
+            </FloatingActionButton>
           </div>
         </MuiThemeProvider>
       </IntlProvider>
@@ -131,6 +158,7 @@ const Group = () => (
     <Route path="/" component={AppX}>
       <IndexRoute component={Home} />
       <Route path="/post/:slug" component={Post} />
+      <Route path="/page/:title" component={Page} />
       <Route path="/search" component={SearchX} />
     </Route>
   </Router>

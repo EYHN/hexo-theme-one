@@ -1,5 +1,10 @@
 import * as React from 'react';
 import * as MarkdownIt from 'markdown-it'
+import { googleTranslate } from '../../lib/translate';
+import IconButton from 'material-ui/IconButton';
+import TranslateIcon from 'material-ui/svg-icons/action/translate';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
 let style = require("./context.less");
 let markdownItTocAndAnchor = require('../../lib/markdown-it-toc-and-anchor/index.js').default;
 
@@ -17,10 +22,11 @@ interface contentProps {
   markdown?: boolean,
   content?: string,
   excerpt?: string,
+  translate?: boolean
   toc?: (tocArray: toc[]) => void
 }
 
-export function removeHTMLTag(str: String) {
+export function removeHTMLTag(str: string) {
   str = str.replace(/<\/?[^>]*>/g, '');
   str = str.replace(/[ | ]*\n/g, '\n');
   str = str.replace(/ /ig, '');
@@ -33,15 +39,26 @@ export interface toc {
   level: number
 }
 
-export default class Content extends React.Component<contentProps, undefined>{
+interface contentState {
+  content: string
+}
+
+export default class Content extends React.Component<contentProps, contentState>{
+  sourceText: string;
+  translated: boolean;
+  constructor() {
+    super();
+    this.state = {
+      content: ""
+    }
+  }
   excerpt() {
     let {excerpt: e = ""} = this.props
     return removeHTMLTag(e.toString());
   }
   putHTMLin() {
     if (this.props.content) {
-      let hasHTML = $(this.refs['body']).html();
-      if ($.trim(hasHTML) == "" || $.trim(hasHTML) == $.trim(this.props.excerpt)) {
+      if (this.state.content == "") {
         let html = this.props.content;
         if (this.props.markdown) {
           html = md.render(this.props.content, {
@@ -52,8 +69,32 @@ export default class Content extends React.Component<contentProps, undefined>{
             }
           })
         }
-        $(this.refs['body']).html(html);
+        this.sourceText = html;
+        this.setState({
+          content: html
+        })
       }
+    }
+  }
+  async translate(l:string) {
+    if (this.sourceText) {
+      let res = await googleTranslate("zh-CN", l, this.sourceText);
+      let content = JSON.parse("\"" + res.result + "\"") as string;
+      content = content.replace(/\/ /g, "/")
+      console.log(content)
+      this.setState({
+        content: content
+      })
+      this.translated = true
+    }
+  }
+  distranslate() {
+    if (this.translated) {
+      this.setState({
+        content: this.sourceText
+      })
+      this.translated = false
+      return false
     }
   }
   componentDidUpdate() {
@@ -63,12 +104,29 @@ export default class Content extends React.Component<contentProps, undefined>{
     this.putHTMLin();
   }
   render() {
-    let {id, className = ''} = this.props
+    let {id, className = '', translate} = this.props
+    let content = this.state.content;
+    if (!content || content == "") {
+      content = this.excerpt();
+    }
     return (
-      <div id={id} ref="body" className={className + " " + style.context}>
+      <div id={id}>
         {
-          this.excerpt()
+          translate ?
+            <IconMenu
+              iconButtonElement={<IconButton onClick={this.distranslate.bind(this)}><TranslateIcon /></IconButton>}
+              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+              targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+              maxHeight={272}
+              className={style.tools}
+            >
+              <MenuItem primaryText="English" onClick={this.translate.bind(this,"en")} />
+              <MenuItem primaryText="日本語" onClick={this.translate.bind(this,"ja")} />
+            </IconMenu>
+            : undefined
         }
+        <div ref="body" className={className + " " + style.context} dangerouslySetInnerHTML={{ __html: content }}>
+        </div>
       </div>
     )
   }

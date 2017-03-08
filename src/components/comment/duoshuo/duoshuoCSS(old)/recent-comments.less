@@ -1,0 +1,59 @@
+#ds-recent-comments {
+  li.ds-comment {
+    list-style-type: none; 
+    position : relative !important;
+    margin : 0 !important;
+    padding : 6px 0 !important;
+    _zoom: 1;  // 为了避免 IE6 在 padding 和 absolute 的 bug
+    border-top: 1px solid #DCDCDC;
+    word-wrap: break-word;
+    font-size: @font-size-base;
+    
+    a {
+      display: inline;  // for compatible, leiphone.com
+    }
+
+    div {
+      padding: 0;  // for compatible, kxt.fm
+      margin: 0;   // for compatible, kxt.fm 如果有了ds-reset就可以去掉
+    }
+
+    .ds-avatar {
+      position: absolute !important;
+      top: 6px !important;
+      left: 0 !important;
+      a {
+        display: block;
+      }
+    }
+
+    .ds-meta {
+      *margin-left: -15px;
+      _margin-left: 0px;
+    }
+    
+    .ds-time {
+      font-size: 10px;
+      color: @text-muted;
+      margin-left: 5px;
+    }
+    
+    .ds-thread-title {
+      margin: 0 0 4px 0;
+      line-height: 13px;
+      font-size: @font-size-small;
+      color: @link-color;
+      a {
+        font-size: @font-size-small;
+      }
+    }
+    
+    .ds-excerpt {
+      line-height: 18px;
+    }
+    
+    &.ds-show-avatars {
+      padding-left: 38px !important;
+    }
+  }
+}

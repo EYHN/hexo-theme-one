@@ -137,7 +137,9 @@ class search extends React.Component<searchProps, searchState>{
     })
   }
   componentDidMount() {
-    $("." + style.input + " input").focus()
+    setTimeout(function() {
+      $("." + style.input + " input").focus()
+    }, 1000);
   }
   getPostsNode() {
     let nodes = [];

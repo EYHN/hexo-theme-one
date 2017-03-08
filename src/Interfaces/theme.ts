@@ -1,21 +1,33 @@
+export interface DrawerIten {
+  title?: string
+  type?: string
+  name?: string
+  href?: string
+  slug?: string
+  initiallyOpen?: boolean
+  icon?: string
+  nested?: DrawerIten[]
+}
+
 export interface theme {
-  uiux?:{
+  uiux?: {
     slogan?: string | Array<string>,
     defaultPrimaryColor?: string | Array<string>
-    defaultAccentColor?:string | Array<string>
+    defaultAccentColor?: string | Array<string>
   },
-  head?:{
-    favicon?:string | Array<string>
+  head?: {
+    favicon?: string | Array<string>
   },
-  img?:{
+  img?: {
     avatar?: string | Array<string>,
     left_pic?: string | Array<string>,
-    right_pic?:string | Array<string>,
-    post_thumbnail?:string | Array<string>
+    right_pic?: string | Array<string>,
+    post_thumbnail?: string | Array<string>
   },
-  comment?:{
-    duoshuo?:{
+  comment?: {
+    duoshuo?: {
       shortName?: string
     }
-  }
+  },
+  Drawer?: DrawerIten[]
 }

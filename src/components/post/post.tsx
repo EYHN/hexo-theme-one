@@ -21,6 +21,7 @@ import FontIcon from 'material-ui/FontIcon';
 import { setNavTitle, fullModel } from '../../actions/nav';
 import Comment from '../comment/comment';
 import { Card } from 'material-ui/Card';
+import { FormattedDate } from 'react-intl';
 var style = require("./post.less");
 
 interface PostProps {
@@ -31,7 +32,6 @@ interface PostProps {
   defaultAccentColor?: string;
   params?: {
     slug?: string
-    toc?: string
   }
   setNavTitle?: (title: string) => void
   phone?: boolean
@@ -68,6 +68,14 @@ class Post extends React.Component<PostProps, PostState>{
     this.props.onChangeColor(this.props.defaultPrimaryColor, this.props.defaultAccentColor);
     this.props.fullModel(false)
   }
+  onloaded(post: postState) {
+    if (post.primarycolor || post.accentcolor)
+      this.props.onChangeColor(array_randS(post.primarycolor), array_randS(post.accentcolor));
+    if (post.thumbnail)
+      this.props.addBackGroundImg(url.resolve(this.props.siteUrl, array_randS(post.thumbnail) || this.default_thumbnail), "post-" + post.slug)
+    if (post.title)
+      this.props.setNavTitle(post.title)
+  }
   render() {
     let {postsList = new Map<string, postState>(), params = {}, phone = false, siteUrl = ""} = this.props
     let {slug} = params;
@@ -82,33 +90,31 @@ class Post extends React.Component<PostProps, PostState>{
       thumbnail = url.resolve(siteUrl, array_randS(post.thumbnail) || this.default_thumbnail);
       if (this.loaded == false) {
         this.loaded = true
-        if (post.primarycolor || post.accentcolor)
-          this.props.onChangeColor(array_randS(post.primarycolor), array_randS(post.accentcolor));
-        if (thumbnail)
-          this.props.addBackGroundImg(thumbnail, "post-" + slug)
-        if (post.title)
-          this.props.setNavTitle(post.title)
+        this.onloaded(post)
       }
     }
     return (
       <div className="Post">
         <Grid>
-          <div className={style.postCard}>
-          <PostCard
-            content={post.content}
-            cover={phone ? undefined : thumbnail}
-            cardMedia={!phone}
-            title={post.title}
-            cardMediaStyle={{
-              height: "275px"
-            }}
-            toc={this.toc.bind(this)}
-            slug={post.slug} />
-          <Card className={style.commentCard}>
-            {
-              (slug != '' && post.title) ? <Comment postID={slug} className={style.Comment} postTitle={post.title.toString()}></Comment> : undefined
-            }
-          </Card>
+          <div className={style.post}>
+            <PostCard
+              content={post.content}
+              className={style.PostCard}
+              cover={phone ? undefined : thumbnail}
+              cardMedia={!phone}
+              title={post.title}
+              cardMediaStyle={{
+                height: "275px"
+              }}
+              translate
+              date={<FormattedDate value={new Date(post.date)} />}
+              toc={this.toc.bind(this)}
+              slug={post.slug} />
+            <Card className={style.commentCard}>
+              {
+                (slug != '' && post.title) ? <Comment postID={slug} className={style.Comment} postTitle={post.title.toString()}></Comment> : undefined
+              }
+            </Card>
           </div>
           {
             phone ? undefined :
@@ -123,12 +129,12 @@ class Post extends React.Component<PostProps, PostState>{
 }
 
 const mapStateToProps = (state: AppState) => {
-  let { theme = {}, postList = new Map<string, postState>() } = state;
+  let { theme = {}, postsList = new Map<string, postState>() } = state;
   let { uiux = {} } = theme;
   let { defaultPrimaryColor = 'cyan', defaultAccentColor = 'pink'} = uiux
   Cstate = state
   return {
-    postsList: postList,
+    postsList: postsList,
     defaultPrimaryColor: array_randS(defaultPrimaryColor),
     defaultAccentColor: array_randS(defaultAccentColor),
     phone: state.windowSize.smaller.than.phone,

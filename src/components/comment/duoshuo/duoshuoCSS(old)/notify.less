@@ -1,0 +1,48 @@
+#ds-notify {
+  position: fixed;
+  *position: absolute;  //  ie6/ie7 hack
+  z-index: 9999;
+  max-width: 144px;
+  _width: 130px;  //  ie6 hack
+  display: block;
+  float: none;
+  padding: 8px 12px;
+  background-color: #fff;
+  .rounded(@border-radius-large);
+  box-shadow: 0 1px 1px rgba(0,0,0,.25);
+  border: @border-dark;
+
+  #ds-reset {
+    //font-size: @font-size-base; ds-reset中已经定义
+    line-height: 14px;
+    
+    a.ds-logo {
+      //text-align: left; ds-reset中已经定义
+      width: 18px;
+      height: 14px;
+      .spritesheet(0, -220px);
+      position: absolute;
+      display: block;
+      top:8px;
+      left:12px;
+    }
+    span.ds-unread-count {
+      font-weight: bold;
+      color: #e32;
+    }
+    ul.ds-notify-unread {
+      line-height: 150%;
+      display: inline-block;
+      margin: 0 0 0 22px;
+      //text-align: left; ds-reset中已经定义
+      padding: 0;
+      li {
+        //list-style: none outside none; ds-reset中已经定义
+        a {
+          color: @highlight;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

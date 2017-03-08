@@ -1,10 +1,11 @@
 @import "../../variable.less";
 .context {
+    color: rgba(0, 0, 0, .8);
     >* {
         padding: 0px @context-padding;
         margin-top: 0px;
         margin-bottom: @context-margin * 2;
-        @media (max-width: (@screen-sm-min + 1)) {
+        @media (max-width: (@screen-sm-min - 1)) {
             padding: 0px @context-padding-mobile;
         }
     }
@@ -81,13 +82,14 @@
     h4,
     h5,
     h6 {
+        color: rgba(0, 0, 0, .7);
         &:hover {
             .borderLeft(#888);
         }
         .borderLeft(transparent);
         padding-left: @context-padding - 3px;
         margin-top: 10px;
-        @media (max-width: (@screen-sm-min + 1)) {
+        @media (max-width: (@screen-sm-min - 1)) {
             padding-left: @context-padding-mobile - 3px;
         }
     }
@@ -142,4 +144,8 @@
     img {
         max-width: 35%;
     }
+}
+
+.tools {
+    float: right;
 }

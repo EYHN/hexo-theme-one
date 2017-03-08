@@ -15,3 +15,32 @@ img:
 
 uiux:
     slogan: "1"
+
+comment:
+    duoshuo:
+        shortName: "huaji-blog"
+
+Drawer:
+    -
+      title: 首页
+      type: sitelink
+      href: /
+      icon: home
+    -
+      title: hr
+      type: hr
+    -
+      title: 关于我
+      type: page
+      name: 关于我
+      icon: account_circle
+    -
+      title: Indox
+      initiallyOpen: true
+      icon: inbox
+      nested:
+        - 
+          title: Starred
+          type: link
+          href: "https://www.baidu.com/"
+          icon: search

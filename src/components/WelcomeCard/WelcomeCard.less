@@ -1,19 +1,56 @@
 @import "../../variable.less";
- 
-
 .WelcomeCard {
     composes: card from '../card/card.less';
     composes: card-with-img from '../card/card.less';
     width: e("calc(66.66% - 16px)");
 }
 
-// @media (max-width: @screen-sm-min) {
-//     .WelcomeCard {
-//         margin: 0px !important;
-//         width: 100% !important;
-//         border-radius: 0px !important;
-//     }
-// }
+@media (max-width: (@screen-sm-min - 1)) {
+    .WelcomeCard {
+        margin: 0px !important;
+        width: 100% !important;
+        border-radius: 0px !important;
+    }
+}
+
+.PhoneWelcomeCard {
+    composes: card from '../card/card.less';
+    margin: 0px !important;
+    width: 100% !important;
+    border-radius: 0px !important;
+}
+
+.phone {
+    width: 100% !important;
+    margin: 0px !important;
+    .PhoneWelcomeCard {
+        padding-top: 50px;
+        margin-top: -50px !important;
+        > div > div:first-child {
+            color: rgba(0, 0, 0, 0.65) !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            h4 {
+                font-size: 20px;
+                font-weight: 300;
+                margin: 17px 0px;
+            }
+        }
+    }
+}
+
+.phoneAvatar {
+    border-radius: 50% 50%;
+    width: 100px;
+    height: 100px;
+    margin: 0px auto;
+    border: 2px solid #fff;
+    display: block;
+    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+}
 
 .CardImage {
     composes: CardImage from '../card/card.less';

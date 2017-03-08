@@ -19,6 +19,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import CircularProgress from 'material-ui/CircularProgress';
 import { addBackGroundImg, setBackGroundImg } from '../../actions/background';
 import { setNavTitle, fullModel } from '../../actions/nav';
+import { FormattedDate } from 'react-intl';
 var style = require("./home.less");
 
 interface HomeProps {
@@ -32,6 +33,7 @@ interface HomeProps {
   siteUrl?:string
   author?:string
   title?:string,
+  phone?:boolean
   setNavTitle?: (title: string)=>void
   onChooseColor?: (primaryColor:string,accentColor:string) =>void;
   primaryColor?: string
@@ -47,11 +49,11 @@ interface HomeState {
 
 export class Home extends React.Component<HomeProps, HomeState>{
   componentDidMount(){
-    let {left_pic = '',siteUrl = ''} = this.props;
+    let {left_pic = '',siteUrl = '',title = ''} = this.props;
     this.props.setBackGroundImg(url.resolve(siteUrl,left_pic),"home")
     this.props.onChooseColor(this.props.primaryColor,this.props.accentColor);
     this.props.fullModel(false)
-    this.props.setNavTitle('');
+    this.props.setNavTitle(title);
   }
 
   constructor() {
@@ -60,7 +62,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
   }
 
   getPosts(): React.ReactNode {
-    let { posts = {} } = this.props;
+    let { posts = {}, siteUrl = '', author = '', title = '',avatar = '' } = this.props;
     if (typeof posts.total === 'undefined' && !this.props.loading) {
       this.props.updatePostsP();
     }
@@ -78,7 +80,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
           i += apiPageSize - 1;
         }
       } else {
-        res.push(<PostCard key={post.slug} title={post.title} excerpt={post.excerpt} cover={array_randS(post.thumbnail)} link={post.slug} />);
+        res.push(<PostCard key={post.slug} date={<FormattedDate value={new Date(post.date)}/>} authorAvatar={url.resolve(siteUrl,avatar)} authorName={author} title={post.title} excerpt={post.excerpt} cover={array_randS(post.thumbnail)} link={post.slug} />);
       }
     }
     return res;
@@ -95,7 +97,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
   }
 
   render() {
-    let {siteUrl = '',author = '',title = ''} = this.props;
+    let {siteUrl = '',author = '',title = '',phone=false} = this.props;
     let {left_pic = '',slogan = '',avatar = ''} = this.props;
     return (
       <div className="Home">
@@ -106,8 +108,11 @@ export class Home extends React.Component<HomeProps, HomeState>{
           username={author}
           coverImg={url.resolve(siteUrl,left_pic)}
           avatarImg={url.resolve(siteUrl,avatar)}
+          phone={phone}
         />
-        <LogoCard />
+        {
+          phone?undefined:<LogoCard />
+        }
         {this.getPosts()}
         <DisplayTrigger className={style.Loading} onDisplay={
           this.loadingMore.bind(this)
@@ -125,7 +130,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
 }
 
 const mapStateToProps = (state: AppState) => {
-  let { site = {}, posts = {}, theme = {} } = state;
+  let { site = {}, posts = {}, theme = {},windowSize } = state;
   let { siteUrl = '',author = '',title = '' } = site;
   let { img = {},uiux = {} } = theme;
   let { defaultPrimaryColor = 'cyan', defaultAccentColor = 'pink'} = uiux
@@ -134,6 +139,7 @@ const mapStateToProps = (state: AppState) => {
     author,
     title,
     posts,
+    phone: windowSize.smaller.than.phone ,
     loading: posts.loading, 
     avatar: array_randS(img.avatar),
     left_pic: array_randS(img.left_pic),

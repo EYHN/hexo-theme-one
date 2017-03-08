@@ -14,6 +14,13 @@
     transition: padding-top 1200ms cubic-bezier(.45,0,0,1) 0ms;
 }
 
+.fixedFloatingButton {
+    position: fixed;
+    bottom:20px;
+    right: 20px;
+    z-index: 1000;
+}
+
 .fullModel#container {
     padding-top: 64px;
 }
@@ -36,7 +43,7 @@
     .route-page-enter:not(.search) {
         opacity: 0;
         top: 0;
-        transition: all 450ms;
+        transition: all 200ms;
     }
     .route-page-enter.route-page-enter-active:not(.search) {
         opacity: 1;
@@ -46,11 +53,11 @@
         position: absolute;
         transform: translateY(0px);
         top: 0;
-        transition: all 450ms;
+        transition: all 200ms;
     }
     .route-page-leave.route-page-leave-active:not(.search) {
         opacity: 0;
-        transform: translateY(300px);
+        transform: translateY(20px);
     }
 }
 

@@ -6,6 +6,7 @@ import windowSize from './windowSize';
 import { combineReducers } from 'redux'
 import background from './background';
 import nav from './nav';
+import page from './page';
 
 var reducer;
 
@@ -13,8 +14,9 @@ export default reducer = combineReducers({
   theme,
   site,
   posts,
-  postList:post,
+  postsList:post,
   windowSize,
   background,
-  nav
+  nav,
+  pagesList:page
 });
