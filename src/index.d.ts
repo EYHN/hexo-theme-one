@@ -3,6 +3,7 @@ declare interface Window {
   duoshuoQuery:any
   webkitScrollbar:any
   decodeURIComponent:any
+  mdIt:any
 }
 
 declare function unescape(a:string):string

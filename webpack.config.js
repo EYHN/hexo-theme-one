@@ -38,7 +38,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.tsx?$/, loaders: ["react-hot", "awesome-typescript-loader?useBabel=true"] },
-            { test: /\.(css|less)$/, loader: 'style-loader!css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]!less-loader' },
+            { test: /\.(css|less)$/, loader: 'style-loader!css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]!postcss-loader!less-loader' },
             { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' },
             { test: /\.(ttf|otf|woff|woff2|eot)$/, loader: 'file-loader' },
             {

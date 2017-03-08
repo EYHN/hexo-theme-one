@@ -1575,7 +1575,7 @@
                         render: function (e) {
                             function s(e) {
                                 e.find('textarea').val(function () {
-                                    return marked ? marked(this.value).replace(/>\n/g, '>') : this.value
+                                    return window.mdIt ? window.mdIt.render(this.value).replace(/>\n/g, '>') : this.value
                                 }),
                                     e.data("submitting", !0),
                                     e.find(".ds-post-button").addClass("ds-waiting").html(z.posting)[0].disabled = !0

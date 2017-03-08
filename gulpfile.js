@@ -12,7 +12,7 @@ gulp.task('server', ['webpack-server'], function () {
 
 gulp.task('webpack', function () {
   return gulp.src('./src/main.tsx')
-    .pipe(webpackGulp(require('./webpack.config.js')))
+    .pipe(webpackGulp(require('./webpack.config.prod.js')))
     .pipe(gulp.dest('./dist'))
 }
 )
