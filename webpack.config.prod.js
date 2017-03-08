@@ -32,7 +32,6 @@ var HtmlWebpackConfig = {
 module.exports = {
     entry: [
         'babel-polyfill',
-        "webpack-hot-middleware/client",
         "./src/main.tsx"
     ],
     output: {
@@ -45,7 +44,6 @@ module.exports = {
 
     plugins: [
         new webpack.DefinePlugin(GLOBALS),
-        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin(HtmlWebpackConfig),
         new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
         new BundleAnalyzerPlugin()

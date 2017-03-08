@@ -40,22 +40,22 @@
 //     opacity: 0;
 // }
 :global {
-    .route-page-enter:not(.search) {
+    .route-page-enter:not(.pagefullModel) {
         opacity: 0;
         top: 0;
         transition: all 200ms;
     }
-    .route-page-enter.route-page-enter-active:not(.search) {
+    .route-page-enter.route-page-enter-active:not(.pagefullModel) {
         opacity: 1;
     }
-    .route-page-leave:not(.search) {
+    .route-page-leave:not(.pagefullModel) {
         opacity: 1;
         position: absolute;
         transform: translateY(0px);
         top: 0;
         transition: all 200ms;
     }
-    .route-page-leave.route-page-leave-active:not(.search) {
+    .route-page-leave.route-page-leave-active:not(.pagefullModel) {
         opacity: 0;
         transform: translateY(20px);
     }

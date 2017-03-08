@@ -21,6 +21,7 @@ import Background from '../background/background'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import SearchX from '../search/search'
+import Category from '../category/category'
 import Footer from '../footer/footer'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
@@ -160,6 +161,7 @@ const Group = () => (
       <Route path="/post/:slug" component={Post} />
       <Route path="/page/:title" component={Page} />
       <Route path="/search" component={SearchX} />
+      <Route path="/category/:name" component={Category} />
     </Route>
   </Router>
 )

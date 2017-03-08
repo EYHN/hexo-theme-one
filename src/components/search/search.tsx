@@ -165,7 +165,7 @@ class search extends React.Component<searchProps, searchState>{
 
   render() {
     return (
-      <div className="search">
+      <div className="search pagefullModel">
         <Paper className={style.inputCanve}
           style={{
             backgroundColor: this.props.muiTheme.palette.accent1Color
