@@ -10,7 +10,7 @@ window.mdIt = new MarkdownIt({
   linkify: true
 });
 
-$("body").append(`<script src="${js}" />`);
+$("body").append(`<script src="${js}"></script>`);
 
 interface DuoshuoProps {
     thread: string,
