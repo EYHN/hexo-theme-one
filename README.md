@@ -35,4 +35,4 @@ DEMO: https://eyhn.github.io/hexo-theme-one/
 | google translate | 勉强能用 | 格式会乱 issua: [#7](https://github.com/EYHN/hexo-theme-one/issues/7) |
 | ~~页脚~~ | ~~已完成~~ | |
 
-该主页深受 [hexo-theme-material](https://github.com/viosey/hexo-theme-material) 和 [hexo-theme-indigo](https://github.com/yscoder/hexo-theme-indigo) 的影响,感谢这2个主页的开发者们
+该主页深受 [hexo-theme-material](https://github.com/viosey/hexo-theme-material) 和 [hexo-theme-indigo](https://github.com/yscoder/hexo-theme-indigo) 的影响,感谢这2个主题的开发者们
