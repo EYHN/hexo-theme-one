@@ -1,5 +1,5 @@
 import { category as categoryI } from '../Interfaces/category';
-import { getCategoryAction } from '../actions/categorie';
+import { getCategoryAction } from '../actions/categories';
 export interface categoryState extends categoryI{
   loading?:boolean,
   error?:boolean

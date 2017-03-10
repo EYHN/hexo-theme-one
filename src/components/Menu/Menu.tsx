@@ -21,7 +21,6 @@ interface MenuProps {
   onclickLeft?: (e: any) => void
   title?: string,
   fullModel?:boolean,
-  RouterHistory:History,
   phone?:boolean
 }
 
@@ -87,14 +86,14 @@ class Menu extends React.Component<MenuProps, MenuStates>{
     $(window).unbind("scroll", this.scrollListener);
   }
   render() {
-    let {fullModel = false,RouterHistory,phone} = this.props
+    let {fullModel = false,phone} = this.props
     return (
       <div className={style.Menu + " " + (fullModel?"":this.state.outClassName)}
         style={{}}>
         <AppBar
-          className={(fullModel?"":this.state.className)}
+          className={style.appbar + " " + (fullModel?"":this.state.className)}
           onLeftIconButtonTouchTap={this.props.onclickLeft}
-          iconElementRight={<IconButton href={RouterHistory.createHref("/search")}><SearchIcon></SearchIcon></IconButton>}
+          iconElementRight={<IconButton href={router.hashHistory.createHref("/search")}><SearchIcon></SearchIcon></IconButton>}
           title={<span className={style.title}>{this.props.title || ""}</span>}
           titleStyle={{ fontSize: '22px' }}
         />

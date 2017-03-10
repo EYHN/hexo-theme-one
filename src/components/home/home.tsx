@@ -27,31 +27,31 @@ interface HomeProps {
   loading?: boolean;
   posts?: postsState;
   ajaxLoading?: boolean;
-  avatar?:string
-  left_pic?:string
-  slogan?:string
-  siteUrl?:string
-  author?:string
-  title?:string,
-  phone?:boolean
-  setNavTitle?: (title: string)=>void
-  onChooseColor?: (primaryColor:string,accentColor:string) =>void;
+  avatar?: string
+  left_pic?: string
+  slogan?: string
+  siteUrl?: string
+  author?: string
+  title?: string,
+  phone?: boolean
+  setNavTitle?: (title: string) => void
+  onChooseColor?: (primaryColor: string, accentColor: string) => void;
   primaryColor?: string
   accentColor?: string
-  updatePostsP?:(index?:number) => void
-  setBackGroundImg?:(backgroundImg: string,key:string) => void
-  fullModel?:(fullModelB: boolean)=>void
+  updatePostsP?: (index?: number) => void
+  setBackGroundImg?: (backgroundImg: string, key: string) => void
+  fullModel?: (fullModelB: boolean) => void
 }
 
 interface HomeState {
   pageNumber: number
 }
 
-export class Home extends React.Component<HomeProps, HomeState>{
-  componentDidMount(){
-    let {left_pic = '',siteUrl = '',title = ''} = this.props;
-    this.props.setBackGroundImg(url.resolve(siteUrl,left_pic),"home")
-    this.props.onChooseColor(this.props.primaryColor,this.props.accentColor);
+class Home extends React.Component<HomeProps, HomeState>{
+  componentDidMount() {
+    let {left_pic = '', siteUrl = '', title = ''} = this.props;
+    this.props.setBackGroundImg(url.resolve(siteUrl, left_pic), "home")
+    this.props.onChooseColor(this.props.primaryColor, this.props.accentColor);
     this.props.fullModel(false)
     this.props.setNavTitle(title);
   }
@@ -62,7 +62,7 @@ export class Home extends React.Component<HomeProps, HomeState>{
   }
 
   getPosts(): React.ReactNode {
-    let { posts = {}, siteUrl = '', author = '', title = '',avatar = '' } = this.props;
+    let { posts = {}, siteUrl = '', author = '', title = '', avatar = '' } = this.props;
     if (typeof posts.total === 'undefined' && !this.props.loading) {
       this.props.updatePostsP();
     }
@@ -80,7 +80,12 @@ export class Home extends React.Component<HomeProps, HomeState>{
           i += apiPageSize - 1;
         }
       } else {
-        res.push(<PostCard key={post.slug} date={<FormattedDate value={new Date(post.date)}/>} authorAvatar={url.resolve(siteUrl,avatar)} authorName={author} title={post.title} excerpt={post.excerpt} cover={array_randS(post.thumbnail)} link={post.slug} />);
+        res.push(<PostCard
+          post={post}
+          key={post.slug}
+          authorAvatar={url.resolve(siteUrl, avatar)}
+          authorName={author}
+          link={post.slug} />);
       }
     }
     return res;
@@ -97,50 +102,50 @@ export class Home extends React.Component<HomeProps, HomeState>{
   }
 
   render() {
-    let {siteUrl = '',author = '',title = '',phone=false} = this.props;
-    let {left_pic = '',slogan = '',avatar = ''} = this.props;
+    let {siteUrl = '', author = '', title = '', phone = false} = this.props;
+    let {left_pic = '', slogan = '', avatar = ''} = this.props;
     return (
       <div className="Home">
-      <Grid>
-        <WelcomeCard
-          title={title}
-          subtitle={slogan}
-          username={author}
-          coverImg={url.resolve(siteUrl,left_pic)}
-          avatarImg={url.resolve(siteUrl,avatar)}
-          phone={phone}
-        />
-        {
-          phone?undefined:<LogoCard />
-        }
-        {this.getPosts()}
-        <DisplayTrigger className={style.Loading} onDisplay={
-          this.loadingMore.bind(this)
-          }>
+        <Grid>
+          <WelcomeCard
+            title={title}
+            subtitle={slogan}
+            username={author}
+            coverImg={url.resolve(siteUrl, left_pic)}
+            avatarImg={url.resolve(siteUrl, avatar)}
+            phone={phone}
+          />
           {
-              this.props.loading ? <span style={{
-                color:this.props.muiTheme.cardText.textColor
-              }}><CircularProgress size={25} /><span className={style.loadingMore}> 加载更多...</span></span> : undefined
+            phone ? undefined : <LogoCard />
           }
-        </DisplayTrigger>
-      </Grid>
+          {this.getPosts()}
+          <DisplayTrigger className={style.Loading} onDisplay={
+            this.loadingMore.bind(this)
+          }>
+            {
+              this.props.loading ? <span style={{
+                color: this.props.muiTheme.cardText.textColor
+              }}><CircularProgress size={25} /><span className={style.loadingMore}> 加载更多...</span></span> : undefined
+            }
+          </DisplayTrigger>
+        </Grid>
       </div>
     )
   }
 }
 
 const mapStateToProps = (state: AppState) => {
-  let { site = {}, posts = {}, theme = {},windowSize } = state;
-  let { siteUrl = '',author = '',title = '' } = site;
-  let { img = {},uiux = {} } = theme;
+  let { site = {}, posts = {}, theme = {}, windowSize } = state;
+  let { siteUrl = '', author = '', title = '' } = site;
+  let { img = {}, uiux = {} } = theme;
   let { defaultPrimaryColor = 'cyan', defaultAccentColor = 'pink'} = uiux
   return {
     siteUrl,
     author,
     title,
     posts,
-    phone: windowSize.smaller.than.phone ,
-    loading: posts.loading, 
+    phone: windowSize.smaller.than.phone,
+    loading: posts.loading,
     avatar: array_randS(img.avatar),
     left_pic: array_randS(img.left_pic),
     slogan: array_randS(uiux.slogan),
@@ -151,26 +156,26 @@ const mapStateToProps = (state: AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
   return {
-    onChooseColor: (primaryColor:string,accentColor:string) => {
-      dispatch(changeColor(primaryColor,accentColor))
+    onChooseColor: (primaryColor: string, accentColor: string) => {
+      dispatch(changeColor(primaryColor, accentColor))
     },
-    updatePostsP:  (index?:number) => {
-      dispatch(updatePostsP(index) as any );
+    updatePostsP: (index?: number) => {
+      dispatch(updatePostsP(index) as any);
     },
-    setBackGroundImg: (backgroundImg: string,key:string) => {
-      dispatch(setBackGroundImg([{url:backgroundImg,key}]))
+    setBackGroundImg: (backgroundImg: string, key: string) => {
+      dispatch(setBackGroundImg([{ url: backgroundImg, key }]))
     },
-    setNavTitle: (title: string)=>{
+    setNavTitle: (title: string) => {
       dispatch(setNavTitle(title));
     },
-    fullModel:(fullModelB: boolean)=>{
+    fullModel: (fullModelB: boolean) => {
       dispatch(fullModel(fullModelB));
     }
   }
 }
 
-let HomeX = connect<AppState, HomeProps, HomeProps>(mapStateToProps,mapDispatchToProps)(Home as any)
+let HomeX = connect<AppState, HomeProps, HomeProps>(mapStateToProps, mapDispatchToProps)(Home as any)
 
-let HomeS =  muiThemeable()(HomeX);
+let HomeS = muiThemeable()(HomeX);
 
 export default HomeS

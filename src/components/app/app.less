@@ -14,6 +14,15 @@
     transition: padding-top 1200ms cubic-bezier(.45,0,0,1) 0ms;
 }
 
+:global(.pagefullModel) {
+    width: 100%;
+    animation: fadeIn 1s cubic-bezier(.64,.13,.08,1.01);
+    -webkit-animation: fadeIn 1s cubic-bezier(.64,.13,.08,1.01);
+    &:global(.route-page-leave) {
+      opacity: 0 !important;
+    }
+}
+
 .fixedFloatingButton {
     position: fixed;
     bottom:20px;

@@ -7,6 +7,8 @@ import { backgroundState } from './reducers/background';
 import { navState } from './reducers/nav';
 import { pageState } from './reducers/page';
 import { categoryState } from './reducers/category';
+import {categoriesState} from './reducers/categories';
+import { RouterState } from 'react-router-redux'
 
 interface AppState {
   theme?:themeState,
@@ -17,7 +19,9 @@ interface AppState {
   background?:backgroundState,
   nav?:navState,
   pagesList?:Map<string,pageState>
-  categoriesList?:Map<string,categoryState>
+  categoriesList?:Map<string,categoryState>,
+  categories?:categoriesState
+  routing?:RouterState
 }
 
 export default AppState;

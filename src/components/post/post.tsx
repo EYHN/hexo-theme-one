@@ -98,18 +98,15 @@ class Post extends React.Component<PostProps, PostState>{
         <Grid>
           <div className={style.post}>
             <PostCard
-              content={post.content}
+              post={post}
               className={style.PostCard}
-              cover={phone ? undefined : thumbnail}
               cardMedia={!phone}
-              title={post.title}
               cardMediaStyle={{
                 height: "275px"
               }}
               translate
-              date={<FormattedDate value={new Date(post.date)} />}
               toc={this.toc.bind(this)}
-              slug={post.slug} />
+               />
             <Card className={style.commentCard}>
               {
                 (slug != '' && post.title) ? <Comment postID={slug} className={style.Comment} postTitle={post.title.toString()}></Comment> : undefined

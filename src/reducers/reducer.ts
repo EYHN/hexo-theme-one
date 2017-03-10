@@ -8,6 +8,8 @@ import background from './background';
 import nav from './nav';
 import page from './page';
 import category from './category';
+import categories from './categories'
+import { routerReducer } from 'react-router-redux';
 
 var reducer;
 
@@ -20,5 +22,7 @@ export default reducer = combineReducers({
   background,
   nav,
   pagesList:page,
-  categoriesList:category
+  categoriesList:category,
+  categories,
+  routing: routerReducer
 });

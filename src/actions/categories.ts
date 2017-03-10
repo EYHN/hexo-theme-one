@@ -12,3 +12,15 @@ export const getCategory = (name:string,href?:string) => {
     name:name
   }
 }
+
+export interface getCategoriesListAction {
+  type: 'GET_CATEGORIESLIST'|'GET_CATEGORIESLIST_REQUEST'|'GET_CATEGORIESLIST_FAILURE',
+  result:categoriesItem[]
+}
+
+export const getCategoriesList = (href?:string) => {
+  return {
+    types:["GET_CATEGORIESLIST_REQUEST","GET_CATEGORIESLIST","GET_CATEGORIESLIST_FAILURE"],
+    promise:()=>getCategoriesX(undefined,href)
+  }
+}

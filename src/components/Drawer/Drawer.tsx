@@ -16,14 +16,19 @@ import { History } from "history"
 import AppState from '../../stateI';
 import { DrawerIten } from '../../Interfaces/theme';
 import FontIcon from 'material-ui/FontIcon';
+import { array_randS } from '../../lib/random';
+import { hashHistory } from 'react-router';
+const url = require('url');
 
 interface DrawerProps {
   open?: boolean
   onRequestChange?: (opening: boolean, reason: string) => void
   phone?: boolean
-  RouterHistory: History
   onTouchTap: () => void
   itemList?: DrawerIten[]
+  avatar?:string
+  siteUrl?:string
+  headerBg?:string
 }
 
 interface DrawerState {
@@ -38,7 +43,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
       case "sitelink":
         return <ListItem onTouchTap={this.props.onTouchTap}
           primaryText={item.title}
-          href={this.props.RouterHistory.createHref(item.href)}
+          href={hashHistory.createHref(item.href)}
           key={item.title + item.type}
           initiallyOpen={item.initiallyOpen}
           className={style.ListItem} leftIcon={icon}
@@ -59,7 +64,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
           className={style.ListItem}
           key={item.title + item.type}
           initiallyOpen={item.initiallyOpen}
-          href={this.props.RouterHistory.createHref("/page/" + item.name)}
+          href={hashHistory.createHref("/page/" + item.name)}
           leftIcon={icon}
           nestedItems={this.renderLists(item.nested)} />;
       default:
@@ -82,7 +87,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
     return res;
   }
   render() {
-    let {phone = false, RouterHistory} = this.props
+    let {phone = false , avatar="",siteUrl="",headerBg = ""} = this.props
     return (
       <MDDrawer
         open={this.props.open}
@@ -91,33 +96,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
         width={phone ? 250 : 300}
         className={style.Drawer}
       >
-        <SideHander className={style.sideHander}></SideHander>
-        {/*<ListItem onTouchTap={this.props.onTouchTap} href={RouterHistory.createHref("/")} className={style.ListItem} leftIcon={<HomeIcon color="" />}>首页</ListItem>
-        <Divider className={style.divider} />
-        <ListItem onTouchTap={this.props.onTouchTap} className={style.ListItem} leftIcon={<AccountCircleIcon color="" />}>关于我</ListItem>
-        <ListItem onTouchTap={this.props.onTouchTap} className={style.ListItem}
-          primaryText="Inbox"
-          leftIcon={<ContentInbox />}
-          initiallyOpen={true}
-          primaryTogglesNestedList={true}
-          nestedItems={[
-            <ListItem
-              onTouchTap={this.props.onTouchTap}
-              className={style.ListItem}
-              key={1}
-              primaryText="Starred"
-              leftIcon={<ActionGrade />}
-              nestedItems={[
-                <ListItem
-                  onTouchTap={this.props.onTouchTap}
-                  className={style.ListItem}
-                  key={1}
-                  primaryText="Starred"
-                  leftIcon={<ActionGrade />} />
-              ]}
-            />
-          ]}
-        />*/}
+        <SideHander className={style.sideHander} background={headerBg} Avatar={url.resolve(siteUrl,avatar)}></SideHander>
         {
           this.renderLists(this.props.itemList)
         }
@@ -128,9 +107,14 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
 }
 
 const mapStateToProps = (state: AppState) => {
+  let { img = {},uiux = {} } = state.theme;
+  let {siteUrl = ""} = state.site
   return {
     phone: state.windowSize.smaller.than.phone,
-    itemList: state.theme.Drawer
+    itemList: state.theme.Drawer,
+    avatar: array_randS(img.avatar),
+    headerBg: array_randS(img.drawerHeaderBg),
+    siteUrl: siteUrl
   }
 }
 
