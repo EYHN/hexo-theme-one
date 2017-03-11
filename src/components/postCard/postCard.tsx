@@ -81,7 +81,21 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
                 }
               </div>
             </CardMedia>
-            : undefined
+            : <CardText>
+              <div className={style.Header}>
+              <h1>
+                {
+                  title || ""
+                }
+              </h1>
+              <label>
+                {
+                  <FormattedDate value={new Date(post.date)}/>
+                }
+              </label>
+              <hr/>
+              </div>
+            </CardText>
         }
         <CardText>
           <Content content={content} translate={translate} className={style.content} markdown={true} excerpt={excerpt} toc={this.props.toc} >

@@ -71,8 +71,7 @@ class Post extends React.Component<PostProps, PostState>{
   onloaded(post: postState) {
     if (post.primarycolor || post.accentcolor)
       this.props.onChangeColor(array_randS(post.primarycolor), array_randS(post.accentcolor));
-    if (post.thumbnail)
-      this.props.addBackGroundImg(url.resolve(this.props.siteUrl, array_randS(post.thumbnail) || this.default_thumbnail), "post-" + post.slug)
+    this.props.addBackGroundImg(url.resolve(this.props.siteUrl, array_randS(post.thumbnail) || this.default_thumbnail), "post-" + post.slug)
     if (post.title)
       this.props.setNavTitle(post.title)
   }
