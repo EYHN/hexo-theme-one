@@ -16,25 +16,22 @@ import { Link } from 'react-router';
 import FlatButton from 'material-ui/FlatButton';
 import Content from '../context/context';
 import { toc } from '../context/context';
-import post from '../../reducers/post';
+import { postState } from '../../reducers/post';
+import { post } from '../../Interfaces/post'
+import { FormattedDate } from 'react-intl';
 var style = require('./postCard.less')
 
 interface PostCardProps {
   muiTheme?: __MaterialUI.Styles.MuiTheme,
-  title?: React.ReactNode
-  cover?: string,
-  excerpt?: string,
+  post:post
   authorName?: React.ReactNode,
   authorAvatar?: React.ReactNode,
   siteUrl?: string,
-  content?: string,
   link?: string,
   className?: string,
   cardMedia?: boolean
-  slug?: string
   cardMediaStyle?: React.CSSProperties,
   toc?: (tocArray: toc[]) => void
-  date?: React.ReactNode
   translate?: boolean
 }
 
@@ -58,7 +55,9 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
   }
   render() {
-    let {cover: setCover, slug = '', siteUrl = '', translate = false, date, className = '', link, title, excerpt, cardMedia, cardMediaStyle, content} = this.props;
+    let {siteUrl = '', translate = false, className = '', link, cardMedia, cardMediaStyle,post} = this.props;
+    let {thumbnail: setCover,title,excerpt,content,date,categories = [],tags = []} = post;
+    setCover = array_randS(setCover)
     let { setCover: cover = this.default_thumbnail} = { setCover }
     cover = url.resolve(siteUrl, cover);
     content = this.state.translateContent || content
@@ -67,7 +66,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
         {
           (typeof cardMedia === 'undefined' || cardMedia) && (link || title || setCover) ?
             <CardMedia
-              overlay={(title) ? <CardTitle title={title} subtitle={date} /> : undefined}
+              overlay={(title) ? <CardTitle title={title} subtitle={<FormattedDate value={new Date(post.date)}/>} /> : undefined}
               style={{
                 ...cardMediaStyle
               }}
@@ -82,7 +81,21 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
                 }
               </div>
             </CardMedia>
-            : undefined
+            : <CardText>
+              <div className={style.Header}>
+              <h1>
+                {
+                  title || ""
+                }
+              </h1>
+              <label>
+                {
+                  <FormattedDate value={new Date(post.date)}/>
+                }
+              </label>
+              <hr/>
+              </div>
+            </CardText>
         }
         <CardText>
           <Content content={content} translate={translate} className={style.content} markdown={true} excerpt={excerpt} toc={this.props.toc} >
@@ -96,18 +109,32 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
               avatar={this.props.authorAvatar} /> : undefined
           }
           <div className="flexFull"></div>
-          <CardText><a style={{
-            color: this.props.muiTheme.palette.accent1Color
-          }} href="#">分类</a> | <a style={{
-            color: this.props.muiTheme.palette.accent1Color
-          }} href="#">分类</a></CardText>
+          <CardText>
+            {
+            tags.map((value)=>{
+              return <Link style={{
+                    color: this.props.muiTheme.palette.accent1Color
+                  }} className={style.CardBottomLink} key={value.name} to={"/tag/" + value.name}>{value.name}</Link>
+            })
+          }
+          {
+            tags.length > 0 && categories.length > 0 ? '|' : ''
+          }
+          {
+            categories.map((value)=>{
+              return <Link style={{
+                    color: this.props.muiTheme.palette.accent1Color
+                  }} className={style.CardBottomLink} key={value.name} to={"/category/" + value.name}>{value.name}</Link>
+            })
+          }
+          </CardText>
         </div>
       </Card>
     )
   }
 }
 
-const mapStateToProps: (state: AppState) => PostCardProps = (state: AppState) => {
+const mapStateToProps = (state: AppState) => {
   try {
     var { theme: {img: {post_thumbnail}}, site: {siteUrl} } = state;
   } catch (e) {

@@ -7,6 +7,11 @@ import { combineReducers } from 'redux'
 import background from './background';
 import nav from './nav';
 import page from './page';
+import category from './category';
+import categories from './categories'
+import { routerReducer } from 'react-router-redux';
+import tags from './tags';
+import tag from './tag';
 
 var reducer;
 
@@ -18,5 +23,10 @@ export default reducer = combineReducers({
   windowSize,
   background,
   nav,
-  pagesList:page
+  pagesList:page,
+  categoriesList:category,
+  categories,
+  routing: routerReducer,
+  tags,
+  tagsList: tag
 });

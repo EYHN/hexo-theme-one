@@ -71,8 +71,7 @@ class Post extends React.Component<PostProps, PostState>{
   onloaded(post: postState) {
     if (post.primarycolor || post.accentcolor)
       this.props.onChangeColor(array_randS(post.primarycolor), array_randS(post.accentcolor));
-    if (post.thumbnail)
-      this.props.addBackGroundImg(url.resolve(this.props.siteUrl, array_randS(post.thumbnail) || this.default_thumbnail), "post-" + post.slug)
+    this.props.addBackGroundImg(url.resolve(this.props.siteUrl, array_randS(post.thumbnail) || this.default_thumbnail), "post-" + post.slug)
     if (post.title)
       this.props.setNavTitle(post.title)
   }
@@ -98,18 +97,15 @@ class Post extends React.Component<PostProps, PostState>{
         <Grid>
           <div className={style.post}>
             <PostCard
-              content={post.content}
+              post={post}
               className={style.PostCard}
-              cover={phone ? undefined : thumbnail}
               cardMedia={!phone}
-              title={post.title}
               cardMediaStyle={{
                 height: "275px"
               }}
               translate
-              date={<FormattedDate value={new Date(post.date)} />}
               toc={this.toc.bind(this)}
-              slug={post.slug} />
+               />
             <Card className={style.commentCard}>
               {
                 (slug != '' && post.title) ? <Comment postID={slug} className={style.Comment} postTitle={post.title.toString()}></Comment> : undefined

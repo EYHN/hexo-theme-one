@@ -84,6 +84,7 @@ class Page extends React.Component<PageProps, PageState>{
     let {pagesList = new Map<string, pageState>(), params = {}, phone = false, siteUrl = ""} = this.props
     let {title} = params;
     let page = pagesList.get(title);
+    let background
     let thumbnail;
     if (typeof page === "undefined") {
       page = page || {};
@@ -91,6 +92,7 @@ class Page extends React.Component<PageProps, PageState>{
         this.props.loadingPage(title);
       }
     } else {
+      thumbnail = page.background
       if (page.thumbnail) thumbnail = url.resolve(siteUrl, array_randS(page.thumbnail))  || this.default_thumbnail;
       if (this.loaded == false) {
         this.loaded = true
@@ -98,21 +100,23 @@ class Page extends React.Component<PageProps, PageState>{
       }
     }
     return (
-    <div className="Page">
+    <div className={"Page " + background?"":"pagefullModel"}>
       <Grid>
         <div className={style.page}>
           <PostCard
-            content={page.content}
+            post={{
+              content:page.content,
+              thumbnail:page.thumbnail,
+              title:page.title,
+              date:page.date
+            }}
             className={style.PageCard}
-            cover={phone ? undefined : thumbnail}
             cardMedia={!phone}
-            title={page.title}
             cardMediaStyle={{
               height: "275px"
             }}
-            date={<FormattedDate value={new Date(page.date)} />}
             toc={this.toc.bind(this)}
-            slug={page.title} />
+            />
           {
             page.comments ?
               <Card className={style.commentCard}>

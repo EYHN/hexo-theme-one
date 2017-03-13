@@ -8,7 +8,7 @@ import zh_CN from '../../locale/zh_CN';
 import en_US from '../../locale/en_US';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import { Router, Route, hashHistory, IndexRoute, applyRouterMiddleware } from 'react-router';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import Home from '../home/home'
 import Post from '../post/post';
 import Page from '../page/page';
@@ -21,10 +21,10 @@ import Background from '../background/background'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import SearchX from '../search/search'
+import Category from '../category/category'
 import Footer from '../footer/footer'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-let useScroll = require('react-router-scroll/lib/useScroll');
 const MaterialIconseot = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.eot");
 const MaterialIconsttf = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.ttf");
 const MaterialIconswoff = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff");
@@ -104,12 +104,11 @@ export class App extends React.Component<AppProps, AppComponentState>{
                 `
               }
             </style>
-            <Menu onclickLeft={this.MenuToggle.bind(this)} RouterHistory={hashHistory}/>
+            <Menu onclickLeft={this.MenuToggle.bind(this)} />
             <Background />
             <Drawer
               open={this.state.sidebar}
               onRequestChange={this.MenuToggle.bind(this)}
-              RouterHistory={hashHistory}
               onTouchTap={()=>{this.setState({
                 ...this.state,
                 sidebar: false
@@ -120,8 +119,8 @@ export class App extends React.Component<AppProps, AppComponentState>{
                 <ReactCSSTransitionGroup
                   component="div"
                   transitionName="route-page"
-                  transitionEnterTimeout={200}
-                  transitionLeaveTimeout={200}
+                  transitionEnterTimeout={450}
+                  transitionLeaveTimeout={450}
                   className={style.TransitionGroup}
                 >
                   {React.cloneElement(this.props.children, {
@@ -153,15 +152,4 @@ const mapStateToProps = (state: AppState) => {
 
 let AppX = connect(mapStateToProps)(App as any)
 
-const Group = () => (
-  <Router history={hashHistory} render={applyRouterMiddleware(useScroll())}>
-    <Route path="/" component={AppX}>
-      <IndexRoute component={Home} />
-      <Route path="/post/:slug" component={Post} />
-      <Route path="/page/:title" component={Page} />
-      <Route path="/search" component={SearchX} />
-    </Route>
-  </Router>
-)
-
-export default Group;
+export default AppX;

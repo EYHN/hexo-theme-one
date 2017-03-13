@@ -6,7 +6,7 @@ import { siteState } from './reducers/site';
 import AppState from './stateI';
 import { apiHref, getSite, getTheme } from './lib/api';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
-import { Router, Route, hashHistory } from 'react-router';
+import { Router, Route, hashHistory, applyRouterMiddleware, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -17,7 +17,17 @@ import createStore from './create-store';
 import App from './components/app/app'
 import reducer from './reducers/reducer'
 import { registerListener } from './windowSize';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import Home from './components/home/home';
+import Post from './components/post/post';
+import Page from './components/page/page';
+import SearchX from './components/search/search'
+import Category from './components/category/category'
+import { History } from "history"
+import Tag from './components/tag/tag';
+const useScroll = require('react-router-scroll/lib/useScroll');
 injectTapEventPlugin();
+const style = require('./main.less');
 
 if(/webkit/.test(navigator.userAgent.toLowerCase())){
   require('!style!css!less!./lib/webkit-scrollrail/style.less');
@@ -25,11 +35,20 @@ if(/webkit/.test(navigator.userAgent.toLowerCase())){
   new window.webkitScrollbar({autohide:true});
 }
 
-var style = require('./main.less');
+let history:History;
 
 const Main = ({store}: { store: Store<any> }) => (
   <Provider store={store}>
-    <App />
+    <Router history={history} render={applyRouterMiddleware(useScroll())}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Home} />
+        <Route path="/post/:slug" component={Post} />
+        <Route path="/page/:title" component={Page} />
+        <Route path="/search" component={SearchX} />
+        <Route path="/category/:name" component={Category} />
+        <Route path="/tag/:name" component={Tag} />
+      </Route>
+    </Router>
   </Provider>
 );
 
@@ -46,6 +65,7 @@ Promise.all([getSite() as siteState, getTheme()]).then((res) => {
   state.theme.color.primaryColor = array_randS(state.theme.uiux.defaultPrimaryColor);
   store = createStore(state)
   registerListener(store);
+  history = syncHistoryWithStore(hashHistory, store)
   ReactDOM.render(
     <Main store={store} />,
     document.getElementById('app')

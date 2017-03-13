@@ -16,39 +16,36 @@
     }
 }
 
-
-.card > * {
+.card>* {
     animation: fadeIn 0.5s;
 }
 
-
 @media (max-width:((@screen-sm-min + 1))) {
     .card {
-        margin: 8px 0px;
-        margin-left: auto;
-        margin-right: auto;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 }
 
 .CardBottom {
-    display:flex;
+    display: flex;
     height: 74px;
     align-items: center;
 }
 
 .card.card-with-img {
     >div {
-        display:flex;
+        display: flex;
         flex-direction: column;
         min-height: 400px;
         >div:first-child {
             flex-grow: 1;
-            display:flex;
+            display: flex;
             flex-direction: column;
             >div {
                 height: 100%;
                 flex-grow: 1;
-                display:flex;
+                display: flex;
                 flex-direction: column;
             }
         }

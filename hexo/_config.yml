@@ -12,6 +12,8 @@ img:
     post_thumbnail: 
       - "/img/random/marerial-2.png"
       - "/img/random/marerial-3.png"
+    drawerHeaderBg:
+      - "/img/daily_pic.min.jpg"
 
 uiux:
     slogan: "1"
