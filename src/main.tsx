@@ -24,6 +24,7 @@ import Page from './components/page/page';
 import SearchX from './components/search/search'
 import Category from './components/category/category'
 import { History } from "history"
+import Tag from './components/tag/tag';
 const useScroll = require('react-router-scroll/lib/useScroll');
 injectTapEventPlugin();
 const style = require('./main.less');
@@ -45,6 +46,7 @@ const Main = ({store}: { store: Store<any> }) => (
         <Route path="/page/:title" component={Page} />
         <Route path="/search" component={SearchX} />
         <Route path="/category/:name" component={Category} />
+        <Route path="/tag/:name" component={Tag} />
       </Route>
     </Router>
   </Provider>

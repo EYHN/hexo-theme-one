@@ -5,86 +5,86 @@ import { connect } from 'react-redux';
 import Grid from '../grid/grid';
 import { changeColor } from '../../actions/theme';
 import { fullModel, setNavTitle } from '../../actions/nav';
-import { categoryState } from '../../reducers/category';
+import { tagState } from '../../reducers/tag';
 import { post } from '../../Interfaces/post';
-import { getCategory, getCategoriesList } from '../../actions/categories';
+import { getTag, getTagsList } from '../../actions/tags';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { MuiTheme } from 'material-ui/styles';
 import { color } from '../../lib/themes';
 import PostCard from "../postCard/postCard"
 import Tab from '../Tab/Tab';
-import { categoriesState } from '../../reducers/categories';
+import { tagsState } from '../../reducers/tags';
 import { array_randS } from '../../lib/random';
 const url = require('url');
 
-const style = require("./category.less")
+const style = require("./tag.less")
 
-interface CategoryProps {
+interface TagProps {
   onChangeColor?: (primaryColor: string, accentColor: string) => void;
   fullModel?: (fullModelB: boolean) => void
-  categoriesList?: Map<string, categoryState>
+  tagsList?: Map<string, tagState>
   params?: {
     name?: string
   }
-  getCategoriesList?: () => void
-  loadCategory: (name: string) => void
+  getTagsList?: () => void
+  loadTag: (name: string) => void
   muiTheme?: MuiTheme
-  categories?: categoriesState
+  tags?: tagsState
   siteUrl?: string
   avatar?: string
   author?: string
   setNavTitle?: (title: string) => void
 }
 
-interface CategoryState {
+interface TagState {
 
 }
 
-class Category extends React.Component<CategoryProps, CategoryState>{
+class Tag extends React.Component<TagProps, TagState>{
   loaded: boolean;
   componentWillMount() {
     this.props.onChangeColor("blue", "pink");
     this.props.fullModel(true);
-    this.props.setNavTitle("分类")
+    this.props.setNavTitle("标签");
   }
-  onloaded(Category: CategoryState) {
+  onloaded(tag: TagState) {
   }
   render() {
-    let {categoriesList = new Map<string, categoryState>(), avatar = "", author = "", siteUrl = "", params = {}, categories} = this.props;
+    let {tagsList = new Map<string, tagState>(), avatar = "", author = "", siteUrl = "", params = {}, tags} = this.props;
     let {name} = params;
-    let Category = categoriesList.get(name);
-    let CategoriesNameList: string[] = [];
+    let tag = tagsList.get(name);
+    let TagsNameList: string[] = [];
     let postList: post[] = [];
-    if (typeof Category === "undefined" || typeof Category.postlist === "undefined") {
-      Category = Category || {};
-      if (!Category.loading) {
-        this.props.loadCategory(name);
+    if (typeof tag === "undefined" || typeof tag.postlist === "undefined") {
+      tag = tag || {};
+      if (!tag.loading) {
+        this.props.loadTag(name);
       }
     } else {
-      postList = Category.postlist
+      postList = tag.postlist
       if (this.loaded == false) {
         this.loaded = true
-        this.onloaded(Category)
+        this.onloaded(tag)
       }
     }
-    if (categories.categoriesList == undefined) {
-      if (!categories.loading) {
-        this.props.getCategoriesList();
+    if (tags.tagsList == undefined) {
+      if (!tags.loading) {
+        this.props.getTagsList();
       }
     } else {
-      CategoriesNameList = categories.categoriesList.map((value) => {
+      TagsNameList = tags.tagsList.map((value) => {
         return value.name
       })
     }
     return (
-      <div className="Category pagefullModel">
-        <div className={style.categoryNameBox} style={{
+      <div className="Tag pagefullModel">
+        <div className={style.tagNameBox} style={{
           backgroundColor: this.props.muiTheme.appBar.color,
           color: this.props.muiTheme.palette.alternateTextColor
         }}>
           <Grid>
             <h1>{name}</h1>
-            <Tab NameList={CategoriesNameList} value={name} link={(name)=>"/category/"+name} />
+            <Tab NameList={TagsNameList} value={name} link={(name)=>"/tag/" + name} />
           </Grid>
         </div>
         <Grid>
@@ -109,8 +109,8 @@ const mapStateToProps = (state: AppState) => {
   return {
     avatar: array_randS(img.avatar),
     siteUrl: state.site.siteUrl,
-    categoriesList: state.categoriesList,
-    categories: state.categories,
+    tagsList: state.tagsList,
+    tags: state.tags,
     author: state.site.author
   }
 }
@@ -123,11 +123,11 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     fullModel: (fullModelB: boolean) => {
       dispatch(fullModel(fullModelB));
     },
-    loadCategory: (name: string) => {
-      dispatch(getCategory(name) as any);
+    loadTag: (name: string) => {
+      dispatch(getTag(name) as any);
     },
-    getCategoriesList: () => {
-      dispatch(getCategoriesList() as any);
+    getTagsList: () => {
+      dispatch(getTagsList() as any);
     },
     setNavTitle: (title: string) => {
       dispatch(setNavTitle(title));
@@ -135,8 +135,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   }
 }
 
-const CategoryX = connect<AppState, CategoryProps, CategoryProps>(mapStateToProps, mapDispatchToProps)(Category)
+const TagX = connect<AppState, TagProps, TagProps>(mapStateToProps, mapDispatchToProps)(Tag)
 
-const CategoryS = muiThemeable()(CategoryX);
+const TagS = muiThemeable()(TagX);
 
-export default CategoryS;
+export default TagS;

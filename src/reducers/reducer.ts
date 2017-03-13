@@ -10,6 +10,8 @@ import page from './page';
 import category from './category';
 import categories from './categories'
 import { routerReducer } from 'react-router-redux';
+import tags from './tags';
+import tag from './tag';
 
 var reducer;
 
@@ -24,5 +26,7 @@ export default reducer = combineReducers({
   pagesList:page,
   categoriesList:category,
   categories,
-  routing: routerReducer
+  routing: routerReducer,
+  tags,
+  tagsList: tag
 });

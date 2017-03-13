@@ -1,9 +1,10 @@
 import { getCategories as getCategoriesX } from '../lib/api';
 import { categoriesItem } from '../Interfaces/categories';
+import { category } from '../Interfaces/category';
 export interface getCategoryAction {
   type: 'GET_CATEGORY'|'GET_CATEGORY_REQUEST'|'GET_CATEGORY_FAILURE',
   name:string
-  result:categoriesItem
+  result:category
 }
 export const getCategory = (name:string,href?:string) => {
   return {
