@@ -56,7 +56,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
   }
   render() {
     let {siteUrl = '', translate = false, className = '', link, cardMedia, cardMediaStyle,post} = this.props;
-    let {thumbnail: setCover,title,excerpt,content,date,categories = []} = post;
+    let {thumbnail: setCover,title,excerpt,content,date,categories = [],tags = []} = post;
     setCover = array_randS(setCover)
     let { setCover: cover = this.default_thumbnail} = { setCover }
     cover = url.resolve(siteUrl, cover);
@@ -109,9 +109,17 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
               avatar={this.props.authorAvatar} /> : undefined
           }
           <div className="flexFull"></div>
-          <CardText><a style={{
-            color: this.props.muiTheme.palette.accent1Color
-          }} href="#">分类</a> | 
+          <CardText>
+            {
+            tags.map((value)=>{
+              return <Link style={{
+                    color: this.props.muiTheme.palette.accent1Color
+                  }} className={style.CardBottomLink} key={value.name} to={"/tag/" + value.name}>{value.name}</Link>
+            })
+          }
+          {
+            tags.length > 0 && categories.length > 0 ? '|' : ''
+          }
           {
             categories.map((value)=>{
               return <Link style={{
