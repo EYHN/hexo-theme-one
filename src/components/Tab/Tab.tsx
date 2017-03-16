@@ -1,6 +1,6 @@
+import routerHistory from '../../lib/History';
 import * as React from 'react';
 import { Tabs, Tab as Tabx } from 'material-ui/Tabs';
-import { hashHistory } from 'react-router';
 const style = require("./Tab.less")
 
 interface TabProps extends React.HTMLProps<HTMLDivElement> {
@@ -20,7 +20,7 @@ export default class Tab extends React.Component<TabProps, TabState>{
       return <Tabx label={value} key={value} value={value} className={style.tab} onActive={()=>{
           if(typeof this.props.link === "function"){
             console.log(this.props.link(value))
-            hashHistory.push(this.props.link(value));
+            routerHistory.push(this.props.link(value));
           }
         }}></Tabx>
     })

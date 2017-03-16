@@ -1,3 +1,4 @@
+import routerHistory from './lib/History';
 import { array_randS } from './lib/random';
 import { darkBlack, grey600 } from 'material-ui/styles/colors';
 import { MuiTheme } from 'material-ui/styles';
@@ -6,7 +7,7 @@ import { siteState } from './reducers/site';
 import AppState from './stateI';
 import { apiHref, getSite, getTheme } from './lib/api';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
-import { Router, Route, hashHistory, applyRouterMiddleware, IndexRoute } from 'react-router';
+import { Router, Route, applyRouterMiddleware, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -45,8 +46,8 @@ const Main = ({store}: { store: Store<any> }) => (
         <Route path="/post/:slug" component={Post} />
         <Route path="/page/:title" component={Page} />
         <Route path="/search" component={SearchX} />
-        <Route path="/category/:name" component={Category} />
-        <Route path="/tag/:name" component={Tag} />
+        <Route path="/categories/:name" component={Category} />
+        <Route path="/tags/:name" component={Tag} />
       </Route>
     </Router>
   </Provider>
@@ -57,6 +58,7 @@ let store: Store<AppState>;
 Promise.all([getSite() as siteState, getTheme()]).then((res) => {
   let u = url.parse(apiHref);
   res[0].siteUrl = u.protocol + '//' + u.host;
+  console.log(res[0].siteUrl);
   let state:AppState = { site: res[0], theme: {
     ...res[1]
   }};
@@ -65,7 +67,7 @@ Promise.all([getSite() as siteState, getTheme()]).then((res) => {
   state.theme.color.primaryColor = array_randS(state.theme.uiux.defaultPrimaryColor);
   store = createStore(state)
   registerListener(store);
-  history = syncHistoryWithStore(hashHistory, store)
+  history = syncHistoryWithStore(routerHistory, store)
   ReactDOM.render(
     <Main store={store} />,
     document.getElementById('app')

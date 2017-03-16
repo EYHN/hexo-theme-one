@@ -3,6 +3,9 @@ var webpack = require('webpack');
 var webpackGulp = require('gulp-webpack');
 var rename = require("gulp-rename");
 var webpackMiddleware = require("webpack-dev-middleware");
+var CSON = require('cson');
+var path = require('path')
+var buildConfig = CSON.parseCSONFile(path.resolve(__dirname,'./build.cson'))
 
 gulp.task('build', ['webpack'], function () {
 });
@@ -24,7 +27,8 @@ gulp.task('webpack-server', function () {
     var compiler = webpack(require('./webpack.config.js'));
     app.use(webpackMiddleware(compiler, {
       publicPath: "/",
-      noInfo: true
+      noInfo: true,
+
     }));
     app.use(require('webpack-hot-middleware')(compiler));
 
@@ -39,10 +43,13 @@ gulp.task('webpack-server', function () {
 }
 )
 
-gulp.task('buildHexo', function () {
-  gulp.src('./dist/**/*')
+gulp.task('copysource', function () {
+  return gulp.src('./dist/**/*')
     .pipe(gulp.dest('./hexo/source'));
-  gulp.src('./dist/index.html')
+})
+
+gulp.task('buildHexo', ['copysource'], function () {
+  return gulp.src('./dist/index.html')
     .pipe(rename(function (path) {
       path.basename = "layout";
       path.extname = ".ejs";
@@ -55,10 +62,10 @@ gulp.task('buildHexo', function () {
     .pipe(gulp.dest('./hexo/layout'));
 })
 
-gulp.task('copyHexo', function () {
-  gulp.src('./hexo/**/*')
-    .pipe(gulp.dest('C:/Users/AREA/Documents/Project/HexoBlogKit - 副本/themes/design'));
+gulp.task('copyHexo', ['buildHexo'], function () {
+  return gulp.src('./hexo/**/*')
+    .pipe(gulp.dest(buildConfig.hexoThemePath));
 })
 
-gulp.task('hexo', ['buildHexo', 'copyHexo'], function () {
+gulp.task('hexo', ['copyHexo'], function () {
 })

@@ -85,7 +85,7 @@ class Home extends React.Component<HomeProps, HomeState>{
           key={post.slug}
           authorAvatar={url.resolve(siteUrl, avatar)}
           authorName={author}
-          link={post.slug} />);
+          link={"/post/" + post.slug + "/"} />);
       }
     }
     return res;

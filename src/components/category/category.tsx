@@ -95,7 +95,7 @@ class Category extends React.Component<CategoryProps, CategoryState>{
                 key={value.slug}
                 authorAvatar={url.resolve(siteUrl, avatar)}
                 authorName={author}
-                link={value.slug} />
+                link={"/post/" + value.slug + "/"} />
             })
           }
         </Grid>

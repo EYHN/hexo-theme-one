@@ -77,7 +77,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
               >
                 {
                   link ?
-                    <Link to={"/post/" + link} className={style.Link}></Link> : undefined
+                    <Link to={link} className={style.Link}></Link> : undefined
                 }
               </div>
             </CardMedia>
@@ -114,7 +114,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
             tags.map((value)=>{
               return <Link style={{
                     color: this.props.muiTheme.palette.accent1Color
-                  }} className={style.CardBottomLink} key={value.name} to={"/tag/" + value.name}>{value.name}</Link>
+                  }} className={style.CardBottomLink} key={value.name} to={"/tags/" + value.name + "/"}>{value.name}</Link>
             })
           }
           {
@@ -124,7 +124,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
             categories.map((value)=>{
               return <Link style={{
                     color: this.props.muiTheme.palette.accent1Color
-                  }} className={style.CardBottomLink} key={value.name} to={"/category/" + value.name}>{value.name}</Link>
+                  }} className={style.CardBottomLink} key={value.name} to={"/categories/" + value.name + "/"}>{value.name}</Link>
             })
           }
           </CardText>

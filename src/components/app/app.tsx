@@ -8,7 +8,6 @@ import zh_CN from '../../locale/zh_CN';
 import en_US from '../../locale/en_US';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import Home from '../home/home'
 import Post from '../post/post';
 import Page from '../page/page';
@@ -29,6 +28,7 @@ const MaterialIconseot = require("../../../node_modules/material-design-icons/ic
 const MaterialIconsttf = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.ttf");
 const MaterialIconswoff = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff");
 const MaterialIconswoff2 = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff2");
+const url = require('url');
 addLocaleData(zh);
 addLocaleData(en);
 var style = require('./app.less')
@@ -94,12 +94,12 @@ export class App extends React.Component<AppProps, AppComponentState>{
                   font-family: 'Material Icons';
                   font-style: normal;
                   font-weight: 400;
-                  src: url(${MaterialIconseot}); /* For IE6-8 */
+                  src: url(${url.resolve("/",MaterialIconseot)}); /* For IE6-8 */
                   src: local('Material Icons'),
                       local('MaterialIcons-Regular'),
-                      url(${MaterialIconswoff2}) format('woff2'),
-                      url(${MaterialIconswoff}) format('woff'),
-                      url(${MaterialIconsttf}) format('truetype');
+                      url(${url.resolve("/",MaterialIconswoff2)}) format('woff2'),
+                      url(${url.resolve("/",MaterialIconswoff)}) format('woff'),
+                      url(${url.resolve("/",MaterialIconsttf)}) format('truetype');
                 }
                 `
               }
@@ -130,9 +130,9 @@ export class App extends React.Component<AppProps, AppComponentState>{
               </main>
             </div>
             <Footer />
-            <FloatingActionButton className={style.fixedFloatingButton}>
+            {/*<FloatingActionButton className={style.fixedFloatingButton}>
               <MoreVertIcon />
-            </FloatingActionButton>
+            </FloatingActionButton>*/}
           </div>
         </MuiThemeProvider>
       </IntlProvider>
