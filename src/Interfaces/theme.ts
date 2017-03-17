@@ -1,4 +1,4 @@
-export interface DrawerIten {
+export interface DrawerItemI {
   title?: string
   type?: string
   name?: string
@@ -6,7 +6,22 @@ export interface DrawerIten {
   slug?: string
   initiallyOpen?: boolean
   icon?: string
-  nested?: DrawerIten[]
+  nested?: DrawerItemI[]
+}
+
+export interface MenuItemI {
+  title?: string
+  type?: string
+  name?: string
+  href?: string
+  slug?: string
+  icon?: string
+  nested?: MenuItemI[]
+}
+
+export interface barMenu {
+  items: MenuItemI[],
+  icon?: string
 }
 
 export interface theme {
@@ -30,5 +45,6 @@ export interface theme {
       shortName?: string
     }
   },
-  Drawer?: DrawerIten[]
+  Drawer?: DrawerItemI[],
+  homeToolBar?:barMenu[]
 }

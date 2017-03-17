@@ -41,7 +41,6 @@ interface HomeProps {
   updatePostsP?: (index?: number) => void
   setBackGroundImg?: (backgroundImg: string, key: string) => void
   fullModel?: (fullModelB: boolean) => void
-  right_pic?: string
 }
 
 interface HomeState {
@@ -104,8 +103,7 @@ class Home extends React.Component<HomeProps, HomeState>{
 
   render() {
     let {siteUrl = '', author = '', title = '', phone = false} = this.props;
-    let {left_pic = '', slogan = '', avatar = '',right_pic = ''} = this.props;
-    right_pic = url.resolve(siteUrl, right_pic);
+    let {left_pic = '', slogan = '', avatar = ''} = this.props;
     return (
       <div className="Home">
         <Grid>
@@ -118,7 +116,7 @@ class Home extends React.Component<HomeProps, HomeState>{
             phone={phone}
           />
           {
-            phone ? undefined : <LogoCard img={right_pic}  />
+            phone ? undefined : <LogoCard />
           }
           {this.getPosts()}
           <DisplayTrigger className={style.Loading} onDisplay={
@@ -150,7 +148,6 @@ const mapStateToProps = (state: AppState) => {
     loading: posts.loading,
     avatar: array_randS(img.avatar),
     left_pic: array_randS(img.left_pic),
-    right_pic: array_randS(img.right_pic),
     slogan: array_randS(uiux.slogan),
     primaryColor: array_randS(defaultPrimaryColor),
     accentColor: array_randS(defaultAccentColor)
