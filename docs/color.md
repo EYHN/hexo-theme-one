@@ -4,11 +4,11 @@
 
 ## 支持颜色
 
-* <span style="color:#F44336">red</span> ![](https://raw.githubusercontent.com/EYHN/hexo-theme-one/dev/docs/img/red.svg)
-* <span style="color:#00BCD4">cyan</span> ![](https://raw.githubusercontent.com/EYHN/hexo-theme-one/dev/docs/img/cyan.svg)
-* <span style="color:#E91E63">pink</span>  ![](https://raw.githubusercontent.com/EYHN/hexo-theme-one/dev/docs/img/pink.svg)
-* <span style="color:#2196F3">blue</span> ![](https://raw.githubusercontent.com/EYHN/hexo-theme-one/dev/docs/img/blue.svg)
-* <span style="color:#03A9F4">lightBlue</span> ![](https://raw.githubusercontent.com/EYHN/hexo-theme-one/dev/docs/img/lightBlue.svg)
-* <span style="color:#f1f3f4,background-color:#000">white</span> ![](https://raw.githubusercontent.com/EYHN/hexo-theme-one/dev/docs/img/white.svg)
+* <span style="color:#F44336">red</span> ![](https://img.shields.io/badge/color-red-F44336.svg)
+* <span style="color:#00BCD4">cyan</span> ![](https://img.shields.io/badge/color-cyan-00BCD4.svg)
+* <span style="color:#E91E63">pink</span>  ![](https://img.shields.io/badge/color-pink-E91E63.svg)
+* <span style="color:#2196F3">blue</span> ![](https://img.shields.io/badge/color-blue-2196F3.svg)
+* <span style="color:#03A9F4">lightBlue</span> ![](https://img.shields.io/badge/color-lightBlue-03A9F4.svg)
+* <span style="color:#f1f3f4,background-color:#000">white</span> ![](https://img.shields.io/badge/color-white-f1f3f4.svg)
 
 [回到首页](./README.md)
