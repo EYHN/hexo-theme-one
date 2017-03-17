@@ -34,4 +34,6 @@ date: 2013/7/13 20:46:25
 * primarycolor: 支持数组 文章主色
 * accentcolor: 支持数组 文章强调色
 
+[下一篇  页面 Front-matter](./Page-Front-matter.md)
+
 [回到首页](./README.md)

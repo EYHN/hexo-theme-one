@@ -7,8 +7,8 @@
 ## 创建新博客（强烈建议创建新的hexo）
 
 ```
-$ hexo init <folder>
-$ cd <folder>
+$ hexo init <hexo-folder>
+$ cd <hexo-folder>
 $ npm install
 ```
 
@@ -16,13 +16,15 @@ $ npm install
 > 
 > 在hexo目录中运行
 > ```
-> npm i lodash.pic --save
+> npm i lodash.pick --save
 > ```
 
 ## clone 本主题
 
 ```
 $ git clone https://github.com/EYHN/hexo-theme-one.git
+$ cd hexo-theme-one
+$ npm i
 ```
 
 ## 安装
@@ -36,7 +38,9 @@ $ git clone https://github.com/EYHN/hexo-theme-one.git
 运行
 
 ```
-$ gulp hexo
+$ npm run hexo
 ```
+
+[下一篇 基本设置](./setting.md)
 
 [回到首页](./README.md)

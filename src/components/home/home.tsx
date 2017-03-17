@@ -118,7 +118,7 @@ class Home extends React.Component<HomeProps, HomeState>{
             phone={phone}
           />
           {
-            phone ? undefined : <LogoCard img={right_pic}  />
+            phone ? undefined : <LogoCard img={right_pic} title={title}  />
           }
           {this.getPosts()}
           <DisplayTrigger className={style.Loading} onDisplay={

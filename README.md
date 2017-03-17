@@ -1,9 +1,10 @@
 # hexo-theme-one
 
-
 [![Author](https://img.shields.io/badge/author-EYHN-blue.svg?style=flat-square)](https://delusion.coding.me)
 [![QQ](https://img.shields.io/badge/QQ-1106996185-blue.svg?style=flat-square)](http://wpa.qq.com/msgrd?v=3&uin=&site=qq&menu=yes)
 [![Email](https://img.shields.io/badge/Emali%20me-cneyhn@gmail.com-green.svg?style=flat-square)]()
+
+[文档](./docs/README.md)
 
 使用 React 制作的 material design 风格的 hexo 主题。
 
@@ -17,7 +18,7 @@ DEMO: https://eyhn.github.io/hexo-theme-one/
 
 | 名称          |           进展         |      详情       |
 |:------------- |:--------------:| -------------------:|
-| 移动版首页 | 需重新设计 |  | 
+| ~~移动版首页~~ | ~~已完成~~ |  | 
 | 中文搜索 | 开发中 | 需要后端生成关键字 或 改为正则匹配 | 
 | 404 Page | 尚未开始 |  |
 | Drawer | 开发中 | 配置文件待开发|

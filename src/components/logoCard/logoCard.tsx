@@ -8,12 +8,13 @@ import SocialShare from 'material-ui/svg-icons/social/share';
 var style = require('./logoCard.less')
 
 interface LogoCardProps {
-  img: string
+  img: string,
+  title: string
 }
 
 export default class LogoCard extends React.Component<LogoCardProps, undefined>{
   render() {
-    let {img = ""} = this.props
+    let {img = "",title = ""} = this.props
     return (
       <Card className={style.LogoCard}>
           <CardMedia>
@@ -25,7 +26,9 @@ export default class LogoCard extends React.Component<LogoCardProps, undefined>{
           </CardMedia>
           <div className={style.CardBottom}>
             <CardText>
-              幻想帖
+              {
+                title
+              }
             </CardText>
             <div className="flexFull"></div>
             <IconMenu

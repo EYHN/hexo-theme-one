@@ -36,4 +36,6 @@ date: 2013/7/13 20:46:25
 * toc: 开启toc导航 默认为 true
 * html: 跳过markdown解析 默认为 false
 
+[下一篇 颜色](./color.md)
+
 [回到首页](./README.md)
