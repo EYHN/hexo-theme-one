@@ -33,3 +33,5 @@ date: 2013/7/13 20:46:25
 * thumbnail: 支持数组 文章图片
 * primarycolor: 支持数组 文章主色
 * accentcolor: 支持数组 文章强调色
+
+[回到首页](./README.md)

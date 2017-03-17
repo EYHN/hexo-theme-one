@@ -55,11 +55,6 @@ gulp.task('buildHexo', ['copysource'], function () {
       path.extname = ".ejs";
     }))
     .pipe(gulp.dest('./hexo/layout'))
-    .pipe(rename(function (path) {
-      path.basename = "index";
-      path.extname = ".ejs";
-    }))
-    .pipe(gulp.dest('./hexo/layout'));
 })
 
 gulp.task('copyHexo', ['buildHexo'], function () {

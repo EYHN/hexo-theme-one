@@ -35,3 +35,5 @@ date: 2013/7/13 20:46:25
 * background: 开启背景 默认为 true
 * toc: 开启toc导航 默认为 true
 * html: 跳过markdown解析 默认为 false
+
+[回到首页](./README.md)

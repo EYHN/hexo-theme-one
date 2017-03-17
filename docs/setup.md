@@ -31,3 +31,5 @@ $ git clone https://github.com/EYHN/hexo-theme-one.git
 ```
 $ gulp hexo
 ```
+
+[回到首页](./README.md)
