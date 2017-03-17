@@ -16,15 +16,15 @@ head:
 
 # head
 
-## slogan <font size="2">string | string[] 支持数组</font>
+## slogan <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 标语
 
-## defaultPrimaryColor <font size="2">string | string[] 支持数组</font>
+## defaultPrimaryColor <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 默认主色
 
-## defaultAccentColor <font size="2">string | string[] 支持数组</font>
+## defaultAccentColor <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 默认强调色
 
@@ -33,7 +33,7 @@ head:
 
 # head
 
-## favicon <font size="2">string | string[] 支持数组</font>
+## favicon <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 站点图标
 
@@ -41,23 +41,23 @@ head:
 
 # img
 
-## avatar <font size="2">string | string[] 支持数组</font>
+## avatar <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 用户头像
 
-## left_pic <font size="2">string | string[] 支持数组</font>
+## left_pic <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 首页左边的图片
 
-## right_pic <font size="2">string | string[] 支持数组</font>
+## right_pic <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 首页右边的图片（在移动端不会显示）
 
-## post_thumbnail <font size="2">string | string[] 支持数组</font>
+## post_thumbnail <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 默认文章图片
 
-## drawerHeaderBg <font size="2">string | string[] 支持数组</font>
+## drawerHeaderBg <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 侧边栏图片
 
@@ -67,23 +67,23 @@ head:
 
 ## duoshuo
 
-## shortName <font size="2">string</font>
+## shortName <small style="font-size:14px"><i>string</i></small>
 
 `shortName`可以在多说后台获取
 
 </br>
 
-# Drawer <font size="2">object[]</font>
+# Drawer <small style="font-size:14px"><i>object[]</i></small>
 
 > 这个稍微有点复杂,同时功能强大,最下面有例子
 
 侧边栏列表数组
 
-## title <font size="2">string</font>
+## title <small style="font-size:14px"><i>string</i></small>
 
 侧边栏项目标题
 
-## type <font size="2">string</font>
+## type <small style="font-size:14px"><i>string</i></small>
 
 侧边栏项目类型
 
@@ -94,21 +94,21 @@ head:
 
 不填写点击就没有任何反应。
 
-## href <font size="2">string</font>
+## href <small style="font-size:14px"><i>string</i></small>
 
 > 当type为 sitelink 或 link 时生效
 
 目标url
 
-## icon <font size="2">string</font>
+## icon <small style="font-size:14px"><i>string</i></small>
 
 material图标名
 
-## nested <font size="2">object[]</font>
+## nested <small style="font-size:14px"><i>object[]</i></small>
 
 子目录数组
 
-## initiallyOpen <font size="2">boolean</font>
+## initiallyOpen <small style="font-size:14px"><i>boolean</i></small>
 
 > 当指定nested时生效
 
