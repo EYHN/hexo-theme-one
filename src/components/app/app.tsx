@@ -24,6 +24,7 @@ import Category from '../category/category'
 import Footer from '../footer/footer'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import Header from '../header/header';
 const MaterialIconseot = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.eot");
 const MaterialIconsttf = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.ttf");
 const MaterialIconswoff = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff");
@@ -87,6 +88,7 @@ export class App extends React.Component<AppProps, AppComponentState>{
           <div style={{
             fontFamily: Theme.fontFamily
           }} className={style.body}>
+            <Header/>
             <style>
               {
                 `

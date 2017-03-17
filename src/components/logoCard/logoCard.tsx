@@ -8,17 +8,18 @@ import SocialShare from 'material-ui/svg-icons/social/share';
 var style = require('./logoCard.less')
 
 interface LogoCardProps {
-
+  img: string
 }
 
 export default class LogoCard extends React.Component<LogoCardProps, undefined>{
   render() {
+    let {img = ""} = this.props
     return (
       <Card className={style.LogoCard}>
           <CardMedia>
           <div 
             className={style.CardImage}
-            style={{backgroundImage:"url(https://delusion.coding.me/img/daily_pic.min.jpg)"}}
+            style={{backgroundImage:"url(" + img + ")"}}
              >
           </div>
           </CardMedia>
