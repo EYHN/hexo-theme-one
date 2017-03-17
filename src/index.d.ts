@@ -4,6 +4,7 @@ declare interface Window {
   webkitScrollbar:any
   decodeURIComponent:any
   mdIt:any
+  rootUrl:string
 }
 
 declare function unescape(a:string):string

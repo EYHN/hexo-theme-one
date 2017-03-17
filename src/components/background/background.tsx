@@ -70,6 +70,9 @@ export class Background extends React.Component<BackgroundProps, BackgroundState
             }
           </ReactCSSTransitionGroup>
         </div>
+        <div className={style.shadow}>
+          
+        </div>
       </div>
     )
   }

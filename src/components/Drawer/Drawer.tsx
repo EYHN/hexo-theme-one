@@ -1,3 +1,4 @@
+import routerHistory from '../../lib/History';
 import MenuItem from 'material-ui/MenuItem';
 import MDDrawer from 'material-ui/Drawer';
 import * as React from 'react';
@@ -17,7 +18,6 @@ import AppState from '../../stateI';
 import { DrawerIten } from '../../Interfaces/theme';
 import FontIcon from 'material-ui/FontIcon';
 import { array_randS } from '../../lib/random';
-import { hashHistory } from 'react-router';
 const url = require('url');
 
 interface DrawerProps {
@@ -43,7 +43,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
       case "sitelink":
         return <ListItem onTouchTap={this.props.onTouchTap}
           primaryText={item.title}
-          href={hashHistory.createHref(item.href)}
+          onClick={()=>{routerHistory.push(item.href)}}
           key={item.title + item.type}
           initiallyOpen={item.initiallyOpen}
           className={style.ListItem} leftIcon={icon}
@@ -51,7 +51,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
       case "link":
         return <ListItem onTouchTap={this.props.onTouchTap}
           primaryText={item.title}
-          href={item.href}
+          onClick={()=>{routerHistory.push(item.href)}}
           key={item.title + item.type}
           initiallyOpen={item.initiallyOpen}
           className={style.ListItem} leftIcon={icon}
@@ -64,7 +64,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
           className={style.ListItem}
           key={item.title + item.type}
           initiallyOpen={item.initiallyOpen}
-          href={hashHistory.createHref("/page/" + item.name)}
+          onClick={()=>{routerHistory.push("/page/" + item.name + "/")}}
           leftIcon={icon}
           nestedItems={this.renderLists(item.nested)} />;
       default:

@@ -95,7 +95,7 @@ class Tag extends React.Component<TagProps, TagState>{
                 key={value.slug}
                 authorAvatar={url.resolve(siteUrl, avatar)}
                 authorName={author}
-                link={value.slug} />
+                link={"/post/" + value.slug + "/"} />
             })
           }
         </Grid>

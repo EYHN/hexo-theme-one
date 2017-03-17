@@ -147,7 +147,7 @@ class search extends React.Component<searchProps, searchState>{
       nodes.push(
         <div className={style.post} key={post.slug}>
           <h3>
-            <Link to={"/post/" + post.slug}>{post.title}</Link>
+            <Link to={"/post/" + post.slug + "/"}>{post.title}</Link>
             <footer>
             <small>
             <FormattedDate

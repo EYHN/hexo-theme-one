@@ -1,3 +1,4 @@
+import routerHistory from '../../lib/History';
 import { MuiTheme } from 'material-ui/styles';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import AppBar from 'material-ui/AppBar';
@@ -9,7 +10,7 @@ import SearchIcon from 'material-ui/svg-icons/action/search';
 import * as React from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 let style = require('./Menu.less');
-import * as _ from "underscore"
+import * as _ from 'underscore';
 import {History} from "history"
 import * as router from 'react-router';
 import { connect } from 'react-redux';
@@ -93,7 +94,7 @@ class Menu extends React.Component<MenuProps, MenuStates>{
         <AppBar
           className={style.appbar + " " + (fullModel?"":this.state.className)}
           onLeftIconButtonTouchTap={this.props.onclickLeft}
-          iconElementRight={<IconButton href={router.hashHistory.createHref("/search")}><SearchIcon></SearchIcon></IconButton>}
+          iconElementRight={<IconButton onClick={()=>{routerHistory.push("/search/")}}><SearchIcon></SearchIcon></IconButton>}
           title={<span className={style.title}>{this.props.title || ""}</span>}
           titleStyle={{ fontSize: '22px' }}
         />

@@ -8,7 +8,6 @@ import zh_CN from '../../locale/zh_CN';
 import en_US from '../../locale/en_US';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import Home from '../home/home'
 import Post from '../post/post';
 import Page from '../page/page';
@@ -25,10 +24,12 @@ import Category from '../category/category'
 import Footer from '../footer/footer'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import Header from '../header/header';
 const MaterialIconseot = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.eot");
 const MaterialIconsttf = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.ttf");
 const MaterialIconswoff = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff");
 const MaterialIconswoff2 = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff2");
+const url = require('url');
 addLocaleData(zh);
 addLocaleData(en);
 var style = require('./app.less')
@@ -41,6 +42,7 @@ interface AppProps {
   children?: React.ReactElement<any>
   fullModel?: boolean
   location?: any
+  siteUrl?: string
 }
 
 function chooseLocale() {
@@ -74,7 +76,7 @@ export class App extends React.Component<AppProps, AppComponentState>{
   }
 
   render() {
-    let {color = {}, fullModel = false} = this.props;
+    let {color = {}, fullModel = false, siteUrl = "/"} = this.props;
     let {primaryColor, accentColor} = color;
     let t = color2Theme(primaryColor, accentColor,"light");
     t.fontFamily = '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
@@ -87,6 +89,7 @@ export class App extends React.Component<AppProps, AppComponentState>{
           <div style={{
             fontFamily: Theme.fontFamily
           }} className={style.body}>
+            <Header/>
             <style>
               {
                 `
@@ -94,12 +97,12 @@ export class App extends React.Component<AppProps, AppComponentState>{
                   font-family: 'Material Icons';
                   font-style: normal;
                   font-weight: 400;
-                  src: url(${MaterialIconseot}); /* For IE6-8 */
+                  src: url(${url.resolve(siteUrl,MaterialIconseot)}); /* For IE6-8 */
                   src: local('Material Icons'),
                       local('MaterialIcons-Regular'),
-                      url(${MaterialIconswoff2}) format('woff2'),
-                      url(${MaterialIconswoff}) format('woff'),
-                      url(${MaterialIconsttf}) format('truetype');
+                      url(${url.resolve(siteUrl,MaterialIconswoff2)}) format('woff2'),
+                      url(${url.resolve(siteUrl,MaterialIconswoff)}) format('woff'),
+                      url(${url.resolve(siteUrl,MaterialIconsttf)}) format('truetype');
                 }
                 `
               }
@@ -130,9 +133,9 @@ export class App extends React.Component<AppProps, AppComponentState>{
               </main>
             </div>
             <Footer />
-            <FloatingActionButton className={style.fixedFloatingButton}>
+            {/*<FloatingActionButton className={style.fixedFloatingButton}>
               <MoreVertIcon />
-            </FloatingActionButton>
+            </FloatingActionButton>*/}
           </div>
         </MuiThemeProvider>
       </IntlProvider>
@@ -146,6 +149,7 @@ const mapStateToProps = (state: AppState) => {
       primaryColor: 'cyan',
       pccentColor: 'pink'
     },
+    siteUrl: state.site.siteUrl,
     fullModel: state.nav.fullModel
   }
 }
