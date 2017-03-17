@@ -15,7 +15,7 @@ import { List, ListItem } from 'material-ui/List';
 import { connect } from 'react-redux';
 import { History } from "history"
 import AppState from '../../stateI';
-import { DrawerIten } from '../../Interfaces/theme';
+import { DrawerItemI } from '../../Interfaces/theme';
 import FontIcon from 'material-ui/FontIcon';
 import { array_randS } from '../../lib/random';
 const url = require('url');
@@ -25,7 +25,7 @@ interface DrawerProps {
   onRequestChange?: (opening: boolean, reason: string) => void
   phone?: boolean
   onTouchTap: () => void
-  itemList?: DrawerIten[]
+  itemList?: DrawerItemI[]
   avatar?:string
   siteUrl?:string
   headerBg?:string
@@ -36,7 +36,7 @@ interface DrawerState {
 }
 
 class Drawer extends React.Component<DrawerProps, DrawerState>{
-  renderItems(item: DrawerIten) {
+  renderItems(item: DrawerItemI) {
     let icon;
     if(typeof item.icon != undefined)icon = <FontIcon className="material-icons">{item.icon}</FontIcon>;
     switch (item.type) {
@@ -76,7 +76,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
           nestedItems={this.renderLists(item.nested)} />
     }
   }
-  renderLists(itemList: DrawerIten[]): JSX.Element[] {
+  renderLists(itemList: DrawerItemI[]): JSX.Element[] {
     if(typeof itemList === "undefined") return [];
     let res:JSX.Element[] = [];
     itemList.forEach((value) => {
