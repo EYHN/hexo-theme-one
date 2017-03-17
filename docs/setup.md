@@ -12,6 +12,13 @@ $ cd <folder>
 $ npm install
 ```
 
+> PS： 本主题需要额外安装模块:`lodash.pick`
+> 
+> 在hexo目录中运行
+> ```
+> npm i lodash.pic --save
+> ```
+
 ## clone 本主题
 
 ```
