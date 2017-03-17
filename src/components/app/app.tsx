@@ -42,6 +42,7 @@ interface AppProps {
   children?: React.ReactElement<any>
   fullModel?: boolean
   location?: any
+  siteUrl?: string
 }
 
 function chooseLocale() {
@@ -75,7 +76,7 @@ export class App extends React.Component<AppProps, AppComponentState>{
   }
 
   render() {
-    let {color = {}, fullModel = false} = this.props;
+    let {color = {}, fullModel = false, siteUrl = "/"} = this.props;
     let {primaryColor, accentColor} = color;
     let t = color2Theme(primaryColor, accentColor,"light");
     t.fontFamily = '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
@@ -96,12 +97,12 @@ export class App extends React.Component<AppProps, AppComponentState>{
                   font-family: 'Material Icons';
                   font-style: normal;
                   font-weight: 400;
-                  src: url(${url.resolve("/",MaterialIconseot)}); /* For IE6-8 */
+                  src: url(${url.resolve(siteUrl,MaterialIconseot)}); /* For IE6-8 */
                   src: local('Material Icons'),
                       local('MaterialIcons-Regular'),
-                      url(${url.resolve("/",MaterialIconswoff2)}) format('woff2'),
-                      url(${url.resolve("/",MaterialIconswoff)}) format('woff'),
-                      url(${url.resolve("/",MaterialIconsttf)}) format('truetype');
+                      url(${url.resolve(siteUrl,MaterialIconswoff2)}) format('woff2'),
+                      url(${url.resolve(siteUrl,MaterialIconswoff)}) format('woff'),
+                      url(${url.resolve(siteUrl,MaterialIconsttf)}) format('truetype');
                 }
                 `
               }
@@ -148,6 +149,7 @@ const mapStateToProps = (state: AppState) => {
       primaryColor: 'cyan',
       pccentColor: 'pink'
     },
+    siteUrl: state.site.siteUrl,
     fullModel: state.nav.fullModel
   }
 }

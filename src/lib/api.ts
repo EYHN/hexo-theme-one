@@ -9,8 +9,11 @@ import { tag } from '../Interfaces/tag';
 import { categoriesItem } from '../Interfaces/categories';
 import { category } from '../Interfaces/category';
 import * as fetch from 'isomorphic-fetch';
+const url = require('url');
 
-export var apiHref = "https://delusion.coding.me/hexo-theme-design-Demo/api/"
+let rootURL = window.rootUrl || "/";
+
+export var apiHref = process.env.NODE_ENV === "production"?url.resolve(rootURL,"./api/"):"https://delusion.coding.me/hexo-theme-design-Demo/api/"
 
 export function getSite(href = apiHref) {
   return hexo.getSite(href);

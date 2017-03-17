@@ -1,6 +1,11 @@
 var webpack = require('webpack');
 var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
+const GLOBALS = {
+  'process.env.NODE_ENV': JSON.stringify('development'),
+  __DEV__: true
+};
+
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var HtmlWebpackConfig = {
@@ -26,6 +31,7 @@ module.exports = {
     devtool: "source-map",
 
     plugins: [
+        new webpack.DefinePlugin(GLOBALS),
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin(HtmlWebpackConfig)
     ],

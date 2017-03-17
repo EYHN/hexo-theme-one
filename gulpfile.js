@@ -48,16 +48,7 @@ gulp.task('copysource', function () {
     .pipe(gulp.dest('./hexo/source'));
 })
 
-gulp.task('buildHexo', ['copysource'], function () {
-  return gulp.src('./dist/index.html')
-    .pipe(rename(function (path) {
-      path.basename = "layout";
-      path.extname = ".ejs";
-    }))
-    .pipe(gulp.dest('./hexo/layout'))
-})
-
-gulp.task('copyHexo', ['buildHexo'], function () {
+gulp.task('copyHexo', ['copysource'], function () {
   return gulp.src('./hexo/**/*')
     .pipe(gulp.dest(buildConfig.hexoThemePath));
 })
