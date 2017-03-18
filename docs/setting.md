@@ -63,6 +63,12 @@ head:
 
 </br>
 
+# colorPicker <small style="font-size:14px"><i>boolean</i></small>
+
+是否显示侧边抽屉中的取色器。默认为false
+
+</br>
+
 # comment
 
 ## duoshuo
