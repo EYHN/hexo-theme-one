@@ -1,73 +1,61 @@
-# Hexo Configuration
-## Docs: https://hexo.io/docs/configuration.html
-## Source: https://github.com/hexojs/hexo/
+head:
+    favicon: "http://q1.qlogo.cn/headimg_dl?bs=1106996185&dst_uin=1106996185&spec=100&url_enc=0&referer=bu_interface&term_type=PC"
 
-# Site
-title: 幻想帖
-subtitle: URARA幻想帖!
-description: 拼命想抓住一些东西!
-author: 滑稽
-language: zh-CN
-timezone: 
+img:
+    avatar: "http://q1.qlogo.cn/headimg_dl?bs=1106996185&dst_uin=1106996185&spec=100&url_enc=0&referer=bu_interface&term_type=PC"
+    left_pic: 
+      - "/img/home.webp"
+    right_pic:
+      - "/img/right_pic.webp"
+    post_thumbnail: 
+      - "/img/二次元/下雨.webp"
+    drawerHeaderBg:
+      - "/img/drawerCover.webp"
 
-# URL
-## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://huaji8.top
-root: /
-permalink: :year/:month/:day/:title/
-permalink_defaults:
+uiux:
+    slogan: "拼命想抓住一些东西！"
+    defaultPrimaryColor: "blue"
+    defaultAccentColor: "red"
 
-# Directory
-source_dir: source
-public_dir: public
-tag_dir: tags
-archive_dir: archives
-category_dir: categories
-code_dir: downloads/code
-i18n_dir: :lang
-skip_render:
+comment:
+    duoshuo:
+        shortName: "huaji-blog"
 
-# Writing
-new_post_name: :title.md # File name of new posts
-default_layout: post
-titlecase: false # Transform title into titlecase
-external_link: true # Open external links in new tab
-filename_case: 0
-render_drafts: false
-post_asset_folder: false
-relative_link: false
-future: true
-highlight:
-  enable: true
-  line_number: true
-  auto_detect: false
-  tab_replace:
+Drawer:
+    -
+      title: 首页
+      type: sitelink
+      href: /
+      icon: home
+    -
+      title: hr
+      type: hr
+    -
+      title: 关于我
+      type: page
+      name: 关于我
+      icon: account_circle
+    -
+      title: 搜索
+      type: sitelink
+      href: /search/
+      icon: search
+    -
+      title: 联系我
+      icon: contact_phone
+      nested: 
+        - 
+          title: Email
+          type: link
+          href: mailto:cneyhn@email.com
+          icon: mail_outline
+        -
+          title: Github
+          type: link
+          href: https://github.com/EYHN
+        -
+          title: QQ
+          type: link
+          href: http://wpa.qq.com/msgrd?v=3&uin=1106996185&site=qq&menu=yes
 
-# Category & Tag
-default_category: uncategorized
-category_map:
-tag_map:
-
-# Date / Time format
-## Hexo uses Moment.js to parse and display date
-## You can customize the date format as defined in
-## http://momentjs.com/docs/#/displaying/format/
-date_format: YYYY-MM-DD
-time_format: HH:mm:ss
-
-# Pagination
-## Set per_page to 0 to disable pagination
-per_page: 10
-pagination_dir: page
-
-# Extensions
-## Plugins: https://hexo.io/plugins/
-## Themes: https://hexo.io/themes/
-theme: one
-
-# Deployment
-## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type: git
-  repository: https://git.coding.net/delusion/delusion.coding.me.git
-  branch: master
+colorPicker: false
