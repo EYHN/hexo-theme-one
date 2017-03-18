@@ -84,7 +84,7 @@ class Tag extends React.Component<TagProps, TagState>{
         }}>
           <Grid>
             <h1>{name}</h1>
-            <Tab NameList={TagsNameList} value={name} link={(name)=>"/tag/" + name} />
+            <Tab NameList={TagsNameList} value={name} link={(name)=>"/tags/" + name + "/"} />
           </Grid>
         </div>
         <Grid>

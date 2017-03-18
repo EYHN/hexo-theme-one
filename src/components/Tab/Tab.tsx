@@ -19,7 +19,6 @@ export default class Tab extends React.Component<TabProps, TabState>{
     return NameList.map((value) => {
       return <Tabx label={value} key={value} value={value} className={style.tab} onActive={()=>{
           if(typeof this.props.link === "function"){
-            console.log(this.props.link(value))
             routerHistory.push(this.props.link(value));
           }
         }}></Tabx>

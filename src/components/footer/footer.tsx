@@ -27,7 +27,7 @@ class Footer extends React.Component<FooterProps, undefined>{
           <Grid className={style.grid}>
             <p className={style.s1}>
               <span>Powered by </span>
-              <a href="https://hexo.io" target="_blank"style={{
+              <a href="https://hexo.io" target="_blank" style={{
                 color:this.props.muiTheme.palette.alternateTextColor
               }}>Hexo</a>
               <br/>

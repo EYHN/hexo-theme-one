@@ -10,11 +10,13 @@ interface SideHanderProps {
   phone?: boolean
   Avatar:string
   background:string
+  author:string
+  slogan:string
 }
 
 export default class SideHander extends React.Component<SideHanderProps, undefined>{
   render() {
-    let {Avatar:avatar = "",background = ""} = this.props;
+    let {Avatar:avatar = "",background = "",author = "",slogan = ""} = this.props;
     return (
       <MenuItem className={style.SideHander + " " + this.props.className || ""}>
         <div style={{
@@ -22,8 +24,8 @@ export default class SideHander extends React.Component<SideHanderProps, undefin
         }} className={style.bg}></div>
         <Avatar src={avatar} size={50}/>
         <footer>
-          <b>cneyhn</b><br/>
-          cneyhn@gmail.com
+          <b>{author}</b><br/>
+          {slogan}
         </footer>
       </MenuItem>
     )
