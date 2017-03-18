@@ -29,6 +29,10 @@ interface DrawerProps {
   avatar?:string
   siteUrl?:string
   headerBg?:string
+  colorPicker?: boolean
+  author?:string
+  siteTitle?:string
+  siteSlogan?:string
 }
 
 interface DrawerState {
@@ -51,7 +55,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
       case "link":
         return <ListItem onTouchTap={this.props.onTouchTap}
           primaryText={item.title}
-          onClick={()=>{routerHistory.push(item.href)}}
+          onClick={()=>{window.open(item.href)}}
           key={item.title + item.type}
           initiallyOpen={item.initiallyOpen}
           className={style.ListItem} leftIcon={icon}
@@ -87,7 +91,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
     return res;
   }
   render() {
-    let {phone = false , avatar="",siteUrl="",headerBg = ""} = this.props
+    let {phone = false , avatar="",siteUrl="",headerBg = "",colorPicker = false,author,siteTitle,siteSlogan=""} = this.props
     return (
       <MDDrawer
         open={this.props.open}
@@ -96,25 +100,40 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
         width={phone ? 250 : 300}
         className={style.Drawer}
       >
-        <SideHander className={style.sideHander} background={headerBg} Avatar={url.resolve(siteUrl,avatar)}></SideHander>
+        <SideHander className={style.sideHander} author={author} slogan={siteSlogan} background={headerBg} Avatar={url.resolve(siteUrl,avatar)}></SideHander>
         {
           this.renderLists(this.props.itemList)
         }
-        <ColorChoose />
+        <Divider className={style.divider} />
+        <footer className={style.footer}>
+          <span>{siteTitle}</span>
+          <br/>
+          <span>Power by {author}</span>
+          <br/>
+          <span>Theme - <a target="_blank" href={"https://github.com/EYHN/hexo-theme-one"} >EYHN/one</a></span>
+        </footer>
+        {
+          colorPicker?<ColorChoose />:undefined
+        }
       </MDDrawer>
     )
   }
 }
 
 const mapStateToProps = (state: AppState) => {
-  let { img = {},uiux = {} } = state.theme;
-  let {siteUrl = ""} = state.site
+  let { img = {},uiux = {},colorPicker = false } = state.theme;
+  let { siteUrl = "",author,title } = state.site
+  let { slogan = "" } = uiux;
   return {
     phone: state.windowSize.smaller.than.phone,
     itemList: state.theme.Drawer,
     avatar: array_randS(img.avatar),
     headerBg: array_randS(img.drawerHeaderBg),
-    siteUrl: siteUrl
+    siteUrl: siteUrl,
+    colorPicker: colorPicker,
+    author: author,
+    siteTitle:title,
+    siteSlogan: slogan
   }
 }
 

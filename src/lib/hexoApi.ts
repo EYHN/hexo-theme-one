@@ -51,7 +51,7 @@ export function getTags(name?: string, href = apiHref) {
       return res.json() as Promise<Array<tagsItem>>;
     })
   } else {
-    return fetch(url.resolve(href,`/tags/${name}.json`),fetchConfig).then((res) => {
+    return fetch(url.resolve(href,`./tags/${name}.json`),fetchConfig).then((res) => {
       return res.json() as Promise<tag>;
     })
   }
@@ -76,7 +76,7 @@ export function getPost(name: string, href = apiHref) {
 }
 
 export function getPage(name: string, href = apiHref) {
-  return fetch(url.resolve(href,`/page/${name}.json`),fetchConfig).then((res) => {
+  return fetch(url.resolve(href,`./page/${name}.json`),fetchConfig).then((res) => {
     return res.json() as Promise<page>;
   })
 }

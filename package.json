@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/EYHN/hexo-theme-design#readme",
   "devDependencies": {
+    "@types/highlight.js": "^9.1.9",
     "@types/isomorphic-fetch": "^0.0.32",
     "@types/jquery": "^2.0.40",
     "@types/lunr": "^0.5.28",
@@ -58,6 +59,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-webpack": "^1.5.0",
     "happypack": "^3.0.3",
+    "highlight.js": "^9.10.0",
     "html-webpack-plugin": "^2.28.0",
     "intl": "^1.2.5",
     "isomorphic-fetch": "^2.2.1",

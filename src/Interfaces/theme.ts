@@ -20,7 +20,7 @@ export interface MenuItemI {
 }
 
 export interface barMenu {
-  items: MenuItemI[],
+  items: MenuItemI[]
   icon?: string
 }
 
@@ -29,22 +29,23 @@ export interface theme {
     slogan?: string | Array<string>,
     defaultPrimaryColor?: string | Array<string>
     defaultAccentColor?: string | Array<string>
-  },
+  }
   head?: {
     favicon?: string | Array<string>
-  },
+  }
   img?: {
     avatar?: string | Array<string>,
     left_pic?: string | Array<string>,
     right_pic?: string | Array<string>,
     post_thumbnail?: string | Array<string>,
     drawerHeaderBg?: string | Array<string>
-  },
+  }
   comment?: {
     duoshuo?: {
       shortName?: string
     }
-  },
-  Drawer?: DrawerItemI[],
+  }
+  Drawer?: DrawerItemI[]
   homeToolBar?:barMenu[]
+  colorPicker?:boolean
 }

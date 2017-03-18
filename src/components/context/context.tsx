@@ -7,10 +7,22 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 let style = require("./context.less");
 let markdownItTocAndAnchor = require('../../lib/markdown-it-toc-and-anchor/index.js').default;
+var hljs = require('highlight.js'); // https://highlightjs.org/
+
+require('!style-loader!css-loader!highlight.js/styles/github.css'); // https://highlightjs.org/
 
 let md = new MarkdownIt({
   html: true,
-  linkify: true
+  linkify: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
+    }
+
+    return ''; // use external default escaping
+  }
 })
   .use(markdownItTocAndAnchor, {
     anchorLink: false

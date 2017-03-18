@@ -86,7 +86,7 @@ class Page extends React.Component<PageProps, PageState>{
     let page = pagesList.get(title);
     let background
     let thumbnail;
-    if (typeof page === "undefined") {
+    if (typeof page === "undefined" || typeof page.content === "undefined") {
       page = page || {};
       if (!page.loading) {
         this.props.loadingPage(title);
@@ -127,7 +127,7 @@ class Page extends React.Component<PageProps, PageState>{
           }
         </div>
         {
-          (page.toc && phone && this.state.tocArray.length > 0) ? undefined :
+          (!page.toc || phone || this.state.tocArray.length == 0) ? undefined :
             <div className={style.toc} ref="toc">
               <FixedAt fixedHeight={300} className={style.tocFixed}><TocList tocArray={this.state.tocArray} className={style.TocList}></TocList></FixedAt>
             </div>

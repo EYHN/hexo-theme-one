@@ -8,7 +8,7 @@
 
 使用 React 制作的 material design 风格的 hexo 主题。
 
-DEMO: https://eyhn.github.io/hexo-theme-one/
+DEMO: https://huaji8.top/
 
 如果喜欢的话 请点个star 让我看到你们的支持
 
@@ -28,7 +28,7 @@ DEMO: https://eyhn.github.io/hexo-theme-one/
 | ~~标签分类~~ | ~~已完成~~ |  |
 | ~~多说评论~~ | ~~已完成~~ |  |
 | Disqus | 开发中 | 暂不可用 |
-| 分享 | 尚未开始 ||
+| ~~分享~~ | ~~有替代方案~~ ||
 | 全局颜色 | 开发中 | 部分组件需补全 |
 | 载入加载动画 | 尚未开始 | 需设计 |
 | 时间搜索 | 尚未开始 | |
