@@ -5,6 +5,8 @@ declare interface Window {
   decodeURIComponent:any
   mdIt:any
   rootUrl:string
+  jQuery:any
+  $:any
 }
 
 declare function unescape(a:string):string

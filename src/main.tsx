@@ -1,3 +1,6 @@
+import * as $ from 'jquery';
+window.jQuery = $;
+window.$ = $;
 import routerHistory from './lib/History';
 import { array_randS } from './lib/random';
 import { darkBlack, grey600 } from 'material-ui/styles/colors';

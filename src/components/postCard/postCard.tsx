@@ -98,7 +98,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
             </CardText>
         }
         <CardText>
-          <Content content={content} translate={translate} className={style.content} markdown={true} excerpt={excerpt} toc={this.props.toc} >
+          <Content content={content} translate={translate} className={style.content} markdown={false} excerpt={excerpt} toc={this.props.toc} >
 
           </Content>
         </CardText>

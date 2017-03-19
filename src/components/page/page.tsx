@@ -100,7 +100,7 @@ class Page extends React.Component<PageProps, PageState>{
       }
     }
     return (
-    <div className={"Page " + background?"":"pagefullModel"}>
+    <div className={"Page " + (background?"":"pagefullModel")}>
       <Grid>
         <div className={style.page}>
           <PostCard
