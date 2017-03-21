@@ -41,6 +41,7 @@ export default class Duoshuo extends React.Component<DuoshuoProps, undefined>{
     let el = document.createElement('div');
     el.setAttribute('data-thread-key', thread);
     el.setAttribute('data-url', url);
+    el.setAttribute('data-title', thread);
     el.setAttribute('data-author-key', author);
     container.innerHTML = '';
     container.appendChild(el);

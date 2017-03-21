@@ -66,7 +66,6 @@ class Page extends React.Component<PageProps, PageState>{
   componentWillMount() {
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
     this.props.onChangeColor(this.props.defaultPrimaryColor, this.props.defaultAccentColor);
-    this.props.fullModel(true)
   }
 
   onloaded(page: pageState) {
@@ -78,6 +77,8 @@ class Page extends React.Component<PageProps, PageState>{
       this.props.setNavTitle(page.title)
     if (background)
       this.props.fullModel(false)
+    else
+      this.props.fullModel(true)
   }
 
   render() {
@@ -121,7 +122,7 @@ class Page extends React.Component<PageProps, PageState>{
             page.comments ?
               <Card className={style.commentCard}>
                 {
-                  (title != '' && page.title) ? <Comment postID={title} className={style.Comment} postTitle={page.title.toString()}></Comment> : undefined
+                  (title != '' && page.title) ? <Comment postID={title} url={url.resolve(this.props.siteUrl,'./page/' + page.title)} className={style.Comment} postTitle={page.title.toString()}></Comment> : undefined
                 }
               </Card> : undefined
           }

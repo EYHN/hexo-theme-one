@@ -8,8 +8,6 @@ import MenuItem from 'material-ui/MenuItem';
 let style = require("./context.less");
 let markdownItTocAndAnchor = require('../../lib/markdown-it-toc-and-anchor/index.js').default;
 
-require('!style-loader!css-loader!highlight.js/styles/github.css'); // https://highlightjs.org/
-
 let md = new MarkdownIt({
   html: true,
   linkify: true

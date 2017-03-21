@@ -108,7 +108,7 @@ class Post extends React.Component<PostProps, PostState>{
                />
             <Card className={style.commentCard}>
               {
-                (slug != '' && post.title) ? <Comment postID={slug} className={style.Comment} postTitle={post.title.toString()}></Comment> : undefined
+                (slug != '' && post.title) ? <Comment postID={slug} className={style.Comment} url={url.resolve(this.props.siteUrl,'./post/' + post.title)} postTitle={post.title.toString()}></Comment> : undefined
               }
             </Card>
           </div>

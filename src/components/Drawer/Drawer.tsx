@@ -100,7 +100,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
         width={phone ? 250 : 300}
         className={style.Drawer}
       >
-        <SideHander className={style.sideHander} author={author} slogan={siteSlogan} background={headerBg} Avatar={url.resolve(siteUrl,avatar)}></SideHander>
+        <SideHander className={style.sideHander} author={author} slogan={siteSlogan} background={url.resolve(siteUrl,headerBg)} Avatar={url.resolve(siteUrl,avatar)}></SideHander>
         {
           this.renderLists(this.props.itemList)
         }
