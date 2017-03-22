@@ -16,12 +16,26 @@ const fetchConfig = {
 }
 
 export function getSite(href = apiHref) {
+  if (typeof window.one !== "undefined"){
+    if (typeof window.one.site !== "undefined"){
+      return new Promise<site>((value)=>{
+        value(window.one.site)
+      })
+    }
+  }
   return fetch(url.resolve(href,"./site.json"),fetchConfig).then((res) => {
     return res.json() as Promise<site>;
   })
 }
 
 export function getTheme(href = apiHref) {
+  if (typeof window.one !== "undefined"){
+    if (typeof window.one.theme !== "undefined"){
+      return new Promise<theme>((value)=>{
+        value(window.one.theme)
+      })
+    }
+  }
   return fetch(url.resolve(href,"./theme.json"),fetchConfig).then((res) => {
     return res.json() as Promise<theme>;
   })

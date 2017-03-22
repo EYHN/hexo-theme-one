@@ -5,7 +5,7 @@ export interface DrawerItemI {
   href?: string
   slug?: string
   initiallyOpen?: boolean
-  icon?: string
+  icon?: string | {type:string,date:any,style:any}
   nested?: DrawerItemI[]
 }
 

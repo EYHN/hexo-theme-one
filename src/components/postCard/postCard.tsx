@@ -61,10 +61,11 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
     let { setCover: cover = this.default_thumbnail} = { setCover }
     cover = url.resolve(siteUrl, cover);
     content = this.state.translateContent || content
+    cardMedia = Boolean((typeof cardMedia === 'undefined' || cardMedia) && (link || title || setCover));
     return (
-      <Card className={style.PostCard + ' ' + className}>
+      <Card className={style.PostCard + " " + (cardMedia?style.PostCardWithImg:"") + ' ' + className}>
         {
-          (typeof cardMedia === 'undefined' || cardMedia) && (link || title || setCover) ?
+          cardMedia ?
             <CardMedia
               overlay={(title) ? <CardTitle title={title} subtitle={<FormattedDate value={new Date(post.date)}/>} /> : undefined}
               style={{

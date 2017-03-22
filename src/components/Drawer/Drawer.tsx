@@ -18,6 +18,7 @@ import AppState from '../../stateI';
 import { DrawerItemI } from '../../Interfaces/theme';
 import FontIcon from 'material-ui/FontIcon';
 import { array_randS } from '../../lib/random';
+import SvgIcon from 'material-ui/SvgIcon';
 const url = require('url');
 
 interface DrawerProps {
@@ -40,9 +41,31 @@ interface DrawerState {
 }
 
 class Drawer extends React.Component<DrawerProps, DrawerState>{
+  getIcon(icon:string | {type:string,date:any,style:any}){
+    if (typeof icon === "undefined"){
+      return undefined;
+    }
+    if (typeof icon === "string"){
+      return <FontIcon className="material-icons">{icon}</FontIcon>
+    }
+    if (typeof icon === "object"){
+      let {
+        type="svg",
+        date="",
+        style={},
+        ...props
+      } = icon;
+      switch (type){
+        case "svg":
+          return <SvgIcon style={style} dangerouslySetInnerHTML={{ __html: date }} {...props}>
+          </SvgIcon >;
+        default:
+        break;
+      }
+    }
+    return undefined;
+  }
   renderItems(item: DrawerItemI) {
-    let icon;
-    if(typeof item.icon != undefined)icon = <FontIcon className="material-icons">{item.icon}</FontIcon>;
     switch (item.type) {
       case "sitelink":
         return <ListItem onTouchTap={this.props.onTouchTap}
@@ -50,7 +73,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
           onClick={()=>{routerHistory.push(item.href)}}
           key={item.title + item.type}
           initiallyOpen={item.initiallyOpen}
-          className={style.ListItem} leftIcon={icon}
+          className={style.ListItem} leftIcon={this.getIcon(item.icon)}
           nestedItems={this.renderLists(item.nested)} />;
       case "link":
         return <ListItem onTouchTap={this.props.onTouchTap}
@@ -58,7 +81,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
           onClick={()=>{window.open(item.href)}}
           key={item.title + item.type}
           initiallyOpen={item.initiallyOpen}
-          className={style.ListItem} leftIcon={icon}
+          className={style.ListItem} leftIcon={this.getIcon(item.icon)}
           nestedItems={this.renderLists(item.nested)} />;
       case "hr":
         return <Divider className={style.divider} key={item.title + item.type} />;
@@ -69,12 +92,12 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
           key={item.title + item.type}
           initiallyOpen={item.initiallyOpen}
           onClick={()=>{routerHistory.push("/page/" + item.name + "/")}}
-          leftIcon={icon}
+          leftIcon={this.getIcon(item.icon)}
           nestedItems={this.renderLists(item.nested)} />;
       default:
         return <ListItem className={style.ListItem}
           primaryText={item.title}
-          leftIcon={icon}
+          leftIcon={this.getIcon(item.icon)}
           initiallyOpen={item.initiallyOpen}
           key={item.title + item.type}
           nestedItems={this.renderLists(item.nested)} />

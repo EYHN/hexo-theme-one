@@ -1,3 +1,4 @@
+
 declare interface Window {
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__:any
   duoshuoQuery:any
@@ -7,6 +8,10 @@ declare interface Window {
   rootUrl:string
   jQuery:any
   $:any
+  one:{
+    site:any
+    theme:any
+  }
 }
 
 declare function unescape(a:string):string

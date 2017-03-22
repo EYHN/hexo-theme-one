@@ -40,7 +40,7 @@ class LogoCard extends React.Component<LogoCardProps, undefined>{
       case "link":
         return <MenuItem
           primaryText={item.title}
-          onClick={() => { routerHistory.push(item.href) }}
+          onClick={() => { window.open(item.href) }}
           key={item.title + item.type}
           className={style.ListItem} leftIcon={icon}
           menuItems={this.renderLists(item.nested)} />;
@@ -63,7 +63,7 @@ class LogoCard extends React.Component<LogoCardProps, undefined>{
     }
   }
   renderLists(itemList: MenuItemI[]): JSX.Element[] {
-    if (typeof itemList === "undefined") return [];
+    if (typeof itemList === "undefined" || itemList.length == 0) return undefined;
     return itemList.map((value) => {
       return this.renderItems(value)
     })
@@ -74,7 +74,9 @@ class LogoCard extends React.Component<LogoCardProps, undefined>{
       let {items = [],icon} = value;
       return (<IconMenu
         key={index}
-        iconButtonElement={<IconButton iconClassName={icon}></IconButton>}
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        iconButtonElement={<IconButton iconClassName="material-icons">{icon}</IconButton>}
       >
         {
           this.renderLists(items)
