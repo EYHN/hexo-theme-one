@@ -18,7 +18,7 @@ import FixedAt from '../fixedAt/fixedAt';
 import { addBackGroundImg } from '../../actions/background';
 const url = require('url');
 import FontIcon from 'material-ui/FontIcon';
-import { setNavTitle, fullModel } from '../../actions/nav';
+import { setNavTitle, fullModel, backButton } from '../../actions/nav';
 import Comment from '../comment/comment';
 import { Card } from 'material-ui/Card';
 import { FormattedDate } from 'react-intl';
@@ -39,6 +39,7 @@ interface PostProps {
   siteUrl?: string
   addBackGroundImg?: (backgroundImg: string, key: string) => void
   fullModel?: (fullModelB: boolean) => void
+  backButton?: (backButton: boolean) => void
 }
 
 interface PostState {
@@ -68,6 +69,7 @@ class Post extends React.Component<PostProps, PostState>{
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
     this.props.onChangeColor(this.props.defaultPrimaryColor, this.props.defaultAccentColor);
     this.props.fullModel(false)
+    this.props.backButton(true);
   }
   onloaded(post: postState) {
     if (post.primarycolor || post.accentcolor)
@@ -159,6 +161,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     },
     fullModel: (fullModelB: boolean) => {
       dispatch(fullModel(fullModelB));
+    },
+    backButton: (backButtonV: boolean)=>{
+      dispatch(backButton(backButtonV))
     }
   }
 }

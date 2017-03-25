@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Dispatch } from 'redux';
 import Grid from '../grid/grid';
 import { MuiTheme } from 'material-ui/styles';
-import { fullModel, setNavTitle } from '../../actions/nav';
+import { fullModel, setNavTitle, backButton } from '../../actions/nav';
 import { changeColor } from '../../actions/theme';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
@@ -86,6 +86,7 @@ interface searchProps {
   posts?: postsState
   loading?: boolean
   updatePostsP?: (index?: number) => void
+  backButton?: (backButton: boolean) => void
 }
 
 interface searchState {
@@ -131,6 +132,7 @@ class search extends React.Component<searchProps, searchState>{
     this.props.setNavTitle("Search")
     this.props.fullModel(true)
     this.props.ChangeColor("white", "blue")
+    this.props.backButton(true);
     this.setState({
       ...this.state,
       resPost: postSearch(this.getPosts(), "")
@@ -217,6 +219,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     },
     updatePostsP: (index?: number) => {
       dispatch(updatePostsP(index) as any);
+    },
+    backButton: (backButtonV: boolean)=>{
+      dispatch(backButton(backButtonV))
     }
   }
 }

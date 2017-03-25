@@ -8,6 +8,11 @@ export interface fullModelAction {
   fullModel:boolean
 }
 
+export interface backButtonAction {
+  type: 'BACK-BUTTON',
+  backButton:boolean
+}
+
 export const setNavTitle = (title: string) => {
   return {
     type: 'SET-NAV-TITLE',
@@ -19,5 +24,12 @@ export const fullModel = (fullModel: boolean) => {
   return {
     type: 'FULL-MODEL',
     fullModel:fullModel
+  }
+}
+
+export const backButton = (backButton: boolean) => {
+  return {
+    type: 'BACK-BUTTON',
+    backButton:backButton
   }
 }

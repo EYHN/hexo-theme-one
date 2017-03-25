@@ -4,7 +4,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Grid from '../grid/grid';
 import { changeColor } from '../../actions/theme';
-import { fullModel, setNavTitle } from '../../actions/nav';
+import { fullModel, setNavTitle, backButton } from '../../actions/nav';
 import { tagState } from '../../reducers/tag';
 import { post } from '../../Interfaces/post';
 import { getTag, getTagsList } from '../../actions/tags';
@@ -34,6 +34,7 @@ interface TagProps {
   avatar?: string
   author?: string
   setNavTitle?: (title: string) => void
+  backButton?: (backButton: boolean) => void
 }
 
 interface TagState {
@@ -46,6 +47,7 @@ class Tag extends React.Component<TagProps, TagState>{
     this.props.onChangeColor("blue", "pink");
     this.props.fullModel(true);
     this.props.setNavTitle("标签");
+    this.props.backButton(true);
   }
   onloaded(tag: TagState) {
   }
@@ -131,6 +133,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     },
     setNavTitle: (title: string) => {
       dispatch(setNavTitle(title));
+    },
+    backButton: (backButtonV: boolean)=>{
+      dispatch(backButton(backButtonV))
     }
   }
 }

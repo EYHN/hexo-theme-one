@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 import { getPage } from '../../actions/page';
 import { changeColor } from '../../actions/theme';
 import { addBackGroundImg } from '../../actions/background';
-import { setNavTitle, fullModel } from '../../actions/nav';
+import { setNavTitle, fullModel, backButton } from '../../actions/nav';
 import { toc } from '../context/context';
 import * as _ from 'underscore'
 import { array_rand, array_randS } from '../../lib/random';
@@ -36,6 +36,7 @@ interface PageProps {
   params?: {
     title?: string
   }
+  backButton?: (backButton: boolean) => void
 }
 
 interface PageState {
@@ -66,6 +67,7 @@ class Page extends React.Component<PageProps, PageState>{
   componentWillMount() {
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
     this.props.onChangeColor(this.props.defaultPrimaryColor, this.props.defaultAccentColor);
+    this.props.backButton(true);
   }
 
   onloaded(page: pageState) {
@@ -171,6 +173,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     },
     fullModel: (fullModelB: boolean) => {
       dispatch(fullModel(fullModelB));
+    },
+    backButton: (backButtonV: boolean)=>{
+      dispatch(backButton(backButtonV))
     }
   }
 }

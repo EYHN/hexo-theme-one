@@ -109,20 +109,23 @@ export default class Content extends React.Component<contentProps, contentState>
       return false
     }
   }
-  componentDidUpdate() {
-    this.putHTMLin();
-    $(this.refs['body']).html(this.state.content);
-  }
-  componentDidMount() {
-    this.putHTMLin();
-    $(this.refs['body']).html(this.state.content);
-  }
-  render() {
-    let {id, className = '', translate} = this.props
+  renderContent(){
     let content = this.state.content;
     if (!content || content == "") {
       content = this.excerpt();
     }
+    $(this.refs['body']).html(content);
+  }
+  componentDidUpdate() {
+    this.putHTMLin();
+    this.renderContent();
+  }
+  componentDidMount() {
+    this.putHTMLin();
+    this.renderContent();
+  }
+  render() {
+    let {id, className = '', translate} = this.props
     return (
       <div id={id}>
         {

@@ -22,7 +22,8 @@ interface MenuProps {
   onclickLeft?: (e: any) => void
   title?: string,
   fullModel?: boolean,
-  phone?: boolean
+  phone?: boolean,
+  backButton?: boolean
 }
 
 interface MenuStates {
@@ -87,7 +88,7 @@ class Menu extends React.Component<MenuProps, MenuStates>{
     $(window).unbind("scroll", this.scrollListener);
   }
   render() {
-    let {fullModel = false, phone} = this.props
+    let {fullModel = false, phone ,muiTheme,backButton = false } = this.props
     return (
       <div className={style.Menu + " " + (fullModel ? "" : this.state.outClassName)}>
         <AppBar
@@ -96,7 +97,20 @@ class Menu extends React.Component<MenuProps, MenuStates>{
           iconElementRight={<IconButton onClick={() => { routerHistory.push("/search/") }}><SearchIcon></SearchIcon></IconButton>}
           title={<span className={style.title}>{this.props.title || ""}</span>}
           titleStyle={{ fontSize: '22px' }}
+          iconElementLeft={<IconButton><a className={style.menu + " " + (backButton?style.back:"")}><span></span></a></IconButton>}
         />
+        <style>
+          {
+            `.${style.menu} span {
+                  background: ${muiTheme.appBar.textColor};
+              }
+              .${style.menu} span:after,
+              .${style.menu} span:before {
+                  background: ${muiTheme.appBar.textColor};
+              }
+            `
+          }
+        </style>
       </div>
     )
   }
@@ -106,7 +120,8 @@ const mapStateToProps = (state: AppState) => {
   return {
     title: state.nav.title,
     fullModel: state.nav.fullModel,
-    phone: state.windowSize.smaller.than.phone
+    phone: state.windowSize.smaller.than.phone,
+    backButton: state.nav.backButton
   }
 }
 
