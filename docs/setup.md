@@ -19,27 +19,15 @@ $ npm install
 > npm i lodash.pick --save
 > ```
 
-## clone 本主题
+## 下载本主题
 
-```
-$ git clone https://github.com/EYHN/hexo-theme-one.git
-$ cd hexo-theme-one
-$ npm i
-```
+在[https://github.com/EYHN/hexo-theme-one/releases](https://github.com/EYHN/hexo-theme-one/releases)下载最新版本的主题，解压到hexo的themes目录
 
 ## 安装
 
-修改目录中的build.cson文件中的hexo路径为：
+将本主题设置为hexo默认主题。
 
-```
-<hexo-folder>/themes/one
-```
-
-运行
-
-```
-$ npm run hexo
-```
+并重命名主题目录中的 `_config.yml.example` 为 `_config.yml`
 
 [下一篇 基本设置](./setting.md)
 
