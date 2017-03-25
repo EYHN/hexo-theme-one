@@ -22,6 +22,7 @@ import { setNavTitle, fullModel } from '../../actions/nav';
 import Comment from '../comment/comment';
 import { Card } from 'material-ui/Card';
 import { FormattedDate } from 'react-intl';
+import categories from '../../reducers/categories';
 var style = require("./post.less");
 
 interface PostProps {
@@ -92,6 +93,7 @@ class Post extends React.Component<PostProps, PostState>{
         this.onloaded(post)
       }
     }
+    let {categories = []} = post;
     return (
       <div className="Post">
         <Grid>
@@ -105,10 +107,13 @@ class Post extends React.Component<PostProps, PostState>{
               }}
               translate
               toc={this.toc.bind(this)}
-               />
+            />
             <Card className={style.commentCard}>
               {
-                (slug != '' && post.title) ? <Comment postID={slug} className={style.Comment} url={url.resolve(this.props.siteUrl,'./post/' + post.title)} postTitle={post.title.toString()}></Comment> : undefined
+                (slug != '' && post.title) ? <Comment postID={slug} className={style.Comment} 
+                url={url.resolve(this.props.siteUrl, './post/' + post.title)} 
+                postTitle={post.title.toString()} 
+                postCategory={typeof categories[0] === "undefined" ? undefined : categories[0].name}></Comment> : undefined
               }
             </Card>
           </div>

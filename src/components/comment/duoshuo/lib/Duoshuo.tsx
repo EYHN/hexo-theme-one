@@ -1,16 +1,19 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom'
 import * as MarkdownIt from 'markdown-it'
-const duoshuocss = require("!style!css!less!../duoshuocss/embed.less")
 
-const js = require("!raw-loader!./embed.min.js");
+if (typeof window.duoshuoQuery !== "undefined"){
+  window.mdIt = new MarkdownIt({
+    html: true,
+    linkify: true
+  });
 
-window.mdIt = new MarkdownIt({
-  html: true,
-  linkify: true
-});
+  const duoshuocss = require("!style!css!less!../duoshuocss/embed.less")
 
-$("body").append(`<script>${js}</script>`);
+  const js = require("!raw-loader!./embed.min.js");
+
+  $("body").append(`<script>${js}</script>`);
+}
 
 interface DuoshuoProps {
     thread: string,

@@ -122,7 +122,10 @@ class Page extends React.Component<PageProps, PageState>{
             page.comments ?
               <Card className={style.commentCard}>
                 {
-                  (title != '' && page.title) ? <Comment postID={title} url={url.resolve(this.props.siteUrl,'./page/' + page.title)} className={style.Comment} postTitle={page.title.toString()}></Comment> : undefined
+                  (title != '' && page.title) ? <Comment postID={title} 
+                  url={url.resolve(this.props.siteUrl,'./page/' + page.title)} 
+                  className={style.Comment} postTitle={page.title.toString()}
+                  postCategory={"page"}></Comment> : undefined
                 }
               </Card> : undefined
           }

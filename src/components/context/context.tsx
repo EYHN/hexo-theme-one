@@ -111,9 +111,11 @@ export default class Content extends React.Component<contentProps, contentState>
   }
   componentDidUpdate() {
     this.putHTMLin();
+    $(this.refs['body']).html(this.state.content);
   }
   componentDidMount() {
     this.putHTMLin();
+    $(this.refs['body']).html(this.state.content);
   }
   render() {
     let {id, className = '', translate} = this.props
@@ -137,7 +139,7 @@ export default class Content extends React.Component<contentProps, contentState>
             </IconMenu>
             : undefined
         }
-        <div ref="body" className={className + " " + style.context} id="post-content" dangerouslySetInnerHTML={{ __html: content }}>
+        <div ref="body" className={className + " " + style.context} id="post-content">
         </div>
       </div>
     )

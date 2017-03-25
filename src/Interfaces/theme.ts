@@ -43,6 +43,10 @@ export interface theme {
   comment?: {
     duoshuo?: {
       shortName?: string
+    },
+    disqus?: {
+      shortName?: string,
+      
     }
   }
   Drawer?: DrawerItemI[]

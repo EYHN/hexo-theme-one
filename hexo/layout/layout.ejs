@@ -9,9 +9,12 @@
 <body>
   <div id="app"></div>
   <script type="text/javascript">
+    <% if(typeof theme.comment !== "undefined" && typeof theme.comment.duoshuo !== "undefined") { %>
     var duoshuoQuery = { short_name: <%- JSON.stringify(theme.comment.duoshuo.shortName) %>, theme: "none" }
+    <% } %>
     window.rootUrl = <%- JSON.stringify(config.root) %>
   </script>
+  <script type="text/javascript" src="<%= config.root %>vendor.js"></script>
   <script type="text/javascript" src="<%= config.root %>bundle.js"></script>
 </body>
 </html>

@@ -30,10 +30,13 @@ var HtmlWebpackConfig = {
 };
 
 module.exports = {
-    entry: [
-        'babel-polyfill',
-        "./src/main.tsx"
-    ],
+    entry: {
+        bundle: [
+            'babel-polyfill',
+            "./src/main.tsx"
+        ],
+        vendor: ['react','jquery','material-ui','react-dom']
+    },
     output: {
         filename: "bundle.js",
         path: __dirname + "/dist"
@@ -46,7 +49,8 @@ module.exports = {
         new webpack.DefinePlugin(GLOBALS),
         new HtmlWebpackPlugin(HtmlWebpackConfig),
         new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
-        new BundleAnalyzerPlugin()
+        new BundleAnalyzerPlugin(),
+        new webpack.optimize.CommonsChunkPlugin('vendor',  'vendor.js')
     ],
 
     resolve: {
