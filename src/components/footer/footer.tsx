@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import AppState from '../../stateI';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import Grid from '../grid/grid';
+import { array_randS } from '../../lib/random';
 const style = require("./footer.less")
 
 interface FooterProps {
   muiTheme?: __MaterialUI.Styles.MuiTheme
   className?: string
   style?:React.CSSProperties
+  rightText?: string
+  centerText?: string
 }
 
 class Footer extends React.Component<FooterProps, undefined>{
@@ -37,10 +40,10 @@ class Footer extends React.Component<FooterProps, undefined>{
               }}>one</a>
             </p>
             <span className={style.s2}>
-              Copyright © 2016 - 2017 EYHN
+              {this.props.centerText || ""}
             </span>
             <p className={style.s3}>
-            1
+              {this.props.rightText || ""}
             </p>
           </Grid>
         </div>
@@ -50,9 +53,11 @@ class Footer extends React.Component<FooterProps, undefined>{
 }
 
 const mapStateToProps = (state: AppState) => {
-  
+  let {footer=["",""]} = state.theme
+  let [center = "",right = ""] = footer;
   return {
-
+    centerText: array_randS(center),
+    rightText: array_randS(right)
   }
 }
 

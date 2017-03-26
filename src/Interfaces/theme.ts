@@ -52,4 +52,5 @@ export interface theme {
   Drawer?: DrawerItemI[]
   homeToolBar?:barMenu[]
   colorPicker?:boolean
+  footer?: string[][]
 }
