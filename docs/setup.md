@@ -2,7 +2,7 @@
 
 在安装前请先确保安装最新的 nodejs 和 [hexo](https://hexo.io/)。
 
-> 较旧的版本可能出现难以判断的错误
+> 较旧的版本可能出现难以预料的错误
 
 ## 创建新博客（强烈建议创建新的hexo）
 
@@ -18,10 +18,11 @@ $ npm install
 > ```
 > npm i lodash.pick --save
 > ```
+> 完成安装即可，无需更多设置。
 
 ## 下载本主题
 
-在[https://github.com/EYHN/hexo-theme-one/releases](https://github.com/EYHN/hexo-theme-one/releases)下载最新版本的主题，解压到hexo的themes目录
+在[https://github.com/EYHN/hexo-theme-one/releases](https://github.com/EYHN/hexo-theme-one/releases)下载最新版本的主题，解压到hexo的themes目录.
 
 ## 安装
 

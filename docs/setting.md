@@ -16,9 +16,9 @@ head:
 
 # uiux
 
-## slogan <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+# 标语
 
-标语
+slogan <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 ## defaultPrimaryColor <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
@@ -69,13 +69,10 @@ head:
 
 </br>
 
-# comment
+# comment 评论框
 
-## duoshuo
+## disqus
 
-## shortName <small style="font-size:14px"><i>string</i></small>
-
-`shortName`可以在多说后台获取
 
 </br>
 
