@@ -18,10 +18,11 @@ import FixedAt from '../fixedAt/fixedAt';
 import { addBackGroundImg } from '../../actions/background';
 const url = require('url');
 import FontIcon from 'material-ui/FontIcon';
-import { setNavTitle, fullModel } from '../../actions/nav';
+import { setNavTitle, fullModel, backButton } from '../../actions/nav';
 import Comment from '../comment/comment';
 import { Card } from 'material-ui/Card';
 import { FormattedDate } from 'react-intl';
+import categories from '../../reducers/categories';
 var style = require("./post.less");
 
 interface PostProps {
@@ -38,6 +39,7 @@ interface PostProps {
   siteUrl?: string
   addBackGroundImg?: (backgroundImg: string, key: string) => void
   fullModel?: (fullModelB: boolean) => void
+  backButton?: (backButton: boolean) => void
 }
 
 interface PostState {
@@ -67,6 +69,7 @@ class Post extends React.Component<PostProps, PostState>{
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
     this.props.onChangeColor(this.props.defaultPrimaryColor, this.props.defaultAccentColor);
     this.props.fullModel(false)
+    this.props.backButton(true);
   }
   onloaded(post: postState) {
     if (post.primarycolor || post.accentcolor)
@@ -92,6 +95,7 @@ class Post extends React.Component<PostProps, PostState>{
         this.onloaded(post)
       }
     }
+    let {categories = []} = post;
     return (
       <div className="Post">
         <Grid>
@@ -105,10 +109,13 @@ class Post extends React.Component<PostProps, PostState>{
               }}
               translate
               toc={this.toc.bind(this)}
-               />
+            />
             <Card className={style.commentCard}>
               {
-                (slug != '' && post.title) ? <Comment postID={slug} className={style.Comment} postTitle={post.title.toString()}></Comment> : undefined
+                (slug != '' && post.title) ? <Comment postID={slug} className={style.Comment} 
+                url={url.resolve(this.props.siteUrl, './post/' + post.title)} 
+                postTitle={post.title.toString()} 
+                postCategory={typeof categories[0] === "undefined" ? undefined : categories[0].name}></Comment> : undefined
               }
             </Card>
           </div>
@@ -154,6 +161,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     },
     fullModel: (fullModelB: boolean) => {
       dispatch(fullModel(fullModelB));
+    },
+    backButton: (backButtonV: boolean)=>{
+      dispatch(backButton(backButtonV))
     }
   }
 }

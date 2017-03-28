@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 import { getPage } from '../../actions/page';
 import { changeColor } from '../../actions/theme';
 import { addBackGroundImg } from '../../actions/background';
-import { setNavTitle, fullModel } from '../../actions/nav';
+import { setNavTitle, fullModel, backButton } from '../../actions/nav';
 import { toc } from '../context/context';
 import * as _ from 'underscore'
 import { array_rand, array_randS } from '../../lib/random';
@@ -36,6 +36,7 @@ interface PageProps {
   params?: {
     title?: string
   }
+  backButton?: (backButton: boolean) => void
 }
 
 interface PageState {
@@ -66,7 +67,7 @@ class Page extends React.Component<PageProps, PageState>{
   componentWillMount() {
     this.default_thumbnail = array_rand(Cstate.theme.img.post_thumbnail)
     this.props.onChangeColor(this.props.defaultPrimaryColor, this.props.defaultAccentColor);
-    this.props.fullModel(true)
+    this.props.backButton(true);
   }
 
   onloaded(page: pageState) {
@@ -78,6 +79,8 @@ class Page extends React.Component<PageProps, PageState>{
       this.props.setNavTitle(page.title)
     if (background)
       this.props.fullModel(false)
+    else
+      this.props.fullModel(true)
   }
 
   render() {
@@ -100,7 +103,7 @@ class Page extends React.Component<PageProps, PageState>{
       }
     }
     return (
-    <div className={"Page " + background?"":"pagefullModel"}>
+    <div className={"Page " + (background?"":"pagefullModel")}>
       <Grid>
         <div className={style.page}>
           <PostCard
@@ -121,7 +124,10 @@ class Page extends React.Component<PageProps, PageState>{
             page.comments ?
               <Card className={style.commentCard}>
                 {
-                  (title != '' && page.title) ? <Comment postID={title} className={style.Comment} postTitle={page.title.toString()}></Comment> : undefined
+                  (title != '' && page.title) ? <Comment postID={title} 
+                  url={url.resolve(this.props.siteUrl,'./page/' + page.title)} 
+                  className={style.Comment} postTitle={page.title.toString()}
+                  postCategory={"page"}></Comment> : undefined
                 }
               </Card> : undefined
           }
@@ -167,6 +173,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     },
     fullModel: (fullModelB: boolean) => {
       dispatch(fullModel(fullModelB));
+    },
+    backButton: (backButtonV: boolean)=>{
+      dispatch(backButton(backButtonV))
     }
   }
 }

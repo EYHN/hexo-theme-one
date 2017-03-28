@@ -1,3 +1,6 @@
+import * as $ from 'jquery';
+window.jQuery = $;
+window.$ = $;
 import routerHistory from './lib/History';
 import { array_randS } from './lib/random';
 import { darkBlack, grey600 } from 'material-ui/styles/colors';
@@ -43,7 +46,7 @@ let history:History;
 const Main = ({store}: { store: Store<any> }) => (
   <Provider store={store}>
     <Router history={history} render={applyRouterMiddleware(useScroll())}>
-      <Route path="/" component={App}>
+      <Route path={window.rootUrl || "/"} component={App}>
         <IndexRoute component={Home} />
         <Route path="/post/:slug" component={Post} />
         <Route path="/page/:title" component={Page} />

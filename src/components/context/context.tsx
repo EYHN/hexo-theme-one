@@ -1,37 +1,14 @@
 import * as React from 'react';
-import * as MarkdownIt from 'markdown-it'
 import { googleTranslate } from '../../lib/translate';
 import IconButton from 'material-ui/IconButton';
 import TranslateIcon from 'material-ui/svg-icons/action/translate';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 let style = require("./context.less");
-let markdownItTocAndAnchor = require('../../lib/markdown-it-toc-and-anchor/index.js').default;
-var hljs = require('highlight.js'); // https://highlightjs.org/
-
-require('!style-loader!css-loader!highlight.js/styles/github.css'); // https://highlightjs.org/
-
-let md = new MarkdownIt({
-  html: true,
-  linkify: true,
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(lang, str).value;
-      } catch (__) {}
-    }
-
-    return ''; // use external default escaping
-  }
-})
-  .use(markdownItTocAndAnchor, {
-    anchorLink: false
-  });
 
 interface contentProps {
   id?: string,
   className?: string,
-  markdown?: boolean,
   content?: string,
   excerpt?: string,
   translate?: boolean
@@ -58,6 +35,7 @@ interface contentState {
 export default class Content extends React.Component<contentProps, contentState>{
   sourceText: string;
   translated: boolean;
+  loadToc: boolean = false;
   constructor() {
     super();
     this.state = {
@@ -72,28 +50,28 @@ export default class Content extends React.Component<contentProps, contentState>
     if (this.props.content) {
       if (this.state.content == "") {
         let html = this.props.content;
-        if (this.props.markdown) {
-          html = md.render(this.props.content, {
-            tocCallback: (tocMarkdown: any, tocArray: toc[], tocHtml: any) => {
-              if (this.props.toc) {
-                this.props.toc(tocArray);
-              }
-            }
-          })
-        }
         this.sourceText = html;
         this.setState({
           content: html
         })
+        setTimeout(() => {
+          this.props.toc($(this.refs["body"]).find("a.headerlink").toArray().map((dom) => {
+            return {
+              anchor: $(dom).parent().attr("id"),
+              content: $(dom).parent().text(),
+              level: parseInt($(dom).parent()[0].tagName.charAt(1))
+            }
+          }));
+        }, 0)
+        this.loadToc = true;
       }
     }
   }
-  async translate(l:string) {
+  async translate(l: string) {
     if (this.sourceText) {
       let res = await googleTranslate("zh-CN", l, this.sourceText);
       let content = JSON.parse("\"" + res.result + "\"") as string;
       content = content.replace(/\/ /g, "/")
-      console.log(content)
       this.setState({
         content: content
       })
@@ -109,18 +87,23 @@ export default class Content extends React.Component<contentProps, contentState>
       return false
     }
   }
-  componentDidUpdate() {
-    this.putHTMLin();
-  }
-  componentDidMount() {
-    this.putHTMLin();
-  }
-  render() {
-    let {id, className = '', translate} = this.props
+  renderContent() {
     let content = this.state.content;
     if (!content || content == "") {
       content = this.excerpt();
     }
+    $(this.refs['body']).html(content);
+  }
+  componentDidUpdate() {
+    this.putHTMLin();
+    this.renderContent();
+  }
+  componentDidMount() {
+    this.putHTMLin();
+    this.renderContent();
+  }
+  render() {
+    let {id, className = '', translate} = this.props
     return (
       <div id={id}>
         {
@@ -132,12 +115,12 @@ export default class Content extends React.Component<contentProps, contentState>
               maxHeight={272}
               className={style.tools}
             >
-              <MenuItem primaryText="English" onClick={this.translate.bind(this,"en")} />
-              <MenuItem primaryText="日本語" onClick={this.translate.bind(this,"ja")} />
+              <MenuItem primaryText="English" onClick={this.translate.bind(this, "en")} />
+              <MenuItem primaryText="日本語" onClick={this.translate.bind(this, "ja")} />
             </IconMenu>
             : undefined
         }
-        <div ref="body" className={className + " " + style.context} dangerouslySetInnerHTML={{ __html: content }}>
+        <div ref="body" className={className + " " + style.context} id="post-content">
         </div>
       </div>
     )

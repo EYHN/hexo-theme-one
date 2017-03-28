@@ -18,7 +18,7 @@ import mainState from '../../main'
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import CircularProgress from 'material-ui/CircularProgress';
 import { addBackGroundImg, setBackGroundImg } from '../../actions/background';
-import { setNavTitle, fullModel } from '../../actions/nav';
+import { setNavTitle, fullModel, backButton } from '../../actions/nav';
 import { FormattedDate } from 'react-intl';
 var style = require("./home.less");
 
@@ -41,6 +41,7 @@ interface HomeProps {
   updatePostsP?: (index?: number) => void
   setBackGroundImg?: (backgroundImg: string, key: string) => void
   fullModel?: (fullModelB: boolean) => void
+  backButton?: (backButton: boolean) => void
 }
 
 interface HomeState {
@@ -54,6 +55,7 @@ class Home extends React.Component<HomeProps, HomeState>{
     this.props.onChooseColor(this.props.primaryColor, this.props.accentColor);
     this.props.fullModel(false)
     this.props.setNavTitle(title);
+    this.props.backButton(false);
   }
 
   constructor() {
@@ -170,6 +172,9 @@ const mapDispatchToProps = (dispatch: Dispatch<changeColorAction>) => {
     },
     fullModel: (fullModelB: boolean) => {
       dispatch(fullModel(fullModelB));
+    },
+    backButton: (backButtonV: boolean)=>{
+      dispatch(backButton(backButtonV))
     }
   }
 }

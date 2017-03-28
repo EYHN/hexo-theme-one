@@ -14,7 +14,7 @@ head:
 
 </br>
 
-# head
+# uiux
 
 ## slogan <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 

@@ -13,7 +13,7 @@ const url = require('url');
 
 let rootURL = window.rootUrl || "/";
 
-export var apiHref = process.env.NODE_ENV === "production"?url.resolve(rootURL,"./api/"):"https://delusion.coding.me/hexo-theme-design-Demo/api/"
+export var apiHref = process.env.NODE_ENV === "production"?url.resolve(rootURL,"./api/"):"https://huaji8.top/api/"
 
 export function getSite(href = apiHref) {
   return hexo.getSite(href);

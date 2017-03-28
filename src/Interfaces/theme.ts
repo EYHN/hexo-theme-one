@@ -5,7 +5,7 @@ export interface DrawerItemI {
   href?: string
   slug?: string
   initiallyOpen?: boolean
-  icon?: string
+  icon?: string | {type:string,date:any,style:any}
   nested?: DrawerItemI[]
 }
 
@@ -41,11 +41,13 @@ export interface theme {
     drawerHeaderBg?: string | Array<string>
   }
   comment?: {
-    duoshuo?: {
-      shortName?: string
+    disqus?: {
+      shortName?: string,
+      
     }
   }
   Drawer?: DrawerItemI[]
   homeToolBar?:barMenu[]
   colorPicker?:boolean
+  footer?: string[][]
 }

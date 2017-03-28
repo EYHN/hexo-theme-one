@@ -1,48 +1,50 @@
 import * as React from 'react';
-import Duoshuo from './duoshuo/duoshuo'
 import { connect } from 'react-redux';
 import AppState from '../../stateI';
-// const ReactDisqusThread = require('react-disqus-thread');
+const ReactDisqusThread = require('../../lib/react-disqus-thread/DisqusThread.jsx');
 
 interface commentProps {
   className?: string
   postID: string
   postTitle: string
   url?: string
-  shortname?:string
-  author?:string
+  disqus?: any
+  author?: string,
+  postCategory: string
 }
 
 export class Comment extends React.Component<commentProps, undefined>{
-  // handleNewComment(comment:any) {
-  // }
+  handleNewComment(comment: any) {
+    console.log(comment.text);
+  }
 
   render() {
-    let {url = window.location.href,shortname,className = "",author=""} = this.props
+    let {url = window.location.href, disqus = {}, className = "", author = "", postCategory, postTitle, postID} = this.props
     return (
       <div className={className}>
         {
-          typeof shortname !== "undefined"?<Duoshuo thread={this.props.postID} url={url} shortName={shortname} author={author}/>:undefined
+          typeof disqus.shortName !== "undefined" ?
+            <ReactDisqusThread
+              shortname={disqus.shortName}
+              identifier={postID}
+              title={postTitle}
+              url={encodeURI(url)}
+              category_id={postCategory}
+              onNewComment={this.handleNewComment} />
+            : undefined
         }
-        {/*<ReactDisqusThread
-          shortname="huaji"
-          identifier={this.props.postID}
-          title={this.props.postTitle}
-          url={url}
-          category_id="Tech"
-          onNewComment={this.handleNewComment} />*/}
       </div>
     )
   }
 }
 
-const mapStateToProps = (state: AppState)=>{
-  let {author=""} = state.site;
+const mapStateToProps = (state: AppState) => {
+  let {author = ""} = state.site;
   let {comment = {}} = state.theme;
-  let {duoshuo = {}} = comment;
+  let {disqus = {}} = comment;
   return {
-    author:author,
-    shortname:duoshuo.shortName
+    author: author,
+    disqus: disqus
   }
 }
 

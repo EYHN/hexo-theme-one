@@ -1,8 +1,11 @@
 @import "../../variable.less";
 .PostCard {
     composes: card from '../card/card.less';
-    composes: card-with-img from '../card/card.less';
     width: e("calc(100% - 16px)");
+}
+
+.PostCardWithImg { 
+    composes: card-with-img from '../card/card.less';
 }
 
 .CardImage {
