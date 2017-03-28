@@ -1,7 +1,6 @@
 
 declare interface Window {
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__:any
-  duoshuoQuery:any
   webkitScrollbar:any
   decodeURIComponent:any
   mdIt:any

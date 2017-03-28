@@ -16,6 +16,7 @@ import * as router from 'react-router';
 import { connect } from 'react-redux';
 import AppState from '../../stateI';
 import { Link } from 'react-router';
+import { buildPath } from '../../lib/History';
 
 interface MenuProps {
   muiTheme?: MuiTheme
@@ -94,7 +95,7 @@ class Menu extends React.Component<MenuProps, MenuStates>{
         <AppBar
           className={style.appbar + " " + (fullModel ? "" : this.state.className)}
           onLeftIconButtonTouchTap={this.props.onclickLeft}
-          iconElementRight={<IconButton onClick={() => { routerHistory.push("/search/") }}><SearchIcon></SearchIcon></IconButton>}
+          iconElementRight={<IconButton onClick={() => { routerHistory.push(buildPath("/search/")) }}><SearchIcon></SearchIcon></IconButton>}
           title={<span className={style.title}>{this.props.title || ""}</span>}
           titleStyle={{ fontSize: '22px' }}
           iconElementLeft={<IconButton><a className={style.menu + " " + (backButton?style.back:"")}><span></span></a></IconButton>}

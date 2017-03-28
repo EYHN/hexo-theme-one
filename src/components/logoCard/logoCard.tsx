@@ -14,6 +14,7 @@ import Divider from 'material-ui/Divider';
 import AppState from '../../stateI';
 import { connect } from 'react-redux';
 import { array_randS } from '../../lib/random';
+import { buildPath } from '../../lib/History';
 const url = require('url');
 var style = require('./logoCard.less')
 
@@ -33,7 +34,7 @@ class LogoCard extends React.Component<LogoCardProps, undefined>{
       case "sitelink":
         return <MenuItem
           primaryText={item.title}
-          onClick={() => { routerHistory.push(item.href) }}
+          onClick={() => { routerHistory.push(buildPath(item.href))}}
           key={item.title + item.type}
           className={style.ListItem} leftIcon={icon}
           menuItems={this.renderLists(item.nested)} />;
@@ -51,7 +52,7 @@ class LogoCard extends React.Component<LogoCardProps, undefined>{
           primaryText={item.title}
           className={style.ListItem}
           key={item.title + item.type}
-          onClick={() => { routerHistory.push("/page/" + item.name + "/") }}
+          onClick={() => { routerHistory.push(buildPath("/page/" + item.name + "/")) }}
           leftIcon={icon}
           menuItems={this.renderLists(item.nested)} />;
       default:

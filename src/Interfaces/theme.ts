@@ -41,9 +41,6 @@ export interface theme {
     drawerHeaderBg?: string | Array<string>
   }
   comment?: {
-    duoshuo?: {
-      shortName?: string
-    },
     disqus?: {
       shortName?: string,
       

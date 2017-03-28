@@ -19,6 +19,7 @@ import { toc } from '../context/context';
 import { postState } from '../../reducers/post';
 import { post } from '../../Interfaces/post'
 import { FormattedDate } from 'react-intl';
+import { buildPath } from '../../lib/History';
 var style = require('./postCard.less')
 
 interface PostCardProps {
@@ -78,7 +79,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
               >
                 {
                   link ?
-                    <Link to={link} className={style.Link}></Link> : undefined
+                    <Link to={buildPath(link)} className={style.Link}></Link> : undefined
                 }
               </div>
             </CardMedia>
@@ -99,7 +100,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
             </CardText>
         }
         <CardText>
-          <Content content={content} translate={translate} className={style.content} markdown={false} excerpt={excerpt} toc={this.props.toc} >
+          <Content content={content} translate={translate} className={style.content} excerpt={excerpt} toc={this.props.toc} >
 
           </Content>
         </CardText>
@@ -115,7 +116,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
             tags.map((value)=>{
               return <Link style={{
                     color: this.props.muiTheme.palette.accent1Color
-                  }} className={style.CardBottomLink} key={value.name} to={"/tags/" + value.name + "/"}>{value.name}</Link>
+                  }} className={style.CardBottomLink} key={value.name} to={buildPath("/tags/" + value.name + "/")}>{value.name}</Link>
             })
           }
           {
@@ -125,7 +126,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
             categories.map((value)=>{
               return <Link style={{
                     color: this.props.muiTheme.palette.accent1Color
-                  }} className={style.CardBottomLink} key={value.name} to={"/categories/" + value.name + "/"}>{value.name}</Link>
+                  }} className={style.CardBottomLink} key={value.name} to={buildPath("/categories/" + value.name + "/")}>{value.name}</Link>
             })
           }
           </CardText>

@@ -19,6 +19,7 @@ import { DrawerItemI } from '../../Interfaces/theme';
 import FontIcon from 'material-ui/FontIcon';
 import { array_randS } from '../../lib/random';
 import SvgIcon from 'material-ui/SvgIcon';
+import { buildPath } from '../../lib/History';
 const url = require('url');
 
 interface DrawerProps {
@@ -70,7 +71,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
       case "sitelink":
         return <ListItem onTouchTap={this.props.onTouchTap}
           primaryText={item.title}
-          onClick={()=>{routerHistory.push(item.href)}}
+          onClick={()=>{routerHistory.push(buildPath(item.href))}}
           key={item.title + item.type}
           initiallyOpen={item.initiallyOpen}
           className={style.ListItem} leftIcon={this.getIcon(item.icon)}
@@ -91,7 +92,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState>{
           className={style.ListItem}
           key={item.title + item.type}
           initiallyOpen={item.initiallyOpen}
-          onClick={()=>{routerHistory.push("/page/" + item.name + "/")}}
+          onClick={()=>{routerHistory.push(buildPath("/page/" + item.name + "/"))}}
           leftIcon={this.getIcon(item.icon)}
           nestedItems={this.renderLists(item.nested)} />;
       default:

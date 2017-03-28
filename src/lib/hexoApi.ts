@@ -10,7 +10,7 @@ import * as fetch from 'isomorphic-fetch';
 import { page } from '../Interfaces/page';
 const url = require('url');
 
-export var apiHref = "https://delusion.coding.me/hexo-theme-design-Demo/api"
+export var apiHref = "https://delusion.coding.me/blog/api"
 
 const fetchConfig = {
 }

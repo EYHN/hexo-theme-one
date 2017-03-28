@@ -5,14 +5,17 @@
   <title><%= config.title %></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <% site.pages.filter((obj)=>{
+    return obj.layout === 'head'
+  }).forEach((obj)=>{ %>
+    <%- obj._content %>
+  <%})%>
 </head>
 <body>
   <div id="app"></div>
   <script type="text/javascript">
-    <% if(typeof theme.comment !== "undefined" && typeof theme.comment.duoshuo !== "undefined") { %>
-    var duoshuoQuery = { short_name: <%- JSON.stringify(theme.comment.duoshuo.shortName) %>, theme: "none" }
-    <% } %>
     window.rootUrl = <%- JSON.stringify(config.root) %>
+    window.one = <%- JSON.stringify({site:config,theme:theme}) %>
   </script>
   <script type="text/javascript" src="<%= config.root %>vendor.js"></script>
   <script type="text/javascript" src="<%= config.root %>bundle.js"></script>

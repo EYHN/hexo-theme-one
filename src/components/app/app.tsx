@@ -26,6 +26,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import Header from '../header/header';
 import routerHistory from '../../lib/History';
+import { buildPath } from '../../lib/History';
 const MaterialIconseot = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.eot");
 const MaterialIconsttf = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.ttf");
 const MaterialIconswoff = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff");
@@ -78,13 +79,14 @@ export class App extends React.Component<AppProps, AppComponentState>{
   }
 
   back() {
-    routerHistory.push("/");
+    routerHistory.push(buildPath("/"));
   }
 
   render() {
     let {color = {}, fullModel = false, siteUrl = "/",backButton = false} = this.props;
     let {primaryColor, accentColor} = color;
     let t = color2Theme(primaryColor, accentColor,"light");
+    console.log(this.props);
     t.fontFamily = '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
     let Theme = getMuiTheme(t);
     return (
