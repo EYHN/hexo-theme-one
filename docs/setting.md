@@ -20,30 +20,30 @@ head:
 
 slogan <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
-## defaultPrimaryColor <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+# 默认主色
 
-默认主色
+defaultPrimaryColor <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+
+# 默认强调色
 
 ## defaultAccentColor <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
-
-默认强调色
 
 </br>
 
 
 # head
 
-## favicon <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+## 站点图标
 
-站点图标
+favicon <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 </br>
 
-# img
+# img 图像
 
-## avatar <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+## 用户头像 (avater)
 
-用户头像
+avatar <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 ## left_pic <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
