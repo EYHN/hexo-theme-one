@@ -83,9 +83,9 @@ export class App extends React.Component<AppProps, AppComponentState>{
   }
 
   render() {
-    let {color = {}, fullModel = false, siteUrl = "/",backButton = false} = this.props;
+    let {color = {}, fullModel = false, siteUrl = "/", backButton = false} = this.props;
     let {primaryColor, accentColor} = color;
-    let t = color2Theme(primaryColor, accentColor,"light");
+    let t = color2Theme(primaryColor, accentColor, "light");
     console.log(this.props);
     t.fontFamily = '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
     let Theme = getMuiTheme(t);
@@ -97,7 +97,7 @@ export class App extends React.Component<AppProps, AppComponentState>{
           <div style={{
             fontFamily: Theme.fontFamily
           }} className={style.body}>
-            <Header/>
+            <Header />
             <style>
               {
                 `
@@ -105,32 +105,34 @@ export class App extends React.Component<AppProps, AppComponentState>{
                   font-family: 'Material Icons';
                   font-style: normal;
                   font-weight: 400;
-                  src: url(${url.resolve(siteUrl,MaterialIconseot)}); /* For IE6-8 */
+                  src: url(${url.resolve(siteUrl, MaterialIconseot)}); /* For IE6-8 */
                   src: local('Material Icons'),
                       local('MaterialIcons-Regular'),
-                      url(${url.resolve(siteUrl,MaterialIconswoff2)}) format('woff2'),
-                      url(${url.resolve(siteUrl,MaterialIconswoff)}) format('woff'),
-                      url(${url.resolve(siteUrl,MaterialIconsttf)}) format('truetype');
+                      url(${url.resolve(siteUrl, MaterialIconswoff2)}) format('woff2'),
+                      url(${url.resolve(siteUrl, MaterialIconswoff)}) format('woff'),
+                      url(${url.resolve(siteUrl, MaterialIconsttf)}) format('truetype');
                 }
                 `
               }
             </style>
-            <Menu onclickLeft={backButton?this.back.bind(this):this.MenuToggle.bind(this)} />
+            <Menu onclickLeft={backButton ? this.back.bind(this) : this.MenuToggle.bind(this)} />
             <Background />
             <Drawer
               open={this.state.sidebar}
               onRequestChange={this.MenuToggle.bind(this)}
-              onTouchTap={()=>{this.setState({
-                ...this.state,
-                sidebar: false
-              })}}
+              onTouchTap={() => {
+                this.setState({
+                  ...this.state,
+                  sidebar: false
+                })
+              }}
             />
             <div id={style.container} className={fullModel ? style.fullModel : undefined}>
               <main id={style.main}>
                 <ReactCSSTransitionGroup
                   component="div"
                   transitionName="route-page"
-                  transitionEnterTimeout={450}
+                  transitionEnterTimeout={900}
                   transitionLeaveTimeout={450}
                   className={style.TransitionGroup}
                 >
