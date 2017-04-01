@@ -26,13 +26,15 @@ date: 2013/7/13 20:46:25
 
 # 参数
 
-* title: 标题
-* date: 建立日期 文件建立日期
-* tags: 标签
-* categories: 分类
-* thumbnail: 支持数组 文章图片
-* primarycolor: 支持数组 文章主色
-* accentcolor: 支持数组 文章强调色
+| 参数       | 描述      | 备注       |
+|:---------:|:---------:|:----------:|
+title       | 标题       |            |
+date        | 建立日期    | 文件建立日期 |
+tags        | 标签       |            |
+categories  | 分类       |            |
+thumbnail: 支持数组 文章图片
+primarycolor: 支持数组 文章主色
+accentcolor: 支持数组 文章强调色
 
 [下一篇  页面 Front-matter](./Page-Front-matter.md)
 
