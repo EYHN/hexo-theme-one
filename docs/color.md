@@ -5,7 +5,6 @@
 ## 支持颜色
 | 颜色       | Color      | 效果       |
 |:---------:|:---------:|:----------:|
-
 红| <span style="color:#F44336">red</span> | ![](https://img.shields.io/badge/color-red-F44336.svg)
 <span style="color:#00BCD4">cyan</span> ![](https://img.shields.io/badge/color-cyan-00BCD4.svg)
 <span style="color:#E91E63">pink</span>  ![](https://img.shields.io/badge/color-pink-E91E63.svg)
