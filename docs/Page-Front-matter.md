@@ -28,12 +28,12 @@ date: 2013/7/13 20:46:25
 
 | 参数       | 描述      | 默认值       |
 |:---------:|:---------:|:----------:|
-title       | 标题
+title       | 标题       | -
 date        | 建立日期    | 文件建立日期
 comments    | 是否开启评论功能 | 默认为 true
-thumbnail   | 页面图片
-primarycolor| 文章主色
-accentcolor | 文章强调色
+thumbnail   | 页面图片    | -
+primarycolor| 文章主色    | -
+accentcolor | 文章强调色  | -
 background  | 开启背景     | 默认为 true
 toc         | 开启toc导航  | 默认为 true
 html        | 跳过markdown解析 | 默认为 false
