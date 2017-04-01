@@ -1,5 +1,7 @@
 # 基本设置
 
+<theme>/_config.yml的简单设置。
+
 下列设置中标注支持数组的，若没有明确说明，就是指允许接收数组数据在前端随机选择。
 
 例如：
@@ -74,8 +76,8 @@ post_thumbnail <small style="font-size:14px"><i>string | string[] 支持数组</
 # comment 评论框
 
 ## disqus
-    disqus: shortName: "xxx"
-    填入自己的shortname
+disqus: shortName: "xxx"
+填入自己的shortname即可。
 
 </br>
 
@@ -107,15 +109,15 @@ type <small style="font-size:14px"><i>string</i></small>
 
 > href <small style="font-size:14px"><i>string</i></small>：当type为 sitelink 或 link 时生效
 
-##目标url
+## 目标url
 
 icon <small style="font-size:14px"><i>string</i></small>
 
-##material图标名
+## material图标名
 
 nested <small style="font-size:14px"><i>object[]</i></small>
 
-##子目录数组
+## 子目录数组
 
 initiallyOpen <small style="font-size:14px"><i>boolean</i></small>
 
