@@ -1,6 +1,6 @@
 # 基本设置
 
-> <theme>/_config.yml的简单设置。
+> 主题目录下_config.yml的简单设置。
 
 下列设置中标注支持数组的，若没有明确说明，就是指允许接收数组数据在前端随机选择。
 
@@ -60,10 +60,10 @@ right_pic <small style="font-size:14px"><i>string | string[] 支持数组</i></s
 
 post_thumbnail <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
+## 侧边栏图片
 
-## drawerHeaderBg <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+drawerHeaderBg <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
-侧边栏图片
 
 </br>
 
@@ -78,16 +78,15 @@ post_thumbnail <small style="font-size:14px"><i>string | string[] 支持数组</
 ## disqus
 disqus: shortName: "xxx"
 填入自己的shortname即可。
+> 现已停止对多说的支持。
 
 </br>
 
-# Drawer 
+# Drawer 侧边栏抽屉
 
 <small style="font-size:14px"><i>object[]</i></small>
 
-> 这个稍微有点复杂,同时功能强大,最下面有例子
-
-
+> 本功能略微复杂,但功能亦很强大,最下面有示例。
 
 ## 侧边栏列表数组
 
@@ -125,7 +124,7 @@ initiallyOpen <small style="font-size:14px"><i>boolean</i></small>
 
 为`true`时默认展开
 
-例：
+例如：
 
 ```
 Drawer:
