@@ -26,9 +26,9 @@ $ npm install
 
 ## 安装
 
-将本主题设置为hexo默认主题。
+将本主题设置为hexo默认主题。（在站点配置文件里将默认主题字段设置为与存放主题的文件夹相同的值）
 
-并重命名主题目录中的 `_config.yml.example` 为 `_config.yml`
+并重命名主题目录中的 `_config.yml.example` 为 `_config.yml`，依据需要进行修改。
 
 [下一篇 基本设置](./setting.md)
 

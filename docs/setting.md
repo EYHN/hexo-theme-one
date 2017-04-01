@@ -26,7 +26,7 @@ defaultPrimaryColor <small style="font-size:14px"><i>string | string[] 支持数
 
 # 默认强调色
 
-## defaultAccentColor <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+defaultAccentColor <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
 </br>
 
@@ -45,17 +45,19 @@ favicon <small style="font-size:14px"><i>string | string[] 支持数组</i></sma
 
 avatar <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
-## left_pic <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+## 首页左边的图片
 
-首页左边的图片
+left_pic <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
-## right_pic <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
-首页右边的图片（在移动端不会显示）
+## 首页右边的图片（在移动端不会显示）
 
-## post_thumbnail <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+right_pic <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
-默认文章图片
+## 默认文章图片
+
+post_thumbnail <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+
 
 ## drawerHeaderBg <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
 
@@ -72,21 +74,27 @@ avatar <small style="font-size:14px"><i>string | string[] 支持数组</i></smal
 # comment 评论框
 
 ## disqus
-
+    disqus: shortName: "xxx"
+    填入自己的shortname
 
 </br>
 
-# Drawer <small style="font-size:14px"><i>object[]</i></small>
+# Drawer 
+
+<small style="font-size:14px"><i>object[]</i></small>
 
 > 这个稍微有点复杂,同时功能强大,最下面有例子
 
-侧边栏列表数组
 
-## title <small style="font-size:14px"><i>string</i></small>
 
-侧边栏项目标题
+## 侧边栏列表数组
 
-## type <small style="font-size:14px"><i>string</i></small>
+title <small style="font-size:14px"><i>string</i></small>
+
+
+## 侧边栏项目标题
+
+type <small style="font-size:14px"><i>string</i></small>
 
 侧边栏项目类型
 
@@ -97,21 +105,19 @@ avatar <small style="font-size:14px"><i>string | string[] 支持数组</i></smal
 
 不填写点击就没有任何反应。
 
-## href <small style="font-size:14px"><i>string</i></small>
+> href <small style="font-size:14px"><i>string</i></small>：当type为 sitelink 或 link 时生效
 
-> 当type为 sitelink 或 link 时生效
+##目标url
 
-目标url
+icon <small style="font-size:14px"><i>string</i></small>
 
-## icon <small style="font-size:14px"><i>string</i></small>
+##material图标名
 
-material图标名
+nested <small style="font-size:14px"><i>object[]</i></small>
 
-## nested <small style="font-size:14px"><i>object[]</i></small>
+##子目录数组
 
-子目录数组
-
-## initiallyOpen <small style="font-size:14px"><i>boolean</i></small>
+initiallyOpen <small style="font-size:14px"><i>boolean</i></small>
 
 > 当指定nested时生效
 
