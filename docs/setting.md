@@ -20,11 +20,12 @@ head:
 
 # 标语
 
-slogan <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+slogan <small style="font-size:14px"><i>string | string[] 
+支持数组</i></small>
 
 # 默认主色
 
-defaultPrimaryColor <small style="font-size:14px"><i>string | string[] 支持数组</i></small>
+defaultPrimaryColor <small style="font-size:14px"><i>string | string[ ] 支持数组</i></small>
 
 # 默认强调色
 
