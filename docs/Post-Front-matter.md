@@ -32,9 +32,9 @@ title       | 标题       |            |
 date        | 建立日期    | 文件建立日期 |
 tags        | 标签       |            |
 categories  | 分类       |            |
-thumbnail: 支持数组 文章图片
-primarycolor: 支持数组 文章主色
-accentcolor: 支持数组 文章强调色
+thumbnail   | 文章图片    | 支持数组    |
+primarycolor| 文章主色    | 支持数组    |
+accentcolor | 文章强调色  | 支持数组    |
 
 [下一篇  页面 Front-matter](./Page-Front-matter.md)
 
