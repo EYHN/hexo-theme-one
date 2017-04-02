@@ -12,9 +12,6 @@
 亮蓝|<span style="color:#03A9F4">lightBlue</span> | ![](https://img.shields.io/badge/color-lightBlue-03A9F4.svg)
 白|<span style="color:#f1f3f4,background-color:#000">white</span> | ![](https://img.shields.io/badge/color-white-f1f3f4.svg)
 深紫|<span style="color:#673AB7">deepPurple</span> | ![](https://img.shields.io/badge/color-deepPurple-673AB7.svg)
-<<<<<<< HEAD
-=======
 紫|purple |[](https://img.shields.io/badge/color-Purple-9C27B0.svg)
 
->>>>>>> 799f27219dda3ce3cb1fb4cc423c9bb9b1cb02b0
 [回到首页](./README.md)
