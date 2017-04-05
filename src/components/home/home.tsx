@@ -1,25 +1,21 @@
+import { setBackGroundImg } from '../../actions/background';
+import { backButton, fullModel, setNavTitle } from '../../actions/nav';
+import { updatePostsP } from '../../actions/posts';
 import { changeColor, changeColorAction } from '../../actions/theme';
 import { array_randS } from '../../lib/random';
-const url = require('url');
-import { apiHref } from '../../lib/hexoApi';
 import { postsState } from '../../reducers/posts';
-import { updatePostsAction, updatePostsP } from '../../actions/posts';
-import * as React from 'react';
 import AppState from '../../stateI';
-import WelcomeCard from '../WelcomeCard/WelcomeCard'
-import LogoCard from '../logoCard/logoCard'
-import PostCard from '../postCard/postCard'
-import DisplayTrigger from '../displayTrigger/displayTrigger'
-import Grid from '../grid/grid'
-import { Dispatch } from 'redux'
-import { connect } from 'react-redux'
-import { siteState } from '../../reducers/site'
-import mainState from '../../main'
-import muiThemeable from 'material-ui/styles/muiThemeable';
+import DisplayTrigger from '../displayTrigger/displayTrigger';
+import Grid from '../grid/grid';
+import LogoCard from '../logoCard/logoCard';
+import PostCard from '../postCard/postCard';
+import WelcomeCard from '../WelcomeCard/WelcomeCard';
 import CircularProgress from 'material-ui/CircularProgress';
-import { addBackGroundImg, setBackGroundImg } from '../../actions/background';
-import { setNavTitle, fullModel, backButton } from '../../actions/nav';
-import { FormattedDate } from 'react-intl';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+const url = require('url');
 var style = require("./home.less");
 
 interface HomeProps {

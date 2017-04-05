@@ -1,22 +1,19 @@
-import routerHistory from '../../lib/History';
-import { MuiTheme } from 'material-ui/styles';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import { buildPath } from '../../lib/History';
+import AppState from '../../stateI';
 import AppBar from 'material-ui/AppBar';
-import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import SearchIcon from 'material-ui/svg-icons/action/search';
-import * as React from 'react';
+import MenuItem from 'material-ui/MenuItem';
+import { MuiTheme } from 'material-ui/styles';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-let style = require('./Menu.less');
-import * as _ from 'underscore';
-import { History } from "history"
-import * as router from 'react-router';
+import SearchIcon from 'material-ui/svg-icons/action/search';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import * as React from 'react';
 import { connect } from 'react-redux';
-import AppState from '../../stateI';
-import { Link } from 'react-router';
-import { buildPath } from '../../lib/History';
+import * as _ from 'underscore';
+import routerHistory from '../../lib/History';
+let style = require('./Menu.less');
 
 interface MenuProps {
   muiTheme?: MuiTheme

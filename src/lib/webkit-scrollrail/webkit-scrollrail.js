@@ -218,7 +218,6 @@
 
 			if (isFullscreen){
 				this.scrollrail_v.style.display ='none';
-			console.log('isFullscreen');
 				this.scrollrail_h.style.display ='none';
 			}
 			return isFullscreen;

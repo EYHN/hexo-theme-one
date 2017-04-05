@@ -1,11 +1,10 @@
+import AppState from '../../stateI';
 import { MuiTheme } from 'material-ui/styles';
 import * as React from 'react';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import * as _ from "underscore"
-import { connect } from 'react-redux';
-import AppState from '../../stateI';
-import { Dispatch } from 'redux';
 import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { connect } from 'react-redux';
+import * as _ from 'underscore';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 let style = require('./background.less');
 
 interface BackgroundProps {
@@ -34,10 +33,10 @@ export class Background extends React.Component<BackgroundProps, BackgroundState
     let bodyDom = $("body");
     let windowDom = $(window);
     let isOnDisplay = false;
-    this.scrollListener = _.debounce(() => {
+    this.scrollListener = _.throttle(() => {
       let sum = bodyDom.scrollTop();
       this.setState({
-        top: sum / 2
+        top: Math.min(sum / 1.5,270)
       });
     }, 10);
     this.scrollListener();

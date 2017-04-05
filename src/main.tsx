@@ -33,8 +33,6 @@ const useScroll = require('react-router-scroll/lib/useScroll');
 injectTapEventPlugin();
 const style = require('./main.less');
 
-console.log(process.env.NODE_ENV)
-
 if(/webkit/.test(navigator.userAgent.toLowerCase())){
   require('!style!css!less!./lib/webkit-scrollrail/style.less');
   require('./lib/webkit-scrollrail/webkit-scrollrail.js');
@@ -66,7 +64,6 @@ Promise.all([getSite() as siteState, getTheme()]).then((res) => {
     u = url.parse(url.resolve(url.resolve(window.location.protocol + "//" + window.location.host,window.rootUrl || ""),apiHref));
   }
   res[0].siteUrl = u.protocol + '//' + u.host + (window.rootUrl || "");
-  console.log(res[0].siteUrl);
   let state:AppState = { site: res[0], theme: {
     ...res[1]
   }};

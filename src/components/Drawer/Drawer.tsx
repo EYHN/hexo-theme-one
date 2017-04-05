@@ -1,25 +1,24 @@
-import routerHistory from '../../lib/History';
-import MenuItem from 'material-ui/MenuItem';
-import MDDrawer from 'material-ui/Drawer';
-import * as React from 'react';
-import Divider from 'material-ui/Divider';
-import ColorChoose from '../colorChoose/colorChoose'
-import HomeIcon from 'material-ui/svg-icons/action/home'
-import AccountCircleIcon from 'material-ui/svg-icons/action/account-circle'
-import SideHander from '../sideHander/sideHander'
-import DropDownMenu from 'material-ui/DropDownMenu';
-const style = require("./Drawer.less")
-import ActionGrade from 'material-ui/svg-icons/action/grade';
-import ContentInbox from 'material-ui/svg-icons/content/inbox';
-import { List, ListItem } from 'material-ui/List';
-import { connect } from 'react-redux';
-import { History } from "history"
-import AppState from '../../stateI';
 import { DrawerItemI } from '../../Interfaces/theme';
-import FontIcon from 'material-ui/FontIcon';
-import { array_randS } from '../../lib/random';
-import SvgIcon from 'material-ui/SvgIcon';
 import { buildPath } from '../../lib/History';
+import { array_randS } from '../../lib/random';
+import AppState from '../../stateI';
+import ColorChoose from '../colorChoose/colorChoose';
+import SideHander from '../sideHander/sideHander';
+import Divider from 'material-ui/Divider';
+import MDDrawer from 'material-ui/Drawer';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import FontIcon from 'material-ui/FontIcon';
+import { ListItem } from 'material-ui/List';
+import MenuItem from 'material-ui/MenuItem';
+import AccountCircleIcon from 'material-ui/svg-icons/action/account-circle';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import HomeIcon from 'material-ui/svg-icons/action/home';
+import ContentInbox from 'material-ui/svg-icons/content/inbox';
+import SvgIcon from 'material-ui/SvgIcon';
+import * as React from 'react';
+import { connect } from 'react-redux';
+import routerHistory from '../../lib/History';
+const style = require("./Drawer.less")
 const url = require('url');
 
 interface DrawerProps {

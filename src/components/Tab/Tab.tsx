@@ -1,7 +1,7 @@
-import routerHistory from '../../lib/History';
-import * as React from 'react';
-import { Tabs, Tab as Tabx } from 'material-ui/Tabs';
 import { buildPath } from '../../lib/History';
+import { Tab as Tabx, Tabs } from 'material-ui/Tabs';
+import * as React from 'react';
+import routerHistory from '../../lib/History';
 const style = require("./Tab.less")
 
 interface TabProps extends React.HTMLProps<HTMLDivElement> {
