@@ -23,3 +23,5 @@
 [页面 Front-matter](./Page-Front-matter.md)
 
 [颜色](./color.md)
+
+[高级设置](./expert.md)
