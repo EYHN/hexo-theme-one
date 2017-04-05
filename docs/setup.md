@@ -36,6 +36,8 @@ $ npm install
 
 请继续阅读文档。
 
+**如果设置过程中遇到问题可以查看 [huaji8.top 的配置](https://github.com/EYHN/HexoBlogKit)**
+
 > 设置中标注「支持数组」的，若没有明确说明，就是指允许接收数组数据在前端随机选择。
 
 [下一篇 基本设置](./setting.md)
