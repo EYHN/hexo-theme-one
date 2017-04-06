@@ -94,7 +94,7 @@ class Menu extends React.Component<MenuProps, MenuStates>{
           onLeftIconButtonTouchTap={this.props.onclickLeft}
           iconElementRight={<IconButton onClick={() => { routerHistory.push(buildPath("/search/")) }}><SearchIcon></SearchIcon></IconButton>}
           title={<span className={style.title}>{this.props.title || ""}</span>}
-          titleStyle={{ fontSize: '22px' }}
+          titleStyle={{ fontSize: '22px',display:"flex" }}
           iconElementLeft={<IconButton><a className={style.menu + " " + (backButton?style.back:"")}><span></span></a></IconButton>}
         />
         <style>
