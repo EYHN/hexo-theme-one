@@ -1,9 +1,9 @@
+import { array_randS } from '../../lib/random';
+import Grid from '../grid/grid';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import AppState from '../../stateI';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import Grid from '../grid/grid';
-import { array_randS } from '../../lib/random';
 const style = require("./footer.less")
 
 interface FooterProps {

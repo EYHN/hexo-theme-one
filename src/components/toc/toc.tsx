@@ -1,7 +1,6 @@
 import { toc } from '../context/context';
 import * as React from 'react';
 import * as _ from 'underscore';
-import { Link } from 'react-router';
 let style = require("./toc.less")
 
 interface TocProps {

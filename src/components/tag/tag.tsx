@@ -1,20 +1,20 @@
-import AppState from '../../stateI';
-import { Dispatch } from 'redux';
+import { backButton, fullModel, setNavTitle } from '../../actions/nav';
+import { getTag, getTagsList } from '../../actions/tags';
+import { changeColor } from '../../actions/theme';
+import { post } from '../../Interfaces/post';
+import { array_randS } from '../../lib/random';
+import { color } from '../../lib/themes';
+import { tagState } from '../../reducers/tag';
+import { tagsState } from '../../reducers/tags';
+import Grid from '../grid/grid';
+import PostCard from '../postCard/postCard';
+import Tab from '../Tab/Tab';
+import { MuiTheme } from 'material-ui/styles';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Grid from '../grid/grid';
-import { changeColor } from '../../actions/theme';
-import { fullModel, setNavTitle, backButton } from '../../actions/nav';
-import { tagState } from '../../reducers/tag';
-import { post } from '../../Interfaces/post';
-import { getTag, getTagsList } from '../../actions/tags';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import { MuiTheme } from 'material-ui/styles';
-import { color } from '../../lib/themes';
-import PostCard from "../postCard/postCard"
-import Tab from '../Tab/Tab';
-import { tagsState } from '../../reducers/tags';
-import { array_randS } from '../../lib/random';
+import { Dispatch } from 'redux';
+import AppState from '../../stateI';
 const url = require('url');
 
 const style = require("./tag.less")

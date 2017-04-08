@@ -1,12 +1,12 @@
-import { Dispatch } from 'redux';
-import AppState from '../../stateI';
 import { changeColor, changeColorAction } from '../../actions/theme';
+import { color as colorList } from '../../lib/themes';
+import ColorChooseButton from '../colorChooseButton/colorChooseButton';
+import { ListItem } from 'material-ui/List';
 import MenuItem from 'material-ui/MenuItem';
 import * as React from 'react';
-import ColorChooseButton from '../colorChooseButton/colorChooseButton'
-import { color as colorList } from '../../lib/themes'
-import { connect } from 'react-redux'
-import { ListItem } from 'material-ui/List';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import AppState from '../../stateI';
 let style = require('./colorChoose.less');
 
 interface ColorChooseProps {

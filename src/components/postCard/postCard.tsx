@@ -1,25 +1,24 @@
+import { post } from '../../Interfaces/post';
+import { buildPath } from '../../lib/History';
 import { array_rand, array_randS } from '../../lib/random';
-import AppState from '../../stateI';
-const url = require('url');
-import * as React from 'react';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import CardHeaderAcatar from '../cardHeaderAvatar/cardHeaderAvatar';
+import { toc } from '../context/context';
+import Content from '../context/context';
+import { Card, CardMedia, CardText, CardTitle } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import TranslateIcon from 'material-ui/svg-icons/action/translate';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import SocialShare from 'material-ui/svg-icons/social/share';
-import TranslateIcon from 'material-ui/svg-icons/action/translate';
-import CardHeaderAcatar from '../cardHeaderAvatar/cardHeaderAvatar'
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import { connect } from 'react-redux'
-import { Link } from 'react-router';
-import FlatButton from 'material-ui/FlatButton';
-import Content from '../context/context';
-import { toc } from '../context/context';
-import { postState } from '../../reducers/post';
-import { post } from '../../Interfaces/post'
+import * as React from 'react';
 import { FormattedDate } from 'react-intl';
-import { buildPath } from '../../lib/History';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import AppState from '../../stateI';
+const url = require('url');
 var style = require('./postCard.less')
 
 interface PostCardProps {

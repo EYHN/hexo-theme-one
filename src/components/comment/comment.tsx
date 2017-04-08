@@ -15,7 +15,6 @@ interface commentProps {
 
 export class Comment extends React.Component<commentProps, undefined>{
   handleNewComment(comment: any) {
-    console.log(comment.text);
   }
 
   render() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 const DISQUS_CONFIG = [
   'shortname', 'identifier', 'title', 'url', 'category_id', 'onNewComment'
 ];
@@ -78,7 +79,7 @@ module.exports = React.createClass({
   },
 
   componentDidUpdate() {
-    this.loadDisqus();
+    //this.loadDisqus();
   },
 
   render() {
@@ -91,17 +92,22 @@ module.exports = React.createClass({
             <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
           </span>
         </noscript>
-        <a href="http://disqus.com" className="dsq-brlink">
-          Blog comments powered by <span className="logo-disqus">Disqus</span>.
-        </a>
+        <RaisedButton primary={true} label={<span>评论加载中 点击重试「请确保 DISQ.US & DISQUSCDN.COM & DISQUS.COM 可以正常加载」</span>} className="dsq-brlink" style={{
+          maxWidth:"500px",
+          display:"block",
+          margin:"0px auto",
+          height:"auto"
+          }} labelStyle={{height:"auto",padding: "10px",display:"block"}} buttonStyle={{height:"auto"}} onTouchTap={this.loadDisqus.bind(this)}/>
       </div>
     );
   },
 
   addDisqusScript() {
-    if (__disqusAdded) {
+    if (typeof DISQUS !== 'undefined') {
       return;
     }
+
+    $("#disqus_embed").remove();
 
     const child = this.disqus = document.createElement('script');
     const parent = document.getElementsByTagName('head')[0] ||
@@ -110,13 +116,13 @@ module.exports = React.createClass({
     child.async = true;
     child.type = 'text/javascript';
     child.src = '//' + this.props.shortname + '.disqus.com/embed.js';
+    child.id = 'disqus_embed';
 
     parent.appendChild(child);
-    __disqusAdded = true;
   },
 
   loadDisqus() {
-    if (this._loaded == true) return;
+    //if (this._loaded == true) return;
     const props = {};
 
     // Extract Disqus props that were supplied to this component
@@ -139,7 +145,6 @@ module.exports = React.createClass({
           this.page.title = props.title;
           this.page.url = props.url;
           this.page.identifier = props.identifier;
-          console.log(this.page);
         }
       });
       this._loaded = true;
@@ -148,7 +153,6 @@ module.exports = React.createClass({
         this.page.title = props.title;
         this.page.url = props.url;
         this.page.identifier = props.identifier;
-        console.log(this.page);
       }
       this.addDisqusScript();
       this._loaded = true;

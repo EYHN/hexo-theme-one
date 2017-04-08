@@ -1,28 +1,27 @@
+import { addBackGroundImg } from '../../actions/background';
+import { backButton, fullModel, setNavTitle } from '../../actions/nav';
 import { getPost } from '../../actions/post';
+import { changeColor } from '../../actions/theme';
+import { array_rand, array_randS } from '../../lib/random';
+import categories from '../../reducers/categories';
 import { postState } from '../../reducers/post';
-import { array_randS, array_rand } from '../../lib/random';
-import { changeColor, changeColorAction } from '../../actions/theme';
-import { Dispatch } from 'redux';
-import AppState from '../../stateI';
-import * as React from 'react';
-import WelcomeCard from '../WelcomeCard/WelcomeCard'
-import LogoCard from '../logoCard/logoCard'
-import PostCard from '../postCard/postCard'
-import Grid from '../grid/grid'
-import TocList from '../tocList/tocList'
-import { connect } from 'react-redux'
 import post from '../../reducers/post';
-import * as _ from 'underscore'
+import Comment from '../comment/comment';
 import { toc } from '../context/context';
 import FixedAt from '../fixedAt/fixedAt';
-import { addBackGroundImg } from '../../actions/background';
-const url = require('url');
-import FontIcon from 'material-ui/FontIcon';
-import { setNavTitle, fullModel, backButton } from '../../actions/nav';
-import Comment from '../comment/comment';
+import Grid from '../grid/grid';
+import LogoCard from '../logoCard/logoCard';
+import PostCard from '../postCard/postCard';
+import TocList from '../tocList/tocList';
+import WelcomeCard from '../WelcomeCard/WelcomeCard';
 import { Card } from 'material-ui/Card';
-import { FormattedDate } from 'react-intl';
-import categories from '../../reducers/categories';
+import FontIcon from 'material-ui/FontIcon';
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import * as _ from 'underscore';
+import AppState from '../../stateI';
+const url = require('url');
 var style = require("./post.less");
 
 interface PostProps {

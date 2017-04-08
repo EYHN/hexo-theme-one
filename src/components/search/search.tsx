@@ -1,22 +1,22 @@
-import { connect } from 'react-redux';
-import AppState from '../../stateI';
-import * as React from 'react';
-import { Dispatch } from 'redux';
-import Grid from '../grid/grid';
-import { MuiTheme } from 'material-ui/styles';
-import { fullModel, setNavTitle, backButton } from '../../actions/nav';
+import { backButton, fullModel, setNavTitle } from '../../actions/nav';
+import { updatePostsP } from '../../actions/posts';
 import { changeColor } from '../../actions/theme';
-import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
-import muiThemeable from 'material-ui/styles/muiThemeable';
+import post from '../../reducers/post';
 import { postState } from '../../reducers/post';
 import { postsState } from '../../reducers/posts';
-import { updatePostsP } from '../../actions/posts';
-import post from '../../reducers/post';
-import * as _ from "underscore";
-import { Link } from "react-router"
 import { removeHTMLTag } from '../context/context';
-import { FormattedDate } from 'react-intl'
+import Grid from '../grid/grid';
+import Paper from 'material-ui/Paper';
+import { MuiTheme } from 'material-ui/styles';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import TextField from 'material-ui/TextField';
+import * as React from 'react';
+import { FormattedDate } from 'react-intl';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import { Dispatch } from 'redux';
+import * as _ from 'underscore';
+import AppState from '../../stateI';
 const lunr = require("lunr")
 
 const maxPostLength = 20;

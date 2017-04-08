@@ -1,7 +1,7 @@
+import background from '../../reducers/background';
+import Avatar from 'material-ui/Avatar';
 import * as React from 'react';
 import MenuItem from 'material-ui/MenuItem';
-import Avatar from 'material-ui/Avatar';
-import background from '../../reducers/background';
 
 const style = require("./sideHander.less");
 

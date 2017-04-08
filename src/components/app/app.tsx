@@ -1,32 +1,32 @@
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import color2Theme from '../../lib/color2Theme';
-import Menu from '../Menu/Menu';
-import AppState from '../../stateI';
-import * as React from 'react';
-import { connect } from 'react-redux'
-import zh_CN from '../../locale/zh_CN';
-import en_US from '../../locale/en_US';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import Home from '../home/home'
-import Post from '../post/post';
-import Page from '../page/page';
-import * as zh from 'react-intl/locale-data/zh';
-import * as en from 'react-intl/locale-data/en';
-import { IntlProvider, addLocaleData } from 'react-intl'
-import Drawer from '../Drawer/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import Background from '../background/background'
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import SearchX from '../search/search'
-import Category from '../category/category'
-import Footer from '../footer/footer'
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import Header from '../header/header';
-import routerHistory from '../../lib/History';
 import { buildPath } from '../../lib/History';
+import routerHistory from '../../lib/History';
+import en_US from '../../locale/en_US';
+import zh_CN from '../../locale/zh_CN';
+import AppState from '../../stateI';
+import Background from '../background/background';
+import Category from '../category/category';
+import Drawer from '../Drawer/Drawer';
+import Footer from '../footer/footer';
+import Header from '../header/header';
+import Home from '../home/home';
+import Menu from '../Menu/Menu';
+import Page from '../page/page';
+import Post from '../post/post';
+import SearchX from '../search/search';
+import AppBar from 'material-ui/AppBar';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import MenuItem from 'material-ui/MenuItem';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import * as React from 'react';
+import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { addLocaleData, IntlProvider } from 'react-intl';
+import * as en from 'react-intl/locale-data/en';
+import * as zh from 'react-intl/locale-data/zh';
+import { connect } from 'react-redux';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 const MaterialIconseot = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.eot");
 const MaterialIconsttf = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.ttf");
 const MaterialIconswoff = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff");
@@ -76,17 +76,20 @@ export class App extends React.Component<AppProps, AppComponentState>{
       ...state,
       sidebar: !this.state.sidebar
     }))
+    return false;
   }
 
   back() {
-    routerHistory.push(buildPath("/"));
+    setTimeout(()=>{
+      routerHistory.push(buildPath("/"));
+    },0)
+    return false;
   }
 
   render() {
-    let {color = {}, fullModel = false, siteUrl = "/",backButton = false} = this.props;
+    let {color = {}, fullModel = false, siteUrl = "/", backButton = false} = this.props;
     let {primaryColor, accentColor} = color;
-    let t = color2Theme(primaryColor, accentColor,"light");
-    console.log(this.props);
+    let t = color2Theme(primaryColor, accentColor, "light");
     t.fontFamily = '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
     let Theme = getMuiTheme(t);
     return (
@@ -97,7 +100,7 @@ export class App extends React.Component<AppProps, AppComponentState>{
           <div style={{
             fontFamily: Theme.fontFamily
           }} className={style.body}>
-            <Header/>
+            <Header />
             <style>
               {
                 `
@@ -105,32 +108,34 @@ export class App extends React.Component<AppProps, AppComponentState>{
                   font-family: 'Material Icons';
                   font-style: normal;
                   font-weight: 400;
-                  src: url(${url.resolve(siteUrl,MaterialIconseot)}); /* For IE6-8 */
+                  src: url(${url.resolve(siteUrl, MaterialIconseot)}); /* For IE6-8 */
                   src: local('Material Icons'),
                       local('MaterialIcons-Regular'),
-                      url(${url.resolve(siteUrl,MaterialIconswoff2)}) format('woff2'),
-                      url(${url.resolve(siteUrl,MaterialIconswoff)}) format('woff'),
-                      url(${url.resolve(siteUrl,MaterialIconsttf)}) format('truetype');
+                      url(${url.resolve(siteUrl, MaterialIconswoff2)}) format('woff2'),
+                      url(${url.resolve(siteUrl, MaterialIconswoff)}) format('woff'),
+                      url(${url.resolve(siteUrl, MaterialIconsttf)}) format('truetype');
                 }
                 `
               }
             </style>
-            <Menu onclickLeft={backButton?this.back.bind(this):this.MenuToggle.bind(this)} />
+            <Menu onclickLeft={backButton ? this.back.bind(this) : this.MenuToggle.bind(this)} />
             <Background />
             <Drawer
               open={this.state.sidebar}
               onRequestChange={this.MenuToggle.bind(this)}
-              onTouchTap={()=>{this.setState({
-                ...this.state,
-                sidebar: false
-              })}}
+              onTouchTap={() => {
+                this.setState({
+                  ...this.state,
+                  sidebar: false
+                })
+              }}
             />
             <div id={style.container} className={fullModel ? style.fullModel : undefined}>
               <main id={style.main}>
                 <ReactCSSTransitionGroup
                   component="div"
                   transitionName="route-page"
-                  transitionEnterTimeout={450}
+                  transitionEnterTimeout={900}
                   transitionLeaveTimeout={450}
                   className={style.TransitionGroup}
                 >

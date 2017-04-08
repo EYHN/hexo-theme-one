@@ -1,24 +1,24 @@
-import { connect } from 'react-redux';
-import AppState from '../../stateI';
-import * as React from 'react';
-import { Dispatch } from 'redux';
+import { addBackGroundImg } from '../../actions/background';
+import { backButton, fullModel, setNavTitle } from '../../actions/nav';
 import { getPage } from '../../actions/page';
 import { changeColor } from '../../actions/theme';
-import { addBackGroundImg } from '../../actions/background';
-import { setNavTitle, fullModel, backButton } from '../../actions/nav';
-import { toc } from '../context/context';
-import * as _ from 'underscore'
 import { array_rand, array_randS } from '../../lib/random';
+import background from '../../reducers/background';
+import page from '../../reducers/page';
 import { pageState } from '../../reducers/page';
+import post from '../../reducers/post';
+import Comment from '../comment/comment';
+import { toc } from '../context/context';
+import FixedAt from '../fixedAt/fixedAt';
 import Grid from '../grid/grid';
 import PostCard from '../postCard/postCard';
-import post from '../../reducers/post';
-import { FormattedDate } from 'react-intl';
-import { Card } from 'material-ui/Card';
-import Comment from '../comment/comment';
-import FixedAt from '../fixedAt/fixedAt';
 import TocList from '../tocList/tocList';
-import page from '../../reducers/page';
+import { Card } from 'material-ui/Card';
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import * as _ from 'underscore';
+import AppState from '../../stateI';
 const url = require('url');
 const style = require('./page.less')
 
@@ -87,7 +87,7 @@ class Page extends React.Component<PageProps, PageState>{
     let {pagesList = new Map<string, pageState>(), params = {}, phone = false, siteUrl = ""} = this.props
     let {title} = params;
     let page = pagesList.get(title);
-    let background
+    let background = true
     let thumbnail;
     if (typeof page === "undefined" || typeof page.content === "undefined") {
       page = page || {};
@@ -96,6 +96,7 @@ class Page extends React.Component<PageProps, PageState>{
       }
     } else {
       thumbnail = page.background
+      background = page.background || true
       if (page.thumbnail) thumbnail = url.resolve(siteUrl, array_randS(page.thumbnail))  || this.default_thumbnail;
       if (this.loaded == false) {
         this.loaded = true
