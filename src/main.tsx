@@ -30,6 +30,9 @@ import Category from './components/category/category'
 import { History } from "history"
 import Tag from './components/tag/tag';
 const useScroll = require('react-router-scroll/lib/useScroll');
+require('intl');
+require('intl/locale-data/jsonp/en.js');
+require('intl/locale-data/jsonp/zh.js');
 injectTapEventPlugin();
 const style = require('./main.less');
 
