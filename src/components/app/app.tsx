@@ -76,10 +76,14 @@ export class App extends React.Component<AppProps, AppComponentState>{
       ...state,
       sidebar: !this.state.sidebar
     }))
+    return false;
   }
 
   back() {
-    routerHistory.push(buildPath("/"));
+    setTimeout(()=>{
+      routerHistory.push(buildPath("/"));
+    },0)
+    return false;
   }
 
   render() {

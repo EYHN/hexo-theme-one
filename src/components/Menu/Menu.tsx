@@ -91,11 +91,10 @@ class Menu extends React.Component<MenuProps, MenuStates>{
       <div className={style.Menu + " " + (fullModel ? "" : this.state.outClassName)}>
         <AppBar
           className={style.appbar + " " + (fullModel ? "" : this.state.className)}
-          onLeftIconButtonTouchTap={this.props.onclickLeft}
           iconElementRight={<IconButton onClick={() => { routerHistory.push(buildPath("/search/")) }}><SearchIcon></SearchIcon></IconButton>}
           title={<span className={style.title}>{this.props.title || ""}</span>}
           titleStyle={{ fontSize: '22px',display:"flex" }}
-          iconElementLeft={<IconButton><a className={style.menu + " " + (backButton?style.back:"")}><span></span></a></IconButton>}
+          iconElementLeft={<IconButton onClick={this.props.onclickLeft}><a className={style.menu + " " + (backButton?style.back:"")}><span></span></a></IconButton>}
         />
         <style>
           {
