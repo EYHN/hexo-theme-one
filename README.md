@@ -8,6 +8,8 @@
 
 使用 React 制作的 material design 风格的 hexo 主题。
 
+> 本项目并不适合用来学习react，其中包含程序设计问题和反模式是本人学习用作品。
+
 DEMO: https://huaji8.top/
 
 如果喜欢的话 请点个star 让我看到你们的支持
