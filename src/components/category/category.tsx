@@ -86,7 +86,7 @@ class Category extends React.Component<CategoryProps, CategoryState>{
         }}>
           <Grid>
             <h1>{name}</h1>
-            <Tab NameList={CategoriesNameList} value={name} link={(name)=>"/categorys/"+name + "/"} />
+            <Tab NameList={CategoriesNameList} value={name} link={(name)=>"/categories/"+name + "/"} />
           </Grid>
         </div>
         <Grid>
