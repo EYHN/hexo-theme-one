@@ -5,6 +5,7 @@ let style = require("./toc.less")
 
 interface TocProps {
   toc:toc,
+  secondLevel?:boolean,
   active?:boolean,
   read?:Function,
   unread?:Function
@@ -42,7 +43,7 @@ export default class Toc extends React.Component<TocProps, undefined>{
   }
   render(){
     return (
-      <li className={style.Toc + " " + (this.props.active?style.active:"")}>
+      <li className={style.Toc + " " + (this.props.active?style.active:"") + " " + (this.props.secondLevel?style.secondLevel:"")}>
         <a className={style.tocLink} onClick={this.onClickLink.bind(this)}>{this.props.toc.content}</a>
       </li>
     )
