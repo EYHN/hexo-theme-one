@@ -25,9 +25,13 @@ export default class TocList extends React.Component<TocListProps, TocListState>
     });
   }
   getTocNodes(tocArray: toc[]) {
+    let firstLevel:number = tocArray
+      .map((value)=>value.level)
+      .reduce((pre, cur) => Math.min(pre, cur),999)
     let node: React.ReactNode[] = [];
     tocArray.forEach((value,index) => {
-      node.push(<Toc key={value.anchor} toc={value} active={index == this.state.tocIndex} read={()=>{
+      let isSecondLevel = value.level !== firstLevel
+      node.push(<Toc key={value.anchor} toc={value} secondLevel={isSecondLevel} active={index == this.state.tocIndex} read={()=>{
         this.readA.add(index);
         this.updateIndex();
       }} unread={
