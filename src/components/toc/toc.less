@@ -14,6 +14,9 @@
     transition: background-color 450ms;
     cursor:pointer;
     user-select:none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     &:hover {
         background-color: rgba(104, 119, 202, 0.07);
         text-decoration: none;
@@ -23,13 +26,13 @@
 .active .tocLink{
   border-left: 3px solid #3F51B5;
   background-color: rgba(104, 119, 202, 0.11);
-  padding: 3px 20px-3px;
+  padding: 3px 20px 3px 20px-3px;
 }
 
 .secondLevel .tocLink{
-    padding: 3px 30px;
+    padding: 3px 20px 3px 30px;
 }
 
 .secondLevel.active .tocLink{
-    padding: 3px 30px-3px;
+    padding: 3px 20px 3px 30px-3px;
 }
