@@ -21,5 +21,10 @@
   </script>
   <%- jsLsload("vendor") %>
   <%- jsLsload("bundle") %>
+  <% site.pages.filter((obj)=>{
+    return obj.layout === 'footer'
+  }).forEach((obj)=>{ %>
+    <%- obj._content %>
+  <%})%>
 </body>
 </html>
