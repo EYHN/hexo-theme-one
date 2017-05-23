@@ -26,5 +26,14 @@
   }).forEach((obj)=>{ %>
     <%- obj._content %>
   <%})%>
+  <script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+  </script>
 </body>
 </html>
