@@ -14,12 +14,9 @@ import { Router, Route, applyRouterMiddleware, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { Store } from 'redux';
 import createStore from './create-store';
 import App from './components/app/app'
-import reducer from './reducers/reducer'
 import { registerListener } from './windowSize';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import Home from './components/home/home';
@@ -30,9 +27,6 @@ import Category from './components/category/category'
 import { History } from "history"
 import Tag from './components/tag/tag';
 const useScroll = require('react-router-scroll/lib/useScroll');
-require('intl');
-require('intl/locale-data/jsonp/en.js');
-require('intl/locale-data/jsonp/zh.js');
 injectTapEventPlugin();
 const style = require('./main.less');
 

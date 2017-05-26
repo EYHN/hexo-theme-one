@@ -1,3 +1,4 @@
+import { dateFormat } from '../../lib/date';
 import { backButton, fullModel, setNavTitle } from '../../actions/nav';
 import { updatePostsP } from '../../actions/posts';
 import { changeColor } from '../../actions/theme';
@@ -11,7 +12,6 @@ import { MuiTheme } from 'material-ui/styles';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import TextField from 'material-ui/TextField';
 import * as React from 'react';
-import { FormattedDate } from 'react-intl';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Dispatch } from 'redux';
@@ -152,9 +152,9 @@ class search extends React.Component<searchProps, searchState>{
             <Link to={"/post/" + post.slug + "/"}>{post.title}</Link>
             <footer>
             <small>
-            <FormattedDate
-              value={new Date(post.date)}
-            />
+              {
+                dateFormat(new Date(post.date))
+              }
             </small>
           </footer>
             </h3>

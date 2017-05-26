@@ -1,3 +1,4 @@
+import { dateFormat } from '../../lib/date';
 import { post } from '../../Interfaces/post';
 import { buildPath } from '../../lib/History';
 import { array_rand, array_randS } from '../../lib/random';
@@ -14,7 +15,6 @@ import TranslateIcon from 'material-ui/svg-icons/action/translate';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import SocialShare from 'material-ui/svg-icons/social/share';
 import * as React from 'react';
-import { FormattedDate } from 'react-intl';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import AppState from '../../stateI';
@@ -67,7 +67,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
         {
           cardMedia ?
             <CardMedia
-              overlay={(title) ? <CardTitle title={title} subtitle={<FormattedDate value={new Date(post.date)}/>} /> : undefined}
+              overlay={(title) ? <CardTitle title={title} subtitle={dateFormat(new Date(post.date))} /> : undefined}
               style={{
                 ...cardMediaStyle
               }}
@@ -91,7 +91,7 @@ class PostCard extends React.Component<PostCardProps, PostCardState>{
               </h1>
               <label>
                 {
-                  <FormattedDate value={new Date(post.date)}/>
+                  dateFormat(new Date(post.date))
                 }
               </label>
               <hr/>

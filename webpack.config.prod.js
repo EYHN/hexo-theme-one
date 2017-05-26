@@ -32,7 +32,6 @@ var HtmlWebpackConfig = {
 module.exports = {
     entry: {
         bundle: [
-            'babel-polyfill',
             "./src/main.tsx"
         ],
         vendor: ['react','jquery','material-ui','react-dom']

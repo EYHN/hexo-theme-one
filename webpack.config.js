@@ -18,7 +18,6 @@ var HtmlWebpackConfig = {
 
 module.exports = {
     entry: [
-        'babel-polyfill',
         "webpack-hot-middleware/client",
         "./src/main.tsx"
     ],

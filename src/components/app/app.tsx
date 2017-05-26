@@ -1,8 +1,6 @@
 import color2Theme from '../../lib/color2Theme';
 import { buildPath } from '../../lib/History';
 import routerHistory from '../../lib/History';
-import en_US from '../../locale/en_US';
-import zh_CN from '../../locale/zh_CN';
 import AppState from '../../stateI';
 import Background from '../background/background';
 import Category from '../category/category';
@@ -22,9 +20,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import * as React from 'react';
 import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { addLocaleData, IntlProvider } from 'react-intl';
-import * as en from 'react-intl/locale-data/en';
-import * as zh from 'react-intl/locale-data/zh';
 import { connect } from 'react-redux';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 const MaterialIconseot = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.eot");
@@ -32,8 +27,6 @@ const MaterialIconsttf = require("../../../node_modules/material-design-icons/ic
 const MaterialIconswoff = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff");
 const MaterialIconswoff2 = require("../../../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff2");
 const url = require('url');
-addLocaleData(zh);
-addLocaleData(en);
 var style = require('./app.less')
 
 interface AppProps {
@@ -46,17 +39,6 @@ interface AppProps {
   location?: any
   siteUrl?: string
   backButton?: boolean
-}
-
-function chooseLocale() {
-  switch (navigator.language.split('_')[0]) {
-    case 'en':
-      return en_US;
-    case 'zh':
-      return zh_CN;
-    default:
-      return zh_CN;
-  }
 }
 
 interface AppComponentState {
@@ -93,9 +75,6 @@ export class App extends React.Component<AppProps, AppComponentState>{
     t.fontFamily = '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
     let Theme = getMuiTheme(t);
     return (
-      <IntlProvider
-        locale={navigator.language}
-        messages={chooseLocale()}>
         <MuiThemeProvider muiTheme={Theme}>
           <div style={{
             fontFamily: Theme.fontFamily
@@ -151,7 +130,6 @@ export class App extends React.Component<AppProps, AppComponentState>{
             </FloatingActionButton>*/}
           </div>
         </MuiThemeProvider>
-      </IntlProvider>
     );
   }
 }

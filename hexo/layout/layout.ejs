@@ -19,6 +19,7 @@
     window.rootUrl = <%- JSON.stringify(config.root) %>
     window.one = <%- JSON.stringify({site:config,theme:theme}) %>
   </script>
+  <script src="https://polyfill.huaji8.top/"></script>
   <%- jsLsload("vendor") %>
   <%- jsLsload("bundle") %>
   <% site.pages.filter((obj)=>{
